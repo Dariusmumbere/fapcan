@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Education Programs — FAPCAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  :root{--accent:var(--teal);--accent-lt:rgba(26,122,138,.09)}
+
+  .page-hero-tag{color:#81E6D9;border-color:rgba(129,230,217,.35)}
+  .page-hero h1 em{color:#81E6D9}
+
+  /* ── INTRO SPLIT ── */
+  .intro-section{padding:100px 0;background:var(--white)}
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .intro-text h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,48px);color:var(--navy);line-height:1.1;margin-bottom:20px}
+  .intro-text h2 em{font-style:italic;color:var(--teal)}
+  .intro-text p{font-size:16px;line-height:1.8;color:var(--mid);margin-bottom:18px}
+  .intro-highlight{background:rgba(26,122,138,.07);border-left:4px solid var(--teal);padding:20px 24px;margin:28px 0;font-family:var(--font-serif);font-style:italic;font-size:17px;color:var(--navy);line-height:1.6}
+  .grad-badge{display:inline-flex;align-items:center;gap:12px;background:var(--navy);padding:16px 24px;margin-top:8px}
+  .grad-badge .num{font-family:var(--font-serif);font-size:36px;font-weight:900;color:var(--gold);line-height:1}
+  .grad-badge .txt{font-size:13px;color:rgba(255,255,255,.65);line-height:1.4;max-width:160px}
+  .intro-img{position:relative}
+  .intro-img-main{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;box-shadow:0 32px 64px rgba(0,0,0,.14)}
+  .intro-img-badge{position:absolute;bottom:-20px;left:-20px;background:var(--teal);color:#fff;padding:20px 24px;box-shadow:0 12px 32px rgba(26,122,138,.35)}
+  .intro-img-badge strong{font-family:var(--font-serif);font-size:28px;font-weight:900;display:block;line-height:1}
+  .intro-img-badge span{font-size:12px;opacity:.8;letter-spacing:.05em}
+
+  /* ── LEVELS ── */
+  .levels-section{padding:80px 0;background:var(--off-white)}
+  .levels-header{margin-bottom:48px}
+  .levels-header h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy)}
+  .levels-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+  .level-card{background:var(--white);padding:40px 28px;position:relative;overflow:hidden;border-top:4px solid transparent;transition:box-shadow .3s,transform .3s}
+  .level-card:hover{box-shadow:0 20px 48px rgba(0,0,0,.1);transform:translateY(-6px)}
+  .level-card:nth-child(1){border-top-color:var(--teal)}
+  .level-card:nth-child(2){border-top-color:var(--navy)}
+  .level-card:nth-child(3){border-top-color:var(--purple)}
+  .level-card:nth-child(4){border-top-color:var(--gold)}
+  .level-icon{font-size:40px;margin-bottom:20px}
+  .level-num{font-family:var(--font-serif);font-weight:900;font-size:48px;line-height:1;margin-bottom:6px}
+  .level-card:nth-child(1) .level-num{color:var(--teal)}
+  .level-card:nth-child(2) .level-num{color:var(--navy)}
+  .level-card:nth-child(3) .level-num{color:var(--purple)}
+  .level-card:nth-child(4) .level-num{color:var(--gold)}
+  .level-card h3{font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--navy);margin-bottom:10px}
+  .level-card p{font-size:13.5px;color:var(--mid);line-height:1.65}
+
+  /* ── VOCATIONAL ── */
+  .vocational-section{padding:80px 0;background:var(--navy)}
+  .voc-header{margin-bottom:48px}
+  .voc-header .section-label{color:var(--gold)}
+  .voc-header .section-label::before{background:var(--gold)}
+  .voc-header h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:#fff;line-height:1.1}
+  .voc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .voc-card{background:rgba(255,255,255,.05);padding:36px 28px;cursor:pointer;transition:background .2s;border-bottom:3px solid transparent;position:relative;overflow:hidden}
+  .voc-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 70%,rgba(255,255,255,.02));pointer-events:none}
+  .voc-card:hover{background:rgba(255,255,255,.1)}
+  .voc-card:nth-child(1){border-bottom-color:var(--teal)}
+  .voc-card:nth-child(2){border-bottom-color:var(--gold)}
+  .voc-card:nth-child(3){border-bottom-color:var(--red)}
+  .voc-card:nth-child(4){border-bottom-color:var(--purple)}
+  .voc-card:nth-child(5){border-bottom-color:var(--green)}
+  .voc-card:nth-child(6){border-bottom-color:var(--teal)}
+  .voc-icon{font-size:36px;margin-bottom:16px}
+  .voc-card h4{font-family:var(--font-serif);font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+  .voc-card p{font-size:13.5px;color:rgba(255,255,255,.5);line-height:1.65}
+
+  /* ── IMPACT ── */
+  .edu-impact{padding:100px 0;background:var(--white)}
+  .edu-impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .edu-impact-img{position:relative}
+  .edu-impact-img-main{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;box-shadow:0 24px 56px rgba(0,0,0,.14)}
+  .stories-list{display:flex;flex-direction:column;gap:0}
+  .story-item{padding:24px 0;border-bottom:1px solid var(--light-gray);display:flex;gap:20px;align-items:flex-start;transition:padding-left .2s}
+  .story-item:last-child{border-bottom:none}
+  .story-item:hover{padding-left:8px}
+  .story-num{font-family:var(--font-serif);font-size:32px;font-weight:900;color:var(--light-gray);line-height:1;flex-shrink:0;width:44px}
+  .story-body h4{font-family:var(--font-serif);font-size:16px;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .story-body p{font-size:13.5px;color:var(--mid);line-height:1.6}
+
+  /* ── PHOTOS ── */
+  .edu-photos{padding:80px 0;background:var(--off-white)}
+  .edu-photos h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,44px);color:var(--navy);margin-bottom:32px}
+  .edu-grid-photos{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:220px 220px;gap:3px}
+  .edu-grid-photos .photo-item:nth-child(1){grid-column:span 2}
+  .edu-grid-photos .photo-item:nth-child(5){grid-column:span 2}
+
+  /* ── TESTIMONIALS ── */
+  .testi-section{padding:100px 0;background:var(--white)}
+
+  @media(max-width:960px){
+    .intro-grid,.edu-impact-grid{grid-template-columns:1fr;gap:40px}
+    .levels-grid,.voc-grid{grid-template-columns:repeat(2,1fr)}
+    .edu-grid-photos{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+    .edu-grid-photos .photo-item:nth-child(1),.edu-grid-photos .photo-item:nth-child(5){grid-column:span 1}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor"><div class="cursor-dot" id="cDot"></div><div class="cursor-ring" id="cRing"></div></div>
+<div class="colour-band"></div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
+      <div class="logo-text"><strong>FAPCAN</strong><span>Fatima Praying Center</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown"><a href="#"><i class="fas fa-cross"></i> Mission & Vision</a><a href="#"><i class="fas fa-history"></i> Our History</a><a href="#"><i class="fas fa-users"></i> FAPCAN Community</a></div>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">Spiritual Life <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown"><a href="prayer-worship.html"><i class="fas fa-pray"></i> Prayer & Worship</a><a href="#"><i class="fas fa-church"></i> Mass & Services</a></div>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">Community <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown"><a href="#"><i class="fas fa-child"></i> Orphans Support</a><a href="#"><i class="fas fa-wheelchair"></i> PWDs Programs</a><a href="#"><i class="fas fa-female"></i> Widows & Women</a></div>
+      </li>
+      <li class="nav-item"><a href="education.html" class="nav-link active">Education <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown"><a href="#"><i class="fas fa-school"></i> Primary School</a><a href="#"><i class="fas fa-graduation-cap"></i> Secondary School</a><a href="#"><i class="fas fa-university"></i> Tertiary Education</a><a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a></div>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="prayer-worship.html" class="mob-link">Prayer & Worship</a>
+  <a href="education.html" class="mob-link">Education Programs</a>
+  <a href="film-arts.html" class="mob-link">Film & Creative Arts</a>
+  <a href="community-dev.html" class="mob-link">Community Development</a>
+  <a href="#" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('f6.jpg')"></div>
+  <div class="page-hero-overlay" style="background:linear-gradient(to top,#0d2a3a 0%,rgba(13,42,58,.65) 60%,rgba(13,42,58,.3) 100%)"></div>
+  <div class="page-hero-geo">
+    <div class="geo-ring" style="width:500px;height:500px;top:-150px;right:-80px;animation-duration:50s;border-color:rgba(26,122,138,.08)"></div>
+    <div class="geo-ring" style="width:280px;height:280px;bottom:60px;left:35%;animation-duration:38s;animation-direction:reverse;border-color:rgba(214,158,46,.07)"></div>
+  </div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb" style="animation:fadeUp .6s .2s var(--ease-out) both"><a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,.6)">Education Programs</span></div>
+    <div class="page-hero-tag" style="animation:fadeUp .6s .3s var(--ease-out) both;border-color:rgba(129,230,217,.35);color:#81E6D9"><i class="fas fa-graduation-cap"></i> Education & Skills</div>
+    <h1 style="animation:fadeUp .7s .45s var(--ease-out) both">Education for <em>Every Child</em></h1>
+    <p class="page-hero-desc" style="animation:fadeUp .7s .6s var(--ease-out) both">Giving vulnerable children and youth access to formal and vocational learning opportunities — because education is the foundation for lasting transformation.</p>
+  </div>
+  <div class="page-hero-scroll"><div class="page-hero-scroll-line"></div><span>Scroll</span></div>
+</section>
+<style>@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}</style>
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="impact-item reveal"><div class="impact-icon"><i class="fas fa-school"></i></div><div class="impact-num" data-target="40" data-suffix="+">0</div><div class="impact-lbl">Primary Learners</div></div>
+  <div class="impact-item reveal d1"><div class="impact-icon"><i class="fas fa-graduation-cap"></i></div><div class="impact-num" data-target="15" data-suffix="+">0</div><div class="impact-lbl">Secondary Students</div></div>
+  <div class="impact-item reveal d2"><div class="impact-icon"><i class="fas fa-tools"></i></div><div class="impact-num" data-target="20" data-suffix="+">0</div><div class="impact-lbl">Graduates to Date</div></div>
+  <div class="impact-item reveal d3"><div class="impact-icon"><i class="fas fa-briefcase"></i></div><div class="impact-num" data-target="5" data-suffix=" Skills">0</div><div class="impact-lbl">Vocational Trades</div></div>
+</div>
+
+<!-- INTRO -->
+<section class="intro-section">
+  <div class="content-wrap">
+    <div class="intro-grid">
+      <div class="intro-text reveal-left">
+        <div class="section-label" style="--accent:var(--teal)">Our Approach</div>
+        <h2>Education as a Path to <em>Self-Reliance</em></h2>
+        <p>At FAPCAN, we believe education is the foundation for lasting transformation. Our Education Program supports vulnerable children and youth — especially orphans, those from disadvantaged homes, and children formerly living on the streets.</p>
+        <div class="intro-highlight">"Education is the most powerful weapon which you can use to change the world — and at FAPCAN, every child deserves that weapon."</div>
+        <p>We ensure continuity in their academic journey from primary through tertiary level, and equip young people with practical vocational skills that make them self-reliant and productive members of society.</p>
+        <div class="grad-badge reveal d2">
+          <div class="num">20+</div>
+          <div class="txt">beneficiaries have successfully graduated from our programmes</div>
+        </div>
+      </div>
+      <div class="intro-img reveal-right">
+        <img class="intro-img-main" src="f6.jpg" alt="Students" onerror="this.style.background='linear-gradient(135deg,#1A7A8A,#1A365D)';this.style.height='400px'">
+        <div class="intro-img-badge">
+          <strong>Since</strong>
+          <span>2012 · Education First</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEVELS -->
+<section class="levels-section">
+  <div class="content-wrap">
+    <div class="levels-header">
+      <div class="section-label" style="--accent:var(--teal)">Academic Levels</div>
+      <h2 class="reveal">Formal Education Support</h2>
+    </div>
+    <div class="levels-grid">
+      <div class="level-card reveal d1">
+        <div class="level-icon">📚</div>
+        <div class="level-num">40+</div>
+        <h3>Primary School</h3>
+        <p>Supporting foundational education for the most vulnerable children — ensuring every child can read, write, and build a future.</p>
+      </div>
+      <div class="level-card reveal d2">
+        <div class="level-icon">🎒</div>
+        <div class="level-num">15+</div>
+        <h3>Secondary School</h3>
+        <p>Continuing academic journeys for students who would otherwise drop out due to financial hardship and family challenges.</p>
+      </div>
+      <div class="level-card reveal d3">
+        <div class="level-icon">🎓</div>
+        <div class="level-num">5+</div>
+        <h3>Tertiary Education</h3>
+        <p>Supporting university and college-level studies for our most academically talented and motivated beneficiaries.</p>
+      </div>
+      <div class="level-card reveal d4">
+        <div class="level-icon">🔧</div>
+        <div class="level-num">20+</div>
+        <h3>Graduates</h3>
+        <p>More than 20 beneficiaries have already completed their programmes — many are now employed and supporting their families.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOCATIONAL -->
+<section class="vocational-section">
+  <div class="content-wrap">
+    <div class="voc-header reveal">
+      <div class="section-label">Vocational Skills Training</div>
+      <h2>Hands-On Skills for<br>Real-World Livelihoods</h2>
+    </div>
+    <div class="voc-grid">
+      <div class="voc-card reveal d1"><div class="voc-icon">💻</div><h4>Computer Training</h4><p>Digital literacy and computer skills for the modern job market and entrepreneurship.</p></div>
+      <div class="voc-card reveal d2"><div class="voc-icon">✂️</div><h4>Hairdressing</h4><p>Professional hairdressing skills providing a sustainable path to self-employment.</p></div>
+      <div class="voc-card reveal d3"><div class="voc-icon">🔩</div><h4>Mechanics</h4><p>Automotive and mechanical repair skills for Uganda's growing transport sector.</p></div>
+      <div class="voc-card reveal d1"><div class="voc-icon">⚙️</div><h4>Welding</h4><p>Metal fabrication and welding — a high-demand trade in construction and industry.</p></div>
+      <div class="voc-card reveal d2"><div class="voc-icon">🧵</div><h4>Tailoring</h4><p>Fashion design and garment making, empowering women and youth with creative enterprise skills.</p></div>
+      <div class="voc-card reveal d3"><div class="voc-icon">🍳</div><h4>Food & Catering</h4><p>Practical catering and food production skills for employment and community nutrition.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STORIES -->
+<section class="edu-impact">
+  <div class="content-wrap">
+    <div class="edu-impact-grid">
+      <div class="edu-impact-img reveal-left">
+        <img class="edu-impact-img-main" src="f8.jpg" alt="Education impact" onerror="this.style.background='linear-gradient(135deg,#1A7A8A,#276749)';this.style.height='360px'">
+      </div>
+      <div class="reveal-right">
+        <div class="section-label" style="--accent:var(--teal)">Impact & Transformation</div>
+        <h2 style="font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,42px);color:var(--navy);line-height:1.1;margin-bottom:32px">Education That<br>Changes Everything</h2>
+        <div class="stories-list">
+          <div class="story-item reveal d1">
+            <div class="story-num">01</div>
+            <div class="story-body"><h4>Children with clear futures</h4><p>Children who once lacked access to education now have direction, qualifications, and real opportunities.</p></div>
+          </div>
+          <div class="story-item reveal d2">
+            <div class="story-num">02</div>
+            <div class="story-body"><h4>Youth earning a living</h4><p>Graduates have gained employable skills, enabling them to earn a living and support their families.</p></div>
+          </div>
+          <div class="story-item reveal d3">
+            <div class="story-num">03</div>
+            <div class="story-body"><h4>Street children reintegrated</h4><p>Former street-connected children have been reintegrated into society with dignity and renewed purpose.</p></div>
+          </div>
+          <div class="story-item reveal d4">
+            <div class="story-num">04</div>
+            <div class="story-body"><h4>Stronger communities</h4><p>Educated, skilled individuals contribute positively to local development and family stability.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section class="edu-photos">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--teal)">Gallery</div>
+    <h2 class="reveal">Education in Action</h2>
+    <div class="edu-grid-photos">
+      <div class="photo-item reveal" style="position:relative"><img src="f6.jpg" alt="Classroom" onerror="this.parentElement.style.background='linear-gradient(135deg,#1A7A8A,#1A365D)'"><div class="caption">Learning Together</div></div>
+      <div class="photo-item reveal d1" style="position:relative"><img src="f3.jpg" alt="Students" onerror="this.parentElement.style.background='linear-gradient(135deg,#276749,#1A7A8A)'"><div class="caption">Computer Lab</div></div>
+      <div class="photo-item reveal d2" style="position:relative"><img src="f4.jpg" alt="Skills" onerror="this.parentElement.style.background='linear-gradient(135deg,#553C9A,#1A365D)'"><div class="caption">Vocational Skills</div></div>
+      <div class="photo-item reveal d3" style="position:relative"><img src="f9.jpg" alt="Graduation" onerror="this.parentElement.style.background='linear-gradient(135deg,#D69E2E,#C53030)'"><div class="caption">Graduation Day</div></div>
+      <div class="photo-item reveal d4" style="position:relative"><img src="f10.jpg" alt="FAPCAN school" onerror="this.parentElement.style.background='linear-gradient(135deg,#1A365D,#1A7A8A)'"><div class="caption">Community Learning</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--teal)">Student Testimonials</div>
+    <h2 class="reveal" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px">Voices of<br>Transformation</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal d1" style="--accent:var(--teal)">
+        <p class="testi-text">"FAPCAN gave me a chance when I had none. I finished secondary school and now I'm training as a mechanic. I will never forget what Alfred and this community did for me."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(26,122,138,.1);color:var(--teal)">P</div><div><div class="testi-name">Peter Mumbere</div><div class="testi-role">Secondary Graduate, Now Mechanic Trainee</div></div></div>
+      </div>
+      <div class="testi-card reveal d2" style="--accent:var(--teal)">
+        <p class="testi-text">"I used to live on the street. FAPCAN brought me back. I finished primary school, and now I am learning tailoring. I make clothes and sell them. I have hope now."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(26,122,138,.1);color:var(--teal)">G</div><div><div class="testi-name">Grace Muhindo</div><div class="testi-role">Tailoring Programme Graduate</div></div></div>
+      </div>
+      <div class="testi-card reveal d3" style="--accent:var(--teal)">
+        <p class="testi-text">"My mother is a widow and could not afford my fees. FAPCAN stepped in and paid. Now I am in university studying business. I will come back and serve this community one day."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(26,122,138,.1);color:var(--teal)">D</div><div><div class="testi-name">David Bwambale</div><div class="testi-role">Tertiary Student, Sponsored by FAPCAN</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band" style="--accent:var(--teal)">
+  <div class="cta-inner reveal">
+    <h2>Invest in a Child's <em>Future</em></h2>
+    <p>Your support can fund a child's education, skills training, or school materials. Every contribution builds a life with dignity and direction.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-light">Sponsor a Student</a>
+      <a href="#" class="btn-cta-ghost"><i class="fas fa-book"></i> Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
+        <strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span>
+        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
+      </div>
+      <div class="footer-col"><h4>Programmes</h4><ul><li><a href="prayer-worship.html"><i class="fas fa-chevron-right"></i> Prayer & Worship</a></li><li><a href="education.html"><i class="fas fa-chevron-right"></i> Education</a></li><li><a href="film-arts.html"><i class="fas fa-chevron-right"></i> Film & Creative Arts</a></li><li><a href="community-dev.html"><i class="fas fa-chevron-right"></i> Community Dev.</a></li></ul></div>
+      <div class="footer-col"><h4>Who We Serve</h4><ul><li><a href="#"><i class="fas fa-chevron-right"></i> Orphans & Children</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> PWDs</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Widows & Women</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Elders</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li><li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li><li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li><li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FAPCAN — Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>
