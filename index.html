@@ -1,1469 +1,1227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAPCAN | Fatima Praying Center for All Nations</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1a365d;
-            --secondary: #805ad5;
-            --accent: #e53e3e;
-            --light: #f7fafc;
-            --dark: #2d3748;
-            --gold: #d69e2e;
-            --text: #4a5568;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background-color: #fefefe;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5 {
-            font-family: 'Merriweather', serif;
-            font-weight: 700;
-            color: var(--primary);
-            line-height: 1.3;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Modern Header & Navigation */
-        header {
-            background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 0;
-            position: relative;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            box-shadow: 0 5px 15px rgba(128, 90, 213, 0.2);
-            overflow: hidden;
-        }
-
-        .logo-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo-text h1 {
-            font-size: 24px;
-            color: var(--primary);
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-        }
-
-        .logo-text span {
-            font-size: 12px;
-            color: var(--secondary);
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        /* Advanced Navigation with Dropdown Arrows */
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 5px;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--dark);
-            padding: 18px 22px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            font-size: 15px;
-            transition: var(--transition);
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--secondary);
-            background-color: rgba(128, 90, 213, 0.05);
-        }
-
-        .nav-link.active {
-            color: var(--secondary);
-            background-color: rgba(128, 90, 213, 0.08);
-        }
-
-        /* Dropdown Arrow */
-        .dropdown-arrow {
-            font-size: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .nav-item:hover .dropdown-arrow {
-            transform: rotate(180deg);
-        }
-
-        /* Advanced Dropdown */
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 260px;
-            box-shadow: var(--shadow-lg);
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(15px);
-            transition: var(--transition);
-            z-index: 100;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(5px);
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 16px 24px;
-            text-decoration: none;
-            color: var(--dark);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            transition: var(--transition);
-            font-weight: 500;
-            font-size: 14.5px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-item:hover {
-            background-color: rgba(128, 90, 213, 0.05);
-            color: var(--secondary);
-            padding-left: 28px;
-        }
-
-        .dropdown-item i {
-            color: var(--secondary);
-            width: 20px;
-            text-align: center;
-        }
-
-        /* Mobile Toggle */
-        .mobile-toggle {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--primary);
-            background: none;
-            border: none;
-            padding: 5px;
-        }
-
-        /* NEW HERO SECTION - Integrated from NOBLE */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #0f1a45 100%);
-            min-height: 680px;
-            overflow: hidden;
-            position: relative;
-            padding-top: 100px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent 0%, rgba(26, 54, 93, 0.9) 100%);
-            z-index: 1;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-text {
-            color: white;
-            padding: 100px 0 120px;
-        }
-
-        .hero-text h1 {
-            font-family: 'Merriweather', serif;
-            font-size: 3.5rem;
-            line-height: 1.15;
-            margin-bottom: 24px;
-            font-weight: 700;
-            color: white;
-        }
-
-        .hero-text p {
-            max-width: 520px;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 48px;
-            font-size: 1.1rem;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: var(--transition);
-            font-size: 1rem;
-            border: 2px solid transparent;
-            cursor: pointer;
-            text-decoration: none;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: var(--gold);
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            background: #e6c244;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-outline {
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            color: white;
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            transform: translateY(-3px);
-        }
-
-        .btn i {
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
-
-        .btn:hover i {
-            transform: translateX(4px);
-        }
-
-        /* Image Overflow Slider */
-        .hero-media {
-            position: relative;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .slider {
-            position: relative;
-            width: 520px;
-            height: 640px;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            transform: translateY(40px);
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.2s ease;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .slide.active {
-            opacity: 1;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 8s ease;
-        }
-
-        .slide.active img {
-            transform: scale(1.05);
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 3;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .dot.active {
-            background: white;
-            transform: scale(1.2);
-        }
-
-        /* Stats Section */
-        .stats {
-            background-color: white;
-            padding: 80px 0;
-            position: relative;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .stat-card {
-            background-color: var(--light);
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .stat-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, rgba(128, 90, 213, 0.1), rgba(26, 54, 93, 0.1));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            color: var(--secondary);
-            font-size: 28px;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-family: 'Merriweather', serif;
-        }
-
-        .stat-text {
-            font-size: 18px;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* Section Styling */
-        .section {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-title h2 {
-            font-size: 3.2rem;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 20px;
-        }
-
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--secondary), var(--primary));
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            max-width: 700px;
-            margin: 20px auto 0;
-            font-size: 1.2rem;
-            color: var(--text);
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            height: 500px;
-        }
-
-        .about-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            color: var(--primary);
-        }
-
-        .about-text p {
-            margin-bottom: 25px;
-            font-size: 17px;
-        }
-
-        /* Founder Section - UPDATED for image display */
-        .founder {
-            background-color: var(--light);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .founder:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23805ad5' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-
-        .founder-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .founder-img {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .founder-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Changed from cover to contain to show full image */
-            background-color: #f5f5f5; /* Added background for better visibility */
-        }
-
-        .founder-info h3 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .founder-info .title {
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            display: block;
-        }
-
-        /* Activities Section */
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        .activity-card {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        .activity-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .activity-icon {
-            height: 200px;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 60px;
-        }
-
-        .activity-content {
-            padding: 30px;
-        }
-
-        .activity-content h3 {
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary);
-            color: white;
-            padding: 80px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
-        }
-
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 30px;
-            font-size: 1.8rem;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent);
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer-column p {
-            opacity: 0.8;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-            font-size: 18px;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-            font-size: 15px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .hero-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .hero-text h1 {
-                font-size: 3rem;
-            }
-            
-            .nav-link {
-                padding: 18px 16px;
-            }
-            
-            .slider {
-                width: 480px;
-                height: 600px;
-            }
-        }
-
-        @media (max-width: 1100px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero::before {
-                width: 100%;
-                background: linear-gradient(to bottom, transparent 0%, rgba(26, 54, 93, 0.95) 100%);
-            }
-            
-            .slider {
-                width: 100%;
-                max-width: 600px;
-                height: 500px;
-                transform: translateY(0);
-                margin: 0 auto;
-            }
-            
-            .hero-text {
-                padding: 80px 0 60px;
-                text-align: center;
-            }
-            
-            .hero-text h1 {
-                font-size: 3rem;
-            }
-            
-            .hero-buttons {
-                justify-content: center;
-            }
-            
-            /* Founder image adjustment for medium screens */
-            .founder-img img {
-                object-fit: contain;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .mobile-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                position: fixed;
-                top: 90px;
-                left: 0;
-                background-color: white;
-                width: 100%;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 20px 0;
-                box-shadow: var(--shadow-lg);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: var(--transition);
-                z-index: 999;
-                max-height: 80vh;
-                overflow-y: auto;
-            }
-
-            .nav-menu.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .nav-item {
-                width: 100%;
-            }
-
-            .nav-link {
-                padding: 20px 30px;
-                justify-content: space-between;
-            }
-
-            .dropdown {
-                position: static;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                box-shadow: none;
-                background-color: rgba(128, 90, 213, 0.03);
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.4s ease;
-                border-radius: 0;
-                border: none;
-                min-width: 100%;
-            }
-
-            .nav-item:hover .dropdown,
-            .nav-item.active .dropdown {
-                max-height: 500px;
-            }
-
-            .dropdown-item {
-                padding: 15px 30px 15px 45px;
-            }
-            
-            .hero-text h1 {
-                font-size: 2.8rem;
-            }
-            
-            .about-content, .founder-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-            
-            /* Founder image adjustment for tablets */
-            .founder-img {
-                height: 400px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-text h1 {
-                font-size: 2.4rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2.5rem;
-            }
-            
-            .section {
-                padding: 70px 0;
-            }
-            
-            .stat-number {
-                font-size: 2.8rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .slider {
-                height: 400px;
-            }
-            
-            /* Founder image adjustment for mobile */
-            .founder-img {
-                height: 350px;
-                order: -1; /* Move image above text on mobile */
-            }
-            
-            .founder-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-text h1 {
-                font-size: 2rem;
-            }
-            
-            .logo-text h1 {
-                font-size: 20px;
-            }
-            
-            .activities-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .founder-img {
-                height: 300px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAPCAN | Fatima Praying Center for All Nations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════
+   MIF DESIGN SYSTEM — FAPCAN EDITION
+═══════════════════════════════════════════ */
+:root {
+  --navy:    #1A365D;
+  --navy-dk: #0f1f3d;
+  --red:     #C53030;
+  --gold:    #D69E2E;
+  --gold-lt: #F6E05E;
+  --green:   #276749;
+  --teal:    #1A7A8A;
+  --purple:  #553C9A;
+  --off-white: #F7F4EF;
+  --light-gray: #E8E4DC;
+  --mid:     #4A5568;
+  --dark:    #111827;
+  --white:   #FFFFFF;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--off-white);
+  color: var(--dark);
+  overflow-x: hidden;
+  cursor: none; /* custom cursor */
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none; mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--white); transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), opacity 0.3s, transform 0.08s;
+  margin-top: -22px; margin-left: -14px;
+}
+body.hovering .cursor-ring {
+  width: 56px; height: 56px; opacity: 0.5;
+}
+
+/* ── COLOUR BAND ── */
+.colour-band {
+  height: 5px; width: 100%;
+  background: linear-gradient(to right,
+    var(--red) 0%,   var(--red) 20%,
+    var(--gold) 20%, var(--gold) 40%,
+    var(--green) 40%,var(--green) 60%,
+    var(--teal) 60%, var(--teal) 80%,
+    var(--purple) 80%,var(--purple) 100%);
+  position: fixed; top: 0; left: 0; z-index: 1001;
+  transform-origin: left;
+  animation: bandReveal 1s var(--ease-out) both;
+}
+@keyframes bandReveal { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 5px; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--light-gray);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-badge {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(26,54,93,0.25);
+}
+.logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+.logo-badge-fallback {
+  font-family: var(--font-serif); font-weight: 900; font-size: 15px;
+  color: white; letter-spacing: -0.5px;
+}
+.logo-text { display: flex; flex-direction: column; }
+.logo-text strong {
+  font-family: var(--font-serif); font-weight: 700; font-size: 20px;
+  color: var(--navy); line-height: 1.1;
+}
+.logo-text span {
+  font-size: 10.5px; font-weight: 500; color: var(--teal);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.nav-links { display: flex; list-style: none; gap: 2px; }
+.nav-item { position: relative; }
+.nav-link {
+  display: flex; align-items: center; gap: 6px; padding: 10px 18px;
+  font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover, .nav-link.active { color: var(--navy); background: rgba(26,54,93,0.05); }
+.nav-link .arr { font-size: 10px; transition: transform 0.25s; }
+.nav-item:hover .arr { transform: rotate(180deg); }
+
+/* Dropdown */
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  background: var(--white); min-width: 260px;
+  border: 1px solid var(--light-gray); border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s;
+  z-index: 200; overflow: hidden;
+}
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background 0.15s, color 0.15s, padding-left 0.2s;
+}
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: var(--off-white); color: var(--navy); padding-left: 26px; }
+.dropdown a i { color: var(--red); width: 18px; text-align: center; font-size: 13px; }
+.nav-cta {
+  background: var(--red); color: white; border: none; cursor: pointer;
+  padding: 10px 24px; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { background: #9B2C2C; transform: translateY(-1px); }
+.hamburger { display: none; cursor: pointer; padding: 6px; background: none; border: none; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); transition: transform 0.3s, opacity 0.3s; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy-dk);
+  min-height: 100vh; padding-top: 75px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
+}
+
+/* Animated geometric background */
+.hero-geo {
+  position: absolute; inset: 0; overflow: hidden;
+  pointer-events: none;
+}
+.hero-geo-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.04);
+  animation: geoSpin linear infinite;
+}
+.hero-geo-ring:nth-child(1) { width: 700px; height: 700px; top: -200px; right: -150px; animation-duration: 60s; }
+.hero-geo-ring:nth-child(2) { width: 500px; height: 500px; top: -100px; right: -50px; animation-duration: 45s; animation-direction: reverse; border-color: rgba(214,158,46,0.08); }
+.hero-geo-ring:nth-child(3) { width: 300px; height: 300px; bottom: 80px; left: 40%; animation-duration: 35s; border-color: rgba(39,103,73,0.1); }
+@keyframes geoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Noise grain overlay */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.hero-inner {
+  max-width: 1320px; margin: 0 auto; padding: 80px 32px 100px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  position: relative; z-index: 2;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(214,158,46,0.35);
+  padding: 6px 16px; margin-bottom: 28px;
+  animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+}
+.hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+.hero-text h1 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(38px, 5.5vw, 72px); line-height: 1.07;
+  color: white; margin-bottom: 28px;
+  animation: fadeUp 0.9s 0.35s var(--ease-out) both;
+}
+.hero-text h1 em { font-style: italic; color: var(--gold); }
+.hero-text p {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.7);
+  max-width: 500px; line-height: 1.8; margin-bottom: 44px;
+  animation: fadeUp 0.9s 0.5s var(--ease-out) both;
+}
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.9s 0.65s var(--ease-out) both;
+}
+.btn-hero-primary {
+  background: var(--gold); color: var(--navy-dk); border: none;
+  padding: 16px 32px; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.btn-hero-primary:hover { background: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(214,158,46,0.4); }
+.btn-hero-outline {
+  background: transparent; color: white;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  padding: 16px 32px; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.btn-hero-outline:hover { border-color: white; background: rgba(255,255,255,0.08); transform: translateY(-3px); }
+
+/* Slider */
+.hero-media { position: relative; animation: fadeUp 1s 0.4s var(--ease-out) both; }
+.slider {
+  position: relative; width: 100%; aspect-ratio: 3/4; max-height: 580px;
+  overflow: hidden; border-radius: 4px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+/* Colour-band accent on slider */
+.slider::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 10;
+  background: linear-gradient(to right,
+    var(--red) 0%,var(--red) 20%,
+    var(--gold) 20%,var(--gold) 40%,
+    var(--green) 40%,var(--green) 60%,
+    var(--teal) 60%,var(--teal) 80%,
+    var(--purple) 80%,var(--purple) 100%);
+}
+.slide {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 1.2s var(--ease-in-out);
+}
+.slide.active { opacity: 1; }
+.slide img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 8s linear;
+  transform: scale(1.02);
+}
+.slide.active img { transform: scale(1.07); }
+
+/* Slide caption overlay */
+.slide-caption {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
+  padding: 60px 28px 24px;
+  background: linear-gradient(to top, rgba(10,20,40,0.7) 0%, transparent 100%);
+}
+.slide-caption span {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.75);
+  letter-spacing: 0.06em;
+}
+
+/* Slider counter */
+.slider-counter {
+  position: absolute; top: 20px; right: 20px; z-index: 10;
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-serif); font-size: 14px; color: rgba(255,255,255,0.8);
+  background: rgba(0,0,0,0.3); backdrop-filter: blur(6px);
+  padding: 6px 14px; border-radius: 20px;
+}
+.slider-counter .current { font-weight: 700; color: var(--gold); font-size: 18px; }
+.slider-dots {
+  position: absolute; bottom: 20px; right: 20px; z-index: 10;
+  display: flex; gap: 8px; flex-direction: column;
+}
+.dot {
+  width: 3px; height: 24px; border-radius: 2px;
+  background: rgba(255,255,255,0.3); cursor: pointer;
+  transition: background 0.3s, height 0.3s;
+}
+.dot.active { background: var(--gold); height: 40px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── IMPACT STRIP ── */
+.impact-strip {
+  background: var(--dark); padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.impact-item {
+  padding: 52px 32px; border-right: 1px solid rgba(255,255,255,0.07);
+  text-align: center; position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.impact-item:last-child { border-right: none; }
+.impact-item::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.impact-item:nth-child(1)::before { background: var(--red); }
+.impact-item:nth-child(2)::before { background: var(--gold); }
+.impact-item:nth-child(3)::before { background: var(--green); }
+.impact-item:nth-child(4)::before { background: var(--teal); }
+.impact-item:hover::before { transform: scaleX(1); }
+.impact-item:hover { background: rgba(255,255,255,0.03); }
+.impact-icon { font-size: 28px; color: rgba(255,255,255,0.25); margin-bottom: 14px; }
+.impact-num {
+  font-family: var(--font-serif); font-weight: 900; font-size: 52px;
+  color: white; line-height: 1; margin-bottom: 8px;
+}
+.impact-item:nth-child(1) .impact-num { color: var(--red); }
+.impact-item:nth-child(2) .impact-num { color: var(--gold); }
+.impact-item:nth-child(3) .impact-num { color: var(--green); }
+.impact-item:nth-child(4) .impact-num { color: var(--teal); }
+.impact-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+
+/* ── SECTION COMMON ── */
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); display: block; }
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+.reveal-right.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ── ABOUT ── */
+.about {
+  padding: 100px 0; background: var(--off-white);
+  overflow: hidden;
+}
+.about-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.about-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center; }
+.about-img-wrap { position: relative; }
+.about-img-main {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  display: block; border-radius: 2px;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.15);
+}
+.about-img-accent {
+  position: absolute; bottom: -28px; right: -28px;
+  width: 180px; height: 180px; object-fit: cover;
+  border: 6px solid var(--off-white); border-radius: 2px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  transition: transform 0.4s var(--ease-out);
+}
+.about-img-wrap:hover .about-img-accent { transform: translate(-4px, -4px); }
+.about-img-tag {
+  position: absolute; top: 28px; left: -20px;
+  background: var(--red); color: white;
+  padding: 10px 20px; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(197,48,48,0.35);
+}
+.about-text h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(30px, 4vw, 50px); line-height: 1.1; margin-bottom: 24px;
+  color: var(--navy);
+}
+.about-text h2 em { font-style: italic; color: var(--teal); }
+.about-text p { font-size: 16px; line-height: 1.8; color: var(--mid); margin-bottom: 20px; }
+.about-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+.pillar {
+  padding: 20px; border-left: 3px solid var(--light-gray);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.pillar:hover { border-color: var(--red); transform: translateX(4px); }
+.pillar h4 { font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.pillar p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+/* ── FOUNDER ── */
+.founder {
+  background: var(--navy);
+  padding: 100px 0; position: relative; overflow: hidden;
+}
+/* Diagonal accent */
+.founder::before {
+  content: ''; position: absolute;
+  top: 0; right: 0; width: 45%; height: 100%;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 100%);
+  clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+.founder-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.founder-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center; }
+.founder-img-wrap { position: relative; }
+.founder-img-frame {
+  width: 100%; aspect-ratio: 3/4; max-height: 560px;
+  overflow: hidden; border-radius: 2px; position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+}
+.founder-img-frame img {
+  width: 100%; height: 100%; object-fit: contain;
+  object-position: top center;
+  background: rgba(255,255,255,0.05);
+}
+.founder-img-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,54,93,0.6) 0%, transparent 50%);
+  pointer-events: none;
+}
+/* Colour band left accent */
+.founder-img-frame::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; z-index: 2;
+  background: linear-gradient(to bottom, var(--red), var(--gold), var(--green));
+}
+.founder-quote-badge {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--gold); padding: 20px 22px;
+  max-width: 200px; border-radius: 2px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+  z-index: 3;
+}
+.founder-quote-badge p { font-family: var(--font-serif); font-style: italic; font-size: 13px; color: var(--navy-dk); line-height: 1.5; }
+.founder-text .section-label { color: var(--gold); }
+.founder-text .section-label::before { background: var(--gold); }
+.founder-text h2 {
+  font-family: var(--font-serif); font-weight: 900; color: white;
+  font-size: clamp(28px, 3.5vw, 48px); line-height: 1.1; margin-bottom: 8px;
+}
+.founder-title {
+  font-size: 14px; font-weight: 500; color: var(--gold);
+  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 28px; display: block;
+}
+.founder-text p { font-size: 15.5px; line-height: 1.8; color: rgba(255,255,255,0.65); margin-bottom: 18px; }
+.founder-facts { display: flex; gap: 32px; margin: 28px 0; flex-wrap: wrap; }
+.fact { display: flex; flex-direction: column; gap: 3px; }
+.fact .val { font-family: var(--font-serif); font-size: 28px; font-weight: 900; color: var(--gold); }
+.fact .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+/* ── ACTIVITIES ── */
+.activities { padding: 100px 0; background: var(--white); }
+.activities-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.activities-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; flex-wrap: wrap; gap: 20px; }
+.activities-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 48px); color: var(--navy);
+}
+.activities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.activity-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  background: var(--off-white); min-height: 280px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 36px 32px;
+  transition: background 0.3s;
+}
+.activity-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 60%, rgba(0,0,0,0.04));
+  transition: background 0.3s;
+}
+.activity-card:nth-child(1) { background: #EBF4FF; }
+.activity-card:nth-child(2) { background: #FFF5E6; }
+.activity-card:nth-child(3) { background: #F0FFF4; }
+.activity-card:nth-child(4) { background: #FAF5FF; }
+.activity-card:hover { filter: brightness(0.96); }
+.act-icon-wrap {
+  position: absolute; top: 28px; right: 28px;
+  width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 26px; transition: transform 0.4s var(--ease-out);
+}
+.activity-card:nth-child(1) .act-icon-wrap { background: rgba(26,54,93,0.12); color: var(--navy); }
+.activity-card:nth-child(2) .act-icon-wrap { background: rgba(214,158,46,0.15); color: #92610B; }
+.activity-card:nth-child(3) .act-icon-wrap { background: rgba(39,103,73,0.12); color: var(--green); }
+.activity-card:nth-child(4) .act-icon-wrap { background: rgba(85,60,154,0.1); color: var(--purple); }
+.activity-card:hover .act-icon-wrap { transform: scale(1.1) rotate(-8deg); }
+.act-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  display: inline-block; padding: 4px 12px; margin-bottom: 12px; border-radius: 2px;
+}
+.activity-card:nth-child(1) .act-tag { background: var(--navy); color: white; }
+.activity-card:nth-child(2) .act-tag { background: var(--gold); color: white; }
+.activity-card:nth-child(3) .act-tag { background: var(--green); color: white; }
+.activity-card:nth-child(4) .act-tag { background: var(--purple); color: white; }
+.activity-card h3 {
+  font-family: var(--font-serif); font-weight: 700; font-size: 22px;
+  color: var(--navy); line-height: 1.2; margin-bottom: 10px;
+}
+.activity-card p { font-size: 14px; color: var(--mid); line-height: 1.65; max-width: 380px; }
+.act-arrow {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--red); text-decoration: none; transition: gap 0.2s;
+}
+.activity-card:hover .act-arrow { gap: 16px; }
+
+/* ── SPIRITUAL LIFE / PROGRAMME STRIP ── */
+.programmes {
+  background: var(--off-white); padding: 80px 0;
+  border-top: 1px solid var(--light-gray);
+}
+.programmes-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.programmes-header { margin-bottom: 48px; }
+.programmes-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(26px, 3vw, 44px); color: var(--navy);
+}
+.programmes-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+.prog-card {
+  padding: 36px 24px; background: var(--white); position: relative;
+  border-top: 3px solid transparent; cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+.prog-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 0;
+  transition: height 0.3s var(--ease-out);
+}
+.prog-card:hover { background: var(--off-white); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.prog-card:hover::after { height: 0; }
+.prog-card:nth-child(1) { border-top-color: var(--red); }
+.prog-card:nth-child(2) { border-top-color: var(--gold); }
+.prog-card:nth-child(3) { border-top-color: var(--green); }
+.prog-card:nth-child(4) { border-top-color: var(--teal); }
+.prog-card:nth-child(5) { border-top-color: var(--purple); }
+.prog-icon { font-size: 28px; margin-bottom: 16px; }
+.prog-card h4 { font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.3; }
+.prog-card p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--red); padding: 72px 0;
+  position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent 0, transparent 20px,
+    rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px
+  );
+}
+.cta-inner { max-width: 900px; margin: 0 auto; padding: 0 32px; text-align: center; position: relative; z-index: 2; }
+.cta-inner h2 {
+  font-family: var(--font-serif); font-weight: 900; color: white;
+  font-size: clamp(28px, 4vw, 52px); line-height: 1.15; margin-bottom: 16px;
+}
+.cta-inner h2 em { font-style: italic; }
+.cta-inner p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-cta-light {
+  background: white; color: var(--red); border: none;
+  padding: 16px 36px; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-cta-light:hover { background: var(--off-white); transform: translateY(-2px); }
+.btn-cta-ghost {
+  background: transparent; color: white;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  padding: 16px 36px; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-cta-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark); padding: 80px 0 0;
+}
+.footer-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.footer-top { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand .logo-badge { width: 52px; height: 52px; margin-bottom: 16px; }
+.footer-brand strong { font-family: var(--font-serif); font-weight: 700; font-size: 22px; color: white; display: block; margin-bottom: 4px; }
+.footer-brand .tagline { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 18px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 12px; }
+.footer-socials a {
+  width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.footer-socials a:hover { border-color: var(--gold); color: var(--gold); background: rgba(214,158,46,0.1); transform: translateY(-3px); }
+.footer-col h4 {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none;
+  transition: color 0.2s, padding-left 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-col ul a i { font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-col ul a:hover { color: white; padding-left: 4px; }
+.footer-bottom {
+  padding: 24px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
+
+/* ── MOBILE NAV ── */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu {
+    position: fixed; top: 75px; left: 0; right: 0; bottom: 0;
+    background: white; z-index: 999; overflow-y: auto;
+    transform: translateX(100%); transition: transform 0.4s var(--ease-out);
+    padding: 20px 0;
+  }
+  .mobile-menu.open { transform: none; }
+  .mob-link {
+    display: block; padding: 16px 32px; font-size: 16px; font-weight: 500;
+    color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--light-gray);
+    transition: background 0.15s;
+  }
+  .mob-link:hover { background: var(--off-white); }
+  .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
+}
+
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-text h1 { font-size: 44px; }
+  .hero-text p { max-width: none; }
+  .slider { max-height: 420px; max-width: 500px; margin: 0 auto; }
+  .impact-strip { grid-template-columns: repeat(2, 1fr); }
+  .impact-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .about-grid, .founder-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-img-accent { display: none; }
+  .activities-grid { grid-template-columns: 1fr; }
+  .programmes-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .impact-strip { grid-template-columns: 1fr 1fr; }
+  .programmes-grid { grid-template-columns: 1fr; }
+  .hero-text h1 { font-size: 34px; }
+  .about, .activities, .programmes, .founder { padding: 70px 0; }
+  .nav-inner { padding: 0 20px; }
+  .about-inner, .founder-inner, .activities-inner, .programmes-inner, .footer-inner { padding: 0 20px; }
+}
+</style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <img src="logo.png" alt="FAPCAN logo">
-                </div>
-                <div class="logo-text">
-                    <h1>FAPCAN</h1>
-                    <span>Fatima Praying Center for All Nations</span>
-                </div>
-            </a>
 
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor">
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
 
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        About Us
-                        <i class="fas fa-chevron-down dropdown-arrow"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-cross"></i>
-                            Our Mission & Vision
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-history"></i>
-                            Our History
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users"></i>
-                            FAPCAN Community
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Location
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Spiritual Life
-                        <i class="fas fa-chevron-down dropdown-arrow"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-clock"></i>
-                            Prayer Schedule
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-church"></i>
-                            Mass & Services
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-bible"></i>
-                            Bible Study
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-pray"></i>
-                            Prayer Requests
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-heart"></i>
-                            Sacraments
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Community
-                        <i class="fas fa-chevron-down dropdown-arrow"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-child"></i>
-                            Orphans Support
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-wheelchair"></i>
-                            PWDs Programs
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-female"></i>
-                            Widows & Women
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-user-friends"></i>
-                            Elders Care
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-home"></i>
-                            Housing & Shelter
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        Education
-                        <i class="fas fa-chevron-down dropdown-arrow"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-school"></i>
-                            Primary School
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            Secondary School
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-university"></i>
-                            Tertiary Education
-                        </a>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-hands-helping"></i>
-                            Vocational Training
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-            </ul>
+<!-- COLOUR BAND -->
+<div class="colour-band"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-badge">
+        <img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-badge-fallback" style="display:none">FAP</span>
+      </div>
+      <div class="logo-text">
+        <strong>FAPCAN</strong>
+        <span>Fatima Praying Center</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-cross"></i> Mission & Vision</a>
+          <a href="#"><i class="fas fa-history"></i> Our History</a>
+          <a href="#"><i class="fas fa-users"></i> FAPCAN Community</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Location</a>
         </div>
-    </header>
-
-    <!-- NEW HERO SECTION with local images -->
-    <section class="hero">
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <h1>A Home for All Nations<br>Transforming Lives Through Faith</h1>
-                <p>Fatima Praying Center for All Nations (FAPCAN) is a voluntary non-government organization providing homage for the needy persons - PWDs, Orphans, Widows, Widowers, Elders - transforming them through spiritual empowerment, education, and community development.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">
-                        <i class="fas fa-hands-helping"></i>
-                        Support Our Mission
-                    </a>
-                    <a href="#" class="btn btn-outline">
-                        <i class="fas fa-calendar-alt"></i>
-                        Join Our Services
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-media">
-                <div class="slider">
-                    <div class="slide active">
-                        <img src="f1.jpg" alt="FAPCAN Community Gathering">
-                    </div>
-                    <div class="slide">
-                        <img src="f2.jpg" alt="Prayer Session">
-                    </div>
-                    <div class="slide">
-                        <img src="f3.jpg" alt="Community Support">
-                    </div>
-                    <div class="slide">
-                        <img src="f4.jpg" alt="FAPCAN Activities">
-                    </div>
-                    <div class="slide">
-                        <img src="f5.jpg" alt="Community Development">
-                    </div>
-                    <div class="slide">
-                        <img src="f6.jpg" alt="Education Programs">
-                    </div>
-                    <div class="slide">
-                        <img src="f7.jpg" alt="Spiritual Life">
-                    </div>
-                    <div class="slide">
-                        <img src="f8.jpg" alt="FAPCAN Members">
-                    </div>
-                    <div class="slide">
-                        <img src="f9.jpg" alt="Community Outreach">
-                    </div>
-                    <div class="slide">
-                        <img src="f10.jpg" alt="FAPCAN Events">
-                    </div>
-                    
-                    <div class="slider-dots">
-                        <!-- Dots will be generated by JavaScript -->
-                    </div>
-                </div>
-            </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Spiritual Life <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-clock"></i> Prayer Schedule</a>
+          <a href="#"><i class="fas fa-church"></i> Mass & Services</a>
+          <a href="#"><i class="fas fa-bible"></i> Bible Study</a>
+          <a href="#"><i class="fas fa-pray"></i> Prayer Requests</a>
+          <a href="#"><i class="fas fa-heart"></i> Sacraments</a>
         </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Impact</h2>
-                <p>Since our founding in 2012, we have transformed hundreds of lives through faith, education, and community support</p>
-            </div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number">300+</div>
-                    <div class="stat-text">People in FAPCAN Community</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="stat-number">80+</div>
-                    <div class="stat-text">Students in School</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="stat-number">250+</div>
-                    <div class="stat-text">Children Cared For</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-hands-praying"></i>
-                    </div>
-                    <div class="stat-number">12+</div>
-                    <div class="stat-text">Years of Service</div>
-                </div>
-            </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Community <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-child"></i> Orphans Support</a>
+          <a href="#"><i class="fas fa-wheelchair"></i> PWDs Programs</a>
+          <a href="#"><i class="fas fa-female"></i> Widows & Women</a>
+          <a href="#"><i class="fas fa-user-friends"></i> Elders Care</a>
+          <a href="#"><i class="fas fa-home"></i> Housing & Shelter</a>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>About FAPCAN</h2>
-                <p>Fatima Praying Center for All Nations - A voluntary non-government organization founded on May 25, 2012</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="f5.jpg" alt="FAPCAN Community">
-                </div>
-                <div class="about-text">
-                    <h3>Our Vision & Mission</h3>
-                    <p>The name FATIMA comes from Portugal where Virgin Mary appeared to three children in 1917, emphasizing the power of prayer. This inspired our founder to create a center dedicated to prayer and community transformation.</p>
-                    <p><strong>VISION:</strong> To create an association reputed for spiritual empowerment for orphans, PWDs, elders, widows, women and their families through life transformation, education, accommodation and income generation projects.</p>
-                    <p><strong>MISSION:</strong> To build a strong praying working team with one voice, to pool ideas and resources together for enhancement of orphans, PWDs, elders, widows, women emancipation, social-economic and spiritual development.</p>
-                    <p>Located in Kidodo Cell, Central division, Kasese Municipality, Kasese District, Uganda, we serve as a "HOME FOR ALL" regardless of appearance, culture, tribe, gender, age, religion or education level.</p>
-                </div>
-            </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Education <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-school"></i> Primary School</a>
+          <a href="#"><i class="fas fa-graduation-cap"></i> Secondary School</a>
+          <a href="#"><i class="fas fa-university"></i> Tertiary Education</a>
+          <a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a>
         </div>
-    </section>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+    </ul>
 
-    <!-- Founder Section -->
-    <section class="section founder">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Founder</h2>
-                <p>Alfred Bwambale (Omuzana) - A man with a special gift from God</p>
-            </div>
-            <div class="founder-content">
-                <div class="founder-info">
-                    <h3>Alfred Bwambale</h3>
-                    <span class="title">Founder & Spiritual Leader</span>
-                    <p>Alfred Bwambale, also known as Omuzana, was born on February 11, 1992, in Kaghema - Kyarumba sub-county. He is the 5th child of Baluku Wilson Serebethe and Bujune Christine, a Mukonzo by tribe and Ugandan by nationality.</p>
-                    <p>Alfred is a married man with 4 children and a devout Catholic born with a special gift from God. He owns the FAPCAN church where he prays for people of different religions from Uganda and beyond.</p>
-                    <p>Beyond being a prayer warrior, Alfred is a father to over 250 children that he cares for regardless of their culture, tribe, gender, age, religion, or appearance. He has provided food, shelter, education, skills and inspiration to countless people since 2007.</p>
-                    <p>Alfred is also a creative talent - a film actor and producer who owns Save Souls Film Industry with the purpose of saving people's souls from hell, challenging social living, showcasing stories, cultural heritage, and spreading the gospel.</p>
-                </div>
-                <div class="founder-img">
-                    <img src="UUU.jpg" alt="Alfred Bwambale">
-                </div>
-            </div>
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" class="mob-link">Home</a>
+  <a href="#" class="mob-link">About Us</a>
+  <a href="#" class="mob-link sub">↳ Mission & Vision</a>
+  <a href="#" class="mob-link sub">↳ Our History</a>
+  <a href="#" class="mob-link sub">↳ FAPCAN Community</a>
+  <a href="#" class="mob-link">Spiritual Life</a>
+  <a href="#" class="mob-link sub">↳ Prayer Schedule</a>
+  <a href="#" class="mob-link sub">↳ Mass & Services</a>
+  <a href="#" class="mob-link sub">↳ Bible Study</a>
+  <a href="#" class="mob-link">Community</a>
+  <a href="#" class="mob-link sub">↳ Orphans Support</a>
+  <a href="#" class="mob-link sub">↳ PWDs Programs</a>
+  <a href="#" class="mob-link sub">↳ Widows & Women</a>
+  <a href="#" class="mob-link">Education</a>
+  <a href="#" class="mob-link sub">↳ Primary School</a>
+  <a href="#" class="mob-link sub">↳ Secondary School</a>
+  <a href="#" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-geo">
+    <div class="hero-geo-ring"></div>
+    <div class="hero-geo-ring"></div>
+    <div class="hero-geo-ring"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">Kidodo · Kasese · Uganda · Since 2012</div>
+      <h1>A Home for <em>All Nations,</em><br>Transforming Lives<br>Through Faith</h1>
+      <p>Fatima Praying Center for All Nations is a voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders — transforming them through spiritual empowerment, education, and community development.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn-hero-primary">
+          <i class="fas fa-hands-helping"></i> Support Our Mission
+        </a>
+        <a href="#" class="btn-hero-outline">
+          <i class="fas fa-calendar-alt"></i> Join Our Services
+        </a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="slider" id="heroSlider">
+        <div class="slider-counter">
+          <span class="current" id="slideCurrentNum">1</span>
+          <span style="color:rgba(255,255,255,0.3)">/</span>
+          <span id="slideTotalNum">10</span>
         </div>
-    </section>
-
-    <!-- Activities Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Activities</h2>
-                <p>Programs that help us earn a living, fight stress, develop skills, and discover talents</p>
-            </div>
-            <div class="activities-grid">
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-pray"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Prayer & Worship</h3>
-                        <p>Daily prayers, Friday sermons, and special prayer sessions that form the spiritual foundation of our community.</p>
-                    </div>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Education Programs</h3>
-                        <p>Supporting 40 children in primary, 15 in secondary, 5 in tertiary education, and vocational training in tailoring, hair dressing, computer skills, and more.</p>
-                    </div>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Film Production</h3>
-                        <p>Through Save Souls Film Industry, we produce films to save souls, challenge social living, showcase cultural heritage, and spread the gospel.</p>
-                    </div>
-                </div>
-                <div class="activity-card">
-                    <div class="activity-icon">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <div class="activity-content">
-                        <h3>Community Development</h3>
-                        <p>Debates, talent shows, teachings, storytelling, and community tasks in Kidodo for area betterment and development.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="slide active">
+          <img src="f1.jpg" alt="FAPCAN Community Gathering">
+          <div class="slide-caption"><span>Community Gathering</span></div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>FAPCAN</h3>
-                    <p>Fatima Praying Center for All Nations is a voluntary non-government organization providing homage for the needy persons - PWDs, Orphans, Widows, Widowers, Elders.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> About FAPCAN</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Prayer Schedule</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Community Programs</a></li>
-                        <li><a href="#"><i class="fas fa-chevron-right"></i> Education Support</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Central Division<br>Kasese Municipality, Uganda</a></li>
-                        <li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li>
-                        <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM - 9:00 PM</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2026 FAPCAN - Fatima Praying Center for All Nations. All Rights Reserved.</p>
-            </div>
+        <div class="slide">
+          <img src="f2.jpg" alt="Prayer Session">
+          <div class="slide-caption"><span>Prayer Session</span></div>
         </div>
-    </footer>
+        <div class="slide">
+          <img src="f3.jpg" alt="Community Support">
+          <div class="slide-caption"><span>Community Support</span></div>
+        </div>
+        <div class="slide">
+          <img src="f4.jpg" alt="FAPCAN Activities">
+          <div class="slide-caption"><span>FAPCAN Activities</span></div>
+        </div>
+        <div class="slide">
+          <img src="f5.jpg" alt="Community Development">
+          <div class="slide-caption"><span>Community Development</span></div>
+        </div>
+        <div class="slide">
+          <img src="f6.jpg" alt="Education Programs">
+          <div class="slide-caption"><span>Education Programs</span></div>
+        </div>
+        <div class="slide">
+          <img src="f7.jpg" alt="Spiritual Life">
+          <div class="slide-caption"><span>Spiritual Life</span></div>
+        </div>
+        <div class="slide">
+          <img src="f8.jpg" alt="FAPCAN Members">
+          <div class="slide-caption"><span>FAPCAN Members</span></div>
+        </div>
+        <div class="slide">
+          <img src="f9.jpg" alt="Community Outreach">
+          <div class="slide-caption"><span>Community Outreach</span></div>
+        </div>
+        <div class="slide">
+          <img src="f10.jpg" alt="FAPCAN Events">
+          <div class="slide-caption"><span>FAPCAN Events</span></div>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Mobile Navigation Toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="impact-item reveal">
+    <div class="impact-icon"><i class="fas fa-users"></i></div>
+    <div class="impact-num" data-target="300">0</div>
+    <div class="impact-label">People in Community</div>
+  </div>
+  <div class="impact-item reveal reveal-delay-1">
+    <div class="impact-icon"><i class="fas fa-graduation-cap"></i></div>
+    <div class="impact-num" data-target="80">0</div>
+    <div class="impact-label">Students in School</div>
+  </div>
+  <div class="impact-item reveal reveal-delay-2">
+    <div class="impact-icon"><i class="fas fa-home"></i></div>
+    <div class="impact-num" data-target="250">0</div>
+    <div class="impact-label">Children Cared For</div>
+  </div>
+  <div class="impact-item reveal reveal-delay-3">
+    <div class="impact-icon"><i class="fas fa-hands-praying"></i></div>
+    <div class="impact-num" data-target="12">0</div>
+    <div class="impact-label">Years of Service</div>
+  </div>
+</div>
 
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileToggle.querySelector('i').classList.toggle('fa-bars');
-            mobileToggle.querySelector('i').classList.toggle('fa-times');
-        });
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-left">
+        <div class="about-img-tag">Founded 2012</div>
+        <img class="about-img-main" src="f5.jpg" alt="FAPCAN Community"
+          onerror="this.src='';this.style.background='linear-gradient(135deg,#1A365D,#1A7A8A)';this.style.display='block';">
+        <img class="about-img-accent" src="f3.jpg" alt="Prayer"
+          onerror="this.style.display='none'">
+      </div>
+      <div class="about-text reveal-right">
+        <div class="section-label">Who We Are</div>
+        <h2>A Voluntary Organisation<br>Built on <em>Faith &amp; Service</em></h2>
+        <p>The name FATIMA comes from Portugal where the Virgin Mary appeared to three children in 1917, emphasising the power of prayer. This inspired our founder to create a centre dedicated to prayer and community transformation.</p>
+        <p>Located in Kidodo Cell, Central Division, Kasese Municipality, Uganda, we serve as a <strong>"Home for All"</strong> — regardless of appearance, culture, tribe, gender, age, religion or education level.</p>
+        <div class="about-pillars">
+          <div class="pillar reveal reveal-delay-1">
+            <h4>Our Vision</h4>
+            <p>Spiritual empowerment for orphans, PWDs, elders and widows through life transformation, education and income generation.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-2">
+            <h4>Our Mission</h4>
+            <p>Building a strong praying working team to pool resources for social-economic and spiritual development of the community.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-3">
+            <h4>Core Values</h4>
+            <p>Inclusivity, compassion, faith, transparency, and service without discrimination of tribe, gender or religion.</p>
+          </div>
+          <div class="pillar reveal reveal-delay-4">
+            <h4>Our Reach</h4>
+            <p>Serving Kasese District and beyond — with a community of 300+ members and growing partnerships across Uganda.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Mobile Dropdown Functionality
-        document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.querySelector('.dropdown-arrow')) {
-                link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 992) {
-                        e.preventDefault();
-                        const dropdown = link.parentElement.querySelector('.dropdown');
-                        const isActive = link.parentElement.classList.contains('active');
-                        
-                        // Close all other dropdowns
-                        document.querySelectorAll('.nav-item.active').forEach(item => {
-                            if (item !== link.parentElement) {
-                                item.classList.remove('active');
-                            }
-                        });
-                        
-                        // Toggle current dropdown
-                        link.parentElement.classList.toggle('active');
-                    }
-                });
-            }
-        });
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <div class="founder-inner">
+    <div class="founder-grid">
+      <div class="founder-img-wrap reveal-left">
+        <div class="founder-img-frame">
+          <img src="UUU.jpg" alt="Alfred Bwambale"
+            onerror="this.src='f1.jpg';this.style.objectFit='cover'">
+        </div>
+        <div class="founder-quote-badge">
+          <p>"A father to over 250 children, regardless of tribe, faith or background."</p>
+        </div>
+      </div>
+      <div class="founder-text reveal-right">
+        <div class="section-label">Our Founder</div>
+        <h2>Alfred Bwambale</h2>
+        <span class="founder-title">Founder &amp; Spiritual Leader — Omuzana</span>
+        <p>Alfred Bwambale, known as Omuzana, was born on February 11, 1992 in Kaghema, Kyarumba sub-county. A devout Catholic, he was born with a special gift from God — the gift of prayer and healing that draws people from across Uganda and beyond.</p>
+        <p>Alfred owns the FAPCAN church where he prays for people of different religions. Beyond being a prayer warrior, he is a father to over 250 children — providing food, shelter, education, skills, and inspiration since 2007.</p>
+        <p>He is also a creative talent — a film actor and producer who owns <strong style="color:rgba(255,255,255,0.85)">Save Souls Film Industry</strong>, producing films that save souls, challenge social living, showcase cultural heritage, and spread the gospel.</p>
+        <div class="founder-facts">
+          <div class="fact reveal reveal-delay-1">
+            <span class="val">250+</span>
+            <span class="lbl">Children fathered</span>
+          </div>
+          <div class="fact reveal reveal-delay-2">
+            <span class="val">2007</span>
+            <span class="lbl">Service began</span>
+          </div>
+          <div class="fact reveal reveal-delay-3">
+            <span class="val">4</span>
+            <span class="lbl">Biological children</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target) && window.innerWidth <= 992) {
-                navMenu.classList.remove('active');
-                mobileToggle.querySelector('i').classList.add('fa-bars');
-                mobileToggle.querySelector('i').classList.remove('fa-times');
-                document.querySelectorAll('.nav-item.active').forEach(item => {
-                    item.classList.remove('active');
-                });
-            }
-        });
+<!-- ACTIVITIES -->
+<section class="activities" id="activities">
+  <div class="activities-inner">
+    <div class="activities-header">
+      <div>
+        <div class="section-label">What We Do</div>
+        <h2>Our Activities &amp; Programmes</h2>
+      </div>
+    </div>
+    <div class="activities-grid">
+      <div class="activity-card reveal reveal-delay-1">
+        <div class="act-icon-wrap"><i class="fas fa-pray"></i></div>
+        <span class="act-tag">Spiritual</span>
+        <h3>Prayer &amp; Worship</h3>
+        <p>Daily prayers, Friday sermons, and special prayer sessions form the spiritual foundation of our community — open to all faiths.</p>
+        <a href="#" class="act-arrow">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="activity-card reveal reveal-delay-2">
+        <div class="act-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+        <span class="act-tag">Education</span>
+        <h3>Education Programmes</h3>
+        <p>Supporting 40 children in primary, 15 in secondary, 5 in tertiary, and vocational training in tailoring, hair dressing, computer skills and more.</p>
+        <a href="#" class="act-arrow">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="activity-card reveal reveal-delay-3">
+        <div class="act-icon-wrap"><i class="fas fa-film"></i></div>
+        <span class="act-tag">Film &amp; Arts</span>
+        <h3>Save Souls Film Industry</h3>
+        <p>Producing films to save souls, challenge social living, showcase cultural heritage, and spread the gospel across Uganda and beyond.</p>
+        <a href="#" class="act-arrow">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="activity-card reveal reveal-delay-4">
+        <div class="act-icon-wrap"><i class="fas fa-hands-helping"></i></div>
+        <span class="act-tag">Community</span>
+        <h3>Community Development</h3>
+        <p>Debates, talent shows, storytelling, and community tasks in Kidodo that build skills, foster unity, and drive area betterment.</p>
+        <a href="#" class="act-arrow">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // ENHANCED SLIDER SCRIPT for Hero Section with local images
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.querySelector('.slider-dots');
-        let slideIndex = 0;
-        let slideInterval;
+<!-- PROGRAMMES STRIP -->
+<section class="programmes">
+  <div class="programmes-inner">
+    <div class="programmes-header">
+      <div class="section-label">Serving Our Community</div>
+      <h2>Who We Serve</h2>
+    </div>
+    <div class="programmes-grid">
+      <div class="prog-card reveal reveal-delay-1">
+        <div class="prog-icon">👶</div>
+        <h4>Orphans &amp; Children</h4>
+        <p>Food, shelter, education, and unconditional love for 250+ orphaned and vulnerable children.</p>
+      </div>
+      <div class="prog-card reveal reveal-delay-2">
+        <div class="prog-icon">♿</div>
+        <h4>PWDs</h4>
+        <p>Inclusive programmes and practical support for persons with disabilities and their families.</p>
+      </div>
+      <div class="prog-card reveal reveal-delay-3">
+        <div class="prog-icon">🕊️</div>
+        <h4>Widows &amp; Women</h4>
+        <p>Empowerment, counselling, vocational training, and community for widows and women in need.</p>
+      </div>
+      <div class="prog-card reveal reveal-delay-4">
+        <div class="prog-icon">👴</div>
+        <h4>Elders</h4>
+        <p>Dignified care, companionship, and basic needs for elderly community members with no support.</p>
+      </div>
+      <div class="prog-card reveal reveal-delay-1">
+        <div class="prog-icon">🏠</div>
+        <h4>Housing &amp; Shelter</h4>
+        <p>Providing safe shelter and transitional housing for the most vulnerable community members.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // Create dots based on number of slides
-        slides.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            if (index === 0) dot.classList.add('active');
-            dot.setAttribute('data-index', index);
-            dotsContainer.appendChild(dot);
-        });
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Be Part of <em>Something Greater</em></h2>
+    <p>Your support — whether through prayer, volunteering, or a donation — transforms lives in Kasese and beyond. Join the FAPCAN family today.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-light">Donate Now</a>
+      <a href="#" class="btn-cta-ghost">Volunteer With Us</a>
+    </div>
+  </div>
+</section>
 
-        const dots = document.querySelectorAll('.dot');
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-badge" style="margin-bottom:16px">
+          <img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="logo-badge-fallback" style="display:none">FAP</span>
+        </div>
+        <strong>FAPCAN</strong>
+        <span class="tagline">Fatima Praying Center for All Nations</span>
+        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> About FAPCAN</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Prayer Schedule</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Community Programs</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Education</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Work</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Orphans Support</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> PWDs Programs</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Widows & Women</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Elders Care</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Central Division<br>Kasese Municipality, Uganda</a></li>
+          <li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li>
+          <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FAPCAN – Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-        function showSlide(n) {
-            // Remove active class from all slides and dots
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            // Update index
-            slideIndex = (n + slides.length) % slides.length;
-            
-            // Add active class to current slide and dot
-            slides[slideIndex].classList.add('active');
-            dots[slideIndex].classList.add('active');
-        }
+<script>
+/* ── CUSTOM CURSOR ── */
+const cursorDot  = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-        function nextSlide() {
-            showSlide(slideIndex + 1);
-        }
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.querySelectorAll('a, button, .activity-card, .prog-card, .impact-item, .dot').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+});
 
-        // Initialize slider
-        function initSlider() {
-            // Start automatic sliding
-            slideInterval = setInterval(nextSlide, 4500);
-            
-            // Add click events to dots
-            dots.forEach((dot, i) => {
-                dot.addEventListener('click', () => {
-                    clearInterval(slideInterval);
-                    showSlide(i);
-                    slideInterval = setInterval(nextSlide, 4500);
-                });
-            });
-        }
+function animCursor() {
+  rx += (mx - rx) * 0.14;
+  ry += (my - ry) * 0.14;
+  cursorDot.style.transform  = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+  cursorRing.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+// Hide cursor on mobile
+if ('ontouchstart' in window) document.querySelector('.cursor').style.display = 'none';
 
-        // Initialize slider on page load
-        document.addEventListener('DOMContentLoaded', initSlider);
+/* ── NAV SCROLL ── */
+const mainNav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  mainNav.classList.toggle('scrolled', window.scrollY > 40);
+});
 
-        // Animate stats on scroll
-        function animateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const text = stat.textContent;
-                const finalValue = parseInt(text);
-                let currentValue = 0;
-                const increment = finalValue / 100;
-                const timer = setInterval(() => {
-                    currentValue += increment;
-                    if (currentValue >= finalValue) {
-                        stat.textContent = finalValue + '+';
-                        clearInterval(timer);
-                    } else {
-                        stat.textContent = Math.floor(currentValue) + '+';
-                    }
-                }, 20);
-            });
-        }
+/* ── HAMBURGER ── */
+const hamburger   = document.getElementById('hamburger');
+const mobileMenu  = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  const spans = hamburger.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }
+});
 
-        // Trigger stats animation when in viewport
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+/* ── SLIDER ── */
+const slides   = document.querySelectorAll('.slide');
+const dotsWrap = document.getElementById('sliderDots');
+const currNum  = document.getElementById('slideCurrentNum');
+const totalNum = document.getElementById('slideTotalNum');
+let current = 0, interval;
 
-        const statsSection = document.querySelector('.stats');
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
+totalNum.textContent = slides.length;
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 992) {
-                        navMenu.classList.remove('active');
-                        mobileToggle.querySelector('i').classList.add('fa-bars');
-                        mobileToggle.querySelector('i').classList.remove('fa-times');
-                    }
-                }
-            });
-        });
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => goTo(i));
+  dotsWrap.appendChild(d);
+});
 
-        // Add active class to nav items on scroll
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY + 150;
-            
-            document.querySelectorAll('.section').forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                const sectionId = section.getAttribute('id');
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    document.querySelectorAll('.nav-link').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        });
+function goTo(n) {
+  slides[current].classList.remove('active');
+  document.querySelectorAll('#sliderDots .dot')[current].classList.remove('active');
+  current = (n + slides.length) % slides.length;
+  slides[current].classList.add('active');
+  document.querySelectorAll('#sliderDots .dot')[current].classList.add('active');
+  currNum.textContent = current + 1;
+}
 
-        // Founder image error handling
-        const founderImg = document.querySelector('.founder-img img');
-        if (founderImg) {
-            founderImg.onerror = function() {
-                this.src = 'f1.JPG'; // Fallback image if UUU.jpg doesn't exist
-                this.alt = 'Alfred Bwambale - FAPCAN Founder';
-            };
-        }
-    </script>
+function startSlider() {
+  interval = setInterval(() => goTo(current + 1), 4500);
+}
+startSlider();
+
+/* pause on hover */
+document.getElementById('heroSlider').addEventListener('mouseenter', () => clearInterval(interval));
+document.getElementById('heroSlider').addEventListener('mouseleave', startSlider);
+
+/* ── REVEAL ON SCROLL ── */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── COUNTER ANIMATION ── */
+function countUp(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = target >= 10 ? '+' : '';
+  const duration = 1800;
+  const step = target / (duration / 16);
+  let val = 0;
+  const timer = setInterval(() => {
+    val += step;
+    if (val >= target) { el.textContent = target + suffix; clearInterval(timer); }
+    else el.textContent = Math.floor(val) + suffix;
+  }, 16);
+}
+
+const impactObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.impact-num').forEach(countUp);
+      impactObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelector('.impact-strip') && impactObs.observe(document.querySelector('.impact-strip'));
+
+/* ── SMOOTH SCROLL ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+
+/* ── ACTIVE NAV ON SCROLL ── */
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  document.querySelectorAll('.nav-link').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
 </body>
-
-</html>
+    </html>
