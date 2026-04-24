@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prayer & Worship — FAPCAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  :root{--accent:var(--purple);--accent-lt:rgba(85,60,154,.08)}
+
+  /* ── PAGE HERO accent overrides ── */
+  .page-hero-tag{color:var(--gold-lt);border-color:rgba(246,224,94,.35)}
+  .page-hero h1 em{color:var(--gold-lt)}
+
+  /* ── HOW WE PRAY ── */
+  .how-section{padding:100px 0;background:var(--white)}
+  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .how-img-stack{position:relative;height:500px}
+  .how-img-main{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;display:block}
+  .how-img-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(85,60,154,.15),rgba(26,54,93,.4))}
+  .how-img-accent-card{position:absolute;bottom:-24px;right:-24px;background:var(--navy);padding:28px 24px;width:200px;box-shadow:0 16px 40px rgba(0,0,0,.25);z-index:2}
+  .how-img-accent-card .big{font-family:var(--font-serif);font-size:40px;font-weight:900;color:var(--gold);line-height:1}
+  .how-img-accent-card .lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+  .how-img-tag{position:absolute;top:24px;left:-16px;background:var(--purple);color:#fff;padding:8px 20px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 6px 18px rgba(85,60,154,.4);z-index:2}
+  .how-text h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);line-height:1.1;margin-bottom:20px}
+  .how-text h2 em{font-style:italic;color:var(--purple)}
+  .how-text>p{font-size:16px;line-height:1.8;color:var(--mid);margin-bottom:32px}
+  .prayer-methods{display:flex;flex-direction:column;gap:0}
+  .method-item{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--light-gray);transition:padding-left .2s}
+  .method-item:last-child{border-bottom:none}
+  .method-item:hover{padding-left:8px}
+  .method-icon{width:44px;height:44px;border-radius:50%;background:var(--accent-lt);display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:16px;flex-shrink:0;transition:background .2s,color .2s}
+  .method-item:hover .method-icon{background:var(--purple);color:#fff}
+  .method-body h4{font-family:var(--font-serif);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px}
+  .method-body p{font-size:13.5px;color:var(--mid);line-height:1.6}
+
+  /* ── WHEN & WHERE ── */
+  .schedule-section{padding:100px 0;background:var(--off-white)}
+  .schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .schedule-card{background:var(--navy);padding:56px 48px;position:relative;overflow:hidden}
+  .schedule-card::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;border:40px solid rgba(214,158,46,.1)}
+  .schedule-card::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;border:30px solid rgba(85,60,154,.15)}
+  .schedule-icon{font-size:44px;margin-bottom:24px;position:relative;z-index:1}
+  .schedule-day{font-family:var(--font-serif);font-weight:900;font-size:52px;color:var(--gold);line-height:1;position:relative;z-index:1}
+  .schedule-time{font-size:20px;font-weight:300;color:rgba(255,255,255,.7);margin:8px 0 20px;position:relative;z-index:1}
+  .schedule-location{display:flex;align-items:flex-start;gap:12px;color:rgba(255,255,255,.65);font-size:14.5px;line-height:1.6;position:relative;z-index:1}
+  .schedule-location i{color:var(--gold);font-size:16px;margin-top:2px;flex-shrink:0}
+  .schedule-note{background:rgba(255,255,255,.06);padding:16px 20px;margin-top:24px;font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;position:relative;z-index:1;border-left:3px solid var(--gold)}
+
+  .schedule-map{background:var(--navy-dk);height:100%;min-height:360px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .map-placeholder-text{text-align:center;color:rgba(255,255,255,.25);font-size:14px}
+  .map-placeholder-text i{font-size:48px;margin-bottom:12px;display:block;color:rgba(255,255,255,.1)}
+
+  /* ── IMPACT ── */
+  .impact-section{padding:80px 0;background:var(--white)}
+  .impact-list{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+  .impact-card{background:var(--off-white);padding:44px 36px;position:relative;overflow:hidden;transition:background .2s}
+  .impact-card:nth-child(1){background:#EEF2FF}
+  .impact-card:nth-child(2){background:#F5F0FF}
+  .impact-card:nth-child(3){background:#EEF9F0}
+  .impact-card:nth-child(4){background:#FFF8EC}
+  .impact-card:hover{filter:brightness(.97)}
+  .impact-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+  .impact-card:nth-child(1)::before{background:var(--teal)}
+  .impact-card:nth-child(2)::before{background:var(--purple)}
+  .impact-card:nth-child(3)::before{background:var(--green)}
+  .impact-card:nth-child(4)::before{background:var(--gold)}
+  .impact-card h3{font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--navy);margin-bottom:10px;margin-left:16px}
+  .impact-card p{font-size:14.5px;color:var(--mid);line-height:1.7;margin-left:16px}
+
+  /* ── PHOTOS ── */
+  .photos-section{padding:80px 0;background:var(--off-white)}
+  .photos-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:40px}
+  .prayer-photo-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:3px}
+  .prayer-photo-grid .photo-item:first-child{grid-row:span 2}
+  .photo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-out)}
+  .photo-item:hover img{transform:scale(1.05)}
+  .photo-item .caption{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(to top,rgba(0,0,0,.6),transparent);color:#fff;font-size:12px;letter-spacing:.04em;opacity:0;transition:opacity .3s}
+  .photo-item:hover .caption{opacity:1}
+
+  /* ── VIDEO ── */
+  .video-section{padding:80px 0;background:var(--navy-dk)}
+  .video-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,44px);color:#fff;margin-bottom:12px}
+  .video-section>div>p{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:40px;max-width:560px}
+  .video-outer{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}
+  .video-side-list{display:flex;flex-direction:column;gap:16px}
+  .video-thumb-item{display:flex;gap:14px;background:rgba(255,255,255,.05);padding:14px;cursor:pointer;transition:background .2s;align-items:center}
+  .video-thumb-item:hover{background:rgba(255,255,255,.1)}
+  .video-thumb-item .thumb{width:80px;height:54px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:22px}
+  .video-thumb-item .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .video-thumb-item h4{font-family:var(--font-serif);font-size:14px;font-weight:600;color:#fff;line-height:1.3;margin-bottom:4px}
+  .video-thumb-item p{font-size:12px;color:rgba(255,255,255,.35)}
+
+  /* ── TESTIMONIALS ── */
+  .testi-section{padding:100px 0;background:var(--white)}
+  .testi-section .section-label{--accent:var(--purple)}
+
+  @media(max-width:960px){
+    .how-grid,.schedule-grid,.video-outer{grid-template-columns:1fr;gap:40px}
+    .how-img-stack{height:340px}
+    .impact-list{grid-template-columns:1fr}
+    .prayer-photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+    .prayer-photo-grid .photo-item:first-child{grid-row:span 1}
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor"><div class="cursor-dot" id="cDot"></div><div class="cursor-ring" id="cRing"></div></div>
+
+<!-- COLOUR BAND -->
+<div class="colour-band"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
+      <div class="logo-text"><strong>FAPCAN</strong><span>Fatima Praying Center</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-cross"></i> Mission & Vision</a>
+          <a href="#"><i class="fas fa-history"></i> Our History</a>
+          <a href="#"><i class="fas fa-users"></i> FAPCAN Community</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Location</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link active">Spiritual Life <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="prayer-worship.html"><i class="fas fa-pray"></i> Prayer & Worship</a>
+          <a href="#"><i class="fas fa-clock"></i> Prayer Schedule</a>
+          <a href="#"><i class="fas fa-church"></i> Mass & Services</a>
+          <a href="#"><i class="fas fa-bible"></i> Bible Study</a>
+          <a href="#"><i class="fas fa-heart"></i> Sacraments</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Community <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-child"></i> Orphans Support</a>
+          <a href="#"><i class="fas fa-wheelchair"></i> PWDs Programs</a>
+          <a href="#"><i class="fas fa-female"></i> Widows & Women</a>
+          <a href="#"><i class="fas fa-user-friends"></i> Elders Care</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Education <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-school"></i> Primary School</a>
+          <a href="#"><i class="fas fa-graduation-cap"></i> Secondary School</a>
+          <a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="#" class="mob-link">About Us</a>
+  <a href="prayer-worship.html" class="mob-link sub">↳ Prayer & Worship</a>
+  <a href="#" class="mob-link sub">↳ Prayer Schedule</a>
+  <a href="education.html" class="mob-link">Education Programs</a>
+  <a href="film-arts.html" class="mob-link">Film & Creative Arts</a>
+  <a href="community-dev.html" class="mob-link">Community Development</a>
+  <a href="#" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero" id="hero">
+  <div class="page-hero-bg" style="background-image:url('f1.jpg')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-geo">
+    <div class="geo-ring" style="width:600px;height:600px;top:-200px;right:-100px;animation-duration:55s"></div>
+    <div class="geo-ring" style="width:350px;height:350px;top:-80px;right:80px;animation-duration:40s;animation-direction:reverse;border-color:rgba(246,224,94,.07)"></div>
+  </div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb" style="animation:fadeUp .6s .2s var(--ease-out) both">
+      <a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,.6)">Spiritual Life</span><span>/</span><span style="color:rgba(255,255,255,.6)">Prayer & Worship</span>
+    </div>
+    <div class="page-hero-tag" style="animation:fadeUp .6s .3s var(--ease-out) both"><i class="fas fa-pray"></i> Spiritual Life</div>
+    <h1 style="animation:fadeUp .7s .45s var(--ease-out) both">Prayer &amp; <em>Worship</em></h1>
+    <p class="page-hero-desc" style="animation:fadeUp .7s .6s var(--ease-out) both">The foundation of our mission and the heartbeat of our gatherings. Through prayer, lives are transformed, hope is restored, and communities are strengthened.</p>
+  </div>
+  <div class="page-hero-scroll"><div class="page-hero-scroll-line"></div><span>Scroll</span></div>
+</section>
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="impact-item reveal"><div class="impact-icon"><i class="fas fa-hands-praying"></i></div><div class="impact-num" data-target="52" data-suffix="+">0</div><div class="impact-lbl">Saturdays Per Year</div></div>
+  <div class="impact-item reveal d1"><div class="impact-icon"><i class="fas fa-users"></i></div><div class="impact-num" data-target="300" data-suffix="+">0</div><div class="impact-lbl">Community Members</div></div>
+  <div class="impact-item reveal d2"><div class="impact-icon"><i class="fas fa-globe-africa"></i></div><div class="impact-num" data-target="5" data-suffix="+">0</div><div class="impact-lbl">Religions Welcomed</div></div>
+  <div class="impact-item reveal d3"><div class="impact-icon"><i class="fas fa-heart"></i></div><div class="impact-num" data-target="12" data-suffix="+">0</div><div class="impact-lbl">Years Gathering</div></div>
+</div>
+
+<!-- HOW WE PRAY -->
+<section class="how-section" id="how">
+  <div class="content-wrap">
+    <div class="how-grid">
+      <div class="how-img-stack reveal-left">
+        <div class="how-img-tag">Spirit-Led Sessions</div>
+        <img class="how-img-main" src="f2.jpg" alt="Prayer session" onerror="this.style.background='linear-gradient(135deg,#553C9A,#1A365D)';this.alt=''">
+        <div class="how-img-overlay"></div>
+        <div class="how-img-accent-card">
+          <div class="big">5h</div>
+          <div class="lbl">Every Saturday session</div>
+        </div>
+      </div>
+      <div class="how-text reveal-right">
+        <div class="section-label" style="--accent:var(--purple)">How We Pray</div>
+        <h2>A <em>Holistic</em> Approach<br>to Prayer</h2>
+        <p>Our prayer sessions are Spirit-led, inclusive, and deeply rooted in faith and unity — nurturing both individual and community transformation.</p>
+        <div class="prayer-methods">
+          <div class="method-item reveal d1">
+            <div class="method-icon"><i class="fas fa-hands"></i></div>
+            <div class="method-body"><h4>Intercessory Prayer</h4><p>Standing in the gap for families, communities, and the nation</p></div>
+          </div>
+          <div class="method-item reveal d2">
+            <div class="method-icon"><i class="fas fa-music"></i></div>
+            <div class="method-body"><h4>Worship & Praise</h4><p>Expressing gratitude and lifting hearts through music and thanksgiving</p></div>
+          </div>
+          <div class="method-item reveal d3">
+            <div class="method-icon"><i class="fas fa-bible"></i></div>
+            <div class="method-body"><h4>Scripture-Based Prayer</h4><p>Anchoring our prayers firmly in the Word of God</p></div>
+          </div>
+          <div class="method-item reveal d4">
+            <div class="method-icon"><i class="fas fa-user"></i></div>
+            <div class="method-body"><h4>Personal Reflection</h4><p>Creating space for individuals to connect deeply with God</p></div>
+          </div>
+          <div class="method-item reveal d5">
+            <div class="method-icon"><i class="fas fa-heart-pulse"></i></div>
+            <div class="method-body"><h4>Healing & Restoration</h4><p>Trusting God for breakthrough, healing, and renewal</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section" id="schedule">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--purple);margin-bottom:40px">When &amp; Where We Gather</div>
+    <div class="schedule-grid">
+      <div class="schedule-card reveal-left">
+        <div class="schedule-icon">🕊️</div>
+        <div class="schedule-day">Every<br>Saturday</div>
+        <div class="schedule-time">9:00 AM — 2:00 PM</div>
+        <div class="schedule-location"><i class="fas fa-map-marker-alt"></i><span>Fatima Praying Center For All Nations<br>Kidodo, Kasese Municipality, Uganda</span></div>
+        <div class="schedule-note">All sessions are open and participatory. Every person — regardless of faith background — is warmly welcomed.</div>
+        <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
+          <a href="#" class="btn-accent" style="--accent:var(--purple)"><i class="fas fa-calendar-check"></i> Join Next Session</a>
+          <a href="#" class="btn-ghost" style="--accent:var(--purple)"><i class="fas fa-map"></i> Get Directions</a>
+        </div>
+      </div>
+      <div class="schedule-map reveal-right">
+        <img src="f7.jpg" alt="FAPCAN gathering space" style="width:100%;height:100%;object-fit:cover;display:block;min-height:360px" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="map-placeholder-text" style="display:none"><i class="fas fa-map-marked-alt"></i>Kidodo, Kasese</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact-section" id="impact">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--purple);margin-bottom:12px">Impact on the Community</div>
+    <h2 class="reveal" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);max-width:600px;margin-bottom:48px;line-height:1.1">What Prayer Has<br>Produced in Our Community</h2>
+    <div class="impact-list">
+      <div class="impact-card reveal d1">
+        <h3>Spiritual Growth</h3>
+        <p>Developing a deeper relationship with God and a stronger sense of purpose across all age groups and backgrounds.</p>
+      </div>
+      <div class="impact-card reveal d2">
+        <h3>Healing & Restoration</h3>
+        <p>Finding peace, hope, and renewal in times of struggle — many have experienced transformative healing through consistent prayer.</p>
+      </div>
+      <div class="impact-card reveal d3">
+        <h3>Life Transformation</h3>
+        <p>Turning away from destructive paths and embracing positive change — many souls have been guided toward a life of faith and purpose.</p>
+      </div>
+      <div class="impact-card reveal d4">
+        <h3>Community Unity</h3>
+        <p>Building strong bonds of love, support, and togetherness that extend beyond the prayer session into everyday community life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section class="photos-section" id="photos">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--purple)">Gallery</div>
+    <h2 class="reveal">Prayer Sessions in Pictures</h2>
+    <div class="prayer-photo-grid">
+      <div class="photo-item reveal-left" style="position:relative"><img src="f1.jpg" alt="Prayer session" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-pray" style="font-size:64px"></i></div><div class="caption">Community Gathering</div></div>
+      <div class="photo-item reveal d1" style="position:relative"><img src="f3.jpg" alt="Worship" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-music"></i></div><div class="caption">Praise & Worship</div></div>
+      <div class="photo-item reveal d2" style="position:relative"><img src="f4.jpg" alt="Prayer" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-pray"></i></div><div class="caption">Intercessory Prayer</div></div>
+      <div class="photo-item reveal d3" style="position:relative"><img src="f6.jpg" alt="Community" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-users"></i></div><div class="caption">Healing Session</div></div>
+      <div class="photo-item reveal d4" style="position:relative"><img src="f9.jpg" alt="FAPCAN" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-heart"></i></div><div class="caption">Scripture Study</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--gold);margin-bottom:12px">Watch &amp; Experience</div>
+    <h2 class="reveal">See the Power of Prayer</h2>
+    <div class="video-outer">
+      <div class="reveal-left">
+        <div class="video-wrap" data-src="https://www.youtube.com/embed/YOUR_VIDEO_ID" style="border-radius:2px">
+          <div class="video-thumb" style="background-image:url('f2.jpg')"></div>
+          <div class="video-play-btn">
+            <div class="play-circle" style="--accent:var(--purple)"><i class="fas fa-play"></i></div>
+          </div>
+        </div>
+        <p style="font-size:13px;color:rgba(255,255,255,.35);margin-top:12px">A glimpse into our Saturday gathering at Kidodo</p>
+      </div>
+      <div class="video-side-list reveal-right">
+        <p style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">More Recordings</p>
+        <div class="video-thumb-item">
+          <div class="thumb"><img src="f5.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
+          <div><h4>Healing Testimonies Night</h4><p>Saturday Special — March 2024</p></div>
+        </div>
+        <div class="video-thumb-item">
+          <div class="thumb"><img src="f8.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
+          <div><h4>Community Praise &amp; Worship</h4><p>Kidodo · December 2023</p></div>
+        </div>
+        <div class="video-thumb-item">
+          <div class="thumb"><img src="f10.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
+          <div><h4>Intercessory Prayer Session</h4><p>Kasese Municipality · 2024</p></div>
+        </div>
+        <a href="#" class="btn-ghost" style="--accent:var(--gold);margin-top:8px;font-size:12px"><i class="fas fa-film"></i> View All Videos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="testimonials">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--purple)">Testimonials</div>
+    <h2 class="reveal" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px">Lives Changed<br>Through Prayer</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal d1" style="--accent:var(--purple)">
+        <p class="testi-text">"Coming to FAPCAN prayer sessions changed my life completely. I arrived broken and hopeless — through prayer I found healing, direction, and a community that truly cares."</p>
+        <div class="testi-author"><div class="testi-avatar" style="--accent:var(--purple);--accent-lt:rgba(85,60,154,.1)">M</div><div><div class="testi-name">Mary Kyomugisha</div><div class="testi-role">Community Member, Kasese</div></div></div>
+      </div>
+      <div class="testi-card reveal d2" style="--accent:var(--purple)">
+        <p class="testi-text">"The Saturday gatherings give me strength for the whole week. I have seen healings I cannot explain with words — only faith. Alfred and this community are truly special."</p>
+        <div class="testi-author"><div class="testi-avatar">J</div><div><div class="testi-name">John Baluku</div><div class="testi-role">Elder, FAPCAN Congregation</div></div></div>
+      </div>
+      <div class="testi-card reveal d3" style="--accent:var(--purple)">
+        <p class="testi-text">"I am Muslim, but the welcome I received at FAPCAN was unlike anything I expected. Prayer here is for everyone. The unity I found here is real and lasting."</p>
+        <div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Ahmed Muhindo</div><div class="testi-role">Visitor, Kasese Town</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band" style="--accent:var(--purple)">
+  <div class="cta-inner reveal">
+    <h2>Join Us This <em>Saturday</em></h2>
+    <p>Every session is open, welcoming, and free. Come as you are — and experience the power of prayer with the FAPCAN community.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-light">Plan Your Visit</a>
+      <a href="#" class="btn-cta-ghost"><i class="fas fa-hands-helping"></i> Support Our Ministry</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
+        <strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span>
+        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Programmes</h4><ul>
+        <li><a href="prayer-worship.html"><i class="fas fa-chevron-right"></i> Prayer & Worship</a></li>
+        <li><a href="education.html"><i class="fas fa-chevron-right"></i> Education</a></li>
+        <li><a href="film-arts.html"><i class="fas fa-chevron-right"></i> Film & Creative Arts</a></li>
+        <li><a href="community-dev.html"><i class="fas fa-chevron-right"></i> Community Dev.</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Who We Serve</h4><ul>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Orphans & Children</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> PWDs</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Widows & Women</a></li>
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Elders</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li>
+        <li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li>
+        <li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li>
+        <li><a href="#"><i class="fas fa-clock"></i> Saturdays: 9:00 AM – 2:00 PM</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FAPCAN — Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<style>
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+</style>
+</body>
+</html>
