@@ -14,7 +14,6 @@
   .page-hero-tag{color:#FEB2B2;border-color:rgba(254,178,178,.3)}
   .page-hero h1 em{color:var(--gold-lt)}
 
-  /* Film-specific hero enhancements */
   .page-hero{background:#0a0a0a}
   .page-hero-overlay{background:linear-gradient(to top,rgba(10,10,10,.92) 0%,rgba(10,10,10,.5) 50%,rgba(10,10,10,.25) 100%)}
 
@@ -35,7 +34,6 @@
   .film-stats{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap}
   .film-stat .val{font-family:var(--font-serif);font-size:36px;font-weight:900;color:var(--gold);line-height:1}
   .film-stat .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px}
-  /* Clapboard visual */
   .clap-visual{position:relative}
   .clap-main{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(.2)}
   .clap-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.7),transparent 50%)}
@@ -101,13 +99,40 @@
   .film-grid .photo-item:nth-child(1){grid-column:span 2;grid-row:span 2}
   .film-grid .photo-item:nth-child(4){grid-column:span 2}
 
-  /* ── VIDEO ── */
-  .film-video-section{padding:80px 0;background:#0a0a0a}
-  .film-video-inner{max-width:900px;margin:0 auto;padding:0 32px}
-  .film-video-inner .section-label{--accent:var(--gold)}
-  .film-video-inner .section-label::before{background:var(--gold)}
-  .film-video-inner h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,42px);color:#fff;margin-bottom:12px}
-  .film-video-inner p{font-size:16px;color:rgba(255,255,255,.45);margin-bottom:32px}
+  /* ── VIDEO SECTIONS ── */
+  .video-section{padding:80px 0}
+  .video-section.dark-bg{background:#0a0a0a}
+  .video-section.mid-bg{background:#111}
+  .video-section.navy-bg{background:#0d1b2e}
+  .video-section.gold-bg{background:#1a1200}
+  .video-section-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+
+  .video-section-header{margin-bottom:40px}
+  .video-section-header .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+  .video-section-header .section-label::before{content:'';display:block;width:28px;height:2px}
+  .video-section-header h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(24px,3vw,40px);color:#fff;margin-bottom:10px}
+  .video-section-header p{font-size:15px;color:rgba(255,255,255,.4);max-width:600px}
+
+  /* Films grid */
+  .videos-grid{display:grid;gap:16px}
+  .videos-grid.grid-1{grid-template-columns:1fr;max-width:860px}
+  .videos-grid.grid-2{grid-template-columns:repeat(2,1fr)}
+  .videos-grid.grid-3{grid-template-columns:repeat(3,1fr)}
+  .videos-grid.grid-4{grid-template-columns:repeat(4,1fr)}
+  .videos-grid.grid-mixed{grid-template-columns:repeat(3,1fr)}
+  .videos-grid.grid-mixed .yt-embed-item:first-child{grid-column:span 2}
+
+  .yt-embed-item{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}
+  .yt-embed-item iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .yt-embed-item .embed-border{position:absolute;inset:0;border:1px solid rgba(255,255,255,.06);pointer-events:none;z-index:1}
+
+  /* Award banner */
+  .award-banner{background:linear-gradient(135deg,#D69E2E 0%,#92680a 100%);padding:48px 40px;display:flex;align-items:center;gap:32px;margin-top:40px}
+  .award-banner-icon{font-size:56px;flex-shrink:0}
+  .award-banner h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,30px);color:#fff;margin-bottom:6px}
+  .award-banner p{font-size:14.5px;color:rgba(255,255,255,.75);line-height:1.6}
+  .award-banner-video{flex:1;min-width:280px;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden}
+  .award-banner-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
   /* ── TESTIMONIALS ── */
   .testi-section{padding:100px 0;background:var(--white)}
@@ -119,6 +144,10 @@
     .story-block:nth-child(1){grid-row:span 1}
     .film-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
     .film-grid .photo-item:nth-child(1),.film-grid .photo-item:nth-child(4){grid-column:span 1;grid-row:span 1}
+    .videos-grid.grid-2,.videos-grid.grid-3,.videos-grid.grid-4,.videos-grid.grid-mixed{grid-template-columns:1fr}
+    .videos-grid.grid-mixed .yt-embed-item:first-child{grid-column:span 1}
+    .award-banner{flex-direction:column}
+    .award-banner-video{width:100%}
   }
 </style>
 </head>
@@ -201,7 +230,7 @@
           </div>
         </div>
         <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
-          <a href="#video" class="btn-accent" style="--accent:var(--red)"><i class="fas fa-play"></i> Watch Our Films</a>
+          <a href="#films" class="btn-accent" style="--accent:var(--red)"><i class="fas fa-play"></i> Watch Our Films</a>
           <a href="#" class="btn-ghost" style="--accent:var(--gold);border-color:var(--gold);color:var(--gold)"><i class="fas fa-hands-helping"></i> Get Involved</a>
         </div>
       </div>
@@ -281,7 +310,7 @@
       </div>
       <div class="reveal-right">
         <div class="section-label" style="--accent:var(--red)">Exploring Opportunities</div>
-        <h2>Film Has Opened<br>Doors to the <em>World</em></h2>
+        <h2 class="opp-text">Film Has Opened<br>Doors to the <em>World</em></h2>
         <p>Our journey in filmmaking has created remarkable opportunities for community members who might otherwise never have left Kidodo.</p>
         <p>Through Save Souls Film Industry, participants step beyond their limitations and explore the world while carrying their stories with them.</p>
         <div class="opp-list">
@@ -310,17 +339,195 @@
   </div>
 </section>
 
-<!-- VIDEO -->
-<section class="film-video-section" id="video">
-  <div class="film-video-inner">
-    <div class="section-label">Watch Our Work</div>
-    <h2 class="reveal">Our Films</h2>
-    <p class="reveal">Watch the transformative work of Save Souls Film Industry — stories of hope, healing, and community.</p>
-    <div class="video-wrap reveal" data-src="https://www.youtube.com/embed/YOUR_VIDEO_ID" style="border-radius:2px;border:1px solid rgba(255,255,255,.08)">
-      <div class="video-thumb" style="background-image:url('f7.jpg')"></div>
-      <div class="video-play-btn"><div class="play-circle" style="--accent:var(--red)"><i class="fas fa-play"></i></div></div>
+<!-- ══════════════════════════════════════════════
+     FILMS SECTION
+══════════════════════════════════════════════ -->
+
+<!-- FILMS -->
+<section class="video-section dark-bg" id="films">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:var(--red);--accent:var(--red)"><span style="display:block;width:28px;height:2px;background:var(--red);margin-right:10px"></span>Films</div>
+      <h2>Save Souls Films</h2>
+      <p>Original narrative productions from Save Souls Film Industry — stories rooted in community, truth, and transformation.</p>
     </div>
-    <p style="font-size:13px;color:rgba(255,255,255,.2);margin-top:12px;text-align:center">Click to play — Save Souls Film Industry Production</p>
+    <div class="videos-grid grid-3 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/xVqMxlVHoeA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/a9xSesz8QwM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/LtcD9aJnACs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/yYnnXITXrxs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/wsQMhfun26A" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/zb-mXoJz1GY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item" style="grid-column:2">
+        <iframe src="https://www.youtube.com/embed/j3SEEIfPNik" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCUMENTARIES -->
+<section class="video-section mid-bg" id="documentaries">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:var(--gold)"><span style="display:block;width:28px;height:2px;background:var(--gold);margin-right:10px"></span>Documentaries</div>
+      <h2>Documentaries</h2>
+      <p>In-depth documentary work capturing real stories, real lives, and real change from within our community.</p>
+    </div>
+    <div class="videos-grid grid-mixed reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/pjn40lXHEcE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Documentary"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/bcU8vnCyW6g" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Documentary"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/mU5VH8_cUug" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Documentary"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/2-EOrWGOmBQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="Brenda — FAPCAN Documentary"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/oZxjPxLiamo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Documentary"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KIDS MODELING -->
+<section class="video-section navy-bg" id="kids-modeling">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:#7EC8E3"><span style="display:block;width:28px;height:2px;background:#7EC8E3;margin-right:10px"></span>Youth Development</div>
+      <h2>FAPCAN Kids Learning Modeling</h2>
+      <p>Our youngest community members discovering confidence, poise, and self-expression through the art of modeling.</p>
+    </div>
+    <div class="videos-grid grid-1 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/uOk8m05APL8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Kids Learning Modeling"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC — SONG ABOUT ORPHANS -->
+<section class="video-section dark-bg" id="music">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:#FEB2B2"><span style="display:block;width:28px;height:2px;background:#FEB2B2;margin-right:10px"></span>Music</div>
+      <h2>Song by Alfred Bwambale about Orphans</h2>
+      <p>A heartfelt song by FAPCAN founder Alfred Bwambale — a musical tribute to the orphaned children at the heart of FAPCAN's mission.</p>
+    </div>
+    <div class="videos-grid grid-1 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/c7hgC6jeetY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="Song by Alfred Bwambale about Orphans"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAPCAN MUSIC PERFORMANCES -->
+<section class="video-section mid-bg" id="performances">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:var(--gold)"><span style="display:block;width:28px;height:2px;background:var(--gold);margin-right:10px"></span>Performances</div>
+      <h2>FAPCAN Music Performances</h2>
+      <p>Community voices raised in song — celebrating culture, faith, and resilience through live musical performance.</p>
+    </div>
+    <div class="videos-grid grid-3 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/Xia0J8YHuEc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Music Performance"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/Tg19rDCpWXk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Music Performance"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/Nc_bMStBGbk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Music Performance"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIDOWERS PERFORMING -->
+<section class="video-section dark-bg" id="widowers">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:#CBD5E0"><span style="display:block;width:28px;height:2px;background:#CBD5E0;margin-right:10px"></span>Community</div>
+      <h2>FAPCAN Widowers Performing</h2>
+      <p>A powerful testament to resilience — our widowers community finding joy, dignity, and expression through performance.</p>
+    </div>
+    <div class="videos-grid grid-1 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/JYzy0-3pQH8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Widowers Performing"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASHION SHOW & CARNIVAL -->
+<section class="video-section mid-bg" id="events">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:#F687B3"><span style="display:block;width:28px;height:2px;background:#F687B3;margin-right:10px"></span>Community Events</div>
+      <h2>Community Performances & Events</h2>
+      <p>FAPCAN at large — from fashion shows to carnivals, our community shines in every arena.</p>
+    </div>
+    <div class="videos-grid grid-2 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/BK2rJCdEuHw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Community Fashion Show at Thelugi"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/OsQFllck9SU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Community at Kyakere Carnival"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:8px">Left: Fashion Show at Thelugi &nbsp;·&nbsp; Right: Kyakere Carnival</p>
+  </div>
+</section>
+
+<!-- MOVIE AWARD -->
+<section class="video-section gold-bg" id="award">
+  <div class="video-section-inner">
+    <div class="award-banner reveal">
+      <div>
+        <div class="award-banner-icon">🏆</div>
+        <h3>Receiving a Movie Award</h3>
+        <p>Recognition on the wider stage — Save Souls Film Industry receives a movie award, a proud milestone for every storyteller in our community.</p>
+      </div>
+      <div class="award-banner-video">
+        <iframe src="https://www.youtube.com/embed/Sqt5VywoRpc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Receiving Movie Award"></iframe>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -353,7 +560,7 @@
     <p>Every film costs resources — equipment, travel, editing. Your support keeps our cameras rolling and our storytellers creating.</p>
     <div class="cta-btns">
       <a href="#" class="btn-cta-light">Support Film Production</a>
-      <a href="#" class="btn-cta-ghost"><i class="fas fa-film"></i> Watch Our Work</a>
+      <a href="#films" class="btn-cta-ghost"><i class="fas fa-film"></i> Watch Our Work</a>
     </div>
   </div>
 </section>
