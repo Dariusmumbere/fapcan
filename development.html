@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Development | FAPCAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --navy:    #1A365D;
+  --navy-dk: #0f1f3d;
+  --red:     #C53030;
+  --gold:    #D69E2E;
+  --gold-lt: #F6E05E;
+  --green:   #276749;
+  --teal:    #1A7A8A;
+  --purple:  #553C9A;
+  --off-white: #F7F4EF;
+  --light-gray: #E8E4DC;
+  --mid:     #4A5568;
+  --dark:    #111827;
+  --white:   #FFFFFF;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-sans);
+  background: var(--off-white);
+  color: var(--dark);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+.cursor { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; mix-blend-mode: difference; }
+.cursor-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--white); transform: translate(-50%,-50%); transition: transform 0.1s; }
+.cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  transform: translate(-50%,-50%);
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), opacity 0.3s, transform 0.08s;
+  margin-top: -22px; margin-left: -14px;
+}
+body.hovering .cursor-ring { width: 56px; height: 56px; opacity: 0.5; }
+
+/* ── COLOUR BAND ── */
+.colour-band {
+  height: 5px; width: 100%;
+  background: linear-gradient(to right,
+    var(--red) 0%, var(--red) 20%, var(--gold) 20%, var(--gold) 40%,
+    var(--green) 40%, var(--green) 60%, var(--teal) 60%, var(--teal) 80%,
+    var(--purple) 80%, var(--purple) 100%);
+  position: fixed; top: 0; left: 0; z-index: 1001;
+  transform-origin: left;
+  animation: bandReveal 1s var(--ease-out) both;
+}
+@keyframes bandReveal { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 5px; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--light-gray);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-badge {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  box-shadow: 0 4px 14px rgba(26,54,93,0.25);
+}
+.logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+.logo-badge-fallback { font-family: var(--font-serif); font-weight: 900; font-size: 15px; color: white; letter-spacing: -0.5px; }
+.logo-text { display: flex; flex-direction: column; }
+.logo-text strong { font-family: var(--font-serif); font-weight: 700; font-size: 20px; color: var(--navy); line-height: 1.1; }
+.logo-text span { font-size: 10.5px; font-weight: 500; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; }
+.nav-links { display: flex; list-style: none; gap: 2px; }
+.nav-item { position: relative; }
+.nav-link {
+  display: flex; align-items: center; gap: 6px; padding: 10px 18px;
+  font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; border-radius: 4px; transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover, .nav-link.active { color: var(--navy); background: rgba(26,54,93,0.05); }
+.nav-link .arr { font-size: 10px; transition: transform 0.25s; }
+.nav-item:hover .arr { transform: rotate(180deg); }
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  background: var(--white); min-width: 260px;
+  border: 1px solid var(--light-gray); border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s;
+  z-index: 200; overflow: hidden;
+}
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background 0.15s, color 0.15s, padding-left 0.2s;
+}
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: var(--off-white); color: var(--navy); padding-left: 26px; }
+.dropdown a i { color: var(--red); width: 18px; text-align: center; font-size: 13px; }
+.nav-cta {
+  background: var(--red); color: white; border: none; cursor: pointer;
+  padding: 10px 24px; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { background: #9B2C2C; transform: translateY(-1px); }
+.hamburger { display: none; cursor: pointer; padding: 6px; background: none; border: none; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); transition: transform 0.3s, opacity 0.3s; }
+
+/* ── MOBILE MENU ── */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu {
+    position: fixed; top: 75px; left: 0; right: 0; bottom: 0;
+    background: white; z-index: 999; overflow-y: auto;
+    transform: translateX(100%); transition: transform 0.4s var(--ease-out); padding: 20px 0;
+  }
+  .mobile-menu.open { transform: none; }
+  .mob-link { display: block; padding: 16px 32px; font-size: 16px; font-weight: 500; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--light-gray); transition: background 0.15s; }
+  .mob-link:hover { background: var(--off-white); }
+  .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
+}
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+.reveal-right.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); display: block; }
+
+/* ═══════════════════════════
+   PAGE HERO
+═══════════════════════════ */
+.page-hero {
+  background: var(--navy-dk);
+  padding: 140px 0 80px;
+  position: relative; overflow: hidden;
+}
+.page-hero-geo {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+}
+.page-hero-geo-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.04);
+  animation: geoSpin linear infinite;
+}
+.page-hero-geo-ring:nth-child(1) { width: 700px; height: 700px; top: -300px; right: -200px; animation-duration: 60s; }
+.page-hero-geo-ring:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: 10%; animation-duration: 45s; animation-direction: reverse; border-color: rgba(39,103,73,0.1); }
+@keyframes geoSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+.page-hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+.page-hero-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4);
+  margin-bottom: 28px; letter-spacing: 0.04em;
+  animation: fadeUp 0.7s 0.1s var(--ease-out) both;
+}
+.breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb i { font-size: 10px; }
+.breadcrumb .current-page { color: var(--gold); }
+
+.page-hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green); border: 1px solid rgba(39,103,73,0.4); padding: 6px 16px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+}
+.page-hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+.page-hero h1 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(38px, 5vw, 70px); line-height: 1.07;
+  color: white; margin-bottom: 24px;
+  animation: fadeUp 0.9s 0.3s var(--ease-out) both;
+}
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+
+.page-hero p {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.65);
+  max-width: 640px; line-height: 1.8;
+  animation: fadeUp 0.9s 0.45s var(--ease-out) both;
+}
+
+/* coloured bottom bar on hero */
+.page-hero-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(to right,
+    var(--red) 0%, var(--gold) 40%, var(--green) 70%, var(--teal) 100%);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════
+   INTRO SECTION
+═══════════════════════════ */
+.intro { padding: 100px 0 60px; background: var(--off-white); }
+.intro-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center;
+}
+.intro-img-wrap { position: relative; }
+.intro-img-main {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover;
+  display: block; border-radius: 2px;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.13);
+}
+.intro-img-tag {
+  position: absolute; top: 28px; left: -20px;
+  background: var(--green); color: white;
+  padding: 10px 20px; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(39,103,73,0.35);
+}
+.intro-img-accent {
+  position: absolute; bottom: -24px; right: -24px;
+  width: 160px; height: 160px; object-fit: cover;
+  border: 6px solid var(--off-white); border-radius: 2px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+  transition: transform 0.4s var(--ease-out);
+}
+.intro-img-wrap:hover .intro-img-accent { transform: translate(-4px,-4px); }
+
+.intro-text h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 48px); line-height: 1.1;
+  color: var(--navy); margin-bottom: 24px;
+}
+.intro-text h2 em { font-style: italic; color: var(--green); }
+.intro-text p { font-size: 16px; line-height: 1.8; color: var(--mid); margin-bottom: 18px; }
+
+/* Stat chips */
+.intro-stats { display: flex; gap: 24px; flex-wrap: wrap; margin: 32px 0; }
+.intro-stat {
+  padding: 18px 24px; background: var(--white);
+  border-left: 3px solid var(--green);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  flex: 1; min-width: 120px;
+}
+.intro-stat .val {
+  font-family: var(--font-serif); font-size: 36px; font-weight: 900;
+  color: var(--green); line-height: 1;
+}
+.intro-stat .lbl { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); margin-top: 5px; }
+
+/* ═══════════════════════════
+   WHAT WE DO — CARDS
+═══════════════════════════ */
+.what-we-do {
+  padding: 80px 0; background: var(--white);
+  border-top: 1px solid var(--light-gray);
+}
+.what-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.what-header { margin-bottom: 52px; }
+.what-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(26px, 3vw, 44px); color: var(--navy);
+}
+
+.activities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
+.activity-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  min-height: 260px; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 36px 32px; transition: filter 0.3s;
+}
+.activity-card:nth-child(1) { background: #EBF4FF; }
+.activity-card:nth-child(2) { background: #F0FFF4; }
+.activity-card:nth-child(3) { background: #FFF5E6; }
+.activity-card:nth-child(4) { background: #FAF5FF; }
+.activity-card:hover { filter: brightness(0.96); }
+
+.act-icon-wrap {
+  position: absolute; top: 28px; right: 28px;
+  width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 26px; transition: transform 0.4s var(--ease-out);
+}
+.activity-card:nth-child(1) .act-icon-wrap { background: rgba(26,54,93,0.12); color: var(--navy); }
+.activity-card:nth-child(2) .act-icon-wrap { background: rgba(39,103,73,0.12); color: var(--green); }
+.activity-card:nth-child(3) .act-icon-wrap { background: rgba(214,158,46,0.15); color: #92610B; }
+.activity-card:nth-child(4) .act-icon-wrap { background: rgba(85,60,154,0.1); color: var(--purple); }
+.activity-card:hover .act-icon-wrap { transform: scale(1.1) rotate(-8deg); }
+
+.act-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  display: inline-block; padding: 4px 12px; margin-bottom: 12px; border-radius: 2px;
+}
+.activity-card:nth-child(1) .act-tag { background: var(--navy); color: white; }
+.activity-card:nth-child(2) .act-tag { background: var(--green); color: white; }
+.activity-card:nth-child(3) .act-tag { background: var(--gold); color: white; }
+.activity-card:nth-child(4) .act-tag { background: var(--purple); color: white; }
+
+.activity-card h3 {
+  font-family: var(--font-serif); font-weight: 700; font-size: 22px;
+  color: var(--navy); line-height: 1.2; margin-bottom: 10px;
+}
+.activity-card p { font-size: 14px; color: var(--mid); line-height: 1.65; max-width: 380px; }
+
+/* ═══════════════════════════
+   IMPACT STRIP
+═══════════════════════════ */
+.impact-strip {
+  background: var(--dark); padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.impact-item {
+  padding: 52px 32px; border-right: 1px solid rgba(255,255,255,0.07);
+  text-align: center; position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.impact-item:last-child { border-right: none; }
+.impact-item::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease-out);
+}
+.impact-item:nth-child(1)::before { background: var(--navy); }
+.impact-item:nth-child(2)::before { background: var(--green); }
+.impact-item:nth-child(3)::before { background: var(--gold); }
+.impact-item:nth-child(4)::before { background: var(--purple); }
+.impact-item:hover::before { transform: scaleX(1); }
+.impact-item:hover { background: rgba(255,255,255,0.03); }
+.impact-icon { font-size: 28px; color: rgba(255,255,255,0.25); margin-bottom: 14px; }
+.impact-num {
+  font-family: var(--font-serif); font-weight: 900; font-size: 52px;
+  color: white; line-height: 1; margin-bottom: 8px;
+}
+.impact-item:nth-child(1) .impact-num { color: #90CDF4; }
+.impact-item:nth-child(2) .impact-num { color: var(--green); filter: brightness(1.5); }
+.impact-item:nth-child(3) .impact-num { color: var(--gold); }
+.impact-item:nth-child(4) .impact-num { color: var(--purple); filter: brightness(1.6); }
+.impact-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+
+/* ═══════════════════════════
+   ACTIVITIES SHOWCASE
+═══════════════════════════ */
+.showcase {
+  padding: 100px 0; background: var(--off-white);
+}
+.showcase-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.showcase-header { margin-bottom: 56px; }
+.showcase-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(26px, 3vw, 44px); color: var(--navy);
+}
+
+/* Bento-style grid */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+.showcase-card {
+  background: var(--white);
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--light-gray);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s, border-color 0.3s;
+  padding: 32px 28px;
+  position: relative;
+}
+.showcase-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.09);
+  border-color: rgba(39,103,73,0.25);
+}
+.showcase-card.wide {
+  grid-column: span 2;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+}
+.showcase-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.showcase-card:nth-child(1)::before { background: var(--navy); }
+.showcase-card:nth-child(2)::before { background: var(--green); }
+.showcase-card:nth-child(3)::before { background: var(--gold); }
+.showcase-card:nth-child(4)::before { background: var(--teal); }
+.showcase-card:nth-child(5)::before { background: var(--purple); }
+
+.sc-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 20px;
+}
+.showcase-card:nth-child(1) .sc-icon { background: rgba(26,54,93,0.08); color: var(--navy); }
+.showcase-card:nth-child(2) .sc-icon { background: rgba(39,103,73,0.1); color: var(--green); }
+.showcase-card:nth-child(3) .sc-icon { background: rgba(214,158,46,0.12); color: #92610B; }
+.showcase-card:nth-child(4) .sc-icon { background: rgba(26,122,138,0.1); color: var(--teal); }
+.showcase-card:nth-child(5) .sc-icon { background: rgba(85,60,154,0.08); color: var(--purple); }
+
+.showcase-card h4 {
+  font-family: var(--font-serif); font-weight: 700; font-size: 18px;
+  color: var(--navy); margin-bottom: 10px; line-height: 1.25;
+}
+.showcase-card p { font-size: 14px; color: var(--mid); line-height: 1.7; }
+
+.sc-list { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 6px; }
+.sc-list li {
+  font-size: 13.5px; color: var(--mid);
+  display: flex; align-items: center; gap: 10px;
+}
+.sc-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+/* ═══════════════════════════
+   IMPACT SECTION (dark)
+═══════════════════════════ */
+.impact-section {
+  background: var(--navy);
+  padding: 100px 0;
+  position: relative; overflow: hidden;
+}
+.impact-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -55deg, transparent 0, transparent 40px,
+    rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
+  );
+}
+.impact-section::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(to right, var(--green), var(--teal), var(--gold));
+}
+.impact-section-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.impact-section-header { margin-bottom: 52px; }
+.impact-section-header .section-label { color: var(--gold); }
+.impact-section-header .section-label::before { background: var(--gold); }
+.impact-section-header h2 {
+  font-family: var(--font-serif); font-weight: 900; color: white;
+  font-size: clamp(26px, 3vw, 44px); line-height: 1.1;
+}
+.impact-section-header h2 em { font-style: italic; color: var(--gold); }
+
+.impact-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.impact-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px; padding: 32px 28px;
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: background 0.3s, border-color 0.3s;
+}
+.impact-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(214,158,46,0.3);
+}
+.impact-card-icon {
+  width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.impact-card:nth-child(1) .impact-card-icon { background: rgba(144,205,244,0.15); color: #90CDF4; }
+.impact-card:nth-child(2) .impact-card-icon { background: rgba(39,103,73,0.2); color: #68D391; }
+.impact-card:nth-child(3) .impact-card-icon { background: rgba(214,158,46,0.15); color: var(--gold); }
+.impact-card:nth-child(4) .impact-card-icon { background: rgba(85,60,154,0.2); color: #B794F4; }
+.impact-card-body h4 {
+  font-family: var(--font-serif); font-size: 17px; font-weight: 700;
+  color: white; margin-bottom: 8px;
+}
+.impact-card-body p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--green); padding: 72px 0;
+  position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent 0, transparent 20px,
+    rgba(255,255,255,0.04) 20px, rgba(255,255,255,0.04) 21px);
+}
+.cta-inner { max-width: 900px; margin: 0 auto; padding: 0 32px; text-align: center; position: relative; z-index: 2; }
+.cta-inner h2 {
+  font-family: var(--font-serif); font-weight: 900; color: white;
+  font-size: clamp(28px, 4vw, 52px); line-height: 1.15; margin-bottom: 16px;
+}
+.cta-inner h2 em { font-style: italic; }
+.cta-inner p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-cta-light {
+  background: white; color: var(--green); border: none;
+  padding: 16px 36px; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-cta-light:hover { background: var(--off-white); transform: translateY(-2px); }
+.btn-cta-ghost {
+  background: transparent; color: white;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  padding: 16px 36px; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-cta-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); padding: 80px 0 0; }
+.footer-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.footer-top {
+  display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px;
+  padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.footer-brand .logo-badge { width: 52px; height: 52px; margin-bottom: 16px; }
+.footer-brand strong { font-family: var(--font-serif); font-weight: 700; font-size: 22px; color: white; display: block; margin-bottom: 4px; }
+.footer-brand .tagline { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 18px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 12px; }
+.footer-socials a {
+  width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.footer-socials a:hover { border-color: var(--gold); color: var(--gold); background: rgba(214,158,46,0.1); transform: translateY(-3px); }
+.footer-col h4 {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none;
+  transition: color 0.2s, padding-left 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-col ul a i { font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-col ul a:hover { color: white; padding-left: 4px; }
+.footer-bottom {
+  padding: 24px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .intro-inner { grid-template-columns: 1fr; gap: 40px; }
+  .intro-img-accent { display: none; }
+  .activities-grid { grid-template-columns: 1fr; }
+  .impact-strip { grid-template-columns: repeat(2,1fr); }
+  .impact-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .showcase-grid { grid-template-columns: 1fr; }
+  .showcase-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
+  .impact-cards { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .impact-strip { grid-template-columns: 1fr 1fr; }
+  .page-hero { padding: 120px 0 60px; }
+  .intro, .what-we-do, .showcase, .impact-section { padding: 60px 0; }
+  .nav-inner { padding: 0 20px; }
+  .page-hero-inner, .intro-inner, .what-inner, .showcase-inner, .impact-section-inner, .footer-inner { padding: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor">
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
+
+<!-- COLOUR BAND -->
+<div class="colour-band"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">
+        <img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-badge-fallback" style="display:none">FAP</span>
+      </div>
+      <div class="logo-text">
+        <strong>FAPCAN</strong>
+        <span>Fatima Praying Center</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-cross"></i> Mission & Vision</a>
+          <a href="#"><i class="fas fa-history"></i> Our History</a>
+          <a href="#"><i class="fas fa-users"></i> FAPCAN Community</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Location</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Spiritual Life <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-clock"></i> Prayer Schedule</a>
+          <a href="#"><i class="fas fa-church"></i> Mass & Services</a>
+          <a href="#"><i class="fas fa-bible"></i> Bible Study</a>
+          <a href="#"><i class="fas fa-pray"></i> Prayer Requests</a>
+          <a href="#"><i class="fas fa-heart"></i> Sacraments</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Community <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-child"></i> Orphans Support</a>
+          <a href="#"><i class="fas fa-wheelchair"></i> PWDs Programs</a>
+          <a href="#"><i class="fas fa-female"></i> Widows & Women</a>
+          <a href="#"><i class="fas fa-user-friends"></i> Elders Care</a>
+          <a href="#"><i class="fas fa-home"></i> Housing & Shelter</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Education <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-school"></i> Primary School</a>
+          <a href="#"><i class="fas fa-graduation-cap"></i> Secondary School</a>
+          <a href="#"><i class="fas fa-university"></i> Tertiary Education</a>
+          <a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+    </ul>
+
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="#" class="mob-link">About Us</a>
+  <a href="#" class="mob-link sub">↳ Mission & Vision</a>
+  <a href="#" class="mob-link sub">↳ Our History</a>
+  <a href="#" class="mob-link">Spiritual Life</a>
+  <a href="#" class="mob-link sub">↳ Prayer Schedule</a>
+  <a href="#" class="mob-link">Community</a>
+  <a href="#" class="mob-link sub">↳ Orphans Support</a>
+  <a href="#" class="mob-link sub">↳ PWDs Programs</a>
+  <a href="#" class="mob-link sub">↳ Widows & Women</a>
+  <a href="#" class="mob-link">Education</a>
+  <a href="gallery.html" class="mob-link">Gallery</a>
+  <a href="#" class="mob-link">Contact</a>
+</div>
+
+<!-- ═══════════ PAGE HERO ═══════════ -->
+<section class="page-hero">
+  <div class="page-hero-geo">
+    <div class="page-hero-geo-ring"></div>
+    <div class="page-hero-geo-ring"></div>
+  </div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current-page">Community Development</span>
+    </div>
+    <div class="page-hero-tag">
+      <span></span> What We Do
+    </div>
+    <h1>Building a Community<br>Where <em>Everyone Belongs</em></h1>
+    <p>At FAPCAN, true transformation happens when people grow together — through shared activities, discovered talents, and the power of unity in Kidodo, Kasese.</p>
+  </div>
+  <div class="page-hero-bar"></div>
+</section>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<section class="intro">
+  <div class="intro-inner">
+    <div class="intro-img-wrap reveal-left">
+      <div class="intro-img-tag">Kidodo · Kasese</div>
+      <img class="intro-img-main" src="f1.jpg" alt="FAPCAN Community"
+        onerror="this.src='';this.style.background='linear-gradient(135deg,#276749,#1A7A8A)';this.style.minHeight='400px';this.style.display='block';">
+      <img class="intro-img-accent" src="f4.jpg" alt="Community Activities"
+        onerror="this.style.display='none'">
+    </div>
+    <div class="intro-text reveal-right">
+      <div class="section-label">Our Community Programme</div>
+      <h2>Growing Stronger,<br><em>Together</em></h2>
+      <p>Our Community Development Programme creates a safe, active space where children, youth, and adults connect, learn, and build a stronger, united community. We believe that when people come together, they grow stronger — not just individually, but as a whole.</p>
+      <p>Through continuous engagement, we nurture talents, equip individuals with life skills, keep young people positively engaged, and foster a spirit of unity, respect, and belonging within Kidodo and beyond.</p>
+      <div class="intro-stats">
+        <div class="intro-stat reveal reveal-delay-1">
+          <div class="val">300+</div>
+          <div class="lbl">Community Members</div>
+        </div>
+        <div class="intro-stat reveal reveal-delay-2">
+          <div class="val">2012</div>
+          <div class="lbl">Est. in Kasese</div>
+        </div>
+        <div class="intro-stat reveal reveal-delay-3">
+          <div class="val">All</div>
+          <div class="lbl">Ages Welcome</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHAT WE DO ═══════════ -->
+<section class="what-we-do">
+  <div class="what-inner">
+    <div class="what-header reveal">
+      <div class="section-label">Core Activities</div>
+      <h2>What We Do Together</h2>
+    </div>
+    <div class="activities-grid">
+      <div class="activity-card reveal reveal-delay-1">
+        <div class="act-icon-wrap"><i class="fas fa-microphone-alt"></i></div>
+        <span class="act-tag">Expression</span>
+        <h3>Debates &amp; Storytelling</h3>
+        <p>We organise debates and storytelling sessions where individuals freely express themselves, find their voice, and gain hope by hearing what others have overcome and achieved.</p>
+      </div>
+      <div class="activity-card reveal reveal-delay-2">
+        <div class="act-icon-wrap"><i class="fas fa-star"></i></div>
+        <span class="act-tag">Talent</span>
+        <h3>Talent Shows &amp; Performances</h3>
+        <p>Talent shows celebrating music, dance, drama, and creative arts. These platforms help participants discover their abilities, build confidence, and inspire the wider community.</p>
+      </div>
+      <div class="activity-card reveal reveal-delay-3">
+        <div class="act-icon-wrap"><i class="fas fa-futbol"></i></div>
+        <span class="act-tag">Sports</span>
+        <h3>Sports &amp; Outdoor Activities</h3>
+        <p>Football, netball, and other sports for youth and elders alike — bringing joy, strengthening relationships, and creating opportunities for mentorship across generations.</p>
+      </div>
+      <div class="activity-card reveal reveal-delay-4">
+        <div class="act-icon-wrap"><i class="fas fa-seedling"></i></div>
+        <span class="act-tag">Service</span>
+        <h3>Community Work &amp; Environment</h3>
+        <p>Collective community tasks — digging, environmental conservation — that build a sense of shared ownership and responsibility for the neighbourhood we all call home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ IMPACT NUMBERS ═══════════ -->
+<div class="impact-strip">
+  <div class="impact-item reveal">
+    <div class="impact-icon"><i class="fas fa-users"></i></div>
+    <div class="impact-num" data-target="300">0</div>
+    <div class="impact-label">Community Members</div>
+  </div>
+  <div class="impact-item reveal reveal-delay-1">
+    <div class="impact-icon"><i class="fas fa-music"></i></div>
+    <div class="impact-num" data-target="50">0</div>
+    <div class="impact-label">Talent Performances</div>
+  </div>
+  <div class="impact-item reveal reveal-delay-2">
+    <div class="impact-icon"><i class="fas fa-futbol"></i></div>
+    <div class="impact-num" data-target="12">0</div>
+    <div class="impact-label">Years of Service</div>
+  </div>
+  <div class="impact-item reveal reveal-delay-3">
+    <div class="impact-icon"><i class="fas fa-trophy"></i></div>
+    <div class="impact-num" data-target="5">0</div>
+    <div class="impact-label">Activities Per Month</div>
+  </div>
+</div>
+
+<!-- ═══════════ SHOWCASE ═══════════ -->
+<section class="showcase">
+  <div class="showcase-inner">
+    <div class="showcase-header reveal">
+      <div class="section-label">How We Empower</div>
+      <h2>Skills, Confidence &amp; Unity</h2>
+    </div>
+    <div class="showcase-grid">
+
+      <div class="showcase-card wide reveal reveal-delay-1">
+        <div>
+          <div class="sc-icon"><i class="fas fa-hands-helping"></i></div>
+          <h4>Nurturing Talents &amp; Life Skills</h4>
+          <p>We go beyond surface engagement. Every programme is designed to equip participants with real, lasting abilities — from public speaking and teamwork to leadership and creative expression.</p>
+        </div>
+        <div>
+          <ul class="sc-list">
+            <li>Music, dance, and dramatic arts</li>
+            <li>Public speaking and confident communication</li>
+            <li>Teamwork and collaborative problem-solving</li>
+            <li>Leadership development across all age groups</li>
+            <li>Quiz competitions that sharpen critical thinking</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-2">
+        <div class="sc-icon"><i class="fas fa-shield-alt"></i></div>
+        <h4>Keeping Youth on a Positive Path</h4>
+        <p>Positive, structured engagement keeps young people away from harmful influences. By staying active and involved, youth find purpose, direction, and community belonging.</p>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-1">
+        <div class="sc-icon"><i class="fas fa-heart"></i></div>
+        <h4>Mentorship Across Generations</h4>
+        <p>Elders, adults, and youth participate side by side — creating natural mentorship, mutual respect, and bonds of community that outlast any single event or session.</p>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-2">
+        <div class="sc-icon"><i class="fas fa-globe-africa"></i></div>
+        <h4>Cultural Pride &amp; Heritage</h4>
+        <p>Our storytelling and arts activities celebrate the rich cultural heritage of Kasese and Uganda — helping community members feel seen, valued, and proud of who they are.</p>
+      </div>
+
+      <div class="showcase-card reveal reveal-delay-3">
+        <div class="sc-icon"><i class="fas fa-leaf"></i></div>
+        <h4>Environmental Responsibility</h4>
+        <p>Community work such as digging and conservation teaches stewardship — a sense of pride in and responsibility for the shared spaces and environment of Kidodo.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ IMPACT (DARK) ═══════════ -->
+<section class="impact-section">
+  <div class="impact-section-inner">
+    <div class="impact-section-header reveal">
+      <div class="section-label">Transformation</div>
+      <h2>The Impact on <em>Lives &amp; Community</em></h2>
+    </div>
+    <div class="impact-cards">
+      <div class="impact-card reveal reveal-delay-1">
+        <div class="impact-card-icon"><i class="fas fa-user-check"></i></div>
+        <div class="impact-card-body">
+          <h4>Individuals Gain Confidence &amp; Direction</h4>
+          <p>Participants leave with a stronger sense of purpose, clearer direction in life, and the confidence to contribute positively to their families and community.</p>
+        </div>
+      </div>
+      <div class="impact-card reveal reveal-delay-2">
+        <div class="impact-card-icon"><i class="fas fa-lightbulb"></i></div>
+        <div class="impact-card-body">
+          <h4>Hidden Talents Discovered</h4>
+          <p>Many community members have uncovered abilities they never knew they had — in performance, leadership, and creative arts — opening doors to new opportunities.</p>
+        </div>
+      </div>
+      <div class="impact-card reveal reveal-delay-3">
+        <div class="impact-card-icon"><i class="fas fa-hands"></i></div>
+        <div class="impact-card-body">
+          <h4>Stronger Community Bonds</h4>
+          <p>Community members actively support and uplift one another. Shared activities build genuine relationships of trust and mutual care across families and neighbourhoods.</p>
+        </div>
+      </div>
+      <div class="impact-card reveal reveal-delay-4">
+        <div class="impact-card-icon"><i class="fas fa-dove"></i></div>
+        <div class="impact-card-body">
+          <h4>Unity &amp; Peace Strengthened</h4>
+          <p>By bringing people together across age, background, and ability, FAPCAN's programme actively builds the peace and unity that makes Kidodo a better place for all.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA BAND ═══════════ -->
+<section class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Join Our <em>Community</em></h2>
+    <p>Whether you want to participate, volunteer, or support our programmes — there is a place for you at FAPCAN. Together, we build something greater.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-light">Get Involved</a>
+      <a href="#" class="btn-cta-ghost">Support Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-badge" style="margin-bottom:16px">
+          <img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="logo-badge-fallback" style="display:none">FAP</span>
+        </div>
+        <strong>FAPCAN</strong>
+        <span class="tagline">Fatima Praying Center for All Nations</span>
+        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> About FAPCAN</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Prayer Schedule</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Community Programs</a></li>
+          <li><a href="education.html"><i class="fas fa-chevron-right"></i> Education</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Work</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Orphans Support</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> PWDs Programs</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Widows & Women</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Elders Care</a></li>
+          <li><a href="film.html"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Central Division<br>Kasese Municipality, Uganda</a></li>
+          <li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li>
+          <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FAPCAN – Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cursorDot  = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.querySelectorAll('a, button, .activity-card, .showcase-card, .impact-card, .prog-card').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+});
+function animCursor() {
+  rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+  cursorDot.style.transform  = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+  cursorRing.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+if ('ontouchstart' in window) document.querySelector('.cursor').style.display = 'none';
+
+/* NAV SCROLL */
+const mainNav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  mainNav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* HAMBURGER */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  const spans = hamburger.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }
+});
+document.querySelectorAll('.mob-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+});
+
+/* REVEAL ON SCROLL */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* COUNTER */
+function countUp(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.target === '5' ? '' : '+';
+  const duration = 1800;
+  const step = target / (duration / 16);
+  let val = 0;
+  const timer = setInterval(() => {
+    val += step;
+    if (val >= target) { el.textContent = target + suffix; clearInterval(timer); }
+    else el.textContent = Math.floor(val) + suffix;
+  }, 16);
+}
+const impactObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.impact-num').forEach(countUp);
+      impactObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.4 });
+document.querySelector('.impact-strip') && impactObs.observe(document.querySelector('.impact-strip'));
+</script>
+</body>
+</html>
