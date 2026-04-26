@@ -406,34 +406,58 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .founder-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
 .founder-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center; }
-.founder-img-wrap { position: relative; }
-.founder-img-frame {
-  width: 100%; aspect-ratio: 3/4; max-height: 560px;
-  overflow: hidden; border-radius: 2px; position: relative;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+.founder-img-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
+
+/* ── FOUNDER CIRCLE IMAGE ── */
+.founder-img-circle {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 6px rgba(214,158,46,0.35),
+    0 0 0 12px rgba(214,158,46,0.12),
+    0 40px 80px rgba(0,0,0,0.5);
+  flex-shrink: 0;
 }
-.founder-img-frame img {
-  width: 100%; height: 100%; object-fit: contain;
+.founder-img-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: top center;
-  background: rgba(255,255,255,0.05);
+  display: block;
+  transition: transform 0.6s var(--ease-out);
 }
-.founder-img-frame::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(26,54,93,0.6) 0%, transparent 50%);
+.founder-img-wrap:hover .founder-img-circle img {
+  transform: scale(1.06);
+}
+/* Coloured arc overlay on circle */
+.founder-img-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--red) 50%, var(--teal) 100%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  z-index: 2;
   pointer-events: none;
 }
-.founder-img-frame::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; z-index: 2;
-  background: linear-gradient(to bottom, var(--red), var(--gold), var(--green));
-}
+
 .founder-quote-badge {
-  position: absolute; bottom: -20px; right: -20px;
-  background: var(--gold); padding: 20px 22px;
-  max-width: 200px; border-radius: 2px;
+  position: absolute;
+  bottom: -16px;
+  right: calc(50% - 200px);
+  background: var(--gold); padding: 18px 20px;
+  max-width: 188px; border-radius: 2px;
   box-shadow: 0 12px 32px rgba(0,0,0,0.3);
   z-index: 3;
 }
-.founder-quote-badge p { font-family: var(--font-serif); font-style: italic; font-size: 13px; color: var(--navy-dk); line-height: 1.5; }
+.founder-quote-badge p { font-family: var(--font-serif); font-style: italic; font-size: 12.5px; color: var(--navy-dk); line-height: 1.5; }
+
 .founder-text .section-label { color: var(--gold); }
 .founder-text .section-label::before { background: var(--gold); }
 .founder-text h2 {
@@ -459,7 +483,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative;
   overflow: hidden;
 }
-/* Subtle diagonal texture */
 .documentaries::before {
   content: '';
   position: absolute; inset: 0; pointer-events: none;
@@ -469,7 +492,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
   );
 }
-/* Gold accent line top */
 .documentaries::after {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(to right,
@@ -496,7 +518,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-size: 15px; color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.7; margin-top: 10px;
 }
 
-/* ── FEATURED VIDEO (top, full-width spotlight) ── */
+/* ── FEATURED VIDEO ── */
 .doc-featured {
   margin-bottom: 24px;
   position: relative;
@@ -554,7 +576,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .doc-meta-tag i { font-size: 10px; }
 
-/* ── VIDEO GRID (4 smaller) ── */
+/* ── VIDEO GRID ── */
 .doc-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -579,7 +601,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .doc-card-video iframe {
   width: 100%; height: 100%;
   display: block; border: none;
-  pointer-events: none; /* enable on hover */
+  pointer-events: none;
 }
 .doc-card:hover .doc-card-video iframe {
   pointer-events: auto;
@@ -606,7 +628,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .doc-card-tag i { font-size: 9px; }
 
-/* Special "Brenda" card highlight */
 .doc-card.featured-card {
   border-color: rgba(214,158,46,0.25);
   background: rgba(214,158,46,0.06);
@@ -666,6 +687,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
   font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--red); text-decoration: none; transition: gap 0.2s;
+  position: relative; z-index: 1;
 }
 .activity-card:hover .act-arrow { gap: 16px; }
 
@@ -811,6 +833,8 @@ footer {
   .activities-grid { grid-template-columns: 1fr; }
   .programmes-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-top { grid-template-columns: 1fr 1fr; }
+  .founder-img-circle { width: 300px; height: 300px; }
+  .founder-quote-badge { right: calc(50% - 160px); }
 }
 
 @media (max-width: 640px) {
@@ -821,6 +845,8 @@ footer {
   .about, .activities, .programmes, .founder, .documentaries { padding: 70px 0; }
   .nav-inner { padding: 0 20px; }
   .about-inner, .founder-inner, .activities-inner, .programmes-inner, .footer-inner, .documentaries-inner { padding: 0 20px; }
+  .founder-img-circle { width: 240px; height: 240px; }
+  .founder-quote-badge { position: relative; right: auto; bottom: auto; margin-top: 20px; max-width: 100%; }
 }
 </style>
 </head>
@@ -850,14 +876,14 @@ footer {
     </a>
 
     <ul class="nav-links">
-      <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+      <li class="nav-item"><a href="#hero" class="nav-link active">Home</a></li>
       <li class="nav-item">
-        <a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <a href="#about" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
         <div class="dropdown">
-          <a href="#"><i class="fas fa-cross"></i> Mission & Vision</a>
-          <a href="#"><i class="fas fa-history"></i> Our History</a>
-          <a href="#"><i class="fas fa-users"></i> FAPCAN Community</a>
-          <a href="#"><i class="fas fa-map-marker-alt"></i> Location</a>
+          <a href="#mission"><i class="fas fa-cross"></i> Mission & Vision</a>
+          <a href="#history"><i class="fas fa-history"></i> Our History</a>
+          <a href="#community-about"><i class="fas fa-users"></i> FAPCAN Community</a>
+          <a href="#location"><i class="fas fa-map-marker-alt"></i> Location</a>
         </div>
       </li>
       <li class="nav-item">
@@ -889,7 +915,7 @@ footer {
           <a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a>
         </div>
       </li>
-       <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
     </ul>
 
@@ -902,11 +928,12 @@ footer {
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#" class="mob-link">Home</a>
-  <a href="#" class="mob-link">About Us</a>
-  <a href="#" class="mob-link sub">↳ Mission & Vision</a>
-  <a href="#" class="mob-link sub">↳ Our History</a>
-  <a href="#" class="mob-link sub">↳ FAPCAN Community</a>
+  <a href="#hero" class="mob-link">Home</a>
+  <a href="#about" class="mob-link">About Us</a>
+  <a href="#mission" class="mob-link sub">↳ Mission & Vision</a>
+  <a href="#history" class="mob-link sub">↳ Our History</a>
+  <a href="#community-about" class="mob-link sub">↳ FAPCAN Community</a>
+  <a href="#location" class="mob-link sub">↳ Location</a>
   <a href="#" class="mob-link">Spiritual Life</a>
   <a href="#" class="mob-link sub">↳ Prayer Schedule</a>
   <a href="#" class="mob-link sub">↳ Mass & Services</a>
@@ -923,7 +950,7 @@ footer {
 </div>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-geo">
     <div class="hero-geo-ring"></div>
     <div class="hero-geo-ring"></div>
@@ -1021,8 +1048,13 @@ footer {
 </div>
 
 <!-- ABOUT -->
+<!-- About Us section with sub-section anchors -->
 <section class="about" id="about">
   <div class="about-inner">
+
+    <!-- Mission & Vision anchor -->
+    <div id="mission" style="position:relative; top:-90px; visibility:hidden; pointer-events:none;"></div>
+
     <div class="about-grid">
       <div class="about-img-wrap reveal-left">
         <div class="about-img-tag">Founded 2012</div>
@@ -1056,6 +1088,16 @@ footer {
         </div>
       </div>
     </div>
+
+    <!-- History anchor -->
+    <div id="history" style="position:relative; top:-90px; visibility:hidden; pointer-events:none; margin-top:60px;"></div>
+
+    <!-- Community anchor -->
+    <div id="community-about" style="position:relative; top:-90px; visibility:hidden; pointer-events:none;"></div>
+
+    <!-- Location anchor -->
+    <div id="location" style="position:relative; top:-90px; visibility:hidden; pointer-events:none;"></div>
+
   </div>
 </section>
 
@@ -1063,8 +1105,9 @@ footer {
 <section class="founder" id="founder">
   <div class="founder-inner">
     <div class="founder-grid">
+      <!-- Circle image -->
       <div class="founder-img-wrap reveal-left">
-        <div class="founder-img-frame">
+        <div class="founder-img-circle">
           <img src="UUU.jpg" alt="Alfred Bwambale"
             onerror="this.src='f1.jpg';this.style.objectFit='cover'">
         </div>
@@ -1330,11 +1373,11 @@ footer {
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> About FAPCAN</a></li>
+          <li><a href="#hero"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#about"><i class="fas fa-chevron-right"></i> About FAPCAN</a></li>
           <li><a href="#"><i class="fas fa-chevron-right"></i> Prayer Schedule</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Community Programs</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Education</a></li>
+          <li><a href="#activities"><i class="fas fa-chevron-right"></i> Community Programs</a></li>
+          <li><a href="education.html"><i class="fas fa-chevron-right"></i> Education</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1344,13 +1387,13 @@ footer {
           <li><a href="#"><i class="fas fa-chevron-right"></i> PWDs Programs</a></li>
           <li><a href="#"><i class="fas fa-chevron-right"></i> Widows & Women</a></li>
           <li><a href="#"><i class="fas fa-chevron-right"></i> Elders Care</a></li>
-          <li><a href="#"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li>
+          <li><a href="film.html"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Central Division<br>Kasese Municipality, Uganda</a></li>
+          <li><a href="#location"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Central Division<br>Kasese Municipality, Uganda</a></li>
           <li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li>
           <li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li>
           <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li>
@@ -1409,6 +1452,30 @@ hamburger.addEventListener('click', () => {
   } else {
     spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
   }
+});
+
+/* ── CLOSE MOBILE MENU ON LINK CLICK ── */
+document.querySelectorAll('.mob-link').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    const spans = hamburger.querySelectorAll('span');
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+});
+
+/* ── SMOOTH SCROLL FOR ALL HASH LINKS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      const offset = 80; // account for fixed nav height
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
 });
 
 /* ── SLIDER ── */
@@ -1480,21 +1547,14 @@ const impactObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 document.querySelector('.impact-strip') && impactObs.observe(document.querySelector('.impact-strip'));
 
-/* ── SMOOTH SCROLL ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  });
-});
-
 /* ── ACTIVE NAV ON SCROLL ── */
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   let cur = '';
   sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
   document.querySelectorAll('.nav-link').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    const href = a.getAttribute('href');
+    a.classList.toggle('active', href === '#' + cur);
   });
 });
 </script>
