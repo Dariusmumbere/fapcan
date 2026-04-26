@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery | FAPCAN — Fatima Praying Center for All Nations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ═══════════════════════════════════════════
+   MIF DESIGN SYSTEM — FAPCAN EDITION
+═══════════════════════════════════════════ */
+:root {
+  --navy:    #1A365D;
+  --navy-dk: #0f1f3d;
+  --red:     #C53030;
+  --gold:    #D69E2E;
+  --gold-lt: #F6E05E;
+  --green:   #276749;
+  --teal:    #1A7A8A;
+  --purple:  #553C9A;
+  --off-white: #F7F4EF;
+  --light-gray: #E8E4DC;
+  --mid:     #4A5568;
+  --dark:    #111827;
+  --white:   #FFFFFF;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'DM Sans', system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--off-white);
+  color: var(--dark);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; mix-blend-mode: difference; }
+.cursor-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--white); transform: translate(-50%,-50%); transition: transform 0.1s; }
+.cursor-ring { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.6); transform: translate(-50%,-50%); transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), opacity 0.3s, transform 0.08s; margin-top: -22px; margin-left: -14px; }
+body.hovering .cursor-ring { width: 56px; height: 56px; opacity: 0.5; }
+
+/* ── COLOUR BAND ── */
+.colour-band {
+  height: 5px; width: 100%;
+  background: linear-gradient(to right,
+    var(--red) 0%,var(--red) 20%,
+    var(--gold) 20%,var(--gold) 40%,
+    var(--green) 40%,var(--green) 60%,
+    var(--teal) 60%,var(--teal) 80%,
+    var(--purple) 80%,var(--purple) 100%);
+  position: fixed; top: 0; left: 0; z-index: 1001;
+  transform-origin: left;
+  animation: bandReveal 1s var(--ease-out) both;
+}
+@keyframes bandReveal { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 5px; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--light-gray);
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-badge {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(26,54,93,0.25);
+}
+.logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+.logo-badge-fallback { font-family: var(--font-serif); font-weight: 900; font-size: 15px; color: white; letter-spacing: -0.5px; }
+.logo-text { display: flex; flex-direction: column; }
+.logo-text strong { font-family: var(--font-serif); font-weight: 700; font-size: 20px; color: var(--navy); line-height: 1.1; }
+.logo-text span { font-size: 10.5px; font-weight: 500; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; }
+.nav-links { display: flex; list-style: none; gap: 2px; }
+.nav-item { position: relative; }
+.nav-link { display: flex; align-items: center; gap: 6px; padding: 10px 18px; font-size: 14px; font-weight: 500; color: var(--mid); text-decoration: none; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+.nav-link:hover, .nav-link.active { color: var(--navy); background: rgba(26,54,93,0.05); }
+.nav-link .arr { font-size: 10px; transition: transform 0.25s; }
+.nav-item:hover .arr { transform: rotate(180deg); }
+.dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--white); min-width: 260px; border: 1px solid var(--light-gray); border-radius: 8px; box-shadow: 0 16px 48px rgba(0,0,0,0.12); opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s; z-index: 200; overflow: hidden; }
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown a { display: flex; align-items: center; gap: 12px; padding: 14px 20px; font-size: 14px; font-weight: 500; color: var(--mid); text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.04); transition: background 0.15s, color 0.15s, padding-left 0.2s; }
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: var(--off-white); color: var(--navy); padding-left: 26px; }
+.dropdown a i { color: var(--red); width: 18px; text-align: center; font-size: 13px; }
+.nav-cta { background: var(--red); color: white; border: none; cursor: pointer; padding: 10px 24px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; transition: background 0.2s, transform 0.15s; text-decoration: none; display: inline-block; }
+.nav-cta:hover { background: #9B2C2C; transform: translateY(-1px); }
+.hamburger { display: none; cursor: pointer; padding: 6px; background: none; border: none; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); transition: transform 0.3s, opacity 0.3s; }
+
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--navy-dk);
+  padding: 140px 0 80px;
+  position: relative; overflow: hidden;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.page-hero-geo { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.page-hero-geo span {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.04);
+  animation: geoSpin linear infinite;
+}
+.page-hero-geo span:nth-child(1) { width: 600px; height: 600px; top: -250px; right: -100px; animation-duration: 55s; }
+.page-hero-geo span:nth-child(2) { width: 400px; height: 400px; top: -120px; right: 80px; animation-duration: 40s; animation-direction: reverse; border-color: rgba(214,158,46,0.07); }
+.page-hero-geo span:nth-child(3) { width: 200px; height: 200px; bottom: -60px; left: 30%; animation-duration: 30s; border-color: rgba(39,103,73,0.1); }
+@keyframes geoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.page-hero-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+.page-hero-breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 24px;
+  animation: fadeUp 0.7s 0.1s var(--ease-out) both;
+}
+.page-hero-breadcrumb a { color: var(--gold); text-decoration: none; }
+.page-hero-breadcrumb a:hover { color: var(--gold-lt); }
+.page-hero-breadcrumb i { font-size: 9px; }
+.page-hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(214,158,46,0.35);
+  padding: 6px 16px; margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+}
+.page-hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+.page-hero h1 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(36px, 5vw, 68px); line-height: 1.08;
+  color: white; margin-bottom: 20px;
+  animation: fadeUp 0.9s 0.3s var(--ease-out) both;
+}
+.page-hero h1 em { font-style: italic; color: var(--gold); }
+.page-hero p {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.6);
+  max-width: 560px; line-height: 1.8;
+  animation: fadeUp 0.9s 0.45s var(--ease-out) both;
+}
+.page-hero-stats {
+  display: flex; gap: 40px; margin-top: 40px; flex-wrap: wrap;
+  animation: fadeUp 0.9s 0.55s var(--ease-out) both;
+}
+.ph-stat { display: flex; flex-direction: column; gap: 4px; }
+.ph-stat .val { font-family: var(--font-serif); font-size: 28px; font-weight: 900; color: var(--gold); }
+.ph-stat .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+/* ── GALLERY SECTION ── */
+.gallery-section {
+  padding: 80px 0 100px;
+  background: var(--off-white);
+}
+.gallery-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 52px;
+  flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.filter-bar.visible { opacity: 1; transform: none; }
+.filter-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-right: 6px; }
+.filter-btn {
+  padding: 8px 20px; border: 1.5px solid var(--light-gray);
+  background: var(--white); color: var(--mid);
+  font-family: var(--font-sans); font-size: 13px; font-weight: 500;
+  cursor: pointer; border-radius: 2px;
+  transition: all 0.2s var(--ease-out);
+  letter-spacing: 0.03em;
+}
+.filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+.filter-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+.filter-count {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  font-size: 10px; font-weight: 700;
+  background: rgba(214,158,46,0.18); color: var(--gold);
+  margin-left: 6px;
+}
+
+/* ── MASONRY GRID ── */
+.gallery-grid {
+  columns: 4; column-gap: 14px;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 14px;
+  position: relative; overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out),
+              box-shadow 0.3s, filter 0.3s;
+}
+.gallery-item.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.gallery-item:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.22); z-index: 5; }
+.gallery-item img {
+  width: 100%; display: block;
+  transition: transform 0.6s var(--ease-out), filter 0.4s;
+  filter: brightness(0.95) saturate(1.05);
+}
+.gallery-item:hover img { transform: scale(1.045); filter: brightness(1.02) saturate(1.1); }
+
+/* Overlay */
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,20,40,0.75) 0%, rgba(10,20,40,0.1) 50%, transparent 100%);
+  opacity: 0; transition: opacity 0.35s var(--ease-out);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 20px 18px;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay-num {
+  font-family: var(--font-serif); font-size: 11px; font-weight: 700;
+  color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.gallery-overlay-expand {
+  position: absolute; top: 14px; right: 14px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 12px;
+  transform: scale(0.7); opacity: 0;
+  transition: transform 0.3s var(--ease-out), opacity 0.3s;
+}
+.gallery-item:hover .gallery-overlay-expand { transform: scale(1); opacity: 1; }
+
+/* Colour accent strip per item (cycling) */
+.gallery-item::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.gallery-item:hover::after { transform: scaleX(1); }
+.gallery-item:nth-child(5n+1)::after { background: var(--red); }
+.gallery-item:nth-child(5n+2)::after { background: var(--gold); }
+.gallery-item:nth-child(5n+3)::after { background: var(--green); }
+.gallery-item:nth-child(5n+4)::after { background: var(--teal); }
+.gallery-item:nth-child(5n+5)::after { background: var(--purple); }
+
+/* Featured / tall items */
+.gallery-item.tall img { aspect-ratio: auto; }
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(5,10,20,0.96);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s var(--ease-out), visibility 0.35s;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox-img-wrap {
+  position: relative;
+  max-width: min(90vw, 1100px);
+  max-height: 85vh;
+  display: flex; align-items: center; justify-content: center;
+}
+.lightbox-img {
+  max-width: 100%; max-height: 82vh;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  transform: scale(0.92);
+  transition: transform 0.45s var(--ease-out);
+}
+.lightbox.open .lightbox-img { transform: scale(1); }
+.lb-close {
+  position: fixed; top: 24px; right: 28px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  color: white; font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.lb-close:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
+.lb-prev, .lb-next {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  color: white; font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+}
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-prev:hover { background: rgba(255,255,255,0.18); transform: translateY(-50%) translateX(-3px); }
+.lb-next:hover { background: rgba(255,255,255,0.18); transform: translateY(-50%) translateX(3px); }
+.lb-counter {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-serif); font-size: 15px; color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);
+  padding: 8px 20px; border-radius: 20px;
+}
+.lb-counter .lb-cur { font-weight: 700; color: var(--gold); font-size: 20px; }
+.lb-strip {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; padding: 8px; max-width: 90vw;
+  overflow-x: auto; background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);
+  border-radius: 4px; scrollbar-width: none;
+}
+.lb-strip::-webkit-scrollbar { display: none; }
+.lb-thumb {
+  width: 52px; height: 38px; object-fit: cover; border-radius: 2px;
+  opacity: 0.4; cursor: pointer; flex-shrink: 0;
+  border: 2px solid transparent;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.lb-thumb.active { opacity: 1; border-color: var(--gold); }
+
+/* ── LOAD MORE ── */
+.load-more-wrap { text-align: center; margin-top: 56px; }
+.btn-load-more {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: transparent; color: var(--navy);
+  border: 1.5px solid var(--navy);
+  padding: 14px 36px; font-size: 14px; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-load-more:hover { background: var(--navy); color: white; transform: translateY(-2px); }
+.btn-load-more.hidden { display: none; }
+
+/* ── CTA BAND ── */
+.cta-band { background: var(--red); padding: 72px 0; position: relative; overflow: hidden; }
+.cta-band::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent 0, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px); }
+.cta-inner { max-width: 900px; margin: 0 auto; padding: 0 32px; text-align: center; position: relative; z-index: 2; }
+.cta-inner h2 { font-family: var(--font-serif); font-weight: 900; color: white; font-size: clamp(28px, 4vw, 52px); line-height: 1.15; margin-bottom: 16px; }
+.cta-inner h2 em { font-style: italic; }
+.cta-inner p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-cta-light { background: white; color: var(--red); border: none; padding: 16px 36px; font-size: 14px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; }
+.btn-cta-light:hover { background: var(--off-white); transform: translateY(-2px); }
+.btn-cta-ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); padding: 16px 36px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, background 0.2s; }
+.btn-cta-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); padding: 80px 0 0; }
+.footer-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.footer-top { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand .logo-badge { width: 52px; height: 52px; margin-bottom: 16px; }
+.footer-brand strong { font-family: var(--font-serif); font-weight: 700; font-size: 22px; color: white; display: block; margin-bottom: 4px; }
+.footer-brand .tagline { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 18px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
+.footer-socials { display: flex; gap: 12px; }
+.footer-socials a { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none; transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s; }
+.footer-socials a:hover { border-color: var(--gold); color: var(--gold); background: rgba(214,158,46,0.1); transform: translateY(-3px); }
+.footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s, padding-left 0.2s; display: flex; align-items: center; gap: 8px; }
+.footer-col ul a i { font-size: 11px; color: rgba(255,255,255,0.2); }
+.footer-col ul a:hover { color: white; padding-left: 4px; }
+.footer-bottom { padding: 24px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
+
+/* ── MOBILE ── */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { position: fixed; top: 75px; left: 0; right: 0; bottom: 0; background: white; z-index: 999; overflow-y: auto; transform: translateX(100%); transition: transform 0.4s var(--ease-out); padding: 20px 0; }
+  .mobile-menu.open { transform: none; }
+  .mob-link { display: block; padding: 16px 32px; font-size: 16px; font-weight: 500; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--light-gray); transition: background 0.15s; }
+  .mob-link:hover { background: var(--off-white); }
+  .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
+}
+@media (max-width: 1100px) { .gallery-grid { columns: 3; } }
+@media (max-width: 768px) { .gallery-grid { columns: 2; } .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) {
+  .gallery-grid { columns: 2; column-gap: 8px; }
+  .gallery-item { margin-bottom: 8px; }
+  .nav-inner { padding: 0 20px; }
+  .gallery-inner, .footer-inner { padding: 0 20px; }
+  .page-hero-inner { padding: 0 20px; }
+  .page-hero { padding: 120px 0 60px; }
+  .lb-strip { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor">
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
+
+<!-- COLOUR BAND -->
+<div class="colour-band"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">
+        <img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-badge-fallback" style="display:none">FAP</span>
+      </div>
+      <div class="logo-text">
+        <strong>FAPCAN</strong>
+        <span>Fatima Praying Center</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-cross"></i> Mission &amp; Vision</a>
+          <a href="#"><i class="fas fa-history"></i> Our History</a>
+          <a href="#"><i class="fas fa-users"></i> FAPCAN Community</a>
+          <a href="#"><i class="fas fa-map-marker-alt"></i> Location</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Spiritual Life <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-clock"></i> Prayer Schedule</a>
+          <a href="#"><i class="fas fa-church"></i> Mass &amp; Services</a>
+          <a href="#"><i class="fas fa-bible"></i> Bible Study</a>
+          <a href="#"><i class="fas fa-pray"></i> Prayer Requests</a>
+          <a href="#"><i class="fas fa-heart"></i> Sacraments</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Community <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-child"></i> Orphans Support</a>
+          <a href="#"><i class="fas fa-wheelchair"></i> PWDs Programs</a>
+          <a href="#"><i class="fas fa-female"></i> Widows &amp; Women</a>
+          <a href="#"><i class="fas fa-user-friends"></i> Elders Care</a>
+          <a href="#"><i class="fas fa-home"></i> Housing &amp; Shelter</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Education <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="#"><i class="fas fa-school"></i> Primary School</a>
+          <a href="#"><i class="fas fa-graduation-cap"></i> Secondary School</a>
+          <a href="#"><i class="fas fa-university"></i> Tertiary Education</a>
+          <a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link active">Gallery</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="#" class="mob-link">About Us</a>
+  <a href="#" class="mob-link sub">↳ Mission &amp; Vision</a>
+  <a href="#" class="mob-link sub">↳ Our History</a>
+  <a href="#" class="mob-link sub">↳ FAPCAN Community</a>
+  <a href="#" class="mob-link">Spiritual Life</a>
+  <a href="#" class="mob-link sub">↳ Prayer Schedule</a>
+  <a href="#" class="mob-link sub">↳ Mass &amp; Services</a>
+  <a href="#" class="mob-link sub">↳ Bible Study</a>
+  <a href="#" class="mob-link">Community</a>
+  <a href="#" class="mob-link sub">↳ Orphans Support</a>
+  <a href="#" class="mob-link sub">↳ PWDs Programs</a>
+  <a href="#" class="mob-link sub">↳ Widows &amp; Women</a>
+  <a href="#" class="mob-link">Education</a>
+  <a href="#" class="mob-link sub">↳ Primary School</a>
+  <a href="#" class="mob-link sub">↳ Secondary School</a>
+  <a href="#" class="mob-link active">Gallery</a>
+  <a href="#" class="mob-link">Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-geo">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Gallery</span>
+    </div>
+    <div class="page-hero-tag">Moments of Faith &amp; Community</div>
+    <h1>Our <em>Gallery</em></h1>
+    <p>Every image tells a story of transformation — of lives touched, families built, and faith lived out in the heart of Kasese, Uganda.</p>
+    <div class="page-hero-stats">
+      <div class="ph-stat"><span class="val">40</span><span class="lbl">Photos</span></div>
+      <div class="ph-stat"><span class="val">12+</span><span class="lbl">Years documented</span></div>
+      <div class="ph-stat"><span class="val">300+</span><span class="lbl">Lives captured</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-inner">
+
+    <!-- Filter bar -->
+    <div class="filter-bar" id="filterBar">
+      <span class="filter-label">Filter</span>
+      <button class="filter-btn active" data-filter="all">All <span class="filter-count">40</span></button>
+      <button class="filter-btn" data-filter="community">Community</button>
+      <button class="filter-btn" data-filter="spiritual">Spiritual Life</button>
+      <button class="filter-btn" data-filter="education">Education</button>
+      <button class="filter-btn" data-filter="outreach">Outreach</button>
+    </div>
+
+    <!-- Masonry grid — all 40 images -->
+    <div class="gallery-grid" id="galleryGrid">
+
+      <div class="gallery-item" data-cat="community" data-index="0">
+        <img src="fa1.jpg" alt="FAPCAN Photo 1" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">01 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="1">
+        <img src="fa2.jpg" alt="FAPCAN Photo 2" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">02 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="2">
+        <img src="fa3.jpg" alt="FAPCAN Photo 3" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">03 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="3">
+        <img src="fa4.jpg" alt="FAPCAN Photo 4" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">04 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="4">
+        <img src="fa5.jpg" alt="FAPCAN Photo 5" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">05 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="5">
+        <img src="fa6.jpg" alt="FAPCAN Photo 6" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">06 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="6">
+        <img src="fa7.jpg" alt="FAPCAN Photo 7" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">07 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="7">
+        <img src="fa8.jpg" alt="FAPCAN Photo 8" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">08 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="8">
+        <img src="fa9.jpg" alt="FAPCAN Photo 9" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">09 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="9">
+        <img src="fa10.jpg" alt="FAPCAN Photo 10" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">10 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="10">
+        <img src="fa11.jpg" alt="FAPCAN Photo 11" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">11 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="11">
+        <img src="fa12.jpg" alt="FAPCAN Photo 12" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">12 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="12">
+        <img src="fa13.jpg" alt="FAPCAN Photo 13" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">13 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="13">
+        <img src="fa14.jpg" alt="FAPCAN Photo 14" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">14 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="14">
+        <img src="fa15.jpg" alt="FAPCAN Photo 15" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">15 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="15">
+        <img src="fa16.jpg" alt="FAPCAN Photo 16" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">16 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="16">
+        <img src="fa17.jpg" alt="FAPCAN Photo 17" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">17 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="17">
+        <img src="fa18.jpg" alt="FAPCAN Photo 18" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">18 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="18">
+        <img src="fa19.jpg" alt="FAPCAN Photo 19" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">19 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="19">
+        <img src="fa20.jpg" alt="FAPCAN Photo 20" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">20 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="20">
+        <img src="fa21.jpg" alt="FAPCAN Photo 21" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">21 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="21">
+        <img src="fa22.jpg" alt="FAPCAN Photo 22" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">22 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="22">
+        <img src="fa23.jpg" alt="FAPCAN Photo 23" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">23 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="23">
+        <img src="fa24.jpg" alt="FAPCAN Photo 24" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">24 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="24">
+        <img src="fa25.jpg" alt="FAPCAN Photo 25" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">25 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="25">
+        <img src="fa26.jpg" alt="FAPCAN Photo 26" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">26 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="26">
+        <img src="fa27.jpg" alt="FAPCAN Photo 27" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">27 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="27">
+        <img src="fa28.jpg" alt="FAPCAN Photo 28" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">28 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="28">
+        <img src="fa29.jpg" alt="FAPCAN Photo 29" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">29 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="29">
+        <img src="fa30.jpg" alt="FAPCAN Photo 30" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">30 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="30">
+        <img src="fa31.jpg" alt="FAPCAN Photo 31" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">31 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="31">
+        <img src="fa32.jpg" alt="FAPCAN Photo 32" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">32 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="32">
+        <img src="fa33.jpg" alt="FAPCAN Photo 33" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">33 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="33">
+        <img src="fa34.jpg" alt="FAPCAN Photo 34" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">34 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="34">
+        <img src="fa35.jpg" alt="FAPCAN Photo 35" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">35 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="35">
+        <img src="fa36.jpg" alt="FAPCAN Photo 36" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">36 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="community" data-index="36">
+        <img src="fa37.jpg" alt="FAPCAN Photo 37" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">37 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="spiritual" data-index="37">
+        <img src="fa38.jpg" alt="FAPCAN Photo 38" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">38 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="education" data-index="38">
+        <img src="fa39.jpg" alt="FAPCAN Photo 39" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">39 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+      <div class="gallery-item" data-cat="outreach" data-index="39">
+        <img src="fa40.jpg" alt="FAPCAN Photo 40" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-overlay-num">40 / 40</div>
+          <div class="gallery-overlay-expand"><i class="fas fa-expand-alt"></i></div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /gallery-grid -->
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+  <button class="lb-close" id="lbClose" aria-label="Close"><i class="fas fa-times"></i></button>
+  <button class="lb-prev" id="lbPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+  <button class="lb-next" id="lbNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+  <div class="lightbox-img-wrap">
+    <img class="lightbox-img" id="lbImg" src="" alt="">
+  </div>
+  <div class="lb-counter">
+    <span class="lb-cur" id="lbCur">1</span>
+    <span style="color:rgba(255,255,255,0.25)">/</span>
+    <span id="lbTotal">40</span>
+  </div>
+  <div class="lb-strip" id="lbStrip"></div>
+</div>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="cta-inner reveal">
+    <h2>Be Part of <em>Something Greater</em></h2>
+    <p>Your support — whether through prayer, volunteering, or a donation — transforms lives in Kasese and beyond. Join the FAPCAN family today.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-light">Donate Now</a>
+      <a href="#" class="btn-cta-ghost">Volunteer With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-badge" style="margin-bottom:16px">
+          <img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span class="logo-badge-fallback" style="display:none">FAP</span>
+        </div>
+        <strong>FAPCAN</strong>
+        <span class="tagline">Fatima Praying Center for All Nations</span>
+        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> About FAPCAN</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Prayer Schedule</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Community Programs</a></li>
+          <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Work</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Orphans Support</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> PWDs Programs</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Widows &amp; Women</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Elders Care</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Central Division<br>Kasese Municipality, Uganda</a></li>
+          <li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li>
+          <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FAPCAN – Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cursorDot  = document.getElementById('cursorDot');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.querySelectorAll('a, button, .gallery-item, .filter-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+});
+(function animCursor() {
+  rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
+  cursorDot.style.transform  = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animCursor);
+})();
+if ('ontouchstart' in window) document.querySelector('.cursor').style.display = 'none';
+
+/* ── NAV SCROLL ── */
+const mainNav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', window.scrollY > 40));
+
+/* ── HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  const spans = hamburger.querySelectorAll('span');
+  if (open) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else { spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; }); }
+});
+
+/* ── FILTER ── */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const allItems   = document.querySelectorAll('.gallery-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.filter;
+
+    allItems.forEach((item, i) => {
+      const match = cat === 'all' || item.dataset.cat === cat;
+      if (match) {
+        item.style.display = '';
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px) scale(0.97)';
+        setTimeout(() => {
+          item.style.transition = `opacity 0.55s ${i * 0.03}s var(--ease-out), transform 0.55s ${i * 0.03}s var(--ease-out)`;
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0) scale(1)';
+        }, 20);
+      } else {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.9)';
+        setTimeout(() => { item.style.display = 'none'; }, 300);
+      }
+    });
+  });
+});
+
+/* Filter bar reveal */
+const fb = document.getElementById('filterBar');
+setTimeout(() => fb.classList.add('visible'), 200);
+
+/* ── SCROLL REVEAL for gallery items ── */
+const itemObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const delay = (parseInt(e.target.dataset.index) % 8) * 0.07;
+      e.target.style.transitionDelay = delay + 's';
+      e.target.classList.add('in-view');
+      itemObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+allItems.forEach(el => itemObs.observe(el));
+
+/* Generic reveal */
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => revealObs.observe(el));
+
+/* ── LIGHTBOX ── */
+const lightbox = document.getElementById('lightbox');
+const lbImg    = document.getElementById('lbImg');
+const lbCur    = document.getElementById('lbCur');
+const lbTotal  = document.getElementById('lbTotal');
+const lbStrip  = document.getElementById('lbStrip');
+
+/* Build all image paths */
+const images = Array.from({length: 40}, (_, i) => `fa${i+1}.jpg`);
+lbTotal.textContent = images.length;
+
+/* Build thumbnail strip */
+images.forEach((src, i) => {
+  const t = document.createElement('img');
+  t.src = src; t.alt = ''; t.className = 'lb-thumb'; t.dataset.idx = i;
+  t.addEventListener('click', () => openLightbox(i));
+  lbStrip.appendChild(t);
+});
+
+let lbCurrent = 0;
+
+function openLightbox(idx) {
+  lbCurrent = idx;
+  lbImg.src = images[idx];
+  lbCur.textContent = idx + 1;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  updateStrip();
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbGo(dir) {
+  lbCurrent = (lbCurrent + dir + images.length) % images.length;
+  lbImg.style.opacity = '0';
+  lbImg.style.transform = 'scale(0.94)';
+  setTimeout(() => {
+    lbImg.src = images[lbCurrent];
+    lbCur.textContent = lbCurrent + 1;
+    lbImg.style.opacity = '1';
+    lbImg.style.transform = 'scale(1)';
+    updateStrip();
+  }, 200);
+}
+function updateStrip() {
+  document.querySelectorAll('.lb-thumb').forEach((t, i) => {
+    t.classList.toggle('active', i === lbCurrent);
+    if (i === lbCurrent) t.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'smooth'});
+  });
+}
+lbImg.style.transition = 'opacity 0.3s, transform 0.3s var(--ease-out)';
+
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => lbGo(-1));
+document.getElementById('lbNext').addEventListener('click', () => lbGo(1));
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+/* Open from gallery items */
+allItems.forEach(item => {
+  item.addEventListener('click', () => openLightbox(parseInt(item.dataset.index)));
+});
+
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbGo(1);
+  if (e.key === 'ArrowLeft')  lbGo(-1);
+  if (e.key === 'Escape')     closeLightbox();
+});
+
+/* Touch swipe in lightbox */
+let lbTouchX = 0;
+lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, {passive: true});
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if (Math.abs(dx) > 50) lbGo(dx < 0 ? 1 : -1);
+}, {passive: true});
+
+/* Staggered entrance animation for items already in view on load */
+window.addEventListener('load', () => {
+  allItems.forEach((item, i) => {
+    if (!item.classList.contains('in-view')) {
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        const delay = (i % 8) * 0.07;
+        item.style.transitionDelay = delay + 's';
+        item.classList.add('in-view');
+      }
+    }
+  });
+});
+</script>
+</body>
+  </html>
