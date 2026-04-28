@@ -114,10 +114,7 @@
   /* Films grid */
   .videos-grid{display:grid;gap:16px}
   .videos-grid.grid-1{grid-template-columns:1fr;max-width:860px}
-  .videos-grid.grid-2{grid-template-columns:repeat(2,1fr)}
   .videos-grid.grid-3{grid-template-columns:repeat(3,1fr)}
-  .videos-grid.grid-mixed{grid-template-columns:repeat(3,1fr)}
-  .videos-grid.grid-mixed .yt-embed-item:first-child{grid-column:span 2}
 
   .yt-embed-item{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}
   .yt-embed-item iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -141,8 +138,7 @@
     .story-block:nth-child(1){grid-row:span 1}
     .film-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
     .film-grid .photo-item:nth-child(1),.film-grid .photo-item:nth-child(4){grid-column:span 1;grid-row:span 1}
-    .videos-grid.grid-2,.videos-grid.grid-3,.videos-grid.grid-mixed{grid-template-columns:1fr}
-    .videos-grid.grid-mixed .yt-embed-item:first-child{grid-column:span 1}
+    .videos-grid.grid-3{grid-template-columns:1fr}
     .award-banner{flex-direction:column}
     .award-banner-video{width:100%}
   }
@@ -337,10 +333,10 @@
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SAVE SOULS FILMS ONLY
+     FILMS SECTION
 ══════════════════════════════════════════════ -->
 
-<!-- FILMS SECTION (Save Souls Films) -->
+<!-- SAVE SOULS FILMS -->
 <section class="video-section dark-bg" id="films">
   <div class="video-section-inner">
     <div class="video-section-header reveal">
@@ -366,3 +362,91 @@
         <div class="embed-border"></div>
       </div>
       <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/wsQMhfun26A" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/zb-mXoJz1GY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item" style="grid-column:2">
+        <iframe src="https://www.youtube.com/embed/j3SEEIfPNik" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVIE AWARD -->
+<section class="video-section gold-bg" id="award">
+  <div class="video-section-inner">
+    <div class="award-banner reveal">
+      <div>
+        <div class="award-banner-icon">🏆</div>
+        <h3>Receiving a Movie Award</h3>
+        <p>Recognition on the wider stage — Save Souls Film Industry receives a movie award, a proud milestone for every storyteller in our community.</p>
+      </div>
+      <div class="award-banner-video">
+        <iframe src="https://www.youtube.com/embed/Sqt5VywoRpc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Receiving Movie Award"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--red)">Participant Stories</div>
+    <h2 class="reveal" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px">From the Actors<br>& Storytellers</h2>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal d1" style="--accent:var(--red)">
+        <p class="testi-text">"Film saved my life. I was living on the street when Alfred invited me to join. Now I act, I direct, I script. I have a purpose and I use it to help others find theirs."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(197,48,48,.1);color:var(--red)">S</div><div><div class="testi-name">Samuel Kule</div><div class="testi-role">Actor & Co-Director, SSFI</div></div></div>
+      </div>
+      <div class="testi-card reveal d2" style="--accent:var(--red)">
+        <p class="testi-text">"I was afraid of speaking in public. After six months in the programme, I performed in front of hundreds of people. Film gave me a voice I never knew I had."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(197,48,48,.1);color:var(--red)">R</div><div><div class="testi-name">Rose Muhindo</div><div class="testi-role">Actress, SSFI Community Member</div></div></div>
+      </div>
+      <div class="testi-card reveal d3" style="--accent:var(--red)">
+        <p class="testi-text">"Our film travelled to other districts. People who have never been to Kidodo saw our story and were moved. That is power — and we created it ourselves."</p>
+        <div class="testi-author"><div class="testi-avatar" style="background:rgba(197,48,48,.1);color:var(--red)">T</div><div><div class="testi-name">Thomas Biira</div><div class="testi-role">Scriptwriter & Producer</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band" style="--accent:var(--red)">
+  <div class="cta-inner reveal">
+    <h2>Help Us Keep <em>Creating</em></h2>
+    <p>Every film costs resources — equipment, travel, editing. Your support keeps our cameras rolling and our storytellers creating.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-light">Support Film Production</a>
+      <a href="#films" class="btn-cta-ghost"><i class="fas fa-film"></i> Watch Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
+        <strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span>
+        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
+      </div>
+      <div class="footer-col"><h4>Programmes</h4><ul><li><a href="prayer-worship.html"><i class="fas fa-chevron-right"></i> Prayer & Worship</a></li><li><a href="education.html"><i class="fas fa-chevron-right"></i> Education</a></li><li><a href="film-arts.html"><i class="fas fa-chevron-right"></i> Film & Creative Arts</a></li><li><a href="community-dev.html"><i class="fas fa-chevron-right"></i> Community Dev.</a></li></ul></div>
+      <div class="footer-col"><h4>Who We Serve</h4><ul><li><a href="#"><i class="fas fa-chevron-right"></i> Orphans & Children</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> PWDs</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Widows & Women</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Elders</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li><li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li><li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li><li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FAPCAN — Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div>
+    </div>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
