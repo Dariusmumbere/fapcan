@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Film & Creative Arts — Save Souls Film Industry | FAPCAN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="shared.css">
+<style>
+  :root{--accent:var(--red);--accent-lt:rgba(197,48,48,.08)}
+
+  .page-hero-tag{color:#FEB2B2;border-color:rgba(254,178,178,.3)}
+  .page-hero h1 em{color:var(--gold-lt)}
+
+  .page-hero{background:#0a0a0a}
+  .page-hero-overlay{background:linear-gradient(to top,rgba(10,10,10,.92) 0%,rgba(10,10,10,.5) 50%,rgba(10,10,10,.25) 100%)}
+
+  /* ── BRAND INTRO ── */
+  .brand-section{padding:100px 0;background:var(--dark);position:relative;overflow:hidden}
+  .brand-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(197,48,48,.08),transparent)}
+  .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .brand-logo-block{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+  .ssfi-badge{display:inline-flex;flex-direction:column;gap:4px;margin-bottom:28px}
+  .ssfi-badge .icon-row{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+  .film-icon{width:72px;height:72px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;flex-shrink:0}
+  .ssfi-name{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,4vw,52px);color:#fff;line-height:1.05}
+  .ssfi-name em{font-style:italic;color:var(--gold)}
+  .ssfi-tagline{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px}
+  .brand-divider{width:100%;height:1px;background:rgba(255,255,255,.08);margin:28px 0}
+  .brand-text p{font-size:16px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:18px}
+  .brand-text p strong{color:rgba(255,255,255,.85)}
+  .film-stats{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap}
+  .film-stat .val{font-family:var(--font-serif);font-size:36px;font-weight:900;color:var(--gold);line-height:1}
+  .film-stat .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px}
+  .clap-visual{position:relative}
+  .clap-main{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(.2)}
+  .clap-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.7),transparent 50%)}
+  .film-strip{position:absolute;left:0;right:0;bottom:0;display:flex;height:80px;overflow:hidden}
+  .film-frame{flex:1;height:80px;overflow:hidden;position:relative}
+  .film-frame::before,.film-frame::after{content:'';position:absolute;width:8px;height:100%;background:#0a0a0a;top:0;z-index:2}
+  .film-frame::before{left:0}
+  .film-frame::after{right:0}
+  .film-frame img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ── WHAT WE DO ── */
+  .what-section{padding:100px 0;background:var(--white)}
+  .what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .what-card{padding:48px 36px;position:relative;overflow:hidden;cursor:pointer;background:var(--off-white);transition:background .2s}
+  .what-card:hover{background:#fdf1f0}
+  .what-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+  .what-card:nth-child(1)::after{background:var(--red)}
+  .what-card:nth-child(2)::after{background:var(--gold)}
+  .what-card:nth-child(3)::after{background:var(--navy)}
+  .what-card-num{font-family:var(--font-serif);font-size:80px;font-weight:900;color:var(--light-gray);line-height:.9;margin-bottom:16px;transition:color .3s}
+  .what-card:hover .what-card-num{color:rgba(197,48,48,.1)}
+  .what-card h3{font-family:var(--font-serif);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:12px}
+  .what-card p{font-size:14.5px;color:var(--mid);line-height:1.7}
+
+  /* ── STORIES / IMPACT ── */
+  .stories-section{padding:100px 0;background:var(--off-white)}
+  .stories-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px}
+  .stories-bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2px}
+  .story-block{padding:48px 40px;position:relative;overflow:hidden}
+  .story-block:nth-child(1){background:var(--red);grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
+  .story-block:nth-child(2){background:var(--navy)}
+  .story-block:nth-child(3){background:var(--gold)}
+  .story-block:nth-child(4){background:var(--dark)}
+  .story-block h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,32px);color:#fff;line-height:1.15;margin-bottom:12px}
+  .story-block:nth-child(3) h3{color:var(--dark)}
+  .story-block p{font-size:14.5px;line-height:1.7;color:rgba(255,255,255,.7)}
+  .story-block:nth-child(3) p{color:rgba(0,0,0,.6)}
+  .story-block-icon{font-size:40px;margin-bottom:20px}
+  .story-block-big{font-family:var(--font-serif);font-weight:900;font-size:72px;color:rgba(255,255,255,.12);position:absolute;right:20px;bottom:10px;line-height:1;pointer-events:none}
+  .story-block:nth-child(3) .story-block-big{color:rgba(0,0,0,.08)}
+
+  /* ── OPPORTUNITIES ── */
+  .opp-section{padding:80px 0;background:var(--white)}
+  .opp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .opp-img-wrap{position:relative}
+  .opp-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .opp-caption-strip{background:var(--red);padding:16px 24px;display:flex;align-items:center;gap:12px}
+  .opp-caption-strip i{color:#fff;font-size:18px}
+  .opp-caption-strip span{font-size:13px;color:rgba(255,255,255,.85);font-weight:500}
+  .opp-text h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,44px);color:var(--navy);line-height:1.1;margin-bottom:20px}
+  .opp-text h2 em{font-style:italic;color:var(--red)}
+  .opp-text p{font-size:15.5px;line-height:1.8;color:var(--mid);margin-bottom:16px}
+  .opp-list{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+  .opp-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--off-white);transition:transform .2s,background .2s}
+  .opp-item:hover{transform:translateX(6px);background:#FFF5F5}
+  .opp-item i{color:var(--red);font-size:16px;margin-top:2px;flex-shrink:0}
+  .opp-item span{font-size:14px;color:var(--mid);line-height:1.6}
+
+  /* ── FILMS PHOTO GALLERY ── */
+  .film-gallery{padding:80px 0;background:var(--dark)}
+  .film-gallery h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,42px);color:#fff;margin-bottom:40px}
+  .film-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px 200px;gap:3px}
+  .film-grid .photo-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+  .film-grid .photo-item:nth-child(4){grid-column:span 2}
+
+  /* ── VIDEO SECTIONS ── */
+  .video-section{padding:80px 0}
+  .video-section.dark-bg{background:#0a0a0a}
+  .video-section.gold-bg{background:#1a1200}
+  .video-section-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+
+  .video-section-header{margin-bottom:40px}
+  .video-section-header .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+  .video-section-header .section-label::before{content:'';display:block;width:28px;height:2px}
+  .video-section-header h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(24px,3vw,40px);color:#fff;margin-bottom:10px}
+  .video-section-header p{font-size:15px;color:rgba(255,255,255,.4);max-width:600px}
+
+  /* Films grid */
+  .videos-grid{display:grid;gap:16px}
+  .videos-grid.grid-1{grid-template-columns:1fr;max-width:860px}
+  .videos-grid.grid-2{grid-template-columns:repeat(2,1fr)}
+  .videos-grid.grid-3{grid-template-columns:repeat(3,1fr)}
+  .videos-grid.grid-mixed{grid-template-columns:repeat(3,1fr)}
+  .videos-grid.grid-mixed .yt-embed-item:first-child{grid-column:span 2}
+
+  .yt-embed-item{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}
+  .yt-embed-item iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .yt-embed-item .embed-border{position:absolute;inset:0;border:1px solid rgba(255,255,255,.06);pointer-events:none;z-index:1}
+
+  /* Award banner */
+  .award-banner{background:linear-gradient(135deg,#D69E2E 0%,#92680a 100%);padding:48px 40px;display:flex;align-items:center;gap:32px;margin-top:40px}
+  .award-banner-icon{font-size:56px;flex-shrink:0}
+  .award-banner h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,30px);color:#fff;margin-bottom:6px}
+  .award-banner p{font-size:14.5px;color:rgba(255,255,255,.75);line-height:1.6}
+  .award-banner-video{flex:1;min-width:280px;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden}
+  .award-banner-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* ── TESTIMONIALS ── */
+  .testi-section{padding:100px 0;background:var(--white)}
+
+  @media(max-width:960px){
+    .brand-grid,.opp-grid{grid-template-columns:1fr;gap:40px}
+    .what-grid{grid-template-columns:1fr}
+    .stories-bento{grid-template-columns:1fr}
+    .story-block:nth-child(1){grid-row:span 1}
+    .film-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+    .film-grid .photo-item:nth-child(1),.film-grid .photo-item:nth-child(4){grid-column:span 1;grid-row:span 1}
+    .videos-grid.grid-2,.videos-grid.grid-3,.videos-grid.grid-mixed{grid-template-columns:1fr}
+    .videos-grid.grid-mixed .yt-embed-item:first-child{grid-column:span 1}
+    .award-banner{flex-direction:column}
+    .award-banner-video{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor"><div class="cursor-dot" id="cDot"></div><div class="cursor-ring" id="cRing"></div></div>
+<div class="colour-band"></div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
+      <div class="logo-text"><strong>FAPCAN</strong><span>Fatima Praying Center</span></div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a><div class="dropdown"><a href="#"><i class="fas fa-cross"></i> Mission & Vision</a><a href="#"><i class="fas fa-history"></i> Our History</a><a href="#"><i class="fas fa-users"></i> FAPCAN Community</a></div></li>
+      <li class="nav-item"><a href="prayer-worship.html" class="nav-link">Spiritual Life <i class="fas fa-chevron-down arr"></i></a><div class="dropdown"><a href="prayer-worship.html"><i class="fas fa-pray"></i> Prayer & Worship</a><a href="#"><i class="fas fa-church"></i> Mass & Services</a></div></li>
+      <li class="nav-item"><a href="#" class="nav-link">Community <i class="fas fa-chevron-down arr"></i></a><div class="dropdown"><a href="#"><i class="fas fa-child"></i> Orphans Support</a><a href="#"><i class="fas fa-wheelchair"></i> PWDs Programs</a></div></li>
+      <li class="nav-item"><a href="education.html" class="nav-link">Education <i class="fas fa-chevron-down arr"></i></a><div class="dropdown"><a href="#"><i class="fas fa-school"></i> Primary School</a><a href="#"><i class="fas fa-graduation-cap"></i> Secondary School</a><a href="#"><i class="fas fa-hands-helping"></i> Vocational Training</a></div></li>
+      <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="prayer-worship.html" class="mob-link">Prayer & Worship</a>
+  <a href="education.html" class="mob-link">Education Programs</a>
+  <a href="film-arts.html" class="mob-link">Film & Creative Arts</a>
+  <a href="community-dev.html" class="mob-link">Community Development</a>
+  <a href="#" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('f7.jpg')"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-geo">
+    <div class="geo-ring" style="width:700px;height:700px;top:-300px;right:-200px;animation-duration:70s;border-color:rgba(197,48,48,.06)"></div>
+    <div class="geo-ring" style="width:300px;height:300px;bottom:100px;left:30%;animation-duration:40s;animation-direction:reverse;border-color:rgba(214,158,46,.08)"></div>
+  </div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb" style="animation:fadeUp .6s .2s var(--ease-out) both"><a href="index.html">Home</a><span>/</span><span style="color:rgba(255,255,255,.6)">Film & Creative Arts</span></div>
+    <div class="page-hero-tag" style="animation:fadeUp .6s .3s var(--ease-out) both"><i class="fas fa-film"></i> Creative Arts</div>
+    <h1 style="animation:fadeUp .7s .45s var(--ease-out) both">Save Souls <em>Film Industry</em></h1>
+    <p class="page-hero-desc" style="animation:fadeUp .7s .6s var(--ease-out) both">Not just making movies — saving lives, restoring hope, and building a generation of storytellers who speak truth to the world.</p>
+  </div>
+  <div class="page-hero-scroll"><div class="page-hero-scroll-line"></div><span>Scroll</span></div>
+</section>
+<style>@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}</style>
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="impact-item reveal"><div class="impact-icon"><i class="fas fa-film"></i></div><div class="impact-num" data-target="10" data-suffix="+">0</div><div class="impact-lbl">Films Produced</div></div>
+  <div class="impact-item reveal d1"><div class="impact-icon"><i class="fas fa-users"></i></div><div class="impact-num" data-target="50" data-suffix="+">0</div><div class="impact-lbl">Young Participants</div></div>
+  <div class="impact-item reveal d2"><div class="impact-icon"><i class="fas fa-globe-africa"></i></div><div class="impact-num" data-target="3" data-suffix="+">0</div><div class="impact-lbl">Countries Reached</div></div>
+  <div class="impact-item reveal d3"><div class="impact-icon"><i class="fas fa-heart"></i></div><div class="impact-num" data-target="100" data-suffix="+">0</div><div class="impact-lbl">Lives Redirected</div></div>
+</div>
+
+<!-- BRAND SECTION -->
+<section class="brand-section">
+  <div class="content-wrap">
+    <div class="brand-grid">
+      <div class="reveal-left">
+        <div class="ssfi-badge">
+          <div class="icon-row"><div class="film-icon"><i class="fas fa-film"></i></div><div><div class="ssfi-name">Save Souls<br><em>Film Industry</em></div><div class="ssfi-tagline">A FAPCAN Initiative · Kidodo, Uganda</div></div></div>
+        </div>
+        <div class="brand-divider"></div>
+        <div class="brand-text">
+          <p>At FAPCAN, we use film as a powerful tool for healing, expression, and transformation. Through <strong>Save Souls Film Industry</strong>, we engage young people and community members in acting, storytelling, and film production — giving them a voice to tell their own stories.</p>
+          <p>Many of the individuals we work with come from difficult backgrounds, including street life, broken homes, and trauma. Film provides a safe space where they can <strong>express emotions, rebuild confidence, and rediscover purpose.</strong></p>
+          <p>Instead of being defined by their past, they become storytellers, actors, and creators.</p>
+          <div class="film-stats">
+            <div class="film-stat reveal d1"><div class="val">2012</div><div class="lbl">Programme launched</div></div>
+            <div class="film-stat reveal d2"><div class="val">10+</div><div class="lbl">Films completed</div></div>
+            <div class="film-stat reveal d3"><div class="val">∞</div><div class="lbl">Stories to tell</div></div>
+          </div>
+        </div>
+        <div style="margin-top:32px;display:flex;gap:14px;flex-wrap:wrap">
+          <a href="#films" class="btn-accent" style="--accent:var(--red)"><i class="fas fa-play"></i> Watch Our Films</a>
+          <a href="#" class="btn-ghost" style="--accent:var(--gold);border-color:var(--gold);color:var(--gold)"><i class="fas fa-hands-helping"></i> Get Involved</a>
+        </div>
+      </div>
+      <div class="clap-visual reveal-right">
+        <img class="clap-main" src="f7.jpg" alt="Film production" onerror="this.style.background='linear-gradient(135deg,#111,#C53030)';this.style.height='500px'">
+        <div class="clap-overlay"></div>
+        <div class="film-strip">
+          <div class="film-frame"><img src="f1.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#222'"></div>
+          <div class="film-frame"><img src="f3.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#333'"></div>
+          <div class="film-frame"><img src="f5.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"></div>
+          <div class="film-frame"><img src="f9.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#282828'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-section">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--red)">What We Produce</div>
+    <h2 class="reveal" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px">Telling Our Stories,<br>Changing Lives</h2>
+    <div class="what-grid">
+      <div class="what-card reveal d1"><div class="what-card-num">01</div><h3>Real-Life Stories</h3><p>We share real-life experiences from our community with authenticity and pride — challenging stigma and raising awareness on social issues that matter.</p></div>
+      <div class="what-card reveal d2"><div class="what-card-num">02</div><h3>Hope & Resilience</h3><p>Our productions reflect the realities people face while offering messages of healing, justice, unity, and transformation that inspire viewers locally and beyond.</p></div>
+      <div class="what-card reveal d3"><div class="what-card-num">03</div><h3>Cultural Heritage</h3><p>Showcasing Uganda's culture, traditions, and community narratives — preserving heritage for future generations through the powerful medium of film.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STORIES BENTO -->
+<section class="stories-section">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--red)">Impact</div>
+    <h2 class="reveal">Film as a Lifeline</h2>
+    <div class="stories-bento">
+      <div class="story-block reveal d1">
+        <div>
+          <div class="story-block-icon">🎬</div>
+          <h3>Young people rescued from harmful paths and redirected into creative purpose</h3>
+          <p>Many participants came from the streets or broken homes. Film gave them a safe space, a skill, and a reason to come back every day.</p>
+        </div>
+        <div style="margin-top:32px">
+          <a href="#" class="btn-cta-light" style="background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.3);display:inline-flex;align-items:center;gap:10px;padding:12px 24px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;text-decoration:none;transition:background .2s">Read Stories <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="story-block-big">Film</div>
+      </div>
+      <div class="story-block reveal d2">
+        <div class="story-block-icon">🎭</div>
+        <h3>Practical skills: acting, directing, scripting, production</h3>
+        <p>Participants leave with real, marketable creative skills.</p>
+        <div class="story-block-big">Act</div>
+      </div>
+      <div class="story-block reveal d3">
+        <div class="story-block-icon">🤝</div>
+        <h3>Confidence, teamwork, and leadership through collaboration</h3>
+        <p>Every film set teaches life skills beyond the camera.</p>
+        <div class="story-block-big">Lead</div>
+      </div>
+      <div class="story-block reveal d4">
+        <div class="story-block-icon">🌍</div>
+        <h3>Community members feel seen, heard, and represented</h3>
+        <p>Our films spark conversations far beyond Kidodo — reaching audiences across Uganda and internationally.</p>
+        <div class="story-block-big">Seen</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITIES -->
+<section class="opp-section">
+  <div class="content-wrap">
+    <div class="opp-grid">
+      <div class="opp-img-wrap reveal-left">
+        <img class="opp-img" src="f4.jpg" alt="Film opportunities" onerror="this.style.background='linear-gradient(135deg,#C53030,#553C9A)';this.style.height='360px'">
+        <div class="opp-caption-strip"><i class="fas fa-globe-africa"></i><span>Filming across Uganda and beyond</span></div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-label" style="--accent:var(--red)">Exploring Opportunities</div>
+        <h2 class="opp-text">Film Has Opened<br>Doors to the <em>World</em></h2>
+        <p>Our journey in filmmaking has created remarkable opportunities for community members who might otherwise never have left Kidodo.</p>
+        <p>Through Save Souls Film Industry, participants step beyond their limitations and explore the world while carrying their stories with them.</p>
+        <div class="opp-list">
+          <div class="opp-item reveal d1"><i class="fas fa-map-marker-alt"></i><span>Travelling to different places for filming and storytelling assignments across Uganda</span></div>
+          <div class="opp-item reveal d2"><i class="fas fa-users"></i><span>Connecting with wider audiences and creative networks in the film industry</span></div>
+          <div class="opp-item reveal d3"><i class="fas fa-star"></i><span>Showcasing talent and culture on broader platforms including film festivals</span></div>
+          <div class="opp-item reveal d4"><i class="fas fa-handshake"></i><span>Building partnerships with other filmmakers, NGOs, and storytelling organisations</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILM GALLERY -->
+<section class="film-gallery">
+  <div class="content-wrap">
+    <div class="section-label" style="--accent:var(--gold)">Behind the Scenes</div>
+    <h2 class="reveal">On Set with Save Souls Film Industry</h2>
+    <div class="film-grid">
+      <div class="photo-item reveal" style="position:relative"><img src="f2.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#C53030,#111)'"><div class="caption">On Location Shoot</div></div>
+      <div class="photo-item reveal d1" style="position:relative"><img src="f5.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#553C9A,#111)'"><div class="caption">Directing Session</div></div>
+      <div class="photo-item reveal d2" style="position:relative"><img src="f8.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#1A365D,#111)'"><div class="caption">Script Workshop</div></div>
+      <div class="photo-item reveal d3" style="position:relative"><img src="f10.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#D69E2E,#111)'"><div class="caption">Cast & Crew</div></div>
+      <div class="photo-item reveal d4" style="position:relative"><img src="f6.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#276749,#111)'"><div class="caption">Community Screening</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SAVE SOULS FILMS ONLY
+══════════════════════════════════════════════ -->
+
+<!-- FILMS SECTION (Save Souls Films) -->
+<section class="video-section dark-bg" id="films">
+  <div class="video-section-inner">
+    <div class="video-section-header reveal">
+      <div class="section-label" style="color:var(--red);--accent:var(--red)"><span style="display:block;width:28px;height:2px;background:var(--red);margin-right:10px"></span>Films</div>
+      <h2>Save Souls Films</h2>
+      <p>Original narrative productions from Save Souls Film Industry — stories rooted in community, truth, and transformation.</p>
+    </div>
+    <div class="videos-grid grid-3 reveal">
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/xVqMxlVHoeA" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/a9xSesz8QwM" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/LtcD9aJnACs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
+        <iframe src="https://www.youtube.com/embed/yYnnXITXrxs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="SSFI Film"></iframe>
+        <div class="embed-border"></div>
+      </div>
+      <div class="yt-embed-item">
