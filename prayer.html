@@ -94,6 +94,10 @@
   .video-thumb-item h4{font-family:var(--font-serif);font-size:14px;font-weight:600;color:#fff;line-height:1.3;margin-bottom:4px}
   .video-thumb-item p{font-size:12px;color:rgba(255,255,255,.35)}
 
+  /* ── Native video player ── */
+  .native-video-wrap{position:relative;width:100%;border-radius:2px;overflow:hidden;background:#000;aspect-ratio:16/9}
+  .native-video-wrap video{width:100%;height:100%;display:block;object-fit:cover}
+
   /* ── TESTIMONIALS ── */
   .testi-section{padding:100px 0;background:var(--white)}
   .testi-section .section-label{--accent:var(--purple)}
@@ -181,7 +185,7 @@
 
 <!-- HERO -->
 <section class="page-hero" id="hero">
-  <div class="page-hero-bg" style="background-image:url('f1.jpg')"></div>
+  <div class="page-hero-bg" style="background-image:url('c1.jpg')"></div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-geo">
     <div class="geo-ring" style="width:600px;height:600px;top:-200px;right:-100px;animation-duration:55s"></div>
@@ -198,8 +202,6 @@
   <div class="page-hero-scroll"><div class="page-hero-scroll-line"></div><span>Scroll</span></div>
 </section>
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-
 <!-- IMPACT STRIP -->
 <div class="impact-strip">
   <div class="impact-item reveal"><div class="impact-icon"><i class="fas fa-hands-praying"></i></div><div class="impact-num" data-target="52" data-suffix="+">0</div><div class="impact-lbl">Saturdays Per Year</div></div>
@@ -214,7 +216,7 @@
     <div class="how-grid">
       <div class="how-img-stack reveal-left">
         <div class="how-img-tag">Spirit-Led Sessions</div>
-        <img class="how-img-main" src="f2.jpg" alt="Prayer session" onerror="this.style.background='linear-gradient(135deg,#553C9A,#1A365D)';this.alt=''">
+        <img class="how-img-main" src="c2.jpg" alt="Prayer session" onerror="this.style.background='linear-gradient(135deg,#553C9A,#1A365D)';this.alt=''">
         <div class="how-img-overlay"></div>
         <div class="how-img-accent-card">
           <div class="big">5h</div>
@@ -269,7 +271,7 @@
         </div>
       </div>
       <div class="schedule-map reveal-right">
-        <img src="f7.jpg" alt="FAPCAN gathering space" style="width:100%;height:100%;object-fit:cover;display:block;min-height:360px" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="c3.jpg" alt="FAPCAN gathering space — welcome image" style="width:100%;height:100%;object-fit:cover;display:block;min-height:360px" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="map-placeholder-text" style="display:none"><i class="fas fa-map-marked-alt"></i>Kidodo, Kasese</div>
       </div>
     </div>
@@ -308,11 +310,31 @@
     <div class="section-label" style="--accent:var(--purple)">Gallery</div>
     <h2 class="reveal">Prayer Sessions in Pictures</h2>
     <div class="prayer-photo-grid">
-      <div class="photo-item reveal-left" style="position:relative"><img src="f1.jpg" alt="Prayer session" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-pray" style="font-size:64px"></i></div><div class="caption">Community Gathering</div></div>
-      <div class="photo-item reveal d1" style="position:relative"><img src="f3.jpg" alt="Worship" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-music"></i></div><div class="caption">Praise & Worship</div></div>
-      <div class="photo-item reveal d2" style="position:relative"><img src="f4.jpg" alt="Prayer" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-pray"></i></div><div class="caption">Intercessory Prayer</div></div>
-      <div class="photo-item reveal d3" style="position:relative"><img src="f6.jpg" alt="Community" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-users"></i></div><div class="caption">Healing Session</div></div>
-      <div class="photo-item reveal d4" style="position:relative"><img src="f9.jpg" alt="FAPCAN" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'"><div class="photo-placeholder" style="display:none"><i class="fas fa-heart"></i></div><div class="caption">Scripture Study</div></div>
+      <div class="photo-item reveal-left" style="position:relative">
+        <img src="c4.jpg" alt="Prayer session" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'">
+        <div class="photo-placeholder" style="display:none"><i class="fas fa-pray" style="font-size:64px"></i></div>
+        <div class="caption">Community Gathering</div>
+      </div>
+      <div class="photo-item reveal d1" style="position:relative">
+        <img src="c5.jpg" alt="Worship" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'">
+        <div class="photo-placeholder" style="display:none"><i class="fas fa-music"></i></div>
+        <div class="caption">Praise & Worship</div>
+      </div>
+      <div class="photo-item reveal d2" style="position:relative">
+        <img src="c6.jpg" alt="Prayer" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'">
+        <div class="photo-placeholder" style="display:none"><i class="fas fa-pray"></i></div>
+        <div class="caption">Intercessory Prayer</div>
+      </div>
+      <div class="photo-item reveal d3" style="position:relative">
+        <img src="c7.jpg" alt="Community" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'">
+        <div class="photo-placeholder" style="display:none"><i class="fas fa-users"></i></div>
+        <div class="caption">Healing Session</div>
+      </div>
+      <div class="photo-item reveal d4" style="position:relative">
+        <img src="c8.jpg" alt="FAPCAN" onerror="this.parentElement.querySelector('div').style.display='flex';this.style.display='none'">
+        <div class="photo-placeholder" style="display:none"><i class="fas fa-heart"></i></div>
+        <div class="caption">Scripture Study</div>
+      </div>
     </div>
   </div>
 </section>
@@ -322,28 +344,29 @@
   <div class="content-wrap">
     <div class="section-label" style="--accent:var(--gold);margin-bottom:12px">Watch &amp; Experience</div>
     <h2 class="reveal">See the Power of Prayer</h2>
+    <p>A glimpse into our Spirit-filled Saturday gatherings at Kidodo, Kasese.</p>
     <div class="video-outer">
       <div class="reveal-left">
-        <div class="video-wrap" data-src="https://www.youtube.com/embed/YOUR_VIDEO_ID" style="border-radius:2px">
-          <div class="video-thumb" style="background-image:url('f2.jpg')"></div>
-          <div class="video-play-btn">
-            <div class="play-circle" style="--accent:var(--purple)"><i class="fas fa-play"></i></div>
-          </div>
+        <div class="native-video-wrap">
+          <video controls poster="c3.jpg" preload="metadata">
+            <source src="service.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
         <p style="font-size:13px;color:rgba(255,255,255,.35);margin-top:12px">A glimpse into our Saturday gathering at Kidodo</p>
       </div>
       <div class="video-side-list reveal-right">
         <p style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">More Recordings</p>
         <div class="video-thumb-item">
-          <div class="thumb"><img src="f5.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
+          <div class="thumb"><img src="c9.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
           <div><h4>Healing Testimonies Night</h4><p>Saturday Special — March 2024</p></div>
         </div>
         <div class="video-thumb-item">
-          <div class="thumb"><img src="f8.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
+          <div class="thumb"><img src="c10.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
           <div><h4>Community Praise &amp; Worship</h4><p>Kidodo · December 2023</p></div>
         </div>
         <div class="video-thumb-item">
-          <div class="thumb"><img src="f10.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
+          <div class="thumb"><img src="c1.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'"></div>
           <div><h4>Intercessory Prayer Session</h4><p>Kasese Municipality · 2024</p></div>
         </div>
         <a href="#" class="btn-ghost" style="--accent:var(--gold);margin-top:8px;font-size:12px"><i class="fas fa-film"></i> View All Videos</a>
