@@ -164,27 +164,48 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); display: block; }
 
 /* ═══════════════════════════
-   PAGE HERO
+   PAGE HERO — co2.jpg background
 ═══════════════════════════ */
 .page-hero {
-  background: var(--navy-dk);
   padding: 140px 0 80px;
   position: relative; overflow: hidden;
+  background-color: var(--navy-dk);
 }
+
+/* co2.jpg as hero background image */
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('co2.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+}
+/* Dark overlay so text stays readable */
+.page-hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 20, 45, 0.82) 0%,
+    rgba(15, 31, 61, 0.72) 50%,
+    rgba(39, 103, 73, 0.35) 100%
+  );
+}
+
 .page-hero-geo {
-  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;
 }
 .page-hero-geo-ring {
   position: absolute; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.05);
   animation: geoSpin linear infinite;
 }
 .page-hero-geo-ring:nth-child(1) { width: 700px; height: 700px; top: -300px; right: -200px; animation-duration: 60s; }
-.page-hero-geo-ring:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: 10%; animation-duration: 45s; animation-direction: reverse; border-color: rgba(39,103,73,0.1); }
+.page-hero-geo-ring:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: 10%; animation-duration: 45s; animation-direction: reverse; border-color: rgba(39,103,73,0.12); }
 @keyframes geoSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 
 .page-hero::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.035;
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.025; z-index: 1;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
@@ -208,9 +229,11 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .page-hero-tag {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--green); border: 1px solid rgba(39,103,73,0.4); padding: 6px 16px;
+  color: var(--green); border: 1px solid rgba(39,103,73,0.5); padding: 6px 16px;
   margin-bottom: 24px;
   animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+  background: rgba(39,103,73,0.12);
+  backdrop-filter: blur(4px);
 }
 .page-hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 
@@ -219,18 +242,19 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-size: clamp(38px, 5vw, 70px); line-height: 1.07;
   color: white; margin-bottom: 24px;
   animation: fadeUp 0.9s 0.3s var(--ease-out) both;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 .page-hero h1 em { font-style: italic; color: var(--gold); }
 
 .page-hero p {
-  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.65);
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.75);
   max-width: 640px; line-height: 1.8;
   animation: fadeUp 0.9s 0.45s var(--ease-out) both;
 }
 
 /* coloured bottom bar on hero */
 .page-hero-bar {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 4px;
+  position: absolute; bottom: 0; left: 0; right: 0; height: 4px; z-index: 3;
   background: linear-gradient(to right,
     var(--red) 0%, var(--gold) 40%, var(--green) 70%, var(--teal) 100%);
 }
@@ -312,21 +336,36 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   min-height: 260px; display: flex; flex-direction: column; justify-content: flex-end;
   padding: 36px 32px; transition: filter 0.3s;
 }
-.activity-card:nth-child(1) { background: #EBF4FF; }
-.activity-card:nth-child(2) { background: #F0FFF4; }
-.activity-card:nth-child(3) { background: #FFF5E6; }
-.activity-card:nth-child(4) { background: #FAF5FF; }
-.activity-card:hover { filter: brightness(0.96); }
+
+/* Each card now has a photo background with overlay */
+.activity-card .act-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.5s var(--ease-out);
+}
+.activity-card:hover .act-bg { transform: scale(1.05); }
+.activity-card .act-overlay {
+  position: absolute; inset: 0;
+  transition: opacity 0.3s;
+}
+.activity-card:nth-child(1) .act-overlay { background: linear-gradient(to top, rgba(15,31,61,0.92) 0%, rgba(15,31,61,0.5) 60%, rgba(15,31,61,0.15) 100%); }
+.activity-card:nth-child(2) .act-overlay { background: linear-gradient(to top, rgba(20,60,40,0.92) 0%, rgba(20,60,40,0.5) 60%, rgba(20,60,40,0.15) 100%); }
+.activity-card:nth-child(3) .act-overlay { background: linear-gradient(to top, rgba(80,50,10,0.92) 0%, rgba(80,50,10,0.5) 60%, rgba(80,50,10,0.15) 100%); }
+.activity-card:nth-child(4) .act-overlay { background: linear-gradient(to top, rgba(40,25,80,0.92) 0%, rgba(40,25,80,0.5) 60%, rgba(40,25,80,0.15) 100%); }
+
+/* Content inside card sits above overlay */
+.activity-card > *:not(.act-bg):not(.act-overlay) { position: relative; z-index: 2; }
 
 .act-icon-wrap {
-  position: absolute; top: 28px; right: 28px;
+  position: absolute; top: 28px; right: 28px; z-index: 2;
   width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
   font-size: 26px; transition: transform 0.4s var(--ease-out);
+  backdrop-filter: blur(6px);
 }
-.activity-card:nth-child(1) .act-icon-wrap { background: rgba(26,54,93,0.12); color: var(--navy); }
-.activity-card:nth-child(2) .act-icon-wrap { background: rgba(39,103,73,0.12); color: var(--green); }
-.activity-card:nth-child(3) .act-icon-wrap { background: rgba(214,158,46,0.15); color: #92610B; }
-.activity-card:nth-child(4) .act-icon-wrap { background: rgba(85,60,154,0.1); color: var(--purple); }
+.activity-card:nth-child(1) .act-icon-wrap { background: rgba(26,54,93,0.5); color: #90CDF4; border: 1px solid rgba(144,205,244,0.25); }
+.activity-card:nth-child(2) .act-icon-wrap { background: rgba(39,103,73,0.5); color: #68D391; border: 1px solid rgba(104,211,145,0.25); }
+.activity-card:nth-child(3) .act-icon-wrap { background: rgba(214,158,46,0.4); color: var(--gold-lt); border: 1px solid rgba(246,224,94,0.25); }
+.activity-card:nth-child(4) .act-icon-wrap { background: rgba(85,60,154,0.4); color: #B794F4; border: 1px solid rgba(183,148,244,0.25); }
 .activity-card:hover .act-icon-wrap { transform: scale(1.1) rotate(-8deg); }
 
 .act-tag {
@@ -340,9 +379,9 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 
 .activity-card h3 {
   font-family: var(--font-serif); font-weight: 700; font-size: 22px;
-  color: var(--navy); line-height: 1.2; margin-bottom: 10px;
+  color: white; line-height: 1.2; margin-bottom: 10px;
 }
-.activity-card p { font-size: 14px; color: var(--mid); line-height: 1.65; max-width: 380px; }
+.activity-card p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.65; max-width: 380px; }
 
 /* ═══════════════════════════
    IMPACT STRIP
@@ -377,6 +416,31 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-item:nth-child(3) .impact-num { color: var(--gold); }
 .impact-item:nth-child(4) .impact-num { color: var(--purple); filter: brightness(1.6); }
 .impact-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+
+/* ═══════════════════════════
+   PHOTO GALLERY STRIP
+═══════════════════════════ */
+.photo-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 4px; background: var(--dark);
+}
+.photo-strip-item {
+  position: relative; overflow: hidden; aspect-ratio: 16/10; cursor: pointer;
+}
+.photo-strip-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.5s var(--ease-out), filter 0.4s;
+  filter: brightness(0.85) saturate(0.9);
+}
+.photo-strip-item:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.1); }
+.photo-strip-item .photo-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  padding: 24px 20px 16px; color: white;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.03em;
+  transform: translateY(100%); transition: transform 0.35s var(--ease-out);
+}
+.photo-strip-item:hover .photo-caption { transform: none; }
 
 /* ═══════════════════════════
    ACTIVITIES SHOWCASE
@@ -592,6 +656,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .showcase-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
   .impact-cards { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
+  .photo-strip { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 640px) {
   .impact-strip { grid-template-columns: 1fr 1fr; }
@@ -599,6 +664,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .intro, .what-we-do, .showcase, .impact-section { padding: 60px 0; }
   .nav-inner { padding: 0 20px; }
   .page-hero-inner, .intro-inner, .what-inner, .showcase-inner, .impact-section-inner, .footer-inner { padding: 0 20px; }
+  .photo-strip { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -695,8 +761,10 @@ footer { background: var(--dark); padding: 80px 0 0; }
   <a href="#" class="mob-link">Contact</a>
 </div>
 
-<!-- ═══════════ PAGE HERO ═══════════ -->
+<!-- ═══════════ PAGE HERO — co2.jpg background ═══════════ -->
 <section class="page-hero">
+  <!-- co2.jpg hero background -->
+  <div class="page-hero-bg"></div>
   <div class="page-hero-geo">
     <div class="page-hero-geo-ring"></div>
     <div class="page-hero-geo-ring"></div>
@@ -716,14 +784,14 @@ footer { background: var(--dark); padding: 80px 0 0; }
   <div class="page-hero-bar"></div>
 </section>
 
-<!-- ═══════════ INTRO ═══════════ -->
+<!-- ═══════════ INTRO — co1.jpg main, co3.jpg accent ═══════════ -->
 <section class="intro">
   <div class="intro-inner">
     <div class="intro-img-wrap reveal-left">
       <div class="intro-img-tag">Kidodo · Kasese</div>
-      <img class="intro-img-main" src="fa31.jpg" alt="FAPCAN Community"
+      <img class="intro-img-main" src="co1.jpg" alt="FAPCAN Community"
         onerror="this.src='';this.style.background='linear-gradient(135deg,#276749,#1A7A8A)';this.style.minHeight='400px';this.style.display='block';">
-      <img class="intro-img-accent" src="f4.jpg" alt="Community Activities"
+      <img class="intro-img-accent" src="co3.jpg" alt="Community Activities"
         onerror="this.style.display='none'">
     </div>
     <div class="intro-text reveal-right">
@@ -749,7 +817,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- ═══════════ WHAT WE DO ═══════════ -->
+<!-- ═══════════ WHAT WE DO — co4, co5, co6, co1 as card backgrounds ═══════════ -->
 <section class="what-we-do">
   <div class="what-inner">
     <div class="what-header reveal">
@@ -757,30 +825,47 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <h2>What We Do Together</h2>
     </div>
     <div class="activities-grid">
+
+      <!-- Card 1 — co4.jpg -->
       <div class="activity-card reveal reveal-delay-1">
+        <div class="act-bg" style="background-image:url('co4.jpg')"></div>
+        <div class="act-overlay"></div>
         <div class="act-icon-wrap"><i class="fas fa-microphone-alt"></i></div>
         <span class="act-tag">Expression</span>
         <h3>Debates &amp; Storytelling</h3>
         <p>We organise debates and storytelling sessions where individuals freely express themselves, find their voice, and gain hope by hearing what others have overcome and achieved.</p>
       </div>
+
+      <!-- Card 2 — co5.jpg -->
       <div class="activity-card reveal reveal-delay-2">
+        <div class="act-bg" style="background-image:url('co5.jpg')"></div>
+        <div class="act-overlay"></div>
         <div class="act-icon-wrap"><i class="fas fa-star"></i></div>
         <span class="act-tag">Talent</span>
         <h3>Talent Shows &amp; Performances</h3>
         <p>Talent shows celebrating music, dance, drama, and creative arts. These platforms help participants discover their abilities, build confidence, and inspire the wider community.</p>
       </div>
+
+      <!-- Card 3 — co6.jpg -->
       <div class="activity-card reveal reveal-delay-3">
+        <div class="act-bg" style="background-image:url('co6.jpg')"></div>
+        <div class="act-overlay"></div>
         <div class="act-icon-wrap"><i class="fas fa-futbol"></i></div>
         <span class="act-tag">Sports</span>
         <h3>Sports &amp; Outdoor Activities</h3>
         <p>Football, netball, and other sports for youth and elders alike — bringing joy, strengthening relationships, and creating opportunities for mentorship across generations.</p>
       </div>
+
+      <!-- Card 4 — co3.jpg -->
       <div class="activity-card reveal reveal-delay-4">
+        <div class="act-bg" style="background-image:url('co3.jpg')"></div>
+        <div class="act-overlay"></div>
         <div class="act-icon-wrap"><i class="fas fa-seedling"></i></div>
         <span class="act-tag">Service</span>
         <h3>Community Work &amp; Environment</h3>
         <p>Collective community tasks — digging, environmental conservation — that build a sense of shared ownership and responsibility for the neighbourhood we all call home.</p>
       </div>
+
     </div>
   </div>
 </section>
@@ -806,6 +891,34 @@ footer { background: var(--dark); padding: 80px 0 0; }
     <div class="impact-icon"><i class="fas fa-trophy"></i></div>
     <div class="impact-num" data-target="5">0</div>
     <div class="impact-label">Activities Per Month</div>
+  </div>
+</div>
+
+<!-- ═══════════ PHOTO GALLERY STRIP — co1–co6 ═══════════ -->
+<div class="photo-strip">
+  <div class="photo-strip-item reveal">
+    <img src="co1.jpg" alt="Community gathering" onerror="this.parentElement.style.background='#276749'">
+    <div class="photo-caption">Community Gatherings</div>
+  </div>
+  <div class="photo-strip-item reveal reveal-delay-1">
+    <img src="co3.jpg" alt="Youth activities" onerror="this.parentElement.style.background='#1A365D'">
+    <div class="photo-caption">Youth Engagement</div>
+  </div>
+  <div class="photo-strip-item reveal reveal-delay-2">
+    <img src="co4.jpg" alt="Debates and storytelling" onerror="this.parentElement.style.background='#1A7A8A'">
+    <div class="photo-caption">Debates &amp; Storytelling</div>
+  </div>
+  <div class="photo-strip-item reveal reveal-delay-3">
+    <img src="co5.jpg" alt="Talent performances" onerror="this.parentElement.style.background='#553C9A'">
+    <div class="photo-caption">Talent Performances</div>
+  </div>
+  <div class="photo-strip-item reveal reveal-delay-4">
+    <img src="co6.jpg" alt="Sports activities" onerror="this.parentElement.style.background='#C53030'">
+    <div class="photo-caption">Sports &amp; Outdoor Life</div>
+  </div>
+  <div class="photo-strip-item reveal reveal-delay-1">
+    <img src="co2.jpg" alt="Community unity" onerror="this.parentElement.style.background='#D69E2E'">
+    <div class="photo-caption">Unity &amp; Belonging</div>
   </div>
 </div>
 
@@ -982,7 +1095,7 @@ const cursorDot  = document.getElementById('cursorDot');
 const cursorRing = document.getElementById('cursorRing');
 let mx = 0, my = 0, rx = 0, ry = 0;
 document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-document.querySelectorAll('a, button, .activity-card, .showcase-card, .impact-card, .prog-card').forEach(el => {
+document.querySelectorAll('a, button, .activity-card, .showcase-card, .impact-card, .prog-card, .photo-strip-item').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
@@ -1055,4 +1168,4 @@ const impactObs = new IntersectionObserver((entries) => {
 document.querySelector('.impact-strip') && impactObs.observe(document.querySelector('.impact-strip'));
 </script>
 </body>
-</html>
+  </html>
