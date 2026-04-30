@@ -16,7 +16,34 @@
   .page-hero h1 em{color:var(--gold-lt)}
 
   /* ── HOW WE PRAY ── */
-  .how-section{padding:100px 0;background:var(--white)}
+  .how-section{
+    padding:100px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  /* Subtle parallax background photo */
+  .how-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:url('c2.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    opacity:0.05;
+    z-index:0;
+  }
+  /* White wash over photo so content stays readable */
+  .how-section::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:#fff;
+    opacity:0.93;
+    z-index:1;
+  }
+  .how-section .content-wrap{position:relative;z-index:2}
+
   .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
   .how-img-stack{position:relative;height:500px}
   .how-img-main{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;display:block}
@@ -38,7 +65,30 @@
   .method-body p{font-size:13.5px;color:var(--mid);line-height:1.6}
 
   /* ── WHEN & WHERE ── */
-  .schedule-section{padding:100px 0;background:var(--off-white)}
+  .schedule-section{
+    padding:100px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .schedule-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:url('c3.jpg');
+    background-size:cover;
+    background-position:center top;
+    background-attachment:fixed;
+    z-index:0;
+  }
+  .schedule-section::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(235,240,250,.97) 0%,rgba(230,236,246,.94) 100%);
+    z-index:1;
+  }
+  .schedule-section .content-wrap{position:relative;z-index:2}
+
   .schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
   .schedule-card{background:var(--navy);padding:56px 48px;position:relative;overflow:hidden}
   .schedule-card::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;border:40px solid rgba(214,158,46,.1)}
@@ -55,7 +105,30 @@
   .map-placeholder-text i{font-size:48px;margin-bottom:12px;display:block;color:rgba(255,255,255,.1)}
 
   /* ── IMPACT ── */
-  .impact-section{padding:80px 0;background:var(--white)}
+  .impact-section{
+    padding:80px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .impact-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:url('c4.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    z-index:0;
+  }
+  .impact-section::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,0.95);
+    z-index:1;
+  }
+  .impact-section .content-wrap{position:relative;z-index:2}
+
   .impact-list{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
   .impact-card{background:var(--off-white);padding:44px 36px;position:relative;overflow:hidden;transition:background .2s}
   .impact-card:nth-child(1){background:#EEF2FF}
@@ -72,7 +145,29 @@
   .impact-card p{font-size:14.5px;color:var(--mid);line-height:1.7;margin-left:16px}
 
   /* ── PHOTOS ── */
-  .photos-section{padding:80px 0;background:var(--off-white)}
+  .photos-section{
+    padding:80px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .photos-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:url('c5.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    z-index:0;
+  }
+  .photos-section::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,rgba(240,244,250,0.97),rgba(235,240,248,0.95));
+    z-index:1;
+  }
+  .photos-section .content-wrap{position:relative;z-index:2}
   .photos-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:40px}
   .prayer-photo-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:3px}
   .prayer-photo-grid .photo-item:first-child{grid-row:span 2}
@@ -82,33 +177,133 @@
   .photo-item:hover .caption{opacity:1}
 
   /* ── VIDEO ── */
-  .video-section{padding:80px 0;background:var(--navy-dk)}
+  .video-section{
+    padding:80px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .video-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:url('c1.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    z-index:0;
+  }
+  .video-section::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(8,16,36,0.93);
+    z-index:1;
+  }
+  .video-section .content-wrap{position:relative;z-index:2}
   .video-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,44px);color:#fff;margin-bottom:12px}
   .video-section>div>p{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:40px;max-width:560px}
-  .video-outer{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:start}
-  .video-side-list{display:flex;flex-direction:column;gap:16px}
-  .video-thumb-item{display:flex;gap:14px;background:rgba(255,255,255,.05);padding:14px;cursor:pointer;transition:background .2s,outline .2s;align-items:center;outline:2px solid transparent}
+
+  /* ── PORTRAIT VIDEO LAYOUT ── */
+  .video-layout{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:36px;
+    align-items:start;
+  }
+
+  /* Main player — 9:16 portrait */
+  .native-video-wrap{
+    position:relative;
+    width:100%;
+    border-radius:3px;
+    overflow:hidden;
+    background:#000;
+    aspect-ratio:9/16;
+  }
+  .native-video-wrap video{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+  }
+
+  /* Side thumbnails — 2-column portrait grid */
+  .video-side-col{}
+  .video-side-col>p{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:14px}
+  .video-side-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .video-thumb-item{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    background:rgba(255,255,255,.05);
+    padding:10px;
+    cursor:pointer;
+    transition:background .2s,outline .2s;
+    outline:2px solid transparent;
+    border-radius:2px;
+  }
   .video-thumb-item:hover{background:rgba(255,255,255,.1)}
   .video-thumb-item.active{background:rgba(255,255,255,.12);outline-color:var(--gold)}
-  .video-thumb-item .thumb{width:80px;height:54px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:22px;overflow:hidden}
+  /* Portrait thumbnail */
+  .video-thumb-item .thumb{
+    width:100%;
+    aspect-ratio:9/16;
+    background:rgba(255,255,255,.08);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:rgba(255,255,255,.3);
+    font-size:20px;
+    overflow:hidden;
+    flex-shrink:0;
+  }
   .video-thumb-item .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-  .video-thumb-item h4{font-family:var(--font-serif);font-size:14px;font-weight:600;color:#fff;line-height:1.3;margin-bottom:4px}
-  .video-thumb-item p{font-size:12px;color:rgba(255,255,255,.35)}
-
-  /* ── Native video player ── */
-  .native-video-wrap{position:relative;width:100%;border-radius:2px;overflow:hidden;background:#000;aspect-ratio:16/9}
-  .native-video-wrap video{width:100%;height:100%;display:block;object-fit:cover}
+  .video-thumb-item h4{font-family:var(--font-serif);font-size:12px;font-weight:600;color:#fff;line-height:1.3;margin-bottom:2px}
+  .video-thumb-item p{font-size:11px;color:rgba(255,255,255,.35)}
 
   /* ── TESTIMONIALS ── */
-  .testi-section{padding:100px 0;background:var(--white)}
+  .testi-section{
+    padding:100px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .testi-section::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:url('c6.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    z-index:0;
+  }
+  .testi-section::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,0.96);
+    z-index:1;
+  }
+  .testi-section .content-wrap{position:relative;z-index:2}
   .testi-section .section-label{--accent:var(--purple)}
 
   @media(max-width:960px){
-    .how-grid,.schedule-grid,.video-outer{grid-template-columns:1fr;gap:40px}
+    .how-grid,.schedule-grid{grid-template-columns:1fr;gap:40px}
+    .video-layout{grid-template-columns:1fr}
+    .native-video-wrap{max-width:300px;margin:0 auto}
+    .video-side-grid{grid-template-columns:repeat(4,1fr)}
     .how-img-stack{height:340px}
     .impact-list{grid-template-columns:1fr}
     .prayer-photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
     .prayer-photo-grid .photo-item:first-child{grid-row:span 1}
+  }
+  @media(max-width:600px){
+    .video-side-grid{grid-template-columns:repeat(2,1fr)}
+    .native-video-wrap{max-width:240px}
   }
 </style>
 </head>
@@ -211,7 +406,7 @@
   <div class="impact-item reveal d3"><div class="impact-icon"><i class="fas fa-heart"></i></div><div class="impact-num" data-target="12" data-suffix="+">0</div><div class="impact-lbl">Years Gathering</div></div>
 </div>
 
-<!-- HOW WE PRAY -->
+<!-- HOW WE PRAY — bg: c2.jpg (very faint behind white) -->
 <section class="how-section" id="how">
   <div class="content-wrap">
     <div class="how-grid">
@@ -255,7 +450,7 @@
   </div>
 </section>
 
-<!-- SCHEDULE -->
+<!-- SCHEDULE — bg: c3.jpg (light tinted overlay) -->
 <section class="schedule-section" id="schedule">
   <div class="content-wrap">
     <div class="section-label" style="--accent:var(--purple);margin-bottom:40px">When &amp; Where We Gather</div>
@@ -272,14 +467,14 @@
         </div>
       </div>
       <div class="schedule-map reveal-right">
-        <img src="c3.jpg" alt="FAPCAN gathering space — welcome image" style="width:100%;height:100%;object-fit:cover;display:block;min-height:360px" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="c3.jpg" alt="FAPCAN gathering space" style="width:100%;height:100%;object-fit:cover;display:block;min-height:360px" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="map-placeholder-text" style="display:none"><i class="fas fa-map-marked-alt"></i>Kidodo, Kasese</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- IMPACT -->
+<!-- IMPACT — bg: c4.jpg (very faint behind near-white) -->
 <section class="impact-section" id="impact">
   <div class="content-wrap">
     <div class="section-label" style="--accent:var(--purple);margin-bottom:12px">Impact on the Community</div>
@@ -305,7 +500,7 @@
   </div>
 </section>
 
-<!-- PHOTOS -->
+<!-- PHOTOS — bg: c5.jpg (light gradient overlay) -->
 <section class="photos-section" id="photos">
   <div class="content-wrap">
     <div class="section-label" style="--accent:var(--purple)">Gallery</div>
@@ -340,15 +535,16 @@
   </div>
 </section>
 
-<!-- VIDEO -->
+<!-- VIDEO — bg: c1.jpg (deep dark overlay) -->
 <section class="video-section" id="video">
   <div class="content-wrap">
     <div class="section-label" style="--accent:var(--gold);margin-bottom:12px">Watch &amp; Experience</div>
     <h2 class="reveal">See the Power of Prayer</h2>
     <p>A glimpse into our Spirit-filled Saturday gatherings at Kidodo, Kasese.</p>
-    <div class="video-outer">
 
-      <!-- MAIN PLAYER -->
+    <div class="video-layout">
+
+      <!-- MAIN PORTRAIT PLAYER -->
       <div class="reveal-left">
         <div class="native-video-wrap">
           <video id="mainVideoPlayer" controls poster="c3.jpg" preload="metadata">
@@ -356,80 +552,78 @@
             Your browser does not support the video tag.
           </video>
         </div>
-        <p id="mainVideoCaption" style="font-size:13px;color:rgba(255,255,255,.35);margin-top:12px">A glimpse into our Saturday gathering at Kidodo</p>
+        <p id="mainVideoCaption" style="font-size:13px;color:rgba(255,255,255,.35);margin-top:12px;text-align:center">A glimpse into our Saturday gathering at Kidodo</p>
       </div>
 
-      <!-- SIDE LIST -->
-      <div class="video-side-list reveal-right">
-        <p style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">More Recordings</p>
+      <!-- PORTRAIT THUMBNAILS 2×2 GRID -->
+      <div class="video-side-col reveal-right">
+        <p>More Recordings</p>
+        <div class="video-side-grid">
 
-        <!-- church2.mp4 -->
-        <div class="video-thumb-item"
-             data-src="church2.mp4"
-             data-poster="c9.jpg"
-             data-caption="Saturday Worship — Church Session 2"
-             onclick="switchVideo(this)">
-          <div class="thumb">
-            <img src="c9.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
+          <div class="video-thumb-item"
+               data-src="church2.mp4"
+               data-poster="c9.jpg"
+               data-caption="Saturday Worship — Church Session 2"
+               onclick="switchVideo(this)">
+            <div class="thumb">
+              <img src="c9.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
+            </div>
+            <div>
+              <h4>Saturday Worship Service</h4>
+              <p>Session 2 · Kidodo</p>
+            </div>
           </div>
-          <div>
-            <h4>Saturday Worship Service</h4>
-            <p>Church Session 2 · Kidodo</p>
+
+          <div class="video-thumb-item"
+               data-src="church3.mp4"
+               data-poster="c10.jpg"
+               data-caption="Praise & Worship — Church Session 3"
+               onclick="switchVideo(this)">
+            <div class="thumb">
+              <img src="c10.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
+            </div>
+            <div>
+              <h4>Community Praise &amp; Worship</h4>
+              <p>Session 3 · Kidodo</p>
+            </div>
           </div>
+
+          <div class="video-thumb-item"
+               data-src="church4.mp4"
+               data-poster="c1.jpg"
+               data-caption="Intercessory Prayer — Church Session 4"
+               onclick="switchVideo(this)">
+            <div class="thumb">
+              <img src="c1.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
+            </div>
+            <div>
+              <h4>Intercessory Prayer Session</h4>
+              <p>Session 4 · Kasese</p>
+            </div>
+          </div>
+
+          <div class="video-thumb-item"
+               data-src="church5.mp4"
+               data-poster="c4.jpg"
+               data-caption="Healing Testimonies — Church Session 5"
+               onclick="switchVideo(this)">
+            <div class="thumb">
+              <img src="c4.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
+            </div>
+            <div>
+              <h4>Healing Testimonies Night</h4>
+              <p>Session 5 · Kasese</p>
+            </div>
+          </div>
+
         </div>
-
-        <!-- church3.mp4 -->
-        <div class="video-thumb-item"
-             data-src="church3.mp4"
-             data-poster="c10.jpg"
-             data-caption="Praise & Worship — Church Session 3"
-             onclick="switchVideo(this)">
-          <div class="thumb">
-            <img src="c10.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
-          </div>
-          <div>
-            <h4>Community Praise &amp; Worship</h4>
-            <p>Church Session 3 · Kidodo</p>
-          </div>
-        </div>
-
-        <!-- church4.mp4 -->
-        <div class="video-thumb-item"
-             data-src="church4.mp4"
-             data-poster="c1.jpg"
-             data-caption="Intercessory Prayer — Church Session 4"
-             onclick="switchVideo(this)">
-          <div class="thumb">
-            <img src="c1.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
-          </div>
-          <div>
-            <h4>Intercessory Prayer Session</h4>
-            <p>Church Session 4 · Kasese</p>
-          </div>
-        </div>
-
-        <!-- church5.mp4 -->
-        <div class="video-thumb-item"
-             data-src="church5.mp4"
-             data-poster="c4.jpg"
-             data-caption="Healing Testimonies — Church Session 5"
-             onclick="switchVideo(this)">
-          <div class="thumb">
-            <img src="c4.jpg" alt="" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\'fas fa-play\'></i>'">
-          </div>
-          <div>
-            <h4>Healing Testimonies Night</h4>
-            <p>Church Session 5 · Kasese</p>
-          </div>
-        </div>
-
-        <a href="#" class="btn-ghost" style="--accent:var(--gold);margin-top:8px;font-size:12px"><i class="fas fa-film"></i> View All Videos</a>
+        <a href="#" class="btn-ghost" style="--accent:var(--gold);margin-top:16px;font-size:12px;display:inline-flex"><i class="fas fa-film"></i> View All Videos</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS — bg: c6.jpg (near-white overlay) -->
 <section class="testi-section" id="testimonials">
   <div class="content-wrap">
     <div class="section-label" style="--accent:var(--purple)">Testimonials</div>
@@ -513,21 +707,17 @@ function switchVideo(item) {
   const poster = item.dataset.poster;
   const cap = item.dataset.caption;
 
-  // Update active highlight
   document.querySelectorAll('.video-thumb-item').forEach(el => el.classList.remove('active'));
   item.classList.add('active');
 
-  // Swap video source
   player.pause();
   player.poster = poster || '';
   player.querySelector('source').setAttribute('src', src);
   player.load();
-  player.play().catch(() => {}); // autoplay may be blocked — that's fine
+  player.play().catch(() => {});
 
-  // Update caption
   if (caption) caption.textContent = cap || '';
 
-  // Scroll player into view on mobile
   player.closest('.native-video-wrap').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 </script>
