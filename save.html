@@ -9,159 +9,257 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="shared.css">
 <style>
-  :root{--accent:var(--red);--accent-lt:rgba(197,48,48,.08)}
+:root{--accent:var(--red);--accent-lt:rgba(197,48,48,.08)}
 
-  .page-hero-tag{color:#FEB2B2;border-color:rgba(254,178,178,.3)}
-  .page-hero h1 em{color:var(--gold-lt)}
+.page-hero-tag{color:#FEB2B2;border-color:rgba(254,178,178,.3)} .page-hero h1 em{color:var(--gold-lt)}
 
-  .page-hero{background:#0a0a0a}
-  .page-hero-overlay{background:linear-gradient(to top,rgba(10,10,10,.92) 0%,rgba(10,10,10,.5) 50%,rgba(10,10,10,.25) 100%)}
+.page-hero{background:#0a0a0a} .page-hero-overlay{background:linear-gradient(to top,rgba(10,10,10,.92) 0%,rgba(10,10,10,.5) 50%,rgba(10,10,10,.25) 100%)}
 
-  /* ── VIDEO BACKGROUND HERO ── */
-  .page-hero-video{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    z-index:0;
-    pointer-events:none;
-  }
-  /* Hide the static bg image when video is present */
-  .page-hero-bg{display:none}
+/* ── VIDEO BACKGROUND HERO ── */
+.page-hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  z-index:0;
+  pointer-events:none;
+}
+/* Hide the static bg image when video is present */
+.page-hero-bg{display:none}
 
-  /* ── BRAND INTRO ── */
-  .brand-section{padding:100px 0;background:var(--dark);position:relative;overflow:hidden}
-  .brand-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(197,48,48,.08),transparent)}
-  .brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-  .brand-logo-block{display:flex;flex-direction:column;align-items:flex-start;gap:0}
-  .ssfi-badge{display:inline-flex;flex-direction:column;gap:4px;margin-bottom:28px}
-  .ssfi-badge .icon-row{display:flex;align-items:center;gap:16px;margin-bottom:12px}
-  .film-icon{width:72px;height:72px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;flex-shrink:0}
-  .ssfi-name{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,4vw,52px);color:#fff;line-height:1.05}
-  .ssfi-name em{font-style:italic;color:var(--gold)}
-  .ssfi-tagline{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px}
-  .brand-divider{width:100%;height:1px;background:rgba(255,255,255,.08);margin:28px 0}
-  .brand-text p{font-size:16px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:18px}
-  .brand-text p strong{color:rgba(255,255,255,.85)}
-  .film-stats{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap}
-  .film-stat .val{font-family:var(--font-serif);font-size:36px;font-weight:900;color:var(--gold);line-height:1}
-  .film-stat .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px}
-  .clap-visual{position:relative}
-  .clap-main{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(.2)}
-  .clap-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.7),transparent 50%)}
-  .film-strip{position:absolute;left:0;right:0;bottom:0;display:flex;height:80px;overflow:hidden}
-  .film-frame{flex:1;height:80px;overflow:hidden;position:relative}
-  .film-frame::before,.film-frame::after{content:'';position:absolute;width:8px;height:100%;background:#0a0a0a;top:0;z-index:2}
-  .film-frame::before{left:0}
-  .film-frame::after{right:0}
-  .film-frame img{width:100%;height:100%;object-fit:cover;display:block}
+/* ── SAVE SOULS LOGO (top-right corner) ── */
+.ssfi-logo-corner{
+  position:fixed;
+  top:18px;
+  right:90px;
+  z-index:1100;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(10,10,10,.55);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.12);
+  padding:6px 14px 6px 8px;
+  border-radius:40px;
+  text-decoration:none;
+  transition:background .25s,box-shadow .25s;
+}
+.ssfi-logo-corner:hover{background:rgba(197,48,48,.75);box-shadow:0 4px 20px rgba(197,48,48,.4)}
+.ssfi-logo-corner img{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+  border-radius:50%;
+  background:#fff;
+  padding:2px;
+}
+.ssfi-logo-corner span{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#fff;
+  white-space:nowrap;
+}
 
-  /* ── WHAT WE DO ── */
-  .what-section{padding:100px 0;background:var(--white)}
-  .what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-  .what-card{padding:48px 36px;position:relative;overflow:hidden;cursor:pointer;background:var(--off-white);transition:background .2s}
-  .what-card:hover{background:#fdf1f0}
-  .what-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-  .what-card:nth-child(1)::after{background:var(--red)}
-  .what-card:nth-child(2)::after{background:var(--gold)}
-  .what-card:nth-child(3)::after{background:var(--navy)}
-  .what-card-num{font-family:var(--font-serif);font-size:80px;font-weight:900;color:var(--light-gray);line-height:.9;margin-bottom:16px;transition:color .3s}
-  .what-card:hover .what-card-num{color:rgba(197,48,48,.1)}
-  .what-card h3{font-family:var(--font-serif);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:12px}
-  .what-card p{font-size:14.5px;color:var(--mid);line-height:1.7}
+/* ── BRAND INTRO ── */
+.brand-section{padding:100px 0;background:var(--dark);position:relative;overflow:hidden}
+.brand-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(197,48,48,.08),transparent)}
+.brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.brand-logo-block{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.ssfi-badge{display:inline-flex;flex-direction:column;gap:4px;margin-bottom:28px}
+.ssfi-badge .icon-row{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.film-icon{width:72px;height:72px;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:4px}
+.film-icon img{width:100%;height:100%;object-fit:contain;background:#fff;padding:4px;border-radius:4px}
+.film-icon-fallback{width:72px;height:72px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;flex-shrink:0}
+.ssfi-name{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,4vw,52px);color:#fff;line-height:1.05}
+.ssfi-name em{font-style:italic;color:var(--gold)}
+.ssfi-tagline{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:6px}
+.brand-divider{width:100%;height:1px;background:rgba(255,255,255,.08);margin:28px 0}
+.brand-text p{font-size:16px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:18px}
+.brand-text p strong{color:rgba(255,255,255,.85)}
+.film-stats{display:flex;gap:32px;margin-top:28px;flex-wrap:wrap}
+.film-stat .val{font-family:var(--font-serif);font-size:36px;font-weight:900;color:var(--gold);line-height:1}
+.film-stat .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:4px}
+.clap-visual{position:relative}
+.clap-main{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(.2)}
+.clap-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.7),transparent 50%)}
+.film-strip{position:absolute;left:0;right:0;bottom:0;display:flex;height:80px;overflow:hidden}
+.film-frame{flex:1;height:80px;overflow:hidden;position:relative}
+.film-frame::before,.film-frame::after{content:'';position:absolute;width:8px;height:100%;background:#0a0a0a;top:0;z-index:2}
+.film-frame::before{left:0}
+.film-frame::after{right:0}
+.film-frame img{width:100%;height:100%;object-fit:cover;display:block}
 
-  /* ── STORIES / IMPACT ── */
-  .stories-section{padding:100px 0;background:var(--off-white)}
-  .stories-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px}
-  .stories-bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2px}
-  .story-block{padding:48px 40px;position:relative;overflow:hidden}
-  .story-block:nth-child(1){background:var(--red);grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
-  .story-block:nth-child(2){background:var(--navy)}
-  .story-block:nth-child(3){background:var(--gold)}
-  .story-block:nth-child(4){background:var(--dark)}
-  .story-block h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,32px);color:#fff;line-height:1.15;margin-bottom:12px}
-  .story-block:nth-child(3) h3{color:var(--dark)}
-  .story-block p{font-size:14.5px;line-height:1.7;color:rgba(255,255,255,.7)}
-  .story-block:nth-child(3) p{color:rgba(0,0,0,.6)}
-  .story-block-icon{font-size:40px;margin-bottom:20px}
-  .story-block-big{font-family:var(--font-serif);font-weight:900;font-size:72px;color:rgba(255,255,255,.12);position:absolute;right:20px;bottom:10px;line-height:1;pointer-events:none}
-  .story-block:nth-child(3) .story-block-big{color:rgba(0,0,0,.08)}
+/* ── WHAT WE DO ── */
+.what-section{padding:100px 0;background:var(--white)}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.what-card{padding:48px 36px;position:relative;overflow:hidden;cursor:pointer;background:var(--off-white);transition:background .2s}
+.what-card:hover{background:#fdf1f0}
+.what-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.what-card:nth-child(1)::after{background:var(--red)}
+.what-card:nth-child(2)::after{background:var(--gold)}
+.what-card:nth-child(3)::after{background:var(--navy)}
+.what-card-num{font-family:var(--font-serif);font-size:80px;font-weight:900;color:var(--light-gray);line-height:.9;margin-bottom:16px;transition:color .3s}
+.what-card:hover .what-card-num{color:rgba(197,48,48,.1)}
+.what-card h3{font-family:var(--font-serif);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.what-card p{font-size:14.5px;color:var(--mid);line-height:1.7}
 
-  /* ── OPPORTUNITIES ── */
-  .opp-section{padding:80px 0;background:var(--white)}
-  .opp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-  .opp-img-wrap{position:relative}
-  .opp-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
-  .opp-caption-strip{background:var(--red);padding:16px 24px;display:flex;align-items:center;gap:12px}
-  .opp-caption-strip i{color:#fff;font-size:18px}
-  .opp-caption-strip span{font-size:13px;color:rgba(255,255,255,.85);font-weight:500}
-  .opp-text h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,44px);color:var(--navy);line-height:1.1;margin-bottom:20px}
-  .opp-text h2 em{font-style:italic;color:var(--red)}
-  .opp-text p{font-size:15.5px;line-height:1.8;color:var(--mid);margin-bottom:16px}
-  .opp-list{display:flex;flex-direction:column;gap:12px;margin-top:24px}
-  .opp-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--off-white);transition:transform .2s,background .2s}
-  .opp-item:hover{transform:translateX(6px);background:#FFF5F5}
-  .opp-item i{color:var(--red);font-size:16px;margin-top:2px;flex-shrink:0}
-  .opp-item span{font-size:14px;color:var(--mid);line-height:1.6}
+/* ── STORIES / IMPACT ── */
+.stories-section{padding:100px 0;background:var(--off-white)}
+.stories-section h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(28px,3.5vw,46px);color:var(--navy);margin-bottom:48px}
+.stories-bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:2px}
+.story-block{padding:48px 40px;position:relative;overflow:hidden}
+.story-block:nth-child(1){background:var(--red);grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
+.story-block:nth-child(2){background:var(--navy)}
+.story-block:nth-child(3){background:var(--gold)}
+.story-block:nth-child(4){background:var(--dark)}
+.story-block h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,32px);color:#fff;line-height:1.15;margin-bottom:12px}
+.story-block:nth-child(3) h3{color:var(--dark)}
+.story-block p{font-size:14.5px;line-height:1.7;color:rgba(255,255,255,.7)}
+.story-block:nth-child(3) p{color:rgba(0,0,0,.6)}
+.story-block-icon{font-size:40px;margin-bottom:20px}
+.story-block-big{font-family:var(--font-serif);font-weight:900;font-size:72px;color:rgba(255,255,255,.12);position:absolute;right:20px;bottom:10px;line-height:1;pointer-events:none}
+.story-block:nth-child(3) .story-block-big{color:rgba(0,0,0,.08)}
 
-  /* ── FILMS PHOTO GALLERY ── */
-  .film-gallery{padding:80px 0;background:var(--dark)}
-  .film-gallery h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,42px);color:#fff;margin-bottom:40px}
-  .film-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px 200px;gap:3px}
-  .film-grid .photo-item:nth-child(1){grid-column:span 2;grid-row:span 2}
-  .film-grid .photo-item:nth-child(4){grid-column:span 2}
+/* ── OPPORTUNITIES ── */
+.opp-section{padding:80px 0;background:var(--white)}
+.opp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.opp-img-wrap{position:relative}
+.opp-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.opp-caption-strip{background:var(--red);padding:16px 24px;display:flex;align-items:center;gap:12px}
+.opp-caption-strip i{color:#fff;font-size:18px}
+.opp-caption-strip span{font-size:13px;color:rgba(255,255,255,.85);font-weight:500}
+.opp-text h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,44px);color:var(--navy);line-height:1.1;margin-bottom:20px}
+.opp-text h2 em{font-style:italic;color:var(--red)}
+.opp-text p{font-size:15.5px;line-height:1.8;color:var(--mid);margin-bottom:16px}
+.opp-list{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.opp-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--off-white);transition:transform .2s,background .2s}
+.opp-item:hover{transform:translateX(6px);background:#FFF5F5}
+.opp-item i{color:var(--red);font-size:16px;margin-top:2px;flex-shrink:0}
+.opp-item span{font-size:14px;color:var(--mid);line-height:1.6}
 
-  /* ── VIDEO SECTIONS ── */
-  .video-section{padding:80px 0}
-  .video-section.dark-bg{background:#0a0a0a}
-  .video-section.gold-bg{background:#1a1200}
-  .video-section-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+/* ── FILMS PHOTO GALLERY ── */
+.film-gallery{padding:80px 0;background:var(--dark)}
+.film-gallery h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(26px,3vw,42px);color:#fff;margin-bottom:40px}
+.film-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:200px 200px;gap:3px}
+.film-grid .photo-item:nth-child(1){grid-column:span 2;grid-row:span 2}
+.film-grid .photo-item:nth-child(4){grid-column:span 2}
 
-  .video-section-header{margin-bottom:40px}
-  .video-section-header .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
-  .video-section-header .section-label::before{content:'';display:block;width:28px;height:2px}
-  .video-section-header h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(24px,3vw,40px);color:#fff;margin-bottom:10px}
-  .video-section-header p{font-size:15px;color:rgba(255,255,255,.4);max-width:600px}
+/* ── SAVE SOULS BRAND PANEL ── */
+.ssfi-brand-panel{
+  padding:80px 0;
+  background:linear-gradient(135deg,#0a0a0a 0%,#1a0505 100%);
+  border-top:1px solid rgba(197,48,48,.2);
+}
+.ssfi-brand-inner{
+  display:flex;
+  align-items:center;
+  gap:48px;
+  flex-wrap:wrap;
+}
+.ssfi-brand-logo-wrap{
+  flex-shrink:0;
+  width:160px;
+  height:160px;
+  background:#fff;
+  border-radius:16px;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 60px rgba(197,48,48,.35);
+}
+.ssfi-brand-logo-wrap img{width:100%;height:100%;object-fit:contain}
+.ssfi-brand-text{flex:1;min-width:240px}
+.ssfi-brand-text h3{
+  font-family:var(--font-serif);
+  font-weight:900;
+  font-size:clamp(22px,3vw,38px);
+  color:#fff;
+  margin-bottom:12px;
+  line-height:1.1;
+}
+.ssfi-brand-text h3 em{font-style:italic;color:var(--gold)}
+.ssfi-brand-text p{font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);max-width:560px}
+.ssfi-brand-text .ssfi-brand-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(197,48,48,.15);
+  border:1px solid rgba(197,48,48,.35);
+  color:#FEB2B2;
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:6px 14px;
+  border-radius:40px;
+  margin-bottom:16px;
+}
 
-  /* Films grid */
-  .videos-grid{display:grid;gap:16px}
-  .videos-grid.grid-1{grid-template-columns:1fr;max-width:860px}
-  .videos-grid.grid-3{grid-template-columns:repeat(3,1fr)}
+/* ── VIDEO SECTIONS ── */
+.video-section{padding:80px 0}
+.video-section.dark-bg{background:#0a0a0a}
+.video-section.gold-bg{background:#1a1200}
+.video-section-inner{max-width:1200px;margin:0 auto;padding:0 32px}
 
-  .yt-embed-item{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}
-  .yt-embed-item iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .yt-embed-item .embed-border{position:absolute;inset:0;border:1px solid rgba(255,255,255,.06);pointer-events:none;z-index:1}
+.video-section-header{margin-bottom:40px}
+.video-section-header .section-label{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:14px}
+.video-section-header .section-label::before{content:'';display:block;width:28px;height:2px}
+.video-section-header h2{font-family:var(--font-serif);font-weight:900;font-size:clamp(24px,3vw,40px);color:#fff;margin-bottom:10px}
+.video-section-header p{font-size:15px;color:rgba(255,255,255,.4);max-width:600px}
 
-  /* Award banner */
-  .award-banner{background:linear-gradient(135deg,#D69E2E 0%,#92680a 100%);padding:48px 40px;display:flex;align-items:center;gap:32px;margin-top:40px}
-  .award-banner-icon{font-size:56px;flex-shrink:0}
-  .award-banner h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,30px);color:#fff;margin-bottom:6px}
-  .award-banner p{font-size:14.5px;color:rgba(255,255,255,.75);line-height:1.6}
-  .award-banner-video{flex:1;min-width:280px;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden}
-  .award-banner-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* Films grid */
+.videos-grid{display:grid;gap:16px}
+.videos-grid.grid-1{grid-template-columns:1fr;max-width:860px}
+.videos-grid.grid-3{grid-template-columns:repeat(3,1fr)}
 
-  /* ── TESTIMONIALS ── */
-  .testi-section{padding:100px 0;background:var(--white)}
+.yt-embed-item{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;overflow:hidden}
+.yt-embed-item iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-embed-item .embed-border{position:absolute;inset:0;border:1px solid rgba(255,255,255,.06);pointer-events:none;z-index:1}
 
-  @media(max-width:960px){
-    .brand-grid,.opp-grid{grid-template-columns:1fr;gap:40px}
-    .what-grid{grid-template-columns:1fr}
-    .stories-bento{grid-template-columns:1fr}
-    .story-block:nth-child(1){grid-row:span 1}
-    .film-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
-    .film-grid .photo-item:nth-child(1),.film-grid .photo-item:nth-child(4){grid-column:span 1;grid-row:span 1}
-    .videos-grid.grid-3{grid-template-columns:1fr}
-    .award-banner{flex-direction:column}
-    .award-banner-video{width:100%}
-  }
+/* Award banner */
+.award-banner{background:linear-gradient(135deg,#D69E2E 0%,#92680a 100%);padding:48px 40px;display:flex;align-items:center;gap:32px;margin-top:40px}
+.award-banner-icon{font-size:56px;flex-shrink:0}
+.award-banner h3{font-family:var(--font-serif);font-weight:900;font-size:clamp(20px,2.5vw,30px);color:#fff;margin-bottom:6px}
+.award-banner p{font-size:14.5px;color:rgba(255,255,255,.75);line-height:1.6}
+.award-banner-video{flex:1;min-width:280px;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden}
+.award-banner-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ── TESTIMONIALS ── */
+.testi-section{padding:100px 0;background:var(--white)}
+
+@media(max-width:960px){
+  .brand-grid,.opp-grid{grid-template-columns:1fr;gap:40px}
+  .what-grid{grid-template-columns:1fr}
+  .stories-bento{grid-template-columns:1fr}
+  .story-block:nth-child(1){grid-row:span 1}
+  .film-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .film-grid .photo-item:nth-child(1),.film-grid .photo-item:nth-child(4){grid-column:span 1;grid-row:span 1}
+  .videos-grid.grid-3{grid-template-columns:1fr}
+  .award-banner{flex-direction:column}
+  .award-banner-video{width:100%}
+  .ssfi-logo-corner{right:16px;top:14px}
+  .ssfi-logo-corner span{display:none}
+  .ssfi-brand-inner{flex-direction:column;align-items:flex-start}
+}
 </style>
+
 </head>
 <body>
-
 <div class="cursor"><div class="cursor-dot" id="cDot"></div><div class="cursor-ring" id="cRing"></div></div>
 <div class="colour-band"></div>
+
+<!-- ── SAVE SOULS LOGO — FIXED TOP-RIGHT ── -->
+<a href="#films" class="ssfi-logo-corner" title="Save Souls Film Industry">
+  <img src="savesouls.jpg" alt="Save Souls Film Industry Logo" onerror="this.style.display='none';this.parentElement.querySelector('.ss-fallback').style.display='flex'">
+  <span class="ss-fallback" style="display:none;width:36px;height:36px;background:var(--red,#C53030);border-radius:50%;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:900">SS</span>
+  <span>Save Souls Films</span>
+</a>
 
 <nav id="mainNav">
   <div class="nav-inner">
@@ -181,7 +279,6 @@
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html" class="mob-link">Home</a>
   <a href="prayer-worship.html" class="mob-link">Prayer & Worship</a>
@@ -193,18 +290,8 @@
 
 <!-- HERO -->
 <section class="page-hero">
-  <!-- Video background (muted, autoplay, looping) -->
-  <video
-    class="page-hero-video"
-    src="call.mp4"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-  ></video>
-  <!-- Keep the static image as a fallback (hidden via CSS when video loads) -->
-  <div class="page-hero-bg" style="background-image:url('f7.jpg')"></div>
+  <video class="page-hero-video" src="call.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <div class="page-hero-bg" style="background-image:url('fa23.jpg')"></div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-geo">
     <div class="geo-ring" style="width:700px;height:700px;top:-300px;right:-200px;animation-duration:70s;border-color:rgba(197,48,48,.06)"></div>
@@ -215,6 +302,14 @@
     <div class="page-hero-tag" style="animation:fadeUp .6s .3s var(--ease-out) both"><i class="fas fa-film"></i> Creative Arts</div>
     <h1 style="animation:fadeUp .7s .45s var(--ease-out) both">Save Souls <em>Film Industry</em></h1>
     <p class="page-hero-desc" style="animation:fadeUp .7s .6s var(--ease-out) both">Not just making movies — saving lives, restoring hope, and building a generation of storytellers who speak truth to the world.</p>
+    <!-- Save Souls logo watermark in hero -->
+    <div style="animation:fadeUp .7s .75s var(--ease-out) both;margin-top:28px;display:flex;align-items:center;gap:14px">
+      <img src="savesouls.jpg" alt="Save Souls Film Industry" style="width:52px;height:52px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;box-shadow:0 4px 20px rgba(0,0,0,.4)" onerror="this.style.display='none'">
+      <div>
+        <div style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:600">A FAPCAN Initiative</div>
+        <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;line-height:1.1">Save Souls Film Industry</div>
+      </div>
+    </div>
   </div>
   <div class="page-hero-scroll"><div class="page-hero-scroll-line"></div><span>Scroll</span></div>
 </section>
@@ -234,7 +329,16 @@
     <div class="brand-grid">
       <div class="reveal-left">
         <div class="ssfi-badge">
-          <div class="icon-row"><div class="film-icon"><i class="fas fa-film"></i></div><div><div class="ssfi-name">Save Souls<br><em>Film Industry</em></div><div class="ssfi-tagline">A FAPCAN Initiative · Kidodo, Uganda</div></div></div>
+          <div class="icon-row">
+            <!-- Save Souls logo in brand badge -->
+            <div class="film-icon">
+              <img src="savesouls.jpg" alt="Save Souls Film Industry" onerror="this.parentElement.classList.add('film-icon-fallback');this.parentElement.innerHTML='<i class=\'fas fa-film\'></i>'">
+            </div>
+            <div>
+              <div class="ssfi-name">Save Souls<br><em>Film Industry</em></div>
+              <div class="ssfi-tagline">A FAPCAN Initiative · Kidodo, Uganda</div>
+            </div>
+          </div>
         </div>
         <div class="brand-divider"></div>
         <div class="brand-text">
@@ -253,13 +357,13 @@
         </div>
       </div>
       <div class="clap-visual reveal-right">
-        <img class="clap-main" src="f7.jpg" alt="Film production" onerror="this.style.background='linear-gradient(135deg,#111,#C53030)';this.style.height='500px'">
+        <img class="clap-main" src="fa23.jpg" alt="Film production" onerror="this.style.background='linear-gradient(135deg,#111,#C53030)';this.style.height='500px'">
         <div class="clap-overlay"></div>
         <div class="film-strip">
-          <div class="film-frame"><img src="f1.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#222'"></div>
-          <div class="film-frame"><img src="f3.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#333'"></div>
-          <div class="film-frame"><img src="f5.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"></div>
-          <div class="film-frame"><img src="f9.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#282828'"></div>
+          <div class="film-frame"><img src="film1.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#222'"></div>
+          <div class="film-frame"><img src="film2.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#333'"></div>
+          <div class="film-frame"><img src="film3.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#1a1a1a'"></div>
+          <div class="film-frame"><img src="film4.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='#282828'"></div>
         </div>
       </div>
     </div>
@@ -323,7 +427,7 @@
   <div class="content-wrap">
     <div class="opp-grid">
       <div class="opp-img-wrap reveal-left">
-        <img class="opp-img" src="f4.jpg" alt="Film opportunities" onerror="this.style.background='linear-gradient(135deg,#C53030,#553C9A)';this.style.height='360px'">
+        <img class="opp-img" src="film5.jpg" alt="Film opportunities" onerror="this.style.background='linear-gradient(135deg,#C53030,#553C9A)';this.style.height='360px'">
         <div class="opp-caption-strip"><i class="fas fa-globe-africa"></i><span>Filming across Uganda and beyond</span></div>
       </div>
       <div class="reveal-right">
@@ -348,11 +452,31 @@
     <div class="section-label" style="--accent:var(--gold)">Behind the Scenes</div>
     <h2 class="reveal">On Set with Save Souls Film Industry</h2>
     <div class="film-grid">
-      <div class="photo-item reveal" style="position:relative"><img src="f2.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#C53030,#111)'"><div class="caption">On Location Shoot</div></div>
-      <div class="photo-item reveal d1" style="position:relative"><img src="f5.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#553C9A,#111)'"><div class="caption">Directing Session</div></div>
-      <div class="photo-item reveal d2" style="position:relative"><img src="f8.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#1A365D,#111)'"><div class="caption">Script Workshop</div></div>
-      <div class="photo-item reveal d3" style="position:relative"><img src="f10.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#D69E2E,#111)'"><div class="caption">Cast & Crew</div></div>
-      <div class="photo-item reveal d4" style="position:relative"><img src="f6.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#276749,#111)'"><div class="caption">Community Screening</div></div>
+      <div class="photo-item reveal" style="position:relative"><img src="film1.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#C53030,#111)'"><div class="caption">On Location Shoot</div></div>
+      <div class="photo-item reveal d1" style="position:relative"><img src="film2.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#553C9A,#111)'"><div class="caption">Directing Session</div></div>
+      <div class="photo-item reveal d2" style="position:relative"><img src="film3.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#1A365D,#111)'"><div class="caption">Script Workshop</div></div>
+      <div class="photo-item reveal d3" style="position:relative"><img src="film4.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#D69E2E,#111)'"><div class="caption">Cast & Crew</div></div>
+      <div class="photo-item reveal d4" style="position:relative"><img src="film5.jpg" alt="" onerror="this.parentElement.style.background='linear-gradient(135deg,#276749,#111)'"><div class="caption">Community Screening</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SAVE SOULS BRAND PANEL ── -->
+<section class="ssfi-brand-panel">
+  <div class="content-wrap">
+    <div class="ssfi-brand-inner reveal">
+      <div class="ssfi-brand-logo-wrap">
+        <img src="savesouls.jpg" alt="Save Souls Film Industry" onerror="this.parentElement.style.background='#C53030';this.style.display='none'">
+      </div>
+      <div class="ssfi-brand-text">
+        <div class="ssfi-brand-tag"><i class="fas fa-film"></i> A FAPCAN Initiative · Kidodo, Uganda</div>
+        <h3>Save Souls <em>Film Industry</em></h3>
+        <p>Using the power of storytelling to transform lives, preserve culture, and carry the voices of our community to the world. Every film we make is a testament to resilience, creativity, and the enduring human spirit.</p>
+        <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#films" class="btn-accent" style="--accent:var(--red)"><i class="fas fa-play"></i> Watch Films</a>
+          <a href="#award" class="btn-ghost" style="--accent:var(--gold);border-color:var(--gold);color:var(--gold)"><i class="fas fa-trophy"></i> Our Award</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -410,6 +534,11 @@
         <div class="award-banner-icon">🏆</div>
         <h3>Receiving a Movie Award</h3>
         <p>Recognition on the wider stage — Save Souls Film Industry receives a movie award, a proud milestone for every storyteller in our community.</p>
+        <!-- Save Souls logo in award section -->
+        <div style="margin-top:20px;display:flex;align-items:center;gap:10px">
+          <img src="savesouls.jpg" alt="Save Souls Film Industry" style="width:42px;height:42px;object-fit:contain;background:rgba(255,255,255,.9);border-radius:6px;padding:3px" onerror="this.style.display='none'">
+          <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)">Save Souls Film Industry</span>
+        </div>
       </div>
       <div class="award-banner-video">
         <iframe src="https://www.youtube.com/embed/Sqt5VywoRpc" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="FAPCAN Receiving Movie Award"></iframe>
@@ -460,6 +589,14 @@
         <div class="logo-badge"><img src="logo.png" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-badge-fb">FAP</span></div>
         <strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span>
         <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <!-- Save Souls logo in footer -->
+        <div style="margin-top:20px;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);display:inline-flex;align-items:center;gap:12px;border-radius:6px">
+          <img src="savesouls.jpg" alt="Save Souls Film Industry" style="width:36px;height:36px;object-fit:contain;background:#fff;border-radius:4px;padding:2px" onerror="this.style.display='none'">
+          <div>
+            <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);font-weight:600">FAPCAN Initiative</div>
+            <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.7)">Save Souls Film Industry</div>
+          </div>
+        </div>
         <div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
       </div>
       <div class="footer-col"><h4>Programmes</h4><ul><li><a href="prayer-worship.html"><i class="fas fa-chevron-right"></i> Prayer & Worship</a></li><li><a href="education.html"><i class="fas fa-chevron-right"></i> Education</a></li><li><a href="film-arts.html"><i class="fas fa-chevron-right"></i> Film & Creative Arts</a></li><li><a href="community-dev.html"><i class="fas fa-chevron-right"></i> Community Dev.</a></li></ul></div>
