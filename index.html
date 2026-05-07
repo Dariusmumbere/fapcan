@@ -349,7 +349,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   overflow: hidden;
 }
 
-/* Deep star-field texture */
 .why-exist::before {
   content: '';
   position: absolute; inset: 0; pointer-events: none;
@@ -364,7 +363,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     radial-gradient(1px 1px at 92% 30%, rgba(26,122,138,0.20) 0%, transparent 100%);
 }
 
-/* Radial glow from centre */
 .why-exist::after {
   content: '';
   position: absolute;
@@ -385,7 +383,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 
-/* ── LABEL PILL ── */
 .why-label-pill {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
@@ -399,7 +396,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   content: ''; width: 20px; height: 1px; background: var(--gold); opacity: 0.5;
 }
 
-/* ── EYEBROW ── */
 .why-eyebrow {
   font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
   text-transform: uppercase; color: rgba(214,158,46,0.7);
@@ -409,7 +405,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .why-eyebrow.drop-done { opacity: 1; }
 
-/* ── DROP HEADLINE ── */
 .why-headline {
   font-family: var(--font-serif); font-weight: 900;
   font-size: clamp(38px, 5vw, 78px);
@@ -419,7 +414,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .why-headline em { font-style: italic; color: var(--gold); }
 
-/* Individual letter drop */
 .drop-letter {
   display: inline-block;
   opacity: 0;
@@ -431,10 +425,8 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   opacity: 1;
   transform: translateY(0) rotateX(0deg);
 }
-/* Space characters keep their width */
 .drop-letter.space { width: 0.3em; }
 
-/* ── LEGACY SUBHEADING ── */
 .why-legacy {
   font-family: var(--font-serif); font-style: italic;
   font-size: clamp(20px, 2.5vw, 32px);
@@ -445,7 +437,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .why-legacy.drop-done { opacity: 1; transform: translateY(0); }
 
-/* ── DIVIDER ORNAMENT ── */
 .why-ornament {
   display: flex; align-items: center; gap: 14px;
   margin: 32px 0 44px; opacity: 0;
@@ -459,7 +450,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 @keyframes ornamentPulse { 0%,100%{opacity:0.6;transform:scale(1)} 50%{opacity:1;transform:scale(1.12)} }
 
-/* ── QUOTE BODY ── */
 .why-quote {
   font-size: clamp(16px, 2vw, 22px);
   font-weight: 300; color: rgba(255,255,255,0.72);
@@ -470,7 +460,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .why-quote.drop-done { opacity: 1; transform: translateY(0); }
 .why-quote strong { color: white; font-weight: 500; }
 
-/* ── DECORATIVE AIM CARDS ── */
 .why-cards {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 20px; margin-top: 72px; width: 100%;
@@ -505,7 +494,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .why-card p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.65; }
 
-/* ── BIG BACKGROUND WORD ── */
 .why-bg-word {
   position: absolute; bottom: -20px; left: 50%;
   transform: translateX(-50%);
@@ -515,6 +503,155 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   letter-spacing: 0.05em; text-transform: uppercase;
   pointer-events: none; user-select: none;
   white-space: nowrap; z-index: 1;
+}
+
+/* ══════════════════════════════════════════
+   ── CRAFT SCROLL SECTION (NEW) ──
+══════════════════════════════════════════ */
+.craft-scroll {
+  background: var(--off-white);
+  padding: 90px 0 80px;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--light-gray);
+}
+
+/* Top accent bar */
+.craft-scroll::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(to right,
+    var(--gold) 0%, var(--teal) 35%, var(--green) 65%, var(--gold) 100%);
+}
+
+/* Subtle woven-fabric texture overlay */
+.craft-scroll::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.025;
+  background-image:
+    repeating-linear-gradient(0deg, var(--navy) 0px, var(--navy) 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(90deg, var(--navy) 0px, var(--navy) 1px, transparent 1px, transparent 12px);
+}
+
+.craft-scroll-header {
+  max-width: 1320px; margin: 0 auto 52px; padding: 0 32px;
+  text-align: center; position: relative; z-index: 2;
+}
+
+.craft-scroll-header .section-label {
+  justify-content: center; margin-bottom: 18px;
+}
+.craft-scroll-header .section-label::before { display: none; }
+.craft-scroll-header .section-label::after {
+  content: ''; width: 28px; height: 2px; background: var(--red); display: block;
+}
+
+.craft-scroll-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 50px); color: var(--navy);
+  line-height: 1.15; margin-bottom: 16px;
+}
+.craft-scroll-header h2 em { font-style: italic; color: var(--gold); }
+.craft-scroll-header p {
+  font-size: 16px; color: var(--mid); max-width: 620px;
+  margin: 0 auto; line-height: 1.75;
+}
+
+/* ── Scroll track ── */
+.craft-scroll-outer {
+  position: relative; overflow: hidden;
+}
+.craft-scroll-outer::before,
+.craft-scroll-outer::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 130px; z-index: 10;
+  pointer-events: none;
+}
+.craft-scroll-outer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--off-white), transparent);
+}
+.craft-scroll-outer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--off-white), transparent);
+}
+
+.craft-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: craftScroll 55s linear infinite;
+  will-change: transform;
+  padding: 8px 0 20px;
+}
+.craft-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes craftScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.craft-card {
+  flex-shrink: 0;
+  width: 300px;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  background: var(--white);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+}
+.craft-card:hover {
+  transform: scale(1.03) translateY(-6px);
+  box-shadow: 0 18px 48px rgba(0,0,0,0.18);
+}
+
+.craft-card-img {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+.craft-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  display: block;
+  transition: transform 0.7s var(--ease-out);
+}
+.craft-card:hover .craft-card-img img {
+  transform: scale(1.07);
+}
+
+/* Thin colour bar per card (cycles through brand palette) */
+.craft-card:nth-child(12n+1)  .craft-card-img::after { background: var(--gold); }
+.craft-card:nth-child(12n+2)  .craft-card-img::after { background: var(--teal); }
+.craft-card:nth-child(12n+3)  .craft-card-img::after { background: var(--green); }
+.craft-card:nth-child(12n+4)  .craft-card-img::after { background: var(--red); }
+.craft-card:nth-child(12n+5)  .craft-card-img::after { background: var(--purple); }
+.craft-card:nth-child(12n+6)  .craft-card-img::after { background: var(--navy); }
+.craft-card:nth-child(12n+7)  .craft-card-img::after { background: var(--gold); }
+.craft-card:nth-child(12n+8)  .craft-card-img::after { background: var(--teal); }
+.craft-card:nth-child(12n+9)  .craft-card-img::after { background: var(--green); }
+.craft-card:nth-child(12n+10) .craft-card-img::after { background: var(--red); }
+.craft-card:nth-child(12n+11) .craft-card-img::after { background: var(--purple); }
+.craft-card:nth-child(12n+0)  .craft-card-img::after { background: var(--navy); }
+
+.craft-card-img::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+}
+
+.craft-card-caption {
+  padding: 14px 18px 16px;
+  background: var(--white);
+}
+.craft-card-caption span {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 13.5px; color: var(--mid);
+  line-height: 1.4;
+  display: block;
 }
 
 /* ── ABOUT ── */
@@ -671,7 +808,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   margin: 0 auto; line-height: 1.75;
 }
 
-/* Marquee track */
 .marquee-outer {
   position: relative;
   overflow: hidden;
@@ -738,7 +874,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-size: 13px; color: rgba(255,255,255,0.7); display: block;
 }
 
-/* Nurture pillars row */
 .nurture-pillars {
   max-width: 1320px; margin: 52px auto 0; padding: 0 32px;
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
@@ -1076,6 +1211,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .marquee-card { width: 220px; height: 290px; }
   .nurture-pillars { grid-template-columns: repeat(2, 1fr); }
   .why-cards { grid-template-columns: 1fr; }
+  .craft-card { width: 240px; }
+  .craft-card-img { height: 200px; }
 }
 
 @media (max-width: 640px) {
@@ -1085,6 +1222,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .hero-text h1 { font-size: 34px; }
   .about, .activities, .programmes, .founder, .documentaries, .children-marquee { padding: 70px 0; }
   .why-exist { padding: 80px 0; }
+  .craft-scroll { padding: 70px 0 60px; }
   .nav-inner { padding: 0 20px; }
   .about-inner, .founder-inner, .activities-inner, .programmes-inner, .footer-inner, .documentaries-inner { padding: 0 20px; }
   .why-inner { padding: 0 20px; }
@@ -1094,6 +1232,9 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .marquee-card { width: 180px; height: 240px; }
   .children-marquee-header { padding: 0 20px; }
   .nurture-pillars { padding: 0 20px; }
+  .craft-card { width: 200px; }
+  .craft-card-img { height: 170px; }
+  .craft-scroll-header { padding: 0 20px; }
 }
 </style>
 </head>
@@ -1232,47 +1373,29 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     WHY WE EXIST — AIM SECTION
-══════════════════════════════════════════ -->
+<!-- WHY WE EXIST — AIM SECTION -->
 <section class="why-exist" id="why-exist">
-  <!-- Giant background watermark word -->
   <div class="why-bg-word">LEGACY</div>
-
   <div class="why-inner">
-
-    <!-- Pill label -->
     <div class="why-label-pill reveal">
       <i class="fas fa-dove"></i>
       WHY WE EXIST — OUR AIM
       <i class="fas fa-dove"></i>
     </div>
-
-    <!-- Eyebrow -->
     <p class="why-eyebrow" id="whyEyebrow">A PURPOSE GREATER THAN OURSELVES</p>
-
-    <!-- Drop-letter headline: "Leaving Legacy Behind" -->
     <h2 class="why-headline" id="whyHeadline" aria-label="Leaving Legacy Behind"></h2>
-
-    <!-- Legacy subheading -->
     <p class="why-legacy" id="whyLegacy">"Leaving Legacy Behind"</p>
-
-    <!-- Ornament divider -->
     <div class="why-ornament" id="whyOrnament">
       <div class="why-ornament-line"></div>
       <span class="why-ornament-cross">✦</span>
       <div class="why-ornament-line"></div>
     </div>
-
-    <!-- Main quote -->
     <p class="why-quote" id="whyQuote">
       <strong>To make the world a better place</strong> for those who will come after us —
       that they find it <strong>better than we found it.</strong> Every prayer, every meal, every lesson,
       every act of compassion is a brick we lay for a foundation that outlasts us. We do not build
       for today alone; we build for <strong>generations yet unborn.</strong>
     </p>
-
-    <!-- Three aim cards -->
     <div class="why-cards" id="whyCards">
       <div class="why-card">
         <span class="why-card-icon">🌱</span>
@@ -1290,7 +1413,123 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <p>Our measure of success is simple: did those who come after us find the world a little kinder, a little more just, a little more full of love?</p>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- ══════════════════════════════════════════
+     CRAFT & VOCATIONAL SKILLS SCROLL (NEW)
+══════════════════════════════════════════ -->
+<section class="craft-scroll" id="craft-skills">
+  <div class="craft-scroll-header reveal">
+    <div class="section-label">Vocational Skills &amp; Crafts</div>
+    <h2>Hands That Weave a<br><em>Better Tomorrow</em></h2>
+    <p>Through tailoring, tapestry, weaving and handcraft, FAPCAN equips its community with skills that bring dignity, self-reliance and lasting livelihoods — turning raw gifts into purposeful work.</p>
+  </div>
+
+  <div class="craft-scroll-outer">
+    <div class="craft-track" id="craftTrack">
+
+      <!-- First set -->
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Mastering the art of tailoring</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Intricate tapestry patterns</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Community hands, shared purpose</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Advanced weaving techniques</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Young hands learning early</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Patience woven into every row</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div>
+        <div class="craft-card-caption"><span>From fibre to finished fabric</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Skills that open doors</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Detail in every handmade piece</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div>
+      </div>
+
+      <!-- Duplicate set for seamless loop -->
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Mastering the art of tailoring</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Intricate tapestry patterns</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Community hands, shared purpose</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Advanced weaving techniques</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Young hands learning early</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Patience woven into every row</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div>
+        <div class="craft-card-caption"><span>From fibre to finished fabric</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Skills that open doors</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Detail in every handmade piece</span></div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div>
+        <div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -1344,7 +1583,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <div class="founder-facts">
           <div class="fact"><span class="val">250+</span><span class="lbl">Children fathered</span></div>
           <div class="fact"><span class="val">2007</span><span class="lbl">Service began</span></div>
-          
         </div>
       </div>
     </div>
@@ -1559,7 +1797,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card').forEach(el=>{
+document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
@@ -1648,11 +1886,18 @@ const impactObs=new IntersectionObserver((entries)=>{
 },{threshold:0.4});
 document.querySelector('.impact-strip')&&impactObs.observe(document.querySelector('.impact-strip'));
 
-/* ── MARQUEE ── */
+/* ── MARQUEE PAUSE ON HOVER ── */
 const marqueeTrack = document.getElementById('marqueeTrack');
 if(marqueeTrack){
   marqueeTrack.addEventListener('mouseenter',()=>marqueeTrack.style.animationPlayState='paused');
   marqueeTrack.addEventListener('mouseleave',()=>marqueeTrack.style.animationPlayState='running');
+}
+
+/* ── CRAFT TRACK PAUSE ON HOVER ── */
+const craftTrack = document.getElementById('craftTrack');
+if(craftTrack){
+  craftTrack.addEventListener('mouseenter',()=>craftTrack.style.animationPlayState='paused');
+  craftTrack.addEventListener('mouseleave',()=>craftTrack.style.animationPlayState='running');
 }
 
 /* ══════════════════════════════════════════
@@ -1668,68 +1913,45 @@ if(marqueeTrack){
   const eyebrowEl  = document.getElementById('whyEyebrow');
   let animated = false;
 
-  /* Build drop-letter spans for each line */
   const line1 = 'Leaving Legacy Behind';
-  const line2 = '';  /* second line handled by why-legacy */
 
   function buildDropLine(text, baseDelay, isItalic) {
     const chars = text.split('');
     const frag = document.createDocumentFragment();
-
-    /* Add a line-break wrapper */
     const lineDiv = document.createElement('span');
     lineDiv.style.cssText = 'display:block;';
-
     chars.forEach((ch, i) => {
       const span = document.createElement('span');
       span.classList.add('drop-letter');
       if(ch === ' ') span.classList.add('space');
       if(isItalic) span.style.color = 'var(--gold)';
-
-      /* Stagger: each letter lands 55ms after the previous */
       span.style.transitionDelay = (baseDelay + i * 55) + 'ms';
-
       span.textContent = ch === ' ' ? '\u00A0' : ch;
       lineDiv.appendChild(span);
     });
-
     frag.appendChild(lineDiv);
     return frag;
   }
 
-  /* Build the headline DOM */
   headlineEl.appendChild(buildDropLine(line1, 0, false));
 
   function triggerAnimation() {
     if(animated) return;
     animated = true;
-
-    /* 1. Eyebrow fades in */
     eyebrowEl.classList.add('drop-done');
-
-    /* 2. Drop letters land */
     const letters = headlineEl.querySelectorAll('.drop-letter');
-    /* Small rAF to ensure styles are applied before toggling */
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         letters.forEach(l => l.classList.add('landed'));
       });
     });
-
-    /* Total time for all letters: ~55ms * 21 letters ≈ 1155ms */
     const totalLetterTime = 55 * line1.length + 200;
-
-    /* 3. Legacy italic subtitle */
     setTimeout(() => legacyEl.classList.add('drop-done'),   totalLetterTime);
-    /* 4. Ornament */
     setTimeout(() => ornamentEl.classList.add('drop-done'), totalLetterTime + 200);
-    /* 5. Quote */
     setTimeout(() => quoteEl.classList.add('drop-done'),    totalLetterTime + 400);
-    /* 6. Cards */
     setTimeout(() => cardsEl.classList.add('drop-done'),    totalLetterTime + 650);
   }
 
-  /* Observe section entering viewport */
   const whyObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if(e.isIntersecting) {
