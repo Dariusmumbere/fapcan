@@ -189,15 +189,30 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
   position: relative; z-index: 2;
 }
+.hero-badges {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+}
 .hero-tag {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--gold); border: 1px solid rgba(214,158,46,0.35);
-  padding: 6px 16px; margin-bottom: 28px;
-  animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+  padding: 6px 16px;
 }
 .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+/* ── REGISTERED CBO BADGE ── */
+.hero-cbo-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--navy-dk);
+  background: var(--gold);
+  padding: 6px 14px;
+  position: relative;
+}
+.hero-cbo-badge i { font-size: 11px; }
 
 .hero-text h1 {
   font-family: var(--font-serif); font-weight: 900;
@@ -338,6 +353,281 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ═══════════════════════════════════════════════════
+   ── NEWS & UPDATES SECTION ──
+═══════════════════════════════════════════════════ */
+.news-section {
+  background: var(--navy-dk);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Diagonal stripe texture */
+.news-section::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0, transparent 40px,
+    rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
+  );
+}
+
+/* Top accent */
+.news-section::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(to right, var(--gold) 0%, var(--red) 40%, var(--teal) 100%);
+}
+
+.news-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+
+.news-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 64px; flex-wrap: wrap; gap: 24px;
+}
+.news-header-left {}
+.news-header-left .section-label { color: var(--gold); }
+.news-header-left .section-label::before { background: var(--gold); }
+.news-header-left h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 52px); color: var(--white); line-height: 1.1;
+}
+.news-header-left h2 em { font-style: italic; color: var(--gold); }
+.news-header-left p {
+  font-size: 15px; color: rgba(255,255,255,0.5); max-width: 460px;
+  line-height: 1.7; margin-top: 12px;
+}
+.news-view-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(214,158,46,0.4);
+  padding: 10px 22px; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+}
+.news-view-all:hover { background: rgba(214,158,46,0.1); border-color: var(--gold); }
+
+/* ── Featured Breaking News ── */
+.news-breaking {
+  position: relative;
+  background: linear-gradient(135deg, rgba(214,158,46,0.15) 0%, rgba(26,122,138,0.1) 100%);
+  border: 1px solid rgba(214,158,46,0.3);
+  padding: 0;
+  margin-bottom: 32px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.news-breaking-accent {
+  width: 6px;
+  background: linear-gradient(to bottom, var(--gold), var(--red));
+  flex-shrink: 0;
+}
+
+.news-breaking-body {
+  padding: 36px 40px;
+}
+
+.news-breaking-meta {
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap; margin-bottom: 20px;
+}
+
+.badge-breaking {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--gold); color: var(--navy-dk);
+  font-size: 9px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 5px 14px;
+}
+.badge-breaking::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%; background: var(--navy-dk);
+  animation: blinkDot 1.2s infinite;
+}
+@keyframes blinkDot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.badge-date {
+  font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45);
+  letter-spacing: 0.06em;
+}
+.badge-category {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--teal); border: 1px solid rgba(26,122,138,0.4);
+  padding: 4px 12px;
+}
+
+.news-breaking-body h3 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(22px, 2.8vw, 34px); color: white; line-height: 1.2;
+  margin-bottom: 16px;
+}
+.news-breaking-body h3 em { font-style: italic; color: var(--gold); }
+
+.news-breaking-body p {
+  font-size: 15.5px; color: rgba(255,255,255,0.62); line-height: 1.75;
+  max-width: 700px; margin-bottom: 28px;
+}
+
+/* Winner Cards inside breaking news */
+.winners-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  max-width: 600px; margin-bottom: 28px;
+}
+
+.winner-card {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 20px;
+  position: relative; overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
+}
+.winner-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(214,158,46,0.4);
+}
+.winner-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.winner-card.miss::before { background: linear-gradient(to right, #C53030, #D69E2E); }
+.winner-card.mr::before   { background: linear-gradient(to right, #1A7A8A, #553C9A); }
+
+.winner-crown {
+  font-size: 28px; flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(214,158,46,0.5));
+}
+.winner-info {}
+.winner-title {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.winner-card.miss .winner-title { color: #E88; }
+.winner-card.mr .winner-title   { color: #7BC; }
+.winner-name {
+  font-family: var(--font-serif); font-weight: 700; font-size: 16px;
+  color: white; line-height: 1.2;
+}
+
+.news-breaking-read {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  transition: gap 0.2s;
+}
+.news-breaking-read:hover { gap: 16px; }
+.news-breaking-read i { font-size: 11px; }
+
+/* ── News Grid (secondary articles) ── */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.news-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out), border-color 0.35s, background 0.35s;
+  display: flex; flex-direction: column;
+}
+.news-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(214,158,46,0.3);
+  background: rgba(255,255,255,0.07);
+}
+
+.news-card-img {
+  width: 100%; height: 200px; overflow: hidden; position: relative;
+  background: rgba(255,255,255,0.04);
+  display: flex; align-items: center; justify-content: center;
+}
+.news-card-img-icon {
+  font-size: 52px; opacity: 0.18;
+}
+.news-card-img-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+}
+.news-card:nth-child(1) .news-card-img-bar { background: var(--gold); }
+.news-card:nth-child(2) .news-card-img-bar { background: var(--teal); }
+.news-card:nth-child(3) .news-card-img-bar { background: var(--green); }
+
+.news-card-body {
+  padding: 24px 24px 28px;
+  display: flex; flex-direction: column; flex: 1;
+}
+.news-card-meta {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.news-card-cat {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 4px 12px;
+}
+.news-card:nth-child(1) .news-card-cat { background: rgba(214,158,46,0.15); color: var(--gold); }
+.news-card:nth-child(2) .news-card-cat { background: rgba(26,122,138,0.15); color: #5BC8D8; }
+.news-card:nth-child(3) .news-card-cat { background: rgba(39,103,73,0.15); color: #5DC88A; }
+.news-card-date { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
+.news-card-body h4 {
+  font-family: var(--font-serif); font-weight: 700; font-size: 18px;
+  color: white; line-height: 1.35; margin-bottom: 10px;
+}
+.news-card-body p {
+  font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.65; flex: 1;
+  margin-bottom: 20px;
+}
+.news-card-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); text-decoration: none;
+  transition: color 0.2s, gap 0.2s; margin-top: auto;
+}
+.news-card:nth-child(1) .news-card-link:hover { color: var(--gold); gap: 14px; }
+.news-card:nth-child(2) .news-card-link:hover { color: #5BC8D8; gap: 14px; }
+.news-card:nth-child(3) .news-card-link:hover { color: #5DC88A; gap: 14px; }
+
+/* Ticker at bottom of news section */
+.news-ticker {
+  margin-top: 48px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 28px;
+  display: flex; align-items: center; gap: 0;
+  overflow: hidden;
+}
+.ticker-label {
+  flex-shrink: 0;
+  background: var(--red); color: white;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 7px 18px; margin-right: 28px; white-space: nowrap;
+}
+.ticker-track-outer {
+  overflow: hidden; flex: 1; position: relative;
+}
+.ticker-track {
+  display: flex; gap: 60px;
+  animation: tickerScroll 28s linear infinite;
+  white-space: nowrap; width: max-content;
+}
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes tickerScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.45); flex-shrink: 0;
+}
+.ticker-item strong { color: rgba(255,255,255,0.75); font-weight: 600; }
+.ticker-item::after {
+  content: '✦'; font-size: 8px; color: var(--gold); margin-left: 30px; opacity: 0.6;
+}
 
 /* ═══════════════════════════════════════════════════
    ── WHY WE EXIST SECTION ──
@@ -506,7 +796,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 
 /* ══════════════════════════════════════════
-   ── CRAFT SCROLL SECTION (NEW) ──
+   ── CRAFT SCROLL SECTION ──
 ══════════════════════════════════════════ */
 .craft-scroll {
   background: var(--off-white);
@@ -515,16 +805,12 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   overflow: hidden;
   border-top: 1px solid var(--light-gray);
 }
-
-/* Top accent bar */
 .craft-scroll::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(to right,
     var(--gold) 0%, var(--teal) 35%, var(--green) 65%, var(--gold) 100%);
 }
-
-/* Subtle woven-fabric texture overlay */
 .craft-scroll::after {
   content: '';
   position: absolute; inset: 0; pointer-events: none; opacity: 0.025;
@@ -532,12 +818,10 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     repeating-linear-gradient(0deg, var(--navy) 0px, var(--navy) 1px, transparent 1px, transparent 12px),
     repeating-linear-gradient(90deg, var(--navy) 0px, var(--navy) 1px, transparent 1px, transparent 12px);
 }
-
 .craft-scroll-header {
   max-width: 1320px; margin: 0 auto 52px; padding: 0 32px;
   text-align: center; position: relative; z-index: 2;
 }
-
 .craft-scroll-header .section-label {
   justify-content: center; margin-bottom: 18px;
 }
@@ -545,7 +829,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .craft-scroll-header .section-label::after {
   content: ''; width: 28px; height: 2px; background: var(--red); display: block;
 }
-
 .craft-scroll-header h2 {
   font-family: var(--font-serif); font-weight: 900;
   font-size: clamp(28px, 3.5vw, 50px); color: var(--navy);
@@ -556,8 +839,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-size: 16px; color: var(--mid); max-width: 620px;
   margin: 0 auto; line-height: 1.75;
 }
-
-/* ── Scroll track ── */
 .craft-scroll-outer {
   position: relative; overflow: hidden;
 }
@@ -575,7 +856,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   right: 0;
   background: linear-gradient(to left, var(--off-white), transparent);
 }
-
 .craft-track {
   display: flex;
   gap: 18px;
@@ -584,15 +864,11 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   will-change: transform;
   padding: 8px 0 20px;
 }
-.craft-track:hover {
-  animation-play-state: paused;
-}
-
+.craft-track:hover { animation-play-state: paused; }
 @keyframes craftScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-
 .craft-card {
   flex-shrink: 0;
   width: 300px;
@@ -607,7 +883,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   transform: scale(1.03) translateY(-6px);
   box-shadow: 0 18px 48px rgba(0,0,0,0.18);
 }
-
 .craft-card-img {
   width: 100%;
   height: 240px;
@@ -620,11 +895,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: block;
   transition: transform 0.7s var(--ease-out);
 }
-.craft-card:hover .craft-card-img img {
-  transform: scale(1.07);
-}
-
-/* Thin colour bar per card (cycles through brand palette) */
+.craft-card:hover .craft-card-img img { transform: scale(1.07); }
 .craft-card:nth-child(12n+1)  .craft-card-img::after { background: var(--gold); }
 .craft-card:nth-child(12n+2)  .craft-card-img::after { background: var(--teal); }
 .craft-card:nth-child(12n+3)  .craft-card-img::after { background: var(--green); }
@@ -637,12 +908,10 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .craft-card:nth-child(12n+10) .craft-card-img::after { background: var(--red); }
 .craft-card:nth-child(12n+11) .craft-card-img::after { background: var(--purple); }
 .craft-card:nth-child(12n+0)  .craft-card-img::after { background: var(--navy); }
-
 .craft-card-img::after {
   content: '';
   position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
 }
-
 .craft-card-caption {
   padding: 14px 18px 16px;
   background: var(--white);
@@ -728,7 +997,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .founder-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
 .founder-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center; }
 .founder-img-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
-
 .founder-img-circle {
   width: 380px; height: 380px; border-radius: 50%; overflow: hidden; position: relative;
   box-shadow: 0 0 0 6px rgba(214,158,46,0.35), 0 0 0 12px rgba(214,158,46,0.12), 0 40px 80px rgba(0,0,0,0.5);
@@ -753,7 +1021,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   box-shadow: 0 12px 32px rgba(0,0,0,0.3); z-index: 3;
 }
 .founder-quote-badge p { font-family: var(--font-serif); font-style: italic; font-size: 12.5px; color: var(--navy-dk); line-height: 1.5; }
-
 .founder-text .section-label { color: var(--gold); }
 .founder-text .section-label::before { background: var(--gold); }
 .founder-text h2 {
@@ -785,7 +1052,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(to right, var(--green), var(--teal), var(--gold));
 }
-
 .children-marquee-header {
   max-width: 1320px; margin: 0 auto 52px; padding: 0 32px;
   text-align: center;
@@ -807,7 +1073,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-size: 16px; color: var(--mid); max-width: 680px;
   margin: 0 auto; line-height: 1.75;
 }
-
 .marquee-outer {
   position: relative;
   overflow: hidden;
@@ -826,7 +1091,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   right: 0;
   background: linear-gradient(to left, var(--off-white), transparent);
 }
-
 .marquee-track {
   display: flex;
   gap: 20px;
@@ -834,15 +1098,11 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   animation: marqueeScroll 40s linear infinite;
   will-change: transform;
 }
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
+.marquee-track:hover { animation-play-state: paused; }
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-
 .marquee-card {
   flex-shrink: 0;
   width: 280px;
@@ -873,7 +1133,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-family: var(--font-serif); font-style: italic;
   font-size: 13px; color: rgba(255,255,255,0.7); display: block;
 }
-
 .nurture-pillars {
   max-width: 1320px; margin: 52px auto 0; padding: 0 32px;
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
@@ -926,7 +1185,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
   background: linear-gradient(to right, var(--red) 0%, var(--gold) 40%, var(--teal) 100%);
 }
-
 .documentaries-inner {
   max-width: 1320px; margin: 0 auto; padding: 0 32px;
   position: relative; z-index: 2;
@@ -943,7 +1201,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .documentaries-header h2 em { font-style: italic; color: var(--gold); }
 .documentaries-header p { font-size: 15px; color: rgba(255,255,255,0.5); max-width: 440px; line-height: 1.7; margin-top: 10px; }
-
 .doc-featured { margin-bottom: 24px; position: relative; }
 .doc-featured-inner {
   display: grid; grid-template-columns: 1fr 380px; gap: 0;
@@ -982,7 +1239,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   padding: 4px 12px; border-radius: 2px;
 }
 .doc-meta-tag i { font-size: 10px; }
-
 .doc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .doc-card {
   background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden;
@@ -1191,6 +1447,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .doc-grid { grid-template-columns: repeat(2, 1fr); }
   .nurture-pillars { grid-template-columns: repeat(3, 1fr); }
   .why-cards { grid-template-columns: 1fr 1fr; }
+  .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .winners-row { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 960px) {
@@ -1213,6 +1471,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .why-cards { grid-template-columns: 1fr; }
   .craft-card { width: 240px; }
   .craft-card-img { height: 200px; }
+  .news-breaking { grid-template-columns: 6px 1fr; }
+  .winners-row { grid-template-columns: 1fr; max-width: 100%; }
 }
 
 @media (max-width: 640px) {
@@ -1223,9 +1483,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .about, .activities, .programmes, .founder, .documentaries, .children-marquee { padding: 70px 0; }
   .why-exist { padding: 80px 0; }
   .craft-scroll { padding: 70px 0 60px; }
+  .news-section { padding: 70px 0; }
   .nav-inner { padding: 0 20px; }
   .about-inner, .founder-inner, .activities-inner, .programmes-inner, .footer-inner, .documentaries-inner { padding: 0 20px; }
   .why-inner { padding: 0 20px; }
+  .news-inner { padding: 0 20px; }
   .founder-img-circle { width: 240px; height: 240px; }
   .founder-quote-badge { position: relative; right: auto; bottom: auto; margin-top: 20px; max-width: 100%; }
   .nurture-pillars { grid-template-columns: 1fr 1fr; }
@@ -1235,6 +1497,10 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .craft-card { width: 200px; }
   .craft-card-img { height: 170px; }
   .craft-scroll-header { padding: 0 20px; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-breaking-body { padding: 24px 20px; }
+  .winners-row { grid-template-columns: 1fr; }
+  .news-ticker { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
 </style>
 </head>
@@ -1279,6 +1545,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <li class="nav-item"><a href="save.html" class="nav-link">Save Souls</a></li>
       <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
       <li class="nav-item"><a href="film.html" class="nav-link">Media</a></li>
+      <li class="nav-item"><a href="#news" class="nav-link">News</a></li>
       <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
 
@@ -1302,6 +1569,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   <a href="save.html" class="mob-link">Save Souls</a>
   <a href="gallery.html" class="mob-link">Gallery</a>
   <a href="film.html" class="mob-link">Media</a>
+  <a href="#news" class="mob-link">News & Updates</a>
   <a href="#contact" class="mob-link">Contact</a>
 </div>
 
@@ -1314,9 +1582,14 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-tag">Kidodo · Kasese · Uganda · Since 2012</div>
+      <div class="hero-badges">
+        <div class="hero-tag">Kidodo · Kasese · Uganda · Since 2012</div>
+        <div class="hero-cbo-badge">
+          <i class="fas fa-certificate"></i> Registered CBO
+        </div>
+      </div>
       <h1>A Home for <em>All Nations,</em><br>Transforming Lives<br>Through Faith</h1>
-      <p>Fatima Praying Center for All Nations is a voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders — transforming them through spiritual empowerment, education, and community development.</p>
+      <p>Fatima Praying Center for All Nations is a registered Community Based Organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders — transforming them through spiritual empowerment, education, and community development.</p>
       <div class="hero-btns">
         <a href="#" class="btn-hero-primary">
           <i class="fas fa-hands-helping"></i> Support Our Mission
@@ -1373,6 +1646,133 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════
+     NEWS & UPDATES SECTION
+══════════════════════════════════════════ -->
+<section class="news-section" id="news">
+  <div class="news-inner">
+
+    <div class="news-header reveal">
+      <div class="news-header-left">
+        <div class="section-label">Latest News &amp; Updates</div>
+        <h2>What's Happening at <em>FAPCAN</em></h2>
+        <p>Stay informed with the latest milestones, events, and stories of transformation from our community in Kasese, Uganda.</p>
+      </div>
+      <a href="#" class="news-view-all">All Updates <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
+    </div>
+
+    <!-- FEATURED / BREAKING NEWS -->
+    <div class="news-breaking reveal">
+      <div class="news-breaking-accent"></div>
+      <div class="news-breaking-body">
+        <div class="news-breaking-meta">
+          <span class="badge-breaking">Breaking News</span>
+          <span class="badge-date"><i class="fas fa-calendar-alt" style="margin-right:5px;font-size:10px"></i> 8th May, 2026</span>
+          <span class="badge-category"><i class="fas fa-crown" style="font-size:9px;margin-right:4px"></i> Community Elections</span>
+        </div>
+        <h3>FAPCAN Crowns <em>Miss &amp; Mr FAPCAN 2026</em></h3>
+        <p>
+          In a joyful ceremony held today at the FAPCAN centre in Kidodo, Kasese, the community came together to elect their ambassadors of faith, dignity and service. After a spirited and prayerful voting process, two outstanding members were honoured with the prestigious titles.
+        </p>
+        <div class="winners-row">
+          <div class="winner-card miss">
+            <div class="winner-crown">👑</div>
+            <div class="winner-info">
+              <div class="winner-title">Miss FAPCAN 2026</div>
+              <div class="winner-name">Mbambu Matherene</div>
+            </div>
+          </div>
+          <div class="winner-card mr">
+            <div class="winner-crown">🎖️</div>
+            <div class="winner-info">
+              <div class="winner-title">Mr FAPCAN 2026</div>
+              <div class="winner-name">Bwambale Moses</div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="news-breaking-read">Read Full Story <i class="fas fa-long-arrow-alt-right"></i></a>
+      </div>
+    </div>
+
+    <!-- SECONDARY NEWS GRID -->
+    <div class="news-grid reveal">
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <div class="news-card-img-icon">🏛️</div>
+          <div class="news-card-img-bar"></div>
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat">Organisation</span>
+            <span class="news-card-date">May 2026</span>
+          </div>
+          <h4>FAPCAN Confirmed as a Registered Community Based Organisation</h4>
+          <p>FAPCAN has officially attained registration as a Community Based Organisation (CBO), a milestone that strengthens our legal standing and opens new doors for partnerships and development funding.</p>
+          <a href="#" class="news-card-link">Read More <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <div class="news-card-img-icon">🎓</div>
+          <div class="news-card-img-bar"></div>
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat">Education</span>
+            <span class="news-card-date">April 2026</span>
+          </div>
+          <h4>New School Term Begins for 80+ FAPCAN Students</h4>
+          <p>A new academic term has started with over eighty children enrolled across various levels, supported by FAPCAN's commitment to ensure no child in our care is left without quality education.</p>
+          <a href="#" class="news-card-link">Read More <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <div class="news-card-img">
+          <div class="news-card-img-icon">🌾</div>
+          <div class="news-card-img-bar"></div>
+        </div>
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat">Agriculture</span>
+            <span class="news-card-date">March 2026</span>
+          </div>
+          <h4>Community Farm Harvest Feeds Hundreds This Season</h4>
+          <p>FAPCAN's agricultural programme yielded a bountiful harvest this season, providing food security for over three hundred community members including orphans, elders and persons with disabilities.</p>
+          <a href="#" class="news-card-link">Read More <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NEWS TICKER -->
+    <div class="news-ticker reveal">
+      <div class="ticker-label"><i class="fas fa-bolt" style="margin-right:6px"></i> Latest</div>
+      <div class="ticker-track-outer">
+        <div class="ticker-track" id="tickerTrack">
+          <!-- First set -->
+          <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected on 8th May 2026</span>
+          <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected on 8th May 2026</span>
+          <span class="ticker-item"><strong>CBO Status:</strong> FAPCAN is now a registered Community Based Organisation</span>
+          <span class="ticker-item"><strong>Education:</strong> 80+ students begin new term under FAPCAN support</span>
+          <span class="ticker-item"><strong>Save Souls Films:</strong> New documentary on community transformation in production</span>
+          <span class="ticker-item"><strong>Community:</strong> 300+ members strong and growing across Kasese District</span>
+          <!-- Duplicate for loop -->
+          <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected on 8th May 2026</span>
+          <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected on 8th May 2026</span>
+          <span class="ticker-item"><strong>CBO Status:</strong> FAPCAN is now a registered Community Based Organisation</span>
+          <span class="ticker-item"><strong>Education:</strong> 80+ students begin new term under FAPCAN support</span>
+          <span class="ticker-item"><strong>Save Souls Films:</strong> New documentary on community transformation in production</span>
+          <span class="ticker-item"><strong>Community:</strong> 300+ members strong and growing across Kasese District</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- WHY WE EXIST — AIM SECTION -->
 <section class="why-exist" id="why-exist">
   <div class="why-bg-word">LEGACY</div>
@@ -1416,119 +1816,40 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════
-     CRAFT & VOCATIONAL SKILLS SCROLL (NEW)
-══════════════════════════════════════════ -->
+<!-- CRAFT & VOCATIONAL SKILLS SCROLL -->
 <section class="craft-scroll" id="craft-skills">
   <div class="craft-scroll-header reveal">
     <div class="section-label">Vocational Skills &amp; Crafts</div>
     <h2>Hands That Weave a<br><em>Better Tomorrow</em></h2>
     <p>Through tailoring, tapestry, weaving and handcraft, FAPCAN equips its community with skills that bring dignity, self-reliance and lasting livelihoods — turning raw gifts into purposeful work.</p>
   </div>
-
   <div class="craft-scroll-outer">
     <div class="craft-track" id="craftTrack">
-
-      <!-- First set -->
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Mastering the art of tailoring</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Intricate tapestry patterns</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Community hands, shared purpose</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Advanced weaving techniques</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Young hands learning early</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Patience woven into every row</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div>
-        <div class="craft-card-caption"><span>From fibre to finished fabric</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Skills that open doors</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Detail in every handmade piece</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div>
-      </div>
-
-      <!-- Duplicate set for seamless loop -->
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Mastering the art of tailoring</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Intricate tapestry patterns</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Community hands, shared purpose</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Advanced weaving techniques</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Young hands learning early</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Patience woven into every row</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div>
-        <div class="craft-card-caption"><span>From fibre to finished fabric</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Skills that open doors</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Detail in every handmade piece</span></div>
-      </div>
-      <div class="craft-card">
-        <div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div>
-        <div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div>
-      </div>
-
+      <div class="craft-card"><div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Mastering the art of tailoring</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div><div class="craft-card-caption"><span>Intricate tapestry patterns</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div><div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div><div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Community hands, shared purpose</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div><div class="craft-card-caption"><span>Advanced weaving techniques</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div><div class="craft-card-caption"><span>Young hands learning early</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div><div class="craft-card-caption"><span>Patience woven into every row</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div><div class="craft-card-caption"><span>From fibre to finished fabric</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Skills that open doors</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div><div class="craft-card-caption"><span>Detail in every handmade piece</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div><div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="craft-card"><div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Mastering the art of tailoring</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div><div class="craft-card-caption"><span>Intricate tapestry patterns</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div><div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div><div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Community hands, shared purpose</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div><div class="craft-card-caption"><span>Advanced weaving techniques</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div><div class="craft-card-caption"><span>Young hands learning early</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div><div class="craft-card-caption"><span>Patience woven into every row</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div><div class="craft-card-caption"><span>From fibre to finished fabric</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Skills that open doors</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div><div class="craft-card-caption"><span>Detail in every handmade piece</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div><div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div></div>
     </div>
   </div>
 </section>
@@ -1545,9 +1866,9 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
       <div class="about-text reveal-right">
         <div class="section-label">Who We Are</div>
-        <h2>A Voluntary Organisation<br>Built on <em>Faith &amp; Service</em></h2>
+        <h2>A Registered CBO<br>Built on <em>Faith &amp; Service</em></h2>
         <p>The name FATIMA comes from Portugal where the Virgin Mary appeared to three children in 1917, emphasising the power of prayer. This inspired our founder to create a centre dedicated to prayer and community transformation.</p>
-        <p>Located in Kidodo Cell, Central Division, Kasese Municipality, Uganda, we serve as a <strong>"Home for All"</strong> — regardless of appearance, culture, tribe, gender, age, religion or education level.</p>
+        <p>Located in Kidodo Cell, Central Division, Kasese Municipality, Uganda, we serve as a <strong>"Home for All"</strong> — regardless of appearance, culture, tribe, gender, age, religion or education level. FAPCAN is a registered Community Based Organisation (CBO).</p>
         <div class="about-pillars">
           <div class="pillar"><h4>Our Vision</h4><p>Spiritual empowerment for orphans, PWDs, elders and widows.</p></div>
           <div class="pillar"><h4>Our Mission</h4><p>Building a strong praying working team to pool resources.</p></div>
@@ -1596,7 +1917,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
     <h2>Nurturing the <em>Next Generation</em></h2>
     <p>FAPCAN nurtures children through education, religion, vocational skills, nutrition, healthcare, and the love of community — giving every child a foundation to thrive and a family to belong to.</p>
   </div>
-
   <div class="marquee-outer">
     <div class="marquee-track" id="marqueeTrack">
       <div class="marquee-card"><img src="Child1.jpg" alt="FAPCAN Child 1" loading="lazy"><div class="marquee-card-overlay"><span>Growing in faith &amp; love</span></div></div>
@@ -1609,7 +1929,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="marquee-card"><img src="Child8.jpg" alt="FAPCAN Child 8" loading="lazy"><div class="marquee-card-overlay"><span>Hope in every smile</span></div></div>
       <div class="marquee-card"><img src="Child9.jpg" alt="FAPCAN Child 9" loading="lazy"><div class="marquee-card-overlay"><span>Growing together</span></div></div>
       <div class="marquee-card"><img src="Child10.jpg" alt="FAPCAN Child 10" loading="lazy"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
-      <!-- Duplicate set for seamless loop -->
       <div class="marquee-card"><img src="Child1.jpg" alt="FAPCAN Child 1" loading="lazy"><div class="marquee-card-overlay"><span>Growing in faith &amp; love</span></div></div>
       <div class="marquee-card"><img src="Child2.jpg" alt="FAPCAN Child 2" loading="lazy"><div class="marquee-card-overlay"><span>Education changes lives</span></div></div>
       <div class="marquee-card"><img src="Child3.jpg" alt="FAPCAN Child 3" loading="lazy"><div class="marquee-card-overlay"><span>Every child matters</span></div></div>
@@ -1622,7 +1941,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="marquee-card"><img src="Child10.jpg" alt="FAPCAN Child 10" loading="lazy"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
     </div>
   </div>
-
   <div class="nurture-pillars reveal">
     <div class="nurture-pill">
       <div class="nurture-pill-icon">📚</div>
@@ -1752,7 +2070,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <div class="logo-badge" style="margin-bottom:16px"><img src="logo.png" alt="FAPCAN"><span class="logo-badge-fallback" style="display:none">FAP</span></div>
         <strong>FAPCAN</strong>
         <span class="tagline">Fatima Praying Center for All Nations</span>
-        <p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
+        <p>A registered Community Based Organisation (CBO) providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
         <div class="footer-socials">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-twitter"></i></a>
@@ -1766,6 +2084,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
         <li><a href="prayer.html"><i class="fas fa-chevron-right"></i> Spiritual Life</a></li>
         <li><a href="save.html"><i class="fas fa-chevron-right"></i> Save Souls</a></li>
+        <li><a href="#news"><i class="fas fa-chevron-right"></i> News &amp; Updates</a></li>
         <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
         <li><a href="film.html"><i class="fas fa-chevron-right"></i> Media</a></li>
       </ul></div>
@@ -1778,14 +2097,13 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </ul></div>
       <div class="footer-col"><h4>Contact</h4><ul>
         <li><a href="#location"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li>
-        <li><a href="#"><i class="fas fa-phone"></i> +2567799939120758027180</a></li>
         <li><a href="#"><i class="fas fa-phone"></i> +256758027180</a></li>
         <li><a href="#"><i class="fas fa-envelope"></i> bwambalealfred89@gmail.com</a></li>
         <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 FAPCAN – Fatima Praying Center for All Nations. All Rights Reserved.</p>
+      <p>© 2026 FAPCAN – Fatima Praying Center for All Nations. Registered CBO. All Rights Reserved.</p>
       <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
     </div>
   </div>
@@ -1797,7 +2115,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card').forEach(el=>{
+document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.news-card,.winner-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
@@ -1886,23 +2204,28 @@ const impactObs=new IntersectionObserver((entries)=>{
 },{threshold:0.4});
 document.querySelector('.impact-strip')&&impactObs.observe(document.querySelector('.impact-strip'));
 
-/* ── MARQUEE PAUSE ON HOVER ── */
+/* ── MARQUEE PAUSE ── */
 const marqueeTrack = document.getElementById('marqueeTrack');
 if(marqueeTrack){
   marqueeTrack.addEventListener('mouseenter',()=>marqueeTrack.style.animationPlayState='paused');
   marqueeTrack.addEventListener('mouseleave',()=>marqueeTrack.style.animationPlayState='running');
 }
 
-/* ── CRAFT TRACK PAUSE ON HOVER ── */
+/* ── CRAFT TRACK PAUSE ── */
 const craftTrack = document.getElementById('craftTrack');
 if(craftTrack){
   craftTrack.addEventListener('mouseenter',()=>craftTrack.style.animationPlayState='paused');
   craftTrack.addEventListener('mouseleave',()=>craftTrack.style.animationPlayState='running');
 }
 
-/* ══════════════════════════════════════════
-   ── WHY WE EXIST — DROP LETTER ANIMATION ──
-══════════════════════════════════════════ */
+/* ── TICKER PAUSE ── */
+const tickerTrack = document.getElementById('tickerTrack');
+if(tickerTrack){
+  tickerTrack.addEventListener('mouseenter',()=>tickerTrack.style.animationPlayState='paused');
+  tickerTrack.addEventListener('mouseleave',()=>tickerTrack.style.animationPlayState='running');
+}
+
+/* ── WHY WE EXIST DROP LETTER ANIMATION ── */
 (function(){
   const section = document.getElementById('why-exist');
   const headlineEl = document.getElementById('whyHeadline');
@@ -1912,9 +2235,7 @@ if(craftTrack){
   const cardsEl    = document.getElementById('whyCards');
   const eyebrowEl  = document.getElementById('whyEyebrow');
   let animated = false;
-
   const line1 = 'Leaving Legacy Behind';
-
   function buildDropLine(text, baseDelay, isItalic) {
     const chars = text.split('');
     const frag = document.createDocumentFragment();
@@ -1932,9 +2253,7 @@ if(craftTrack){
     frag.appendChild(lineDiv);
     return frag;
   }
-
   headlineEl.appendChild(buildDropLine(line1, 0, false));
-
   function triggerAnimation() {
     if(animated) return;
     animated = true;
@@ -1951,16 +2270,11 @@ if(craftTrack){
     setTimeout(() => quoteEl.classList.add('drop-done'),    totalLetterTime + 400);
     setTimeout(() => cardsEl.classList.add('drop-done'),    totalLetterTime + 650);
   }
-
   const whyObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if(e.isIntersecting) {
-        triggerAnimation();
-        whyObs.unobserve(section);
-      }
+      if(e.isIntersecting) { triggerAnimation(); whyObs.unobserve(section); }
     });
   }, { threshold: 0.2 });
-
   whyObs.observe(section);
 })();
 </script>
