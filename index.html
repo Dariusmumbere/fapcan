@@ -893,6 +893,204 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .pillar h4 { font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
 .pillar p { font-size: 13px; color: var(--mid); line-height: 1.6; }
 
+/* ══════════════════════════════════════════
+   ── OUR IMPACT / COMMUNITY TRANSFORMATION ──
+══════════════════════════════════════════ */
+.our-impact {
+  background: var(--white);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.our-impact::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(to right, var(--teal) 0%, var(--green) 35%, var(--gold) 65%, var(--red) 100%);
+}
+
+.our-impact::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.018;
+  background-image:
+    repeating-linear-gradient(0deg, var(--navy) 0px, var(--navy) 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient(90deg, var(--navy) 0px, var(--navy) 1px, transparent 1px, transparent 20px);
+}
+
+.our-impact-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+
+/* Header */
+.our-impact-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.our-impact-header .section-label {
+  justify-content: center;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+.our-impact-header .section-label::before { background: var(--teal); }
+.our-impact-header .section-label::after {
+  content: ''; width: 28px; height: 2px; background: var(--teal); display: block;
+}
+.our-impact-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(28px, 3.8vw, 52px); color: var(--navy);
+  line-height: 1.12; margin-bottom: 20px;
+}
+.our-impact-header h2 em { font-style: italic; color: var(--teal); }
+.our-impact-header p {
+  font-size: 17px; color: var(--mid); max-width: 760px;
+  margin: 0 auto; line-height: 1.8;
+}
+
+/* Cards grid */
+.impact-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* Individual impact card */
+.impact-action-card {
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--off-white);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  position: relative;
+}
+.impact-action-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.14);
+}
+
+/* Top accent bar per card */
+.impact-action-card:nth-child(1)::before,
+.impact-action-card:nth-child(2)::before,
+.impact-action-card:nth-child(3)::before,
+.impact-action-card:nth-child(4)::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 5;
+}
+.impact-action-card:nth-child(1)::before { background: linear-gradient(to right, var(--teal), var(--green)); }
+.impact-action-card:nth-child(2)::before { background: linear-gradient(to right, var(--purple), var(--teal)); }
+.impact-action-card:nth-child(3)::before { background: linear-gradient(to right, var(--gold), var(--red)); }
+.impact-action-card:nth-child(4)::before { background: linear-gradient(to right, var(--green), var(--navy)); }
+
+/* Image mosaic area */
+.impact-card-images {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-dk);
+}
+
+/* Single image layout */
+.impact-card-images.single-img {
+  height: 280px;
+}
+.impact-card-images.single-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.7s var(--ease-out);
+}
+.impact-action-card:hover .impact-card-images img { transform: scale(1.06); }
+
+/* Dual image layout */
+.impact-card-images.dual-img {
+  height: 280px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+.impact-card-images.dual-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.7s var(--ease-out);
+}
+.impact-action-card:hover .dual-img img { transform: scale(1.06); }
+
+/* Triple image layout */
+.impact-card-images.triple-img {
+  height: 280px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+}
+.impact-card-images.triple-img .img-main {
+  grid-row: 1 / 3;
+  overflow: hidden;
+}
+.impact-card-images.triple-img .img-main img,
+.impact-card-images.triple-img .img-side img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.7s var(--ease-out);
+}
+.impact-action-card:hover .triple-img img { transform: scale(1.06); }
+.impact-card-images.triple-img .img-side {
+  overflow: hidden;
+}
+
+/* Image overlay gradient */
+.impact-card-images::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+  background: linear-gradient(to top, rgba(15,31,61,0.55), transparent);
+  pointer-events: none; z-index: 2;
+}
+
+/* Card body */
+.impact-card-body {
+  padding: 28px 30px 32px;
+}
+
+.impact-card-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 5px 14px; margin-bottom: 14px; border-radius: 2px;
+}
+.impact-action-card:nth-child(1) .impact-card-tag { background: rgba(26,122,138,0.12); color: var(--teal); border: 1px solid rgba(26,122,138,0.25); }
+.impact-action-card:nth-child(2) .impact-card-tag { background: rgba(85,60,154,0.1); color: var(--purple); border: 1px solid rgba(85,60,154,0.22); }
+.impact-action-card:nth-child(3) .impact-card-tag { background: rgba(214,158,46,0.1); color: #92610B; border: 1px solid rgba(214,158,46,0.3); }
+.impact-action-card:nth-child(4) .impact-card-tag { background: rgba(39,103,73,0.1); color: var(--green); border: 1px solid rgba(39,103,73,0.25); }
+
+.impact-card-body h3 {
+  font-family: var(--font-serif); font-weight: 700;
+  font-size: clamp(18px, 2vw, 22px); color: var(--navy);
+  line-height: 1.25; margin-bottom: 12px;
+}
+
+.impact-card-body p {
+  font-size: 14.5px; color: var(--mid); line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+/* Keyword pills */
+.impact-card-pills {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.impact-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.07em;
+  text-transform: uppercase; padding: 5px 12px;
+  background: var(--white); border: 1px solid var(--light-gray);
+  color: var(--mid); border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.impact-action-card:hover .impact-pill { border-color: var(--light-gray); }
+.impact-action-card:nth-child(1) .impact-pill:hover { border-color: var(--teal); color: var(--teal); }
+.impact-action-card:nth-child(2) .impact-pill:hover { border-color: var(--purple); color: var(--purple); }
+.impact-action-card:nth-child(3) .impact-pill:hover { border-color: var(--gold); color: #92610B; }
+.impact-action-card:nth-child(4) .impact-pill:hover { border-color: var(--green); color: var(--green); }
+.impact-pill i { font-size: 9px; }
+
 /* ── FOUNDER ── */
 .founder {
   background: var(--navy);
@@ -1350,6 +1548,29 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
 }
 
+/* ── OUR IMPACT RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .impact-cards-grid { grid-template-columns: 1fr; }
+  .impact-card-images.single-img { height: 260px; }
+  .impact-card-images.dual-img { height: 260px; }
+  .impact-card-images.triple-img { height: 260px; }
+}
+
+@media (max-width: 960px) {
+  .impact-cards-grid { grid-template-columns: 1fr; }
+  .our-impact { padding: 80px 0; }
+}
+
+@media (max-width: 640px) {
+  .our-impact-inner { padding: 0 20px; }
+  .impact-cards-grid { gap: 20px; }
+  .impact-card-images.dual-img { height: 220px; }
+  .impact-card-images.triple-img { height: 220px; }
+  .impact-card-images.single-img { height: 220px; }
+  .impact-card-body { padding: 22px 20px 26px; }
+  .impact-card-pills { gap: 6px; }
+}
+
 @media (max-width: 1100px) {
   .doc-featured-inner { grid-template-columns: 1fr; }
   .doc-featured-info { padding: 28px 28px 32px; }
@@ -1475,7 +1696,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   <a href="save.html" class="mob-link">Save Souls</a>
   <a href="gallery.html" class="mob-link">Gallery</a>
   <a href="film.html" class="mob-link">Media</a>
-   <a href="event.html" class="mob-link">Events</a>
+  <a href="event.html" class="mob-link">Events</a>
   <a href="#news" class="mob-link">News & Updates</a>
   <a href="#contact" class="mob-link">Contact</a>
 </div>
@@ -1635,7 +1856,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- ABOUT / WHO WE ARE -->
 <section class="about" id="about">
   <div class="about-inner">
     <div id="mission"></div>
@@ -1663,6 +1884,109 @@ footer { background: var(--dark); padding: 80px 0 0; }
     <div id="location"></div>
   </div>
 </section>
+
+<!-- ══════════════════════════════════════════
+     OUR IMPACT / SUPPORT & COMMUNITY TRANSFORMATION
+     (Inserted after "Who We Are" section)
+══════════════════════════════════════════ -->
+<section class="our-impact" id="our-impact">
+  <div class="our-impact-inner">
+
+    <!-- Header -->
+    <div class="our-impact-header reveal">
+      <div class="section-label">Support &amp; Community Transformation</div>
+      <h2>Our <em>Impact</em> in Action</h2>
+      <p>At FAPCAN, compassion is not just a word — it is a daily practice. From supporting persons with albinism and caring for the mentally ill, to sponsoring children's education and uplifting elders, single mothers, and persons with disabilities, we are committed to transforming lives through faith, restoration, and community empowerment.</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="impact-cards-grid">
+
+      <!-- Card 1: Albinism -->
+      <div class="impact-action-card reveal reveal-delay-1">
+        <div class="impact-card-images single-img">
+          <img src="albinos.jpg" alt="Support for People with Albinism at FAPCAN" loading="lazy">
+        </div>
+        <div class="impact-card-body">
+          <span class="impact-card-tag"><i class="fas fa-heart"></i> &nbsp;Inclusion &amp; Advocacy</span>
+          <h3>Support for People with Albinism</h3>
+          <p>FAPCAN stands as a safe haven for persons with albinism — offering care, dignity, and belonging in a world that too often marginalises them. Through community awareness, advocacy, and daily support, we champion their right to be seen, heard, and fully included in every aspect of community life.</p>
+          <div class="impact-card-pills">
+            <span class="impact-pill"><i class="fas fa-shield-alt"></i> Care &amp; Protection</span>
+            <span class="impact-pill"><i class="fas fa-users"></i> Inclusion</span>
+            <span class="impact-pill"><i class="fas fa-bullhorn"></i> Advocacy</span>
+            <span class="impact-pill"><i class="fas fa-hands-helping"></i> Community Support</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Rehabilitation / Prayer -->
+      <div class="impact-action-card reveal reveal-delay-2">
+        <div class="impact-card-images dual-img">
+          <img src="mad.jpg" alt="Rehabilitation and Prayer at FAPCAN" loading="lazy">
+          <img src="brendah.jpg" alt="Brenda's Story — Restoration at FAPCAN" loading="lazy">
+        </div>
+        <div class="impact-card-body">
+          <span class="impact-card-tag"><i class="fas fa-pray"></i> &nbsp;Healing &amp; Restoration</span>
+          <h3>Transformation Through Prayer &amp; Rehabilitation</h3>
+          <p>We walk alongside those broken by mental illness, addiction, and life's hardest seasons. Through prayer, counselling, and structured rehabilitation, FAPCAN brings restoration, hope, and a renewed sense of purpose — turning stories of despair into testimonies of resilience and healing.</p>
+          <div class="impact-card-pills">
+            <span class="impact-pill"><i class="fas fa-brain"></i> Mental Health</span>
+            <span class="impact-pill"><i class="fas fa-hands-praying"></i> Prayer Ministry</span>
+            <span class="impact-pill"><i class="fas fa-redo-alt"></i> Rehabilitation</span>
+            <span class="impact-pill"><i class="fas fa-star"></i> Hope &amp; Restoration</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Education -->
+      <div class="impact-action-card reveal reveal-delay-3">
+        <div class="impact-card-images single-img">
+          <img src="alfred2.jpg" alt="Supporting Education for Vulnerable Children at FAPCAN" loading="lazy">
+        </div>
+        <div class="impact-card-body">
+          <span class="impact-card-tag"><i class="fas fa-graduation-cap"></i> &nbsp;Education &amp; Empowerment</span>
+          <h3>Supporting Education for Vulnerable Children</h3>
+          <p>Every child deserves a chance to learn. FAPCAN provides school sponsorships, learning materials, and mentorship to vulnerable children who would otherwise be left behind — unlocking doors to knowledge, confidence, and a future full of possibility. Education is the most enduring gift we can give.</p>
+          <div class="impact-card-pills">
+            <span class="impact-pill"><i class="fas fa-book-open"></i> School Sponsorship</span>
+            <span class="impact-pill"><i class="fas fa-pencil-alt"></i> Learning Support</span>
+            <span class="impact-pill"><i class="fas fa-lightbulb"></i> Empowerment</span>
+            <span class="impact-pill"><i class="fas fa-child"></i> Child Development</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Elders, Mothers, PWDs -->
+      <div class="impact-action-card reveal reveal-delay-4">
+        <div class="impact-card-images triple-img">
+          <div class="img-main">
+            <img src="alfred6.jpg" alt="Elders and Community Outreach at FAPCAN" loading="lazy">
+          </div>
+          <div class="img-side">
+            <img src="co11.jpg" alt="Single Mothers Support at FAPCAN" loading="lazy">
+          </div>
+          <div class="img-side">
+            <img src="alfred4.jpg" alt="Persons with Disabilities Support at FAPCAN" loading="lazy">
+          </div>
+        </div>
+        <div class="impact-card-body">
+          <span class="impact-card-tag"><i class="fas fa-hand-holding-heart"></i> &nbsp;Humanitarian Outreach</span>
+          <h3>Supporting Elders, Single Mothers &amp; Persons with Disabilities</h3>
+          <p>Our community outreach reaches those society often forgets — the elderly, single mothers carrying the weight of families alone, and persons with disabilities longing for dignity. FAPCAN provides caregiving, empowerment programs, material support, and a community of belonging that lifts the most vulnerable among us.</p>
+          <div class="impact-card-pills">
+            <span class="impact-pill"><i class="fas fa-user-friends"></i> Elders Care</span>
+            <span class="impact-pill"><i class="fas fa-female"></i> Single Mothers</span>
+            <span class="impact-pill"><i class="fas fa-wheelchair"></i> PWDs Support</span>
+            <span class="impact-pill"><i class="fas fa-globe-africa"></i> Community Outreach</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
 <!-- FOUNDER -->
 <section class="founder" id="founder">
@@ -1830,9 +2154,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════
-     NEWS & UPDATES SECTION — BRIEF
-══════════════════════════════════════════ -->
+
+<!-- NEWS & UPDATES SECTION -->
 <section class="news-section" id="news">
   <div class="news-inner">
 
@@ -1967,7 +2290,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card').forEach(el=>{
+document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card,.impact-action-card,.impact-pill').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
