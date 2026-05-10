@@ -84,10 +84,9 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); display: block; }
 
 /* ════════════════════════════════════════
-   HERO — PAGEANT
+   HERO — PAGEANT  (with background image)
 ════════════════════════════════════════ */
 .pageant-hero {
-  background: var(--navy-dk);
   min-height: 100vh;
   padding-top: 75px;
   position: relative;
@@ -95,23 +94,59 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: flex;
   align-items: center;
 }
-.pageant-hero-geo { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.pageant-hero-geo-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,0.04); animation: geoSpin linear infinite; }
+
+/* Background image layer */
+.pageant-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.pageant-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+/* Dark overlay so text stays readable */
+.pageant-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 20, 45, 0.88) 0%,
+    rgba(10, 20, 45, 0.82) 40%,
+    rgba(10, 20, 45, 0.65) 70%,
+    rgba(10, 20, 45, 0.55) 100%
+  );
+}
+
+.pageant-hero-geo { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.pageant-hero-geo-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,0.06); animation: geoSpin linear infinite; }
 .pageant-hero-geo-ring:nth-child(1) { width: 700px; height: 700px; top: -200px; right: -150px; animation-duration: 60s; }
-.pageant-hero-geo-ring:nth-child(2) { width: 500px; height: 500px; top: -100px; right: -50px; animation-duration: 45s; animation-direction: reverse; border-color: rgba(214,158,46,0.08); }
-.pageant-hero-geo-ring:nth-child(3) { width: 300px; height: 300px; bottom: 80px; left: 40%; animation-duration: 35s; border-color: rgba(39,103,73,0.1); }
+.pageant-hero-geo-ring:nth-child(2) { width: 500px; height: 500px; top: -100px; right: -50px; animation-duration: 45s; animation-direction: reverse; border-color: rgba(214,158,46,0.1); }
+.pageant-hero-geo-ring:nth-child(3) { width: 300px; height: 300px; bottom: 80px; left: 40%; animation-duration: 35s; border-color: rgba(39,103,73,0.12); }
 @keyframes geoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-.pageant-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
+/* Noise grain overlay */
+.pageant-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.04; z-index: 2; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
 
 .pageant-hero-inner {
   max-width: 1320px;
   margin: 0 auto;
   padding: 80px 32px 100px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
+
+/* Left column — text */
+.pageant-hero-left {}
 
 .pageant-hero-breadcrumb {
   display: flex; align-items: center; gap: 10px;
@@ -136,7 +171,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 
 .pageant-hero-title {
   font-family: var(--font-serif); font-weight: 900;
-  font-size: clamp(42px, 6vw, 82px); line-height: 1.05;
+  font-size: clamp(38px, 5vw, 72px); line-height: 1.05;
   color: white;
   margin-bottom: 22px;
   animation: fadeUp 0.9s 0.35s var(--ease-out) both;
@@ -144,35 +179,94 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .pageant-hero-title em { font-style: italic; color: var(--gold); }
 
 .pageant-hero-desc {
-  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.65);
-  max-width: 640px; line-height: 1.8; margin-bottom: 48px;
+  font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.7);
+  max-width: 540px; line-height: 1.8; margin-bottom: 40px;
   animation: fadeUp 0.9s 0.5s var(--ease-out) both;
 }
 
 /* Date pills row */
 .pageant-days-strip {
-  display: flex; gap: 14px; flex-wrap: wrap;
-  margin-bottom: 52px;
+  display: flex; gap: 10px; flex-wrap: wrap;
+  margin-bottom: 0;
   animation: fadeUp 0.9s 0.6s var(--ease-out) both;
 }
 .day-pill {
   display: flex; align-items: center; gap: 12px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.12);
-  padding: 14px 22px;
+  padding: 12px 18px;
   transition: background 0.3s, border-color 0.3s;
   cursor: default;
 }
 .day-pill:hover { background: rgba(255,255,255,0.1); border-color: rgba(214,158,46,0.4); }
-.day-pill-num { font-family: var(--font-serif); font-weight: 900; font-size: 28px; color: var(--gold); line-height: 1; }
+.day-pill-num { font-family: var(--font-serif); font-weight: 900; font-size: 26px; color: var(--gold); line-height: 1; }
 .day-pill-info { display: flex; flex-direction: column; }
-.day-pill-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
-.day-pill-day { font-size: 14px; font-weight: 600; color: white; }
+.day-pill-label { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+.day-pill-day { font-size: 13px; font-weight: 600; color: white; }
 .day-pill:nth-child(1) .day-pill-num { color: var(--teal); }
 .day-pill:nth-child(2) .day-pill-num { color: var(--gold); }
 .day-pill:nth-child(3) .day-pill-num { color: var(--red); }
 
-/* Crown winners hero row */
+/* Right column — image showcase */
+.pageant-hero-right {
+  animation: fadeUp 1.1s 0.5s var(--ease-out) both;
+  position: relative;
+}
+.hero-img-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+.hero-img-showcase .hi-main {
+  grid-column: 1 / -1;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid rgba(214,158,46,0.4);
+}
+.hero-img-showcase .hi-main img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  display: block; transition: transform 0.6s var(--ease-out);
+}
+.hero-img-showcase .hi-main:hover img { transform: scale(1.05); }
+.hero-img-showcase .hi-main::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 60%; background: linear-gradient(to top, rgba(10,20,45,0.85), transparent);
+  pointer-events: none;
+}
+.hi-main-label {
+  position: absolute; bottom: 14px; left: 16px; z-index: 2;
+  font-family: var(--font-serif); font-style: italic; font-size: 13px;
+  color: rgba(255,255,255,0.85);
+  display: flex; align-items: center; gap: 8px;
+}
+.hi-main-label span { background: var(--gold); color: var(--navy-dk); font-size: 9px; font-weight: 800; font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; }
+
+.hero-img-showcase .hi-thumb {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: border-color 0.3s;
+}
+.hero-img-showcase .hi-thumb:hover { border-color: rgba(214,158,46,0.5); }
+.hero-img-showcase .hi-thumb img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  display: block; transition: transform 0.5s var(--ease-out);
+}
+.hero-img-showcase .hi-thumb:hover img { transform: scale(1.07); }
+.hi-thumb-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 28px 12px 10px;
+  background: linear-gradient(to top, rgba(10,20,45,0.9), transparent);
+  font-size: 11px; color: rgba(255,255,255,0.75); font-weight: 500;
+  opacity: 0; transition: opacity 0.3s;
+}
+.hero-img-showcase .hi-thumb:hover .hi-thumb-label { opacity: 1; }
+
+/* Crown winners hero row — keep for small screens */
 .pageant-hero-winners {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 860px;
   animation: fadeUp 1s 0.75s var(--ease-out) both;
@@ -194,6 +288,32 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .hwc-name { font-family: var(--font-serif); font-weight: 700; font-size: 17px; color: white; line-height: 1.25; }
 .hero-winner-card.miss-main .hwc-name { color: var(--gold-lt); }
 .hwc-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+/* Winners strip below hero */
+.hero-winners-strip {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 12px;
+  animation: fadeUp 1s 0.8s var(--ease-out) both;
+}
+.hws-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s, border-color 0.3s;
+}
+.hws-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(214,158,46,0.4); }
+.hws-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.hws-card:nth-child(1)::before { background: linear-gradient(to right, var(--gold), var(--gold-lt)); }
+.hws-card:nth-child(2)::before { background: linear-gradient(to right, #C0C0C0, #E8E8E8); }
+.hws-card:nth-child(3)::before { background: linear-gradient(to right, #CD7F32, #E8A454); }
+.hws-icon { font-size: 20px; margin-bottom: 6px; }
+.hws-label { font-size: 8px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.hws-name { font-family: var(--font-serif); font-weight: 700; font-size: 14px; color: white; line-height: 1.2; }
+.hws-sub { font-size: 10px; color: rgba(255,255,255,0.35); margin-top: 2px; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -407,14 +527,21 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .special-card {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
-  padding: 20px;
+  overflow: hidden;
   transition: background 0.3s, border-color 0.3s, transform 0.3s;
 }
 .special-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(214,158,46,0.3); transform: translateY(-4px); }
-.special-card::before { content: ''; display: block; width: 32px; height: 2px; margin-bottom: 12px; }
-.special-card:nth-child(1)::before { background: var(--gold); }
-.special-card:nth-child(2)::before { background: var(--teal); }
-.special-card:nth-child(3)::before { background: var(--purple); }
+.special-card-img {
+  width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative;
+  background: rgba(255,255,255,0.04);
+}
+.special-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.5s var(--ease-out); }
+.special-card:hover .special-card-img img { transform: scale(1.06); }
+.special-card-body { padding: 18px 20px 20px; }
+.special-card-body::before { content: ''; display: block; width: 32px; height: 2px; margin-bottom: 12px; }
+.special-card:nth-child(1) .special-card-body::before { background: var(--gold); }
+.special-card:nth-child(2) .special-card-body::before { background: var(--teal); }
+.special-card:nth-child(3) .special-card-body::before { background: var(--purple); }
 .special-award-icon { font-size: 24px; margin-bottom: 10px; display: block; }
 .special-award-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
 .special-award-name { font-family: var(--font-serif); font-weight: 700; font-size: 16px; color: white; margin-bottom: 3px; }
@@ -499,7 +626,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative;
   overflow: hidden;
 }
-.story-section::before { content: ''; position: absolute; inset: 0; background-image: url('c3.jpg'); background-size: cover; background-position: center; background-attachment: fixed; z-index: 0; }
+.story-section::before { content: ''; position: absolute; inset: 0; background-image: url('group.jpg'); background-size: cover; background-position: center; background-attachment: fixed; z-index: 0; }
 .story-section::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(247,244,239,0.93) 0%, rgba(247,244,239,0.87) 50%, rgba(26,54,93,0.5) 100%); z-index: 1; }
 .story-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
 .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -551,6 +678,28 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .hosted-text p { font-size: 15.5px; line-height: 1.8; color: rgba(255,255,255,0.65); margin-bottom: 16px; }
 
 /* ════════════════════════════════════════
+   GROUP PHOTO SECTION
+════════════════════════════════════════ */
+.group-section {
+  background: var(--off-white);
+  padding: 80px 0;
+  border-top: 1px solid var(--light-gray);
+}
+.group-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
+.group-header { text-align: center; margin-bottom: 48px; }
+.group-header h2 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(26px, 3vw, 44px); color: var(--navy); line-height: 1.1; margin-bottom: 12px; }
+.group-header h2 em { font-style: italic; color: var(--teal); }
+.group-header p { font-size: 15px; color: var(--mid); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+.group-photo-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+.group-photo-main { aspect-ratio: 16/9; overflow: hidden; position: relative; }
+.group-photo-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out); }
+.group-photo-main:hover img { transform: scale(1.04); }
+.group-photo-side { display: flex; flex-direction: column; gap: 16px; }
+.group-photo-thumb { flex: 1; overflow: hidden; position: relative; }
+.group-photo-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.5s var(--ease-out); }
+.group-photo-thumb:hover img { transform: scale(1.06); }
+
+/* ════════════════════════════════════════
    CTA / TICKER
 ════════════════════════════════════════ */
 .news-ticker { background: var(--dark); padding: 22px 0; display: flex; align-items: center; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); }
@@ -579,7 +728,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 footer { background: var(--dark); padding: 80px 0 0; }
 .footer-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
 .footer-top { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.footer-brand .logo-badge { width: 52px; height: 52px; margin-bottom: 16px; }
+.footer-brand .logo-badge { width: 52px; height: 52px; margin-bottom: 16px; border-radius: 50%; background: linear-gradient(135deg, var(--navy),var(--teal)); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .footer-brand strong { font-family: var(--font-serif); font-weight: 700; font-size: 22px; color: white; display: block; margin-bottom: 4px; }
 .footer-brand .tagline { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 18px; }
 .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
@@ -598,20 +747,14 @@ footer { background: var(--dark); padding: 80px 0 0; }
 .footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
 
 /* ════════════════════════════════════════
-   UTILITY
-════════════════════════════════════════ */
-.text-gold { color: var(--gold); }
-.text-teal { color: var(--teal); }
-.text-red { color: var(--red); }
-.font-serif { font-family: var(--font-serif); }
-.fw-900 { font-weight: 900; }
-
-/* ════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
+  .pageant-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .pageant-hero-right { display: none; }
+  .hero-winners-strip { grid-template-columns: repeat(3,1fr); }
   .hosted-img-circle { width: 280px; height: 280px; }
   .hosted-quote-badge { position: relative; right: auto; bottom: auto; margin-top: 20px; max-width: 100%; }
   .hosted-grid, .story-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -627,10 +770,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .categories-grid { grid-template-columns: repeat(3, 1fr); }
   .categories-header { grid-template-columns: 1fr; gap: 32px; }
   .special-grid { grid-template-columns: repeat(3, 1fr); }
+  .group-photo-grid { grid-template-columns: 1fr; }
+  .group-photo-side { flex-direction: row; height: 240px; }
 }
 @media (max-width: 768px) {
-  .pageant-hero-winners { grid-template-columns: 1fr 1fr; }
-  .pageant-hero-winners .hero-winner-card:first-child { grid-column: 1 / -1; }
+  .hero-winners-strip { grid-template-columns: 1fr 1fr; }
   .impact-strip { grid-template-columns: 1fr 1fr; }
   .miss-podium { grid-template-columns: 1fr; }
   .miss-podium .rank-1 { grid-column: auto; }
@@ -639,11 +783,12 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .mr-row { grid-template-columns: 1fr; }
   .story-pillars { grid-template-columns: 1fr; }
+  .group-photo-side { flex-direction: column; height: auto; }
 }
 @media (max-width: 480px) {
   .nav-inner, .footer-inner { padding: 0 20px; }
-  .pageant-hero-inner, .timeline-inner, .winners-inner, .categories-inner, .story-inner, .hosted-inner { padding: 0 20px; }
-  .pageant-hero-winners { grid-template-columns: 1fr; }
+  .pageant-hero-inner, .timeline-inner, .winners-inner, .categories-inner, .story-inner, .hosted-inner, .group-inner { padding: 0 20px; }
+  .hero-winners-strip { grid-template-columns: 1fr; }
   .pageant-days-strip { gap: 10px; }
   .special-grid { grid-template-columns: 1fr; }
   .categories-grid { grid-template-columns: 1fr; }
@@ -711,75 +856,114 @@ footer { background: var(--dark); padding: 80px 0 0; }
 </div>
 
 <!-- ════════════════════════════════════════
-     HERO
+     HERO — background image + two-column layout
 ════════════════════════════════════════ -->
 <section class="pageant-hero" id="hero">
+
+  <!-- Background image with overlay -->
+  <div class="pageant-hero-bg">
+    <img src="Mr and miss.jpg" alt="Miss and Mr FAPCAN 2026" onerror="this.src='group1.jpg'">
+  </div>
+
+  <!-- Geometric rings -->
   <div class="pageant-hero-geo">
     <div class="pageant-hero-geo-ring"></div>
     <div class="pageant-hero-geo-ring"></div>
     <div class="pageant-hero-geo-ring"></div>
   </div>
+
   <div class="pageant-hero-inner">
-    <div class="pageant-hero-breadcrumb">
-      <a href="index.html">Home</a>
-      <i class="fas fa-chevron-right"></i>
-      <a href="activities.html">Activities</a>
-      <i class="fas fa-chevron-right"></i>
-      <span style="color:rgba(255,255,255,0.65)">Beauty &amp; Talent Pageant 2026</span>
-    </div>
-    <div class="pageant-hero-badges">
-      <div class="hero-tag">Kidodo · Kasese · Uganda · May 2026</div>
-      <div class="hero-cbo-badge"><i class="fas fa-crown"></i> Annual Pageant</div>
-    </div>
-    <h1 class="pageant-hero-title">
-      FAPCAN Beauty<br>&amp; <em>Talent Pageant</em><br>2026
-    </h1>
-    <p class="pageant-hero-desc">
-      Three powerful days of colour, culture, confidence and purpose — celebrating the talent, dignity and potential of young girls, women, and boys from the FAPCAN community in Kasese, Uganda.
-    </p>
 
-    <div class="pageant-days-strip">
-      <div class="day-pill">
-        <div class="day-pill-num">07</div>
-        <div class="day-pill-info">
-          <span class="day-pill-label">Day One — Wednesday</span>
-          <span class="day-pill-day">Mr. FAPCAN Competition</span>
+    <!-- LEFT: Text content -->
+    <div class="pageant-hero-left">
+      <div class="pageant-hero-breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="activities.html">Activities</a>
+        <i class="fas fa-chevron-right"></i>
+        <span style="color:rgba(255,255,255,0.65)">Beauty &amp; Talent Pageant 2026</span>
+      </div>
+      <div class="pageant-hero-badges">
+        <div class="hero-tag">Kidodo · Kasese · Uganda · May 2026</div>
+        <div class="hero-cbo-badge"><i class="fas fa-crown"></i> Annual Pageant</div>
+      </div>
+      <h1 class="pageant-hero-title">
+        FAPCAN Beauty<br>&amp; <em>Talent Pageant</em><br>2026
+      </h1>
+      <p class="pageant-hero-desc">
+        Three powerful days of colour, culture, confidence and purpose — celebrating the talent, dignity and potential of young girls, women, and boys from the FAPCAN community in Kasese, Uganda.
+      </p>
+
+      <div class="pageant-days-strip">
+        <div class="day-pill">
+          <div class="day-pill-num">07</div>
+          <div class="day-pill-info">
+            <span class="day-pill-label">Day One — Wednesday</span>
+            <span class="day-pill-day">Mr. FAPCAN Competition</span>
+          </div>
+        </div>
+        <div class="day-pill">
+          <div class="day-pill-num">08</div>
+          <div class="day-pill-info">
+            <span class="day-pill-label">Day Two — Thursday</span>
+            <span class="day-pill-day">Girls &amp; Women Heats</span>
+          </div>
+        </div>
+        <div class="day-pill">
+          <div class="day-pill-num">09</div>
+          <div class="day-pill-info">
+            <span class="day-pill-label">Day Three — Friday</span>
+            <span class="day-pill-day">Grand Finale — Miss FAPCAN</span>
+          </div>
         </div>
       </div>
-      <div class="day-pill">
-        <div class="day-pill-num">08</div>
-        <div class="day-pill-info">
-          <span class="day-pill-label">Day Two — Thursday</span>
-          <span class="day-pill-day">Girls & Women Heats</span>
+
+      <!-- Winners strip under pills -->
+      <div class="hero-winners-strip">
+        <div class="hws-card">
+          <div class="hws-icon">👑</div>
+          <div class="hws-label">Miss FAPCAN 2026</div>
+          <div class="hws-name">Mbambu Matherine</div>
+          <div class="hws-sub">Grand Winner</div>
         </div>
-      </div>
-      <div class="day-pill">
-        <div class="day-pill-num">09</div>
-        <div class="day-pill-info">
-          <span class="day-pill-label">Day Three — Friday</span>
-          <span class="day-pill-day">Grand Finale — Miss FAPCAN</span>
+        <div class="hws-card">
+          <div class="hws-icon">🥈</div>
+          <div class="hws-label">1st Runner Up</div>
+          <div class="hws-name">Mbambu Joyline</div>
+          <div class="hws-sub">aka Kyibiga Joy</div>
+        </div>
+        <div class="hws-card">
+          <div class="hws-icon">🥉</div>
+          <div class="hws-label">2nd Runner Up</div>
+          <div class="hws-name">Babirye Zainab</div>
+          <div class="hws-sub">2nd Runner Up</div>
         </div>
       </div>
     </div>
 
-    <div class="pageant-hero-winners">
-      <div class="hero-winner-card miss-main">
-        <div class="hwc-crown">👑</div>
-        <div class="hwc-title">Miss FAPCAN 2026</div>
-        <div class="hwc-name">Mbambu Matherine</div>
-        <div class="hwc-sub">Grand Winner — Finale</div>
-      </div>
-      <div class="hero-winner-card runner">
-        <div class="hwc-crown">🥈</div>
-        <div class="hwc-title">1st Runner Up</div>
-        <div class="hwc-name">Mbambu Joyline<br><small style="font-size:13px;opacity:0.8">aka Kyibiga Joy</small></div>
-      </div>
-      <div class="hero-winner-card runner">
-        <div class="hwc-crown">🥉</div>
-        <div class="hwc-title">2nd Runner Up</div>
-        <div class="hwc-name">Babirye Zainab</div>
+    <!-- RIGHT: Image showcase grid -->
+    <div class="pageant-hero-right">
+      <div class="hero-img-showcase">
+        <!-- Main large image -->
+        <div class="hi-main">
+          <img src="runners.jpg" alt="FAPCAN Pageant Finalists 2026" onerror="this.src='group1.jpg'">
+          <div class="hi-main-label">
+            <span>Grand Finale</span>
+            Finalists — 9th May 2026
+          </div>
+        </div>
+        <!-- Two thumbs below -->
+        <div class="hi-thumb">
+          <img src="miss1.jpg" alt="Miss FAPCAN contestant" onerror="this.src='yozefina.jpg'">
+          <div class="hi-thumb-label">Miss FAPCAN contestant</div>
+        </div>
+        <div class="hi-thumb">
+          <img src="miss2.jpg" alt="Miss FAPCAN contestant" onerror="this.src='prisca.jpg'">
+          <div class="hi-thumb-label">Miss FAPCAN contestant</div>
+        </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -838,7 +1022,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
           <div class="timeline-connector" style="height:120px;"></div>
         </div>
         <div class="timeline-content-right">
-          <!-- mobile view content -->
           <div class="tl-day-label">Day One · Wednesday 7th May</div>
           <div class="tl-date">Mr. FAPCAN</div>
           <div class="tl-body">Wednesday marked the beginning of the event. Young boys confidently showcased their leadership abilities, talents, discipline, and communication skills before the community.</div>
@@ -853,16 +1036,14 @@ footer { background: var(--dark); padding: 80px 0 0; }
 
       <!-- DAY 2 -->
       <div class="timeline-item reveal">
-        <div class="timeline-content-left">
-          <!-- empty on day 2 — content on right -->
-        </div>
+        <div class="timeline-content-left"></div>
         <div class="timeline-node">
           <div class="timeline-dot">2</div>
           <div class="timeline-connector" style="height:120px;"></div>
         </div>
         <div class="timeline-content-right">
           <div class="tl-day-label">Day Two · Thursday 8th May</div>
-          <div class="tl-date">Girls & Women Heats</div>
+          <div class="tl-date">Girls &amp; Women Heats</div>
           <div class="tl-body">Thursday was dedicated to girls and women. Participants regardless of age were all given equal opportunity to participate and express themselves. The event reflected unity, inclusion, confidence, and empowerment. After different presentations and performances, <strong>ten contestants</strong> successfully qualified for the grand finale.</div>
           <div class="tl-badge gold">
             <i class="fas fa-users"></i> 10 Qualified for Grand Finale
@@ -881,13 +1062,13 @@ footer { background: var(--dark); padding: 80px 0 0; }
           </div>
           <div class="tl-img-grid" style="max-width:340px;margin-left:auto;margin-top:16px;">
             <div class="tl-img-placeholder">
-              <img src="miss.jpg" alt="Miss FAPCAN 2026" onerror="this.style.display='none'">
+              <img src="Mr and miss.jpg" alt="Miss and Mr FAPCAN 2026" onerror="this.style.display='none'">
             </div>
             <div class="tl-img-placeholder">
-              <img src="finale1.jpg" alt="Grand Finale" onerror="this.style.display='none'">
+              <img src="miss3.jpg" alt="Grand Finale" onerror="this.style.display='none'">
             </div>
             <div class="tl-img-placeholder">
-              <img src="finale2.jpg" alt="Pageant Finale" onerror="this.style.display='none'">
+              <img src="runners.jpg" alt="Pageant Finalists" onerror="this.style.display='none'">
             </div>
           </div>
         </div>
@@ -895,7 +1076,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
           <div class="timeline-dot">3</div>
         </div>
         <div class="timeline-content-right">
-          <!-- mobile -->
           <div class="tl-day-label">Day Three · Friday 9th May 2026</div>
           <div class="tl-date">Grand Finale</div>
           <div class="tl-body">The biggest and most exciting day — finalists competed across five categories: self-introduction, talent showcase, creativity, traditional wear, and question &amp; answer.</div>
@@ -904,13 +1084,13 @@ footer { background: var(--dark); padding: 80px 0 0; }
           </div>
           <div class="tl-img-grid" style="margin-top:16px;">
             <div class="tl-img-placeholder">
-              <img src="miss.jpg" alt="Miss FAPCAN 2026" onerror="this.style.display='none'">
+              <img src="Mr and miss.jpg" alt="Miss and Mr FAPCAN 2026" onerror="this.style.display='none'">
             </div>
             <div class="tl-img-placeholder">
-              <img src="finale1.jpg" alt="Grand Finale" onerror="this.style.display='none'">
+              <img src="miss3.jpg" alt="Grand Finale" onerror="this.style.display='none'">
             </div>
             <div class="tl-img-placeholder">
-              <img src="finale2.jpg" alt="Pageant Finale" onerror="this.style.display='none'">
+              <img src="runners.jpg" alt="Pageant Finalists" onerror="this.style.display='none'">
             </div>
           </div>
         </div>
@@ -939,11 +1119,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
     <div class="miss-podium reveal">
-      <!-- Winner -->
+      <!-- 1st Runner Up -->
       <div class="podium-card rank-2">
         <div class="podium-img">
-          <img src="runner1.jpg" alt="Mbambu Joyline" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="podium-img-placeholder" style="display:none">👑</div>
+          <img src="kibuga.jpg" alt="Mbambu Joyline" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="podium-img-placeholder" style="display:none">🥈</div>
           <div class="podium-img-overlay">
             <div class="podium-rank-badge">1st Runner Up</div>
             <div class="podium-name">Mbambu Joyline</div>
@@ -959,7 +1139,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <!-- CENTER — WINNER -->
       <div class="podium-card rank-1">
         <div class="podium-img">
-          <img src="miss.jpg" alt="Mbambu Matherine" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="yozefina.jpg" alt="Mbambu Matherine — Miss FAPCAN 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="podium-img-placeholder" style="display:none">👑</div>
           <div class="podium-img-overlay">
             <div class="podium-rank-badge">Miss FAPCAN 2026</div>
@@ -973,9 +1153,10 @@ footer { background: var(--dark); padding: 80px 0 0; }
         </div>
       </div>
 
+      <!-- 2nd Runner Up -->
       <div class="podium-card rank-3">
         <div class="podium-img">
-          <img src="runner2.jpg" alt="Babirye Zainab" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="zainab.jpg" alt="Babirye Zainab" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="podium-img-placeholder" style="display:none">🥉</div>
           <div class="podium-img-overlay">
             <div class="podium-rank-badge">2nd Runner Up</div>
@@ -1006,7 +1187,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
           <p style="font-size:14.5px;color:rgba(255,255,255,0.55);line-height:1.72;margin-bottom:0;">Bwambale Moses was proudly crowned as the Face of FAPCAN — Mr. FAPCAN 2026, demonstrating outstanding leadership, talent, discipline, and communication skills before the community.</p>
         </div>
         <div class="mr-img-wrap" style="width:220px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,0.04);">
-          <img src="mr.jpg" alt="Bwambale Moses" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
+          <img src="mr.jpg" alt="Bwambale Moses — Mr FAPCAN 2026" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;">
         </div>
       </div>
       <div class="mr-runner-card">
@@ -1017,27 +1198,42 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
 
-    <!-- SPECIAL AWARDS -->
+    <!-- SPECIAL AWARDS — now with photos -->
     <div class="special-awards reveal">
       <div class="special-awards-title">Special Awards &amp; Recognition</div>
       <div class="special-grid">
         <div class="special-card">
-          <span class="special-award-icon">📏</span>
-          <div class="special-award-label">Special Award</div>
-          <div class="special-award-name">Masika Jetress</div>
-          <div class="special-award-title">Miss With Height</div>
+          <div class="special-card-img">
+            <img src="jetress.jpg" alt="Masika Jetress — Miss With Height" onerror="this.style.display='none'">
+          </div>
+          <div class="special-card-body">
+            <span class="special-award-icon">📏</span>
+            <div class="special-award-label">Special Award</div>
+            <div class="special-award-name">Masika Jetress</div>
+            <div class="special-award-title">Miss With Height</div>
+          </div>
         </div>
         <div class="special-card">
-          <span class="special-award-icon">🎭</span>
-          <div class="special-award-label">Special Award</div>
-          <div class="special-award-name">Ithungu Esther</div>
-          <div class="special-award-title">Best Model</div>
+          <div class="special-card-img">
+            <img src="ester.jpg" alt="Ithungu Esther — Best Model" onerror="this.style.display='none'">
+          </div>
+          <div class="special-card-body">
+            <span class="special-award-icon">🎭</span>
+            <div class="special-award-label">Special Award</div>
+            <div class="special-award-name">Ithungu Esther</div>
+            <div class="special-award-title">Best Model</div>
+          </div>
         </div>
         <div class="special-card">
-          <span class="special-award-icon">⭐</span>
-          <div class="special-award-label">Special Award</div>
-          <div class="special-award-name">Kabugho Josephine</div>
-          <div class="special-award-title">Miss Popularity</div>
+          <div class="special-card-img">
+            <img src="prisca.jpg" alt="Kabugho Josephine — Miss Popularity" onerror="this.style.display='none'">
+          </div>
+          <div class="special-card-body">
+            <span class="special-award-icon">⭐</span>
+            <div class="special-award-label">Special Award</div>
+            <div class="special-award-name">Kabugho Josephine</div>
+            <div class="special-award-title">Miss Popularity</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1091,7 +1287,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
 </section>
 
 <!-- ════════════════════════════════════════
-     GALLERY SCROLL
+     GALLERY SCROLL — uses all provided images
 ════════════════════════════════════════ -->
 <section class="pageant-gallery" id="gallery">
   <div class="pageant-gallery-header reveal">
@@ -1101,32 +1297,62 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
   <div class="gallery-scroll-outer">
     <div class="gallery-track" id="galleryTrack">
-      <!-- First set -->
-      <div class="gallery-item"><img src="miss.jpg" alt="Miss FAPCAN 2026" loading="lazy"><div class="gallery-item-overlay"><span>Miss FAPCAN 2026 — Mbambu Matherine</span></div></div>
+      <!-- First set — all provided images -->
+      <div class="gallery-item"><img src="yozefina.jpg" alt="Miss FAPCAN 2026" loading="lazy"><div class="gallery-item-overlay"><span>Miss FAPCAN 2026 — Mbambu Matherine</span></div></div>
+      <div class="gallery-item"><img src="kibuga.jpg" alt="1st Runner Up" loading="lazy"><div class="gallery-item-overlay"><span>1st Runner Up — Mbambu Joyline</span></div></div>
+      <div class="gallery-item"><img src="jetress.jpg" alt="Masika Jetress" loading="lazy"><div class="gallery-item-overlay"><span>Miss With Height — Masika Jetress</span></div></div>
+      <div class="gallery-item"><img src="prisca.jpg" alt="Kabugho Josephine" loading="lazy"><div class="gallery-item-overlay"><span>Miss Popularity — Kabugho Josephine</span></div></div>
       <div class="gallery-item"><img src="mr.jpg" alt="Mr FAPCAN 2026" loading="lazy"><div class="gallery-item-overlay"><span>Mr. FAPCAN 2026 — Bwambale Moses</span></div></div>
-      <div class="gallery-item"><img src="runner1.jpg" alt="1st Runner Up" loading="lazy"><div class="gallery-item-overlay"><span>1st Runner Up — Mbambu Joyline</span></div></div>
-      <div class="gallery-item"><img src="runner2.jpg" alt="2nd Runner Up" loading="lazy"><div class="gallery-item-overlay"><span>2nd Runner Up — Babirye Zainab</span></div></div>
-      <div class="gallery-item"><img src="pageant1.jpg" alt="Pageant Day 1" loading="lazy"><div class="gallery-item-overlay"><span>Day One — Mr. FAPCAN Competition</span></div></div>
-      <div class="gallery-item"><img src="pageant2.jpg" alt="Pageant Day 2" loading="lazy"><div class="gallery-item-overlay"><span>Day Two — Girls &amp; Women Heats</span></div></div>
-      <div class="gallery-item"><img src="pageant3.jpg" alt="Grand Finale" loading="lazy"><div class="gallery-item-overlay"><span>Grand Finale — 9th May 2026</span></div></div>
-      <div class="gallery-item"><img src="finale1.jpg" alt="Crowning Ceremony" loading="lazy"><div class="gallery-item-overlay"><span>The Crowning Moment</span></div></div>
-      <div class="gallery-item"><img src="finale2.jpg" alt="Cultural Wear" loading="lazy"><div class="gallery-item-overlay"><span>Traditional Wear Presentation</span></div></div>
-      <div class="gallery-item"><img src="award1.jpg" alt="Special Awards" loading="lazy"><div class="gallery-item-overlay"><span>Special Awards Night</span></div></div>
-      <div class="gallery-item"><img src="pageant4.jpg" alt="Talent Showcase" loading="lazy"><div class="gallery-item-overlay"><span>Talent Showcase Round</span></div></div>
-      <div class="gallery-item"><img src="pageant5.jpg" alt="Community celebration" loading="lazy"><div class="gallery-item-overlay"><span>Community Celebration</span></div></div>
-      <!-- Duplicate for seamless loop -->
-      <div class="gallery-item"><img src="miss.jpg" alt="Miss FAPCAN 2026" loading="lazy"><div class="gallery-item-overlay"><span>Miss FAPCAN 2026 — Mbambu Matherine</span></div></div>
+      <div class="gallery-item"><img src="runners.jpg" alt="Grand Finalists" loading="lazy"><div class="gallery-item-overlay"><span>Grand Finalists — 9th May 2026</span></div></div>
+      <div class="gallery-item"><img src="Mr and miss.jpg" alt="Miss and Mr FAPCAN" loading="lazy"><div class="gallery-item-overlay"><span>Miss &amp; Mr FAPCAN 2026</span></div></div>
+      <div class="gallery-item"><img src="ester.jpg" alt="Ithungu Esther" loading="lazy"><div class="gallery-item-overlay"><span>Best Model — Ithungu Esther</span></div></div>
+      <div class="gallery-item"><img src="miss1.jpg" alt="Pageant contestant" loading="lazy"><div class="gallery-item-overlay"><span>Grand Finale Contestant</span></div></div>
+      <div class="gallery-item"><img src="group.jpg" alt="Community celebration" loading="lazy"><div class="gallery-item-overlay"><span>Community Celebration</span></div></div>
+      <div class="gallery-item"><img src="group1.jpg" alt="Pageant group" loading="lazy"><div class="gallery-item-overlay"><span>FAPCAN Pageant Community</span></div></div>
+      <div class="gallery-item"><img src="miss2.jpg" alt="Pageant contestant" loading="lazy"><div class="gallery-item-overlay"><span>Talent Showcase Round</span></div></div>
+      <div class="gallery-item"><img src="miss3.jpg" alt="Pageant contestant" loading="lazy"><div class="gallery-item-overlay"><span>Traditional Wear Presentation</span></div></div>
+      <div class="gallery-item"><img src="zainab.jpg" alt="Babirye Zainab" loading="lazy"><div class="gallery-item-overlay"><span>2nd Runner Up — Babirye Zainab</span></div></div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="gallery-item"><img src="yozefina.jpg" alt="Miss FAPCAN 2026" loading="lazy"><div class="gallery-item-overlay"><span>Miss FAPCAN 2026 — Mbambu Matherine</span></div></div>
+      <div class="gallery-item"><img src="kibuga.jpg" alt="1st Runner Up" loading="lazy"><div class="gallery-item-overlay"><span>1st Runner Up — Mbambu Joyline</span></div></div>
+      <div class="gallery-item"><img src="jetress.jpg" alt="Masika Jetress" loading="lazy"><div class="gallery-item-overlay"><span>Miss With Height — Masika Jetress</span></div></div>
+      <div class="gallery-item"><img src="prisca.jpg" alt="Kabugho Josephine" loading="lazy"><div class="gallery-item-overlay"><span>Miss Popularity — Kabugho Josephine</span></div></div>
       <div class="gallery-item"><img src="mr.jpg" alt="Mr FAPCAN 2026" loading="lazy"><div class="gallery-item-overlay"><span>Mr. FAPCAN 2026 — Bwambale Moses</span></div></div>
-      <div class="gallery-item"><img src="runner1.jpg" alt="1st Runner Up" loading="lazy"><div class="gallery-item-overlay"><span>1st Runner Up — Mbambu Joyline</span></div></div>
-      <div class="gallery-item"><img src="runner2.jpg" alt="2nd Runner Up" loading="lazy"><div class="gallery-item-overlay"><span>2nd Runner Up — Babirye Zainab</span></div></div>
-      <div class="gallery-item"><img src="pageant1.jpg" alt="Pageant Day 1" loading="lazy"><div class="gallery-item-overlay"><span>Day One — Mr. FAPCAN Competition</span></div></div>
-      <div class="gallery-item"><img src="pageant2.jpg" alt="Pageant Day 2" loading="lazy"><div class="gallery-item-overlay"><span>Day Two — Girls &amp; Women Heats</span></div></div>
-      <div class="gallery-item"><img src="pageant3.jpg" alt="Grand Finale" loading="lazy"><div class="gallery-item-overlay"><span>Grand Finale — 9th May 2026</span></div></div>
-      <div class="gallery-item"><img src="finale1.jpg" alt="Crowning Ceremony" loading="lazy"><div class="gallery-item-overlay"><span>The Crowning Moment</span></div></div>
-      <div class="gallery-item"><img src="finale2.jpg" alt="Cultural Wear" loading="lazy"><div class="gallery-item-overlay"><span>Traditional Wear Presentation</span></div></div>
-      <div class="gallery-item"><img src="award1.jpg" alt="Special Awards" loading="lazy"><div class="gallery-item-overlay"><span>Special Awards Night</span></div></div>
-      <div class="gallery-item"><img src="pageant4.jpg" alt="Talent Showcase" loading="lazy"><div class="gallery-item-overlay"><span>Talent Showcase Round</span></div></div>
-      <div class="gallery-item"><img src="pageant5.jpg" alt="Community celebration" loading="lazy"><div class="gallery-item-overlay"><span>Community Celebration</span></div></div>
+      <div class="gallery-item"><img src="runners.jpg" alt="Grand Finalists" loading="lazy"><div class="gallery-item-overlay"><span>Grand Finalists — 9th May 2026</span></div></div>
+      <div class="gallery-item"><img src="Mr and miss.jpg" alt="Miss and Mr FAPCAN" loading="lazy"><div class="gallery-item-overlay"><span>Miss &amp; Mr FAPCAN 2026</span></div></div>
+      <div class="gallery-item"><img src="ester.jpg" alt="Ithungu Esther" loading="lazy"><div class="gallery-item-overlay"><span>Best Model — Ithungu Esther</span></div></div>
+      <div class="gallery-item"><img src="miss1.jpg" alt="Pageant contestant" loading="lazy"><div class="gallery-item-overlay"><span>Grand Finale Contestant</span></div></div>
+      <div class="gallery-item"><img src="group.jpg" alt="Community celebration" loading="lazy"><div class="gallery-item-overlay"><span>Community Celebration</span></div></div>
+      <div class="gallery-item"><img src="group1.jpg" alt="Pageant group" loading="lazy"><div class="gallery-item-overlay"><span>FAPCAN Pageant Community</span></div></div>
+      <div class="gallery-item"><img src="miss2.jpg" alt="Pageant contestant" loading="lazy"><div class="gallery-item-overlay"><span>Talent Showcase Round</span></div></div>
+      <div class="gallery-item"><img src="miss3.jpg" alt="Pageant contestant" loading="lazy"><div class="gallery-item-overlay"><span>Traditional Wear Presentation</span></div></div>
+      <div class="gallery-item"><img src="zainab.jpg" alt="Babirye Zainab" loading="lazy"><div class="gallery-item-overlay"><span>2nd Runner Up — Babirye Zainab</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     GROUP PHOTO SECTION
+════════════════════════════════════════ -->
+<section class="group-section" id="community">
+  <div class="group-inner">
+    <div class="group-header reveal">
+      <div class="section-label" style="justify-content:center;">Community Moments</div>
+      <h2>Together in <em>Joy &amp; Unity</em></h2>
+      <p>The FAPCAN community gathered in celebration — a testament to the strength, love, and purpose that defines this extraordinary family in Kasese, Uganda.</p>
+    </div>
+    <div class="group-photo-grid reveal">
+      <div class="group-photo-main">
+        <img src="group1.jpg" alt="FAPCAN Community Group Photo" onerror="this.style.display='none'">
+      </div>
+      <div class="group-photo-side">
+        <div class="group-photo-thumb">
+          <img src="group.jpg" alt="FAPCAN Community" onerror="this.style.display='none'">
+        </div>
+        <div class="group-photo-thumb">
+          <img src="runners.jpg" alt="Pageant finalists group" onerror="this.style.display='none'">
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1183,7 +1409,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
     <div class="hosted-grid">
       <div class="hosted-img-wrap reveal-left">
         <div class="hosted-img-circle">
-          <img src="UUU.jpg" alt="Alfred Bwambale">
+          <img src="UUU.jpg" alt="Alfred Bwambale" onerror="this.src='mr.jpg'">
         </div>
         <div class="hosted-quote-badge">
           <p>"A celebration of talent, dignity, culture, confidence, and purpose."</p>
@@ -1272,7 +1498,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
       <div class="footer-col"><h4>This Event</h4><ul>
         <li><a href="#timeline"><i class="fas fa-chevron-right"></i> 3-Day Programme</a></li>
-        <li><a href="#winners"><i class="fas fa-chevron-right"></i> Winners & Awards</a></li>
+        <li><a href="#winners"><i class="fas fa-chevron-right"></i> Winners &amp; Awards</a></li>
         <li><a href="#categories"><i class="fas fa-chevron-right"></i> Competition Rounds</a></li>
         <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Photo Gallery</a></li>
         <li><a href="#story"><i class="fas fa-chevron-right"></i> The Story</a></li>
@@ -1306,7 +1532,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.podium-card,.hero-winner-card,.cat-card,.special-card,.day-pill,.gallery-item,.story-pillar').forEach(el=>{
+document.querySelectorAll('a,button,.podium-card,.hero-winner-card,.cat-card,.special-card,.day-pill,.gallery-item,.story-pillar,.hws-card,.hi-thumb,.hi-main,.group-photo-main,.group-photo-thumb').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
@@ -1385,7 +1611,7 @@ if(tickerTrack){
   tickerTrack.addEventListener('mouseleave',()=>tickerTrack.style.animationPlayState='running');
 }
 
-/* ── TIMELINE: hide desktop columns on mobile, show right col ── */
+/* ── TIMELINE: hide desktop columns on mobile ── */
 function checkTimeline(){
   const isMobile = window.innerWidth <= 1024;
   document.querySelectorAll('.timeline-content-left').forEach(el=>{
