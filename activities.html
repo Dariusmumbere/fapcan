@@ -154,7 +154,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); transition: transform 0.3s, opacity 0.3s; }
 
 /* ══════════════════════════════════════
-   PAGE HERO — with real background image
+   PAGE HERO — SMOOTH SLIDING IMAGES
 ══════════════════════════════════════ */
 .page-hero {
   padding-top: 75px;
@@ -163,18 +163,61 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: flex; align-items: center;
 }
 
-/* BG image layer */
-.page-hero-bg {
+/* ── HERO SLIDESHOW ── */
+.hero-slides {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('Agric1.jpg');
+}
+.hero-slide {
+  position: absolute; inset: 0;
   background-size: cover;
   background-position: center 40%;
+  opacity: 0;
   transform: scale(1.08);
-  animation: heroBgZoom 18s ease-in-out infinite alternate;
+  transition: opacity 1.4s ease-in-out, transform 8s ease-in-out;
+  will-change: opacity, transform;
 }
-@keyframes heroBgZoom {
-  from { transform: scale(1.08); background-position: center 40%; }
-  to   { transform: scale(1.14); background-position: center 48%; }
+.hero-slide.active {
+  opacity: 1;
+  transform: scale(1.14);
+}
+.hero-slide.prev {
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 1.4s ease-in-out, transform 1.4s ease-in-out;
+}
+/* Individual slide backgrounds */
+.hero-slide:nth-child(1) { background-image: url('Agric1.jpg'); }
+.hero-slide:nth-child(2) { background-image: url('Agric4.jpg'); }
+.hero-slide:nth-child(3) { background-image: url('sports1.jpeg'); }
+.hero-slide:nth-child(4) { background-image: url('livestock1.jpg'); }
+.hero-slide:nth-child(5) { background-image: url('handcraft1.jpg'); }
+.hero-slide:nth-child(6) { background-image: url('pottery1.jpg'); }
+
+/* Slide progress dots */
+.hero-slide-dots {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px; z-index: 5;
+}
+.hero-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.3); border: none; cursor: pointer;
+  padding: 0; transition: background 0.4s, transform 0.4s;
+}
+.hero-dot.active { background: var(--gold); transform: scale(1.5); }
+
+/* Progress bar per slide */
+.hero-progress {
+  position: absolute; bottom: 0; left: 0; z-index: 5;
+  height: 3px; background: rgba(255,255,255,0.2); width: 100%;
+}
+.hero-progress-bar {
+  height: 100%; background: var(--gold);
+  width: 0%; transition: width 0.1s linear;
+  animation: none;
+}
+.hero-progress-bar.running {
+  width: 100%;
+  transition: width 5s linear;
 }
 
 /* multi-layer colour overlay */
@@ -304,6 +347,29 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   color: rgba(255,255,255,0.35);
 }
 
+/* Hero slide nav arrows */
+.hero-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 5; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: white; width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; backdrop-filter: blur(8px);
+  transition: background 0.3s, transform 0.3s var(--ease-out);
+  font-size: 18px;
+}
+.hero-arrow:hover { background: rgba(214,158,46,0.25); transform: translateY(-50%) scale(1.08); }
+.hero-arrow.prev { left: 32px; }
+.hero-arrow.next { right: 32px; }
+
+/* Slide counter */
+.hero-counter {
+  position: absolute; top: 36px; right: 80px; z-index: 5;
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  animation: fadeUp 0.8s 1s var(--ease-out) both;
+}
+.hero-counter span { color: var(--gold); font-size: 18px; font-family: var(--font-serif); font-weight: 900; }
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -386,9 +452,9 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   border-left: 3px solid var(--gold); padding-left: 24px;
 }
 
-/* ══════════════════════════════════════
+/* ═══════════════════════════════════════
    ACTIVITY CARDS — with background images
-══════════════════════════════════════ */
+═══════════════════════════════════════ */
 .act-featured-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -407,7 +473,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .act-card-large:hover { transform: scale(1.005); }
 
-/* Background image layer */
 .act-card-bg {
   position: absolute; inset: 0; z-index: 0;
   background-size: cover; background-position: center;
@@ -417,7 +482,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .act-card-large:hover .act-card-bg { transform: scale(1.12); filter: saturate(1.1); }
 
-/* Gradient overlay on top of image */
 .act-card-large-overlay {
   position: absolute; inset: 0; z-index: 1;
   transition: opacity 0.4s;
@@ -428,7 +492,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .c-gold   .act-card-large-overlay { background: linear-gradient(to top, rgba(60,35,0,0.92) 0%, rgba(60,35,0,0.55) 50%, rgba(100,65,0,0.25) 100%); }
 .act-card-large:hover .act-card-large-overlay { opacity: 0.85; }
 
-/* Pattern overlay */
 .act-card-large::after {
   content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
   opacity: 0.04;
@@ -692,13 +755,12 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .why-visual-body h4 { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
 .why-visual-body p { font-size: 13.5px; color: var(--mid); line-height: 1.65; }
 
-/* ═══════════════════════════════════════════
-   PHOTO GALLERY — ENLARGED 3-PER-ROW GRID
-   Replaces old narrow 5-column photo band
-═══════════════════════════════════════════ */
+/* ══════════════════════════════════════
+   PHOTO GALLERY — BIGGER, 3 PER ROW
+══════════════════════════════════════ */
 .photo-gallery-section {
   background: var(--dark);
-  padding: 80px 0;
+  padding: 80px 0 0;
 }
 .photo-gallery-header {
   max-width: 1320px; margin: 0 auto; padding: 0 32px 48px;
@@ -706,81 +768,104 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .photo-gallery-header h2 {
   font-family: var(--font-serif); font-weight: 900;
-  font-size: clamp(26px, 3vw, 42px); color: white; line-height: 1.1;
+  font-size: clamp(26px, 3vw, 44px); color: white; line-height: 1.1;
 }
 .photo-gallery-header h2 em { font-style: italic; color: var(--gold); }
-.photo-gallery-header p {
-  font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 340px;
-}
+.photo-gallery-header p { font-size: 15px; color: rgba(255,255,255,0.45); max-width: 420px; line-height: 1.7; }
 
-.photo-gallery-grid {
-  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+/* ─ MASONRY-STYLE GRID: 3 columns, tall images ─ */
+.photo-grid {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px 80px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: 10px;
 }
 
-.gallery-item {
-  position: relative; overflow: hidden;
-  border-radius: 3px;
-  cursor: pointer;
+.photo-item {
+  position: relative; overflow: hidden; cursor: pointer;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
 }
 
-/* Tall items (first of every group of 6 spans 2 rows) */
-.gallery-item.tall { grid-row: span 2; }
+/* Vary heights for visual rhythm */
+.photo-item:nth-child(1),
+.photo-item:nth-child(5),
+.photo-item:nth-child(9),
+.photo-item:nth-child(13) { aspect-ratio: 4/3; }
 
-.gallery-item-bg {
-  width: 100%; height: 100%;
-  min-height: 280px;
+.photo-item:nth-child(2),
+.photo-item:nth-child(6),
+.photo-item:nth-child(10),
+.photo-item:nth-child(14) { aspect-ratio: 3/4; }
+
+.photo-item:nth-child(3),
+.photo-item:nth-child(7),
+.photo-item:nth-child(11),
+.photo-item:nth-child(15) { aspect-ratio: 16/9; }
+
+.photo-item:nth-child(4),
+.photo-item:nth-child(8),
+.photo-item:nth-child(12),
+.photo-item:nth-child(16) { aspect-ratio: 1/1; }
+
+/* Span wide items across 2 cols */
+.photo-item.wide {
+  grid-column: span 2;
+  aspect-ratio: 16/7;
+}
+
+.photo-item-bg {
+  position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  transform: scale(1.06);
-  transition: transform 0.7s var(--ease-out), filter 0.5s;
+  transform: scale(1.05);
+  transition: transform 0.8s var(--ease-out), filter 0.5s;
   filter: saturate(0.75) brightness(0.88);
-  display: block;
+  will-change: transform;
 }
-.gallery-item.tall .gallery-item-bg { min-height: 566px; } /* 2 × 280 + 6px gap */
-
-.gallery-item:hover .gallery-item-bg {
-  transform: scale(1);
+.photo-item:hover .photo-item-bg {
+  transform: scale(1.12);
   filter: saturate(1.05) brightness(0.95);
 }
 
-.gallery-item-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.18) 45%, transparent 100%);
+/* Overlay */
+.photo-item-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
   opacity: 0;
-  transition: opacity 0.4s var(--ease-out);
+  transition: opacity 0.4s;
 }
-.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.photo-item:hover .photo-item-overlay { opacity: 1; }
 
-.gallery-item-label {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-  padding: 22px 22px 20px;
-  transform: translateY(10px); opacity: 0;
+/* Label */
+.photo-item-label {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+  padding: 28px 24px 20px;
+  transform: translateY(8px);
+  opacity: 0;
   transition: transform 0.4s var(--ease-out), opacity 0.4s;
-  display: flex; align-items: flex-end; justify-content: space-between;
 }
-.gallery-item:hover .gallery-item-label { transform: translateY(0); opacity: 1; }
+.photo-item:hover .photo-item-label { transform: translateY(0); opacity: 1; }
+.photo-item-label strong {
+  display: block; font-family: var(--font-serif); font-weight: 700; font-size: 18px;
+  color: white; margin-bottom: 4px; text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.photo-item-label span {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold);
+}
 
-.gallery-item-label span {
-  font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-  color: white; text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+/* Zoom icon on hover */
+.photo-item-zoom {
+  position: absolute; top: 16px; right: 16px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 14px;
+  opacity: 0; transform: scale(0.7);
+  transition: opacity 0.3s, transform 0.4s var(--ease-out);
+  backdrop-filter: blur(6px);
 }
-.gallery-item-label i {
-  font-size: 18px; color: rgba(255,255,255,0.6);
-  transition: color 0.25s, transform 0.3s;
-}
-.gallery-item:hover .gallery-item-label i { color: var(--gold); transform: scale(1.15); }
-
-/* accent border on hover */
-.gallery-item::after {
-  content: '';
-  position: absolute; inset: 0; z-index: 3; pointer-events: none;
-  border: 2px solid transparent;
-  transition: border-color 0.35s;
-  border-radius: 3px;
-}
-.gallery-item:hover::after { border-color: rgba(214,158,46,0.45); }
+.photo-item:hover .photo-item-zoom { opacity: 1; transform: scale(1); }
 
 /* ── CTA BAND ── */
 .cta-band {
@@ -794,7 +879,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px
   );
 }
-/* Animated shimmer wave */
 .cta-band::after {
   content: ''; position: absolute; top: -50%; left: -60%; width: 80%; height: 200%;
   background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.07) 50%, transparent 70%);
@@ -884,6 +968,7 @@ footer {
   }
   .mob-link:hover { background: var(--off-white); }
   .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
+  .hero-arrow { display: none; }
 }
 
 @media (max-width: 960px) {
@@ -895,12 +980,8 @@ footer {
   .impact-strip { grid-template-columns: repeat(2, 1fr); }
   .impact-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
   .footer-top { grid-template-columns: 1fr 1fr; }
-  /* Gallery: 2 columns on tablets */
-  .photo-gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-item.tall { grid-row: span 1; }
-  .gallery-item.tall .gallery-item-bg { min-height: 280px; }
-  .photo-gallery-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-  .photo-gallery-header p { max-width: 100%; }
+  .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .photo-item.wide { grid-column: span 2; }
 }
 
 @media (max-width: 640px) {
@@ -909,14 +990,13 @@ footer {
   .why-visual { grid-template-columns: 1fr; }
   .why-visual-card:first-child { grid-column: auto; }
   .impact-strip { grid-template-columns: 1fr 1fr; }
-  .nav-inner, .activities-main-inner, .why-inner, .footer-inner, .page-hero-inner,
-  .photo-gallery-header, .photo-gallery-grid { padding: 0 16px; }
-  .page-hero-inner { padding: 60px 16px; }
+  .nav-inner, .activities-main-inner, .why-inner, .footer-inner, .page-hero-inner { padding: 0 20px; }
+  .page-hero-inner { padding: 60px 20px; }
   .activities-main { padding: 70px 0; }
   .why-activities { padding: 70px 0; }
-  .photo-gallery-section { padding: 60px 0; }
-  /* Gallery: 1 column on mobile */
-  .photo-gallery-grid { grid-template-columns: 1fr; gap: 4px; }
+  .photo-grid { grid-template-columns: 1fr; gap: 6px; padding: 0 16px 60px; }
+  .photo-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
+  .photo-gallery-header { flex-direction: column; gap: 12px; padding: 0 20px 32px; }
 }
 </style>
 </head>
@@ -984,9 +1064,18 @@ footer {
   <a href="index.html#contact" class="mob-link">Contact</a>
 </div>
 
-<!-- PAGE HERO -->
+<!-- ══ PAGE HERO — SLIDING IMAGES ══ -->
 <section class="page-hero">
-  <div class="page-hero-bg"></div>
+  <!-- Slideshow layers -->
+  <div class="hero-slides">
+    <div class="hero-slide active"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+    <div class="hero-slide"></div>
+  </div>
+
   <div class="page-hero-overlay"></div>
   <div class="page-hero-grain"></div>
   <div class="page-hero-geo">
@@ -995,6 +1084,14 @@ footer {
     <div class="page-hero-geo-ring"></div>
   </div>
   <div class="page-hero-line"></div>
+
+  <!-- Slide counter -->
+  <div class="hero-counter"><span id="slideNum">1</span> / 6</div>
+
+  <!-- Arrow navigation -->
+  <button class="hero-arrow prev" id="heroPrev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+  <button class="hero-arrow next" id="heroNext" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+
   <div class="page-hero-inner">
     <div class="breadcrumb">
       <a href="index.html">Home</a>
@@ -1009,6 +1106,12 @@ footer {
       <span>Explore Below</span>
     </div>
   </div>
+
+  <!-- Dots -->
+  <div class="hero-slide-dots" id="heroSliderDots"></div>
+
+  <!-- Progress bar -->
+  <div class="hero-progress"><div class="hero-progress-bar" id="heroProgressBar"></div></div>
 </section>
 
 <!-- ACTIVITIES QUICK NAV -->
@@ -1022,7 +1125,7 @@ footer {
   <a class="act-overview-item" href="#livestock"><span class="act-overview-icon">🐄</span><span class="act-overview-label">Livestock</span></a>
 </div>
 
-<!-- MAIN ACTIVITIES -->
+<!-- MAIN ACTIVITIES SECTION -->
 <section class="activities-main">
   <div class="activities-main-inner">
     <div class="activities-main-header">
@@ -1043,10 +1146,10 @@ footer {
         <span class="act-card-large-tag">Food Security · Family</span><h3>Family Farming</h3>
         <p>Whole families work together in our gardens growing maize, beans, groundnuts, cassava, rice, and more — building food security and shared responsibility.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
       </div>
-      <!-- 3. Hair Dressing -->
-      <div class="act-card-large c-green reveal reveal-delay-2" id="hairdressing">
-        <div class="act-card-bg" style="background-image: url('weaving4.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">03</div><div class="act-card-large-icon">💇</div>
-        <span class="act-card-large-tag">Skills · Self-Employment</span><h3>Hair Dressing</h3>
+      <!-- 3. Hair dressing -->
+      <div class="act-card-large c-green reveal reveal-delay-2">
+        <div class="act-card-bg" style="background-image: url('weaving4.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">03</div><div class="act-card-large-icon">✂️</div>
+        <span class="act-card-large-tag">Skills · Beauty</span><h3>Hair Dressing</h3>
         <p>We train members in hair styling, weaving, braiding and beauty care — building practical skills, creativity and opportunities for self-employment.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
       </div>
       <!-- 4. Handcraft -->
@@ -1056,8 +1159,8 @@ footer {
         <p>We train members in clothing design and fine handcraft — developing practical skills, creativity and opportunities for self-employment.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
       </div>
       <!-- 5. Tailoring -->
-      <div class="act-card-large c-purple reveal reveal-delay-3" id="sewing">
-        <div class="act-card-bg" style="background-image: url('tailor1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">05</div><div class="act-card-large-icon">✂️</div>
+      <div class="act-card-large c-purple reveal reveal-delay-3">
+        <div class="act-card-bg" style="background-image: url('tailor1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">05</div><div class="act-card-large-icon">🪡</div>
         <span class="act-card-large-tag">Skills · Self-Employment</span><h3>Tailoring</h3>
         <p>We train members in sewing, clothing design and fine handcraft — developing practical skills, creativity and opportunities for self-employment.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
       </div>
@@ -1068,8 +1171,8 @@ footer {
         <p>Through pottery and decorative arts, we preserve culture while teaching artistic skills that can create income and personal expression.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
       </div>
       <!-- 7. Tapestry -->
-      <div class="act-card-large c-gold reveal reveal-delay-4" id="weaving">
-        <div class="act-card-bg" style="background-image: url('tapestry.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">07</div><div class="act-card-large-icon">🖼️</div>
+      <div class="act-card-large c-gold reveal reveal-delay-4">
+        <div class="act-card-bg" style="background-image: url('tapestry.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">07</div><div class="act-card-large-icon">🎨</div>
         <span class="act-card-large-tag">Culture · Arts · Income</span><h3>Tapestry</h3>
         <p>Through tapestry, we preserve culture while teaching artistic skills that can create income and personal expression.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
       </div>
@@ -1103,133 +1206,124 @@ footer {
   <div class="impact-item reveal reveal-delay-3"><div class="impact-icon"><i class="fas fa-users"></i></div><div class="impact-num" data-target="250">0</div><div class="impact-label">Youth Engaged</div></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     PHOTO GALLERY — ENLARGED 3-PER-ROW GRID
-═══════════════════════════════════════════ -->
+<!-- ══ PHOTO GALLERY — BIGGER, 3 PER ROW ══ -->
 <section class="photo-gallery-section">
   <div class="photo-gallery-header reveal">
     <div>
-      <div class="section-label" style="color:var(--gold)">
-        <span style="display:inline-block;width:28px;height:2px;background:var(--gold);margin-right:10px;vertical-align:middle"></span>
-        In Pictures
-      </div>
+      <div class="section-label" style="color:var(--gold)"><span style="display:block;width:28px;height:2px;background:var(--gold);margin-right:10px"></span>Our Work in Pictures</div>
       <h2>Life at <em>FAPCAN</em></h2>
     </div>
-    <p>A glimpse into our crafts, fields, courts, and community — every image a story of purpose and belonging.</p>
+    <p>Moments of craftsmanship, community, sport and spiritual life captured across Kasese, Uganda.</p>
   </div>
 
-  <div class="photo-gallery-grid">
-
-    <!-- Row 1 — tall anchor + 2 regular -->
-    <div class="gallery-item tall reveal reveal-delay-1">
-      <div class="gallery-item-bg" style="background-image:url('handcraft.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Handcraft</span><i class="fas fa-expand-alt"></i></div>
+  <div class="photo-grid">
+    <!-- Row 1 -->
+    <div class="photo-item wide reveal">
+      <div class="photo-item-bg" style="background-image:url('handcraft.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Handcraft Workshop</strong><span>Skills · Creativity</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-2">
-      <div class="gallery-item-bg" style="background-image:url('pottery1.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Pottery</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('pottery2.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Pottery</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item reveal reveal-delay-1">
+      <div class="photo-item-bg" style="background-image:url('pottery2.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Pottery</strong><span>Culture · Arts</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
 
-    <!-- Rows 2-3 continuation (tall card spans these) -->
-    <div class="gallery-item reveal reveal-delay-2">
-      <div class="gallery-item-bg" style="background-image:url('sports1.jpeg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Football</span><i class="fas fa-expand-alt"></i></div>
+    <!-- Row 2 -->
+    <div class="photo-item reveal">
+      <div class="photo-item-bg" style="background-image:url('sports2.jpeg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Sports Day</strong><span>Youth · Health</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('sports2.jpeg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Sports</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item reveal reveal-delay-1">
+      <div class="photo-item-bg" style="background-image:url('livestock2.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Livestock Care</strong><span>Nutrition · Livelihoods</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-
-    <!-- Row 4 — tall anchor + 2 regular -->
-    <div class="gallery-item reveal reveal-delay-1">
-      <div class="gallery-item-bg" style="background-image:url('livestock2.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Livestock</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item tall reveal reveal-delay-2">
-      <div class="gallery-item-bg" style="background-image:url('tapestry.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Tapestry</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('tapestry1.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Tapestry</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item reveal reveal-delay-2">
+      <div class="photo-item-bg" style="background-image:url('sports3.jpeg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Tournament</strong><span>Competition · Community</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
 
-    <!-- Rows 5-6 continuation -->
-    <div class="gallery-item reveal reveal-delay-1">
-      <div class="gallery-item-bg" style="background-image:url('handcraft1.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Handcraft</span><i class="fas fa-expand-alt"></i></div>
+    <!-- Row 3 -->
+    <div class="photo-item reveal">
+      <div class="photo-item-bg" style="background-image:url('handcraft1.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Handcraft Detail</strong><span>Craft · Heritage</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-    <!-- tall card spans here -->
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('tapestry2.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Tapestry</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item reveal reveal-delay-1">
+      <div class="photo-item-bg" style="background-image:url('pottery1.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Clay Work</strong><span>Pottery · Skills</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-
-    <!-- Row 7 -->
-    <div class="gallery-item reveal reveal-delay-1">
-      <div class="gallery-item-bg" style="background-image:url('weaving1.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Weaving</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item reveal reveal-delay-2">
-      <div class="gallery-item-bg" style="background-image:url('weaving2.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Weaving</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('weaving4.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Weaving</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item wide reveal reveal-delay-2">
+      <div class="photo-item-bg" style="background-image:url('livestock3.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Animal Husbandry</strong><span>Farming · Sustainability</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
 
-    <!-- Row 8 -->
-    <div class="gallery-item reveal reveal-delay-1">
-      <div class="gallery-item-bg" style="background-image:url('sports3.jpeg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Tournament</span><i class="fas fa-expand-alt"></i></div>
+    <!-- Row 4 -->
+    <div class="photo-item reveal">
+      <div class="photo-item-bg" style="background-image:url('tapestry.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Tapestry</strong><span>Art · Culture</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-2">
-      <div class="gallery-item-bg" style="background-image:url('sports4.jpeg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Tournament</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item reveal reveal-delay-1">
+      <div class="photo-item-bg" style="background-image:url('tapestry1.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Tapestry Work</strong><span>Weaving · Heritage</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('livestock3.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Livestock</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-
-    <!-- Row 9 -->
-    <div class="gallery-item reveal reveal-delay-1">
-      <div class="gallery-item-bg" style="background-image:url('tap.jpeg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Tapestry</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item reveal reveal-delay-2">
-      <div class="gallery-item-bg" style="background-image:url('livestock1.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Livestock</span><i class="fas fa-expand-alt"></i></div>
-    </div>
-    <div class="gallery-item reveal reveal-delay-3">
-      <div class="gallery-item-bg" style="background-image:url('basket.jpg')"></div>
-      <div class="gallery-item-overlay"></div>
-      <div class="gallery-item-label"><span>Basketry</span><i class="fas fa-expand-alt"></i></div>
+    <div class="photo-item reveal reveal-delay-2">
+      <div class="photo-item-bg" style="background-image:url('tap.jpeg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Tapestry Detail</strong><span>Fine Craft</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
     </div>
 
+    <!-- Row 5 -->
+    <div class="photo-item reveal">
+      <div class="photo-item-bg" style="background-image:url('tapestry2.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Tapestry Patterns</strong><span>Colour · Craft</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
+    </div>
+    <div class="photo-item reveal reveal-delay-1">
+      <div class="photo-item-bg" style="background-image:url('weaving1.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Weaving</strong><span>Hair · Skills</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
+    </div>
+    <div class="photo-item reveal reveal-delay-2">
+      <div class="photo-item-bg" style="background-image:url('weaving2.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Hair Styling</strong><span>Beauty · Enterprise</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
+    </div>
+
+    <!-- Row 6 -->
+    <div class="photo-item wide reveal">
+      <div class="photo-item-bg" style="background-image:url('sports4.jpeg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Sports Tournament</strong><span>Youth · Teamwork · Joy</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
+    </div>
+    <div class="photo-item reveal reveal-delay-1">
+      <div class="photo-item-bg" style="background-image:url('weaving4.jpg')"></div>
+      <div class="photo-item-overlay"></div>
+      <div class="photo-item-label"><strong>Hair Braiding</strong><span>Creative · Community</span></div>
+      <div class="photo-item-zoom"><i class="fas fa-expand-alt"></i></div>
+    </div>
   </div>
 </section>
 
@@ -1245,12 +1339,12 @@ footer {
 <footer id="contact"><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><div class="logo-badge" style="margin-bottom:16px"><img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="logo-badge-fallback" style="display:none">FAP</span></div><strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span><p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p><div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About</a></li><li><a href="prayer.html"><i class="fas fa-chevron-right"></i> Spiritual Life</a></li><li><a href="save.html"><i class="fas fa-chevron-right"></i> Save Souls</a></li><li><a href="activities.html"><i class="fas fa-chevron-right"></i> Activities</a></li><li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li><li><a href="film.html"><i class="fas fa-chevron-right"></i> Media</a></li></ul></div><div class="footer-col"><h4>Our Activities</h4><ul><li><a href="#fishing"><i class="fas fa-chevron-right"></i> Fish Ponds</a></li><li><a href="#farming"><i class="fas fa-chevron-right"></i> Family Farming</a></li><li><a href="#tailoring"><i class="fas fa-chevron-right"></i> Tailoring</a></li><li><a href="#tapestry"><i class="fas fa-chevron-right"></i> Tapestry & Pottery</a></li><li><a href="#sports"><i class="fas fa-chevron-right"></i> Football &amp; Netball</a></li><li><a href="#basketry"><i class="fas fa-chevron-right"></i> Basketry</a></li><li><a href="#livestock"><i class="fas fa-chevron-right"></i> Livestock</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li><li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li><li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li><li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 FAPCAN – Fatima Praying Center for All Nations. All Rights Reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div></div></footer>
 
 <script>
-/* ── CURSOR ── */
+/* ── CUSTOM CURSOR ── */
 const cursorDot  = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0, my=0, rx=0, ry=0;
 document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-document.querySelectorAll('a,button,.act-card-large,.act-card-small,.act-overview-item,.impact-item,.why-visual-card,.why-pillar,.gallery-item').forEach(el => {
+document.querySelectorAll('a,button,.act-card-large,.act-card-small,.act-overview-item,.impact-item,.why-visual-card,.why-pillar,.photo-item').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
@@ -1264,9 +1358,11 @@ function animCursor() {
 animCursor();
 if ('ontouchstart' in window) document.querySelector('.cursor').style.display = 'none';
 
+/* ── NAV SCROLL ── */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
+/* ── HAMBURGER ── */
 const hamburger  = document.querySelector('.hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 hamburger?.addEventListener('click', () => {
@@ -1285,6 +1381,7 @@ document.querySelectorAll('.mob-link').forEach(link => link.addEventListener('cl
   hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
 }));
 
+/* ── SMOOTH SCROLL ── */
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
   const href = a.getAttribute('href');
   if (href === '#') return;
@@ -1296,14 +1393,126 @@ document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click
   }
 }));
 
-/* ── REVEAL ── */
+/* ══════════════════════════════════════
+   HERO SLIDESHOW — smooth auto-advancing
+══════════════════════════════════════ */
+(function() {
+  const slides      = document.querySelectorAll('.hero-slide');
+  const totalSlides = slides.length;
+  const dotsWrap    = document.getElementById('heroSliderDots');
+  const slideNum    = document.getElementById('slideNum');
+  const progressBar = document.getElementById('heroProgressBar');
+  const prevBtn     = document.getElementById('heroPrev');
+  const nextBtn     = document.getElementById('heroNext');
+  const INTERVAL    = 5000; // ms per slide
+
+  let current  = 0;
+  let timer    = null;
+  let isPaused = false;
+
+  /* Build dots */
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  function getDots() { return dotsWrap.querySelectorAll('.hero-dot'); }
+
+  function goTo(index, dir) {
+    const prev = current;
+    current = (index + totalSlides) % totalSlides;
+    if (prev === current) return;
+
+    /* Mark previous as "prev" for fade-out */
+    slides[prev].classList.remove('active');
+    slides[prev].classList.add('prev');
+    /* Small delay then remove prev class */
+    setTimeout(() => slides[prev].classList.remove('prev'), 1600);
+
+    /* Activate new slide */
+    slides[current].classList.add('active');
+
+    /* Update dots */
+    getDots().forEach((d, i) => d.classList.toggle('active', i === current));
+
+    /* Update counter */
+    if (slideNum) slideNum.textContent = current + 1;
+
+    /* Restart progress bar */
+    restartProgress();
+  }
+
+  function goNext() { goTo(current + 1); }
+  function goPrev() { goTo(current - 1); }
+
+  function restartProgress() {
+    if (!progressBar) return;
+    progressBar.classList.remove('running');
+    progressBar.style.transition = 'none';
+    progressBar.style.width = '0%';
+    /* Force reflow */
+    progressBar.getBoundingClientRect();
+    progressBar.style.transition = `width ${INTERVAL}ms linear`;
+    progressBar.style.width = '100%';
+  }
+
+  function startAuto() {
+    clearInterval(timer);
+    timer = setInterval(goNext, INTERVAL);
+    restartProgress();
+  }
+
+  function pauseAuto() {
+    clearInterval(timer);
+    isPaused = true;
+  }
+
+  function resumeAuto() {
+    if (!isPaused) return;
+    isPaused = false;
+    startAuto();
+  }
+
+  /* Arrow buttons */
+  prevBtn?.addEventListener('click', () => { goPrev(); startAuto(); });
+  nextBtn?.addEventListener('click', () => { goNext(); startAuto(); });
+
+  /* Pause on hover */
+  const heroSection = document.querySelector('.page-hero');
+  heroSection?.addEventListener('mouseenter', pauseAuto);
+  heroSection?.addEventListener('mouseleave', resumeAuto);
+
+  /* Touch/swipe support */
+  let touchStartX = 0;
+  heroSection?.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  heroSection?.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? goNext() : goPrev(); startAuto(); }
+  }, { passive: true });
+
+  /* Keyboard nav when hero is in viewport */
+  document.addEventListener('keydown', e => {
+    const rect = heroSection?.getBoundingClientRect();
+    if (!rect || rect.bottom < 0 || rect.top > window.innerHeight) return;
+    if (e.key === 'ArrowRight') { goNext(); startAuto(); }
+    if (e.key === 'ArrowLeft')  { goPrev(); startAuto(); }
+  });
+
+  /* Boot */
+  startAuto();
+})();
+
+/* ── REVEAL ON SCROLL ── */
 const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
 const revealObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-}, { threshold: 0.08 });
+}, { threshold: 0.10 });
 revealEls.forEach(el => revealObs.observe(el));
 
-/* ── COUNT UP ── */
+/* ── COUNT-UP ── */
 function countUp(el) {
   const target   = parseInt(el.dataset.target);
   const isLarge  = target >= 100;
@@ -1312,12 +1521,8 @@ function countUp(el) {
   let val = 0;
   const timer = setInterval(() => {
     val += step;
-    if (val >= target) {
-      el.textContent = target + '+';
-      clearInterval(timer);
-    } else {
-      el.textContent = Math.floor(val) + '+';
-    }
+    if (val >= target) { el.textContent = target + '+'; clearInterval(timer); }
+    else               { el.textContent = Math.floor(val) + '+'; }
   }, 16);
 }
 const impactObs = new IntersectionObserver(entries => {
@@ -1326,23 +1531,7 @@ const impactObs = new IntersectionObserver(entries => {
 const impactStrip = document.querySelector('.impact-strip');
 if (impactStrip) impactObs.observe(impactStrip);
 
-/* ── HERO PARALLAX ── */
-const heroBg = document.querySelector('.page-hero-bg');
-window.addEventListener('scroll', () => { if(heroBg) heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`; }, { passive: true });
-
-/* ── GALLERY PARALLAX ── */
-document.querySelectorAll('.gallery-item-bg').forEach((bg, i) => {
-  window.addEventListener('scroll', () => {
-    const parent = bg.parentElement;
-    const rect   = parent.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-    const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-    const dir = i % 2 === 0 ? 1 : -1;
-    bg.style.transform = `scale(1.1) translateY(${(progress - 0.5) * 25 * dir}px)`;
-  }, { passive: true });
-});
-
-/* ── OVERVIEW STAGGER ── */
+/* ── ACTIVITIES OVERVIEW ENTRANCE ── */
 const overviewItems = document.querySelectorAll('.act-overview-item');
 const overviewObs   = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -1352,8 +1541,24 @@ const overviewObs   = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.3 });
-overviewItems.forEach(item => { item.style.opacity = '0'; item.style.transform = 'translateY(20px)'; item.style.transition = 'opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), background 0.3s'; });
+overviewItems.forEach(item => {
+  item.style.opacity = '0';
+  item.style.transform = 'translateY(20px)';
+  item.style.transition = 'opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), background 0.3s';
+});
 if (overviewItems.length) overviewObs.observe(overviewItems[0].parentElement);
+
+/* ── PHOTO PARALLAX ── */
+document.querySelectorAll('.photo-item-bg').forEach((bg, i) => {
+  window.addEventListener('scroll', () => {
+    const parent = bg.parentElement;
+    const rect   = parent.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    const dir = i % 2 === 0 ? 1 : -1;
+    bg.style.transform = `scale(1.1) translateY(${(progress - 0.5) * 24 * dir}px)`;
+  }, { passive: true });
+});
 </script>
 </body>
 </html>
