@@ -355,16 +355,14 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
 /* ═══════════════════════════════════════════════════
-   ── NEWS & UPDATES SECTION ──
+   ── NEWS & UPDATES SECTION — BRIEF STYLE ──
 ═══════════════════════════════════════════════════ */
 .news-section {
   background: var(--navy-dk);
-  padding: 110px 0;
+  padding: 72px 0;
   position: relative;
   overflow: hidden;
 }
-
-/* Diagonal stripe texture */
 .news-section::before {
   content: '';
   position: absolute; inset: 0; pointer-events: none;
@@ -374,8 +372,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
   );
 }
-
-/* Top accent */
 .news-section::after {
   content: '';
   position: absolute; top: 0; left: 0; right: 0; height: 4px;
@@ -387,63 +383,69 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative; z-index: 2;
 }
 
+/* Section header row */
 .news-header {
-  display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 64px; flex-wrap: wrap; gap: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
 }
-.news-header-left {}
 .news-header-left .section-label { color: var(--gold); }
 .news-header-left .section-label::before { background: var(--gold); }
 .news-header-left h2 {
   font-family: var(--font-serif); font-weight: 900;
-  font-size: clamp(28px, 3.5vw, 52px); color: var(--white); line-height: 1.1;
+  font-size: clamp(22px, 2.8vw, 36px); color: var(--white); line-height: 1.1;
 }
 .news-header-left h2 em { font-style: italic; color: var(--gold); }
-.news-header-left p {
-  font-size: 15px; color: rgba(255,255,255,0.5); max-width: 460px;
-  line-height: 1.7; margin-top: 12px;
-}
 .news-view-all {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--gold); border: 1px solid rgba(214,158,46,0.4);
-  padding: 10px 22px; text-decoration: none;
+  padding: 9px 20px; text-decoration: none; flex-shrink: 0;
   transition: background 0.2s, border-color 0.2s;
 }
 .news-view-all:hover { background: rgba(214,158,46,0.1); border-color: var(--gold); }
 
-/* ── Featured Breaking News ── */
-.news-breaking {
-  position: relative;
-  background: linear-gradient(135deg, rgba(214,158,46,0.15) 0%, rgba(26,122,138,0.1) 100%);
-  border: 1px solid rgba(214,158,46,0.3);
-  padding: 0;
-  margin-bottom: 32px;
-  overflow: hidden;
+/* ── Compact event card ── */
+.news-event-card {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  border: 1px solid rgba(214,158,46,0.25);
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  transition: border-color 0.3s;
 }
+.news-event-card:hover { border-color: rgba(214,158,46,0.5); }
 
-.news-breaking-accent {
-  width: 6px;
+.news-event-img {
+  position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.04);
+}
+.news-event-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.6s var(--ease-out);
+}
+.news-event-card:hover .news-event-img img { transform: scale(1.04); }
+.news-event-img-bar {
+  position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
   background: linear-gradient(to bottom, var(--gold), var(--red));
-  flex-shrink: 0;
 }
 
-.news-breaking-body {
-  padding: 36px 40px;
+.news-event-body {
+  padding: 32px 36px;
+  display: flex; flex-direction: column; justify-content: center;
 }
 
-.news-breaking-meta {
-  display: flex; align-items: center; gap: 12px;
-  flex-wrap: wrap; margin-bottom: 20px;
+.news-event-meta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 16px;
 }
-
 .badge-breaking {
   display: inline-flex; align-items: center; gap: 7px;
   background: var(--gold); color: var(--navy-dk);
   font-size: 9px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
-  padding: 5px 14px;
+  padding: 5px 13px;
 }
 .badge-breaking::before {
   content: '';
@@ -451,153 +453,60 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   animation: blinkDot 1.2s infinite;
 }
 @keyframes blinkDot { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
 .badge-date {
   font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45);
   letter-spacing: 0.06em;
 }
-.badge-category {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--teal); border: 1px solid rgba(26,122,138,0.4);
-  padding: 4px 12px;
-}
 
-.news-breaking-body h3 {
+.news-event-body h3 {
   font-family: var(--font-serif); font-weight: 900;
-  font-size: clamp(22px, 2.8vw, 34px); color: white; line-height: 1.2;
-  margin-bottom: 16px;
+  font-size: clamp(20px, 2.2vw, 28px); color: white; line-height: 1.2;
+  margin-bottom: 12px;
 }
-.news-breaking-body h3 em { font-style: italic; color: var(--gold); }
+.news-event-body h3 em { font-style: italic; color: var(--gold); }
 
-.news-breaking-body p {
-  font-size: 15.5px; color: rgba(255,255,255,0.62); line-height: 1.75;
-  max-width: 700px; margin-bottom: 28px;
-}
-
-/* Winner Cards inside breaking news */
-.winners-row {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-  max-width: 600px; margin-bottom: 28px;
+.news-event-body p {
+  font-size: 14.5px; color: rgba(255,255,255,0.58); line-height: 1.72;
+  margin-bottom: 22px; max-width: 520px;
 }
 
-.winner-card {
-  display: flex; align-items: center; gap: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 16px 20px;
-  position: relative; overflow: hidden;
-  transition: background 0.3s, border-color 0.3s;
+/* Winner name tags */
+.winners-inline {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 22px;
 }
-.winner-card:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(214,158,46,0.4);
+.winner-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 9px 16px;
+  transition: border-color 0.3s;
 }
-.winner-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+.winner-tag:hover { border-color: rgba(214,158,46,0.4); }
+.winner-tag-crown { font-size: 18px; }
+.winner-tag-info {}
+.winner-tag-role {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.38); display: block; margin-bottom: 2px;
 }
-.winner-card.miss::before { background: linear-gradient(to right, #C53030, #D69E2E); }
-.winner-card.mr::before   { background: linear-gradient(to right, #1A7A8A, #553C9A); }
-
-.winner-crown {
-  font-size: 28px; flex-shrink: 0;
-  filter: drop-shadow(0 0 8px rgba(214,158,46,0.5));
-}
-.winner-info {}
-.winner-title {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.winner-card.miss .winner-title { color: #E88; }
-.winner-card.mr .winner-title   { color: #7BC; }
-.winner-name {
-  font-family: var(--font-serif); font-weight: 700; font-size: 16px;
-  color: white; line-height: 1.2;
+.winner-tag.miss .winner-tag-role { color: rgba(232,136,136,0.8); }
+.winner-tag.mr   .winner-tag-role { color: rgba(123,188,220,0.8); }
+.winner-tag-name {
+  font-family: var(--font-serif); font-weight: 700; font-size: 14px; color: white;
 }
 
-.news-breaking-read {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+.news-read-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--gold); text-decoration: none;
   transition: gap 0.2s;
 }
-.news-breaking-read:hover { gap: 16px; }
-.news-breaking-read i { font-size: 11px; }
+.news-read-link:hover { gap: 14px; }
 
-/* ── News Grid (secondary articles) ── */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.news-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  overflow: hidden;
-  transition: transform 0.35s var(--ease-out), border-color 0.35s, background 0.35s;
-  display: flex; flex-direction: column;
-}
-.news-card:hover {
-  transform: translateY(-7px);
-  border-color: rgba(214,158,46,0.3);
-  background: rgba(255,255,255,0.07);
-}
-
-.news-card-img {
-  width: 100%; height: 200px; overflow: hidden; position: relative;
-  background: rgba(255,255,255,0.04);
-  display: flex; align-items: center; justify-content: center;
-}
-.news-card-img-icon {
-  font-size: 52px; opacity: 0.18;
-}
-.news-card-img-bar {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-}
-.news-card:nth-child(1) .news-card-img-bar { background: var(--gold); }
-.news-card:nth-child(2) .news-card-img-bar { background: var(--teal); }
-.news-card:nth-child(3) .news-card-img-bar { background: var(--green); }
-
-.news-card-body {
-  padding: 24px 24px 28px;
-  display: flex; flex-direction: column; flex: 1;
-}
-.news-card-meta {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 14px; flex-wrap: wrap;
-}
-.news-card-cat {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  padding: 4px 12px;
-}
-.news-card:nth-child(1) .news-card-cat { background: rgba(214,158,46,0.15); color: var(--gold); }
-.news-card:nth-child(2) .news-card-cat { background: rgba(26,122,138,0.15); color: #5BC8D8; }
-.news-card:nth-child(3) .news-card-cat { background: rgba(39,103,73,0.15); color: #5DC88A; }
-.news-card-date { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.04em; }
-.news-card-body h4 {
-  font-family: var(--font-serif); font-weight: 700; font-size: 18px;
-  color: white; line-height: 1.35; margin-bottom: 10px;
-}
-.news-card-body p {
-  font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.65; flex: 1;
-  margin-bottom: 20px;
-}
-.news-card-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(255,255,255,0.35); text-decoration: none;
-  transition: color 0.2s, gap 0.2s; margin-top: auto;
-}
-.news-card:nth-child(1) .news-card-link:hover { color: var(--gold); gap: 14px; }
-.news-card:nth-child(2) .news-card-link:hover { color: #5BC8D8; gap: 14px; }
-.news-card:nth-child(3) .news-card-link:hover { color: #5DC88A; gap: 14px; }
-
-/* Ticker at bottom of news section */
+/* Ticker */
 .news-ticker {
-  margin-top: 48px;
+  margin-top: 36px;
   border-top: 1px solid rgba(255,255,255,0.07);
-  padding-top: 28px;
+  padding-top: 24px;
   display: flex; align-items: center; gap: 0;
   overflow: hidden;
 }
@@ -1447,8 +1356,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .doc-grid { grid-template-columns: repeat(2, 1fr); }
   .nurture-pillars { grid-template-columns: repeat(3, 1fr); }
   .why-cards { grid-template-columns: 1fr 1fr; }
-  .news-grid { grid-template-columns: repeat(2, 1fr); }
-  .winners-row { grid-template-columns: 1fr 1fr; }
+  .news-event-card { grid-template-columns: 1fr; }
+  .news-event-img { height: 280px; }
 }
 
 @media (max-width: 960px) {
@@ -1471,8 +1380,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .why-cards { grid-template-columns: 1fr; }
   .craft-card { width: 240px; }
   .craft-card-img { height: 200px; }
-  .news-breaking { grid-template-columns: 6px 1fr; }
-  .winners-row { grid-template-columns: 1fr; max-width: 100%; }
 }
 
 @media (max-width: 640px) {
@@ -1483,7 +1390,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .about, .activities, .programmes, .founder, .documentaries, .children-marquee { padding: 70px 0; }
   .why-exist { padding: 80px 0; }
   .craft-scroll { padding: 70px 0 60px; }
-  .news-section { padding: 70px 0; }
+  .news-section { padding: 56px 0; }
   .nav-inner { padding: 0 20px; }
   .about-inner, .founder-inner, .activities-inner, .programmes-inner, .footer-inner, .documentaries-inner { padding: 0 20px; }
   .why-inner { padding: 0 20px; }
@@ -1497,9 +1404,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .craft-card { width: 200px; }
   .craft-card-img { height: 170px; }
   .craft-scroll-header { padding: 0 20px; }
-  .news-grid { grid-template-columns: 1fr; }
-  .news-breaking-body { padding: 24px 20px; }
-  .winners-row { grid-template-columns: 1fr; }
+  .news-event-body { padding: 24px 20px; }
+  .winners-inline { flex-direction: column; }
   .news-ticker { flex-direction: column; align-items: flex-start; gap: 14px; }
 }
 </style>
@@ -1647,7 +1553,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
 </div>
 
 <!-- ══════════════════════════════════════════
-     NEWS & UPDATES SECTION
+     NEWS & UPDATES SECTION — BRIEF
 ══════════════════════════════════════════ -->
 <section class="news-section" id="news">
   <div class="news-inner">
@@ -1656,95 +1562,41 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="news-header-left">
         <div class="section-label">Latest News &amp; Updates</div>
         <h2>What's Happening at <em>FAPCAN</em></h2>
-        <p>Stay informed with the latest milestones, events, and stories of transformation from our community in Kasese, Uganda.</p>
       </div>
       <a href="#" class="news-view-all">All Updates <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
     </div>
 
-    <!-- FEATURED / BREAKING NEWS -->
-    <div class="news-breaking reveal">
-      <div class="news-breaking-accent"></div>
-      <div class="news-breaking-body">
-        <div class="news-breaking-meta">
+    <!-- COMPACT EVENT CARD -->
+    <div class="news-event-card reveal">
+      <div class="news-event-img">
+        <div class="news-event-img-bar"></div>
+        <img src="Mr and miss.jpg" alt="Miss & Mr FAPCAN 2026 Election Ceremony" onerror="this.style.background='rgba(255,255,255,0.06)'">
+      </div>
+      <div class="news-event-body">
+        <div class="news-event-meta">
           <span class="badge-breaking">Breaking News</span>
           <span class="badge-date"><i class="fas fa-calendar-alt" style="margin-right:5px;font-size:10px"></i> 8th May, 2026</span>
-          <span class="badge-category"><i class="fas fa-crown" style="font-size:9px;margin-right:4px"></i> Community Elections</span>
         </div>
         <h3>FAPCAN Crowns <em>Miss &amp; Mr FAPCAN 2026</em></h3>
-        <p>
-          In a joyful ceremony held today at the FAPCAN centre in Kidodo, Kasese, the community came together to elect their ambassadors of faith, dignity and service. After a spirited and prayerful voting process, two outstanding members were honoured with the prestigious titles.
-        </p>
-        <div class="winners-row">
-          <div class="winner-card miss">
-            <div class="winner-crown">👑</div>
-            <div class="winner-info">
-              <div class="winner-title">Miss FAPCAN 2026</div>
-              <div class="winner-name">Mbambu Matherene</div>
+        <p>In a joyful ceremony held at the FAPCAN centre in Kidodo, Kasese, the community elected their ambassadors of faith, dignity, and service after a spirited prayerful voting process.</p>
+        <div class="winners-inline">
+          <div class="winner-tag miss">
+            <span class="winner-tag-crown">👑</span>
+            <div class="winner-tag-info">
+              <span class="winner-tag-role">Miss FAPCAN 2026</span>
+              <span class="winner-tag-name">Mbambu Matherene</span>
             </div>
           </div>
-          <div class="winner-card mr">
-            <div class="winner-crown">🎖️</div>
-            <div class="winner-info">
-              <div class="winner-title">Mr FAPCAN 2026</div>
-              <div class="winner-name">Bwambale Moses</div>
+          <div class="winner-tag mr">
+            <span class="winner-tag-crown">🎖️</span>
+            <div class="winner-tag-info">
+              <span class="winner-tag-role">Mr FAPCAN 2026</span>
+              <span class="winner-tag-name">Bwambale Moses</span>
             </div>
           </div>
         </div>
-        <a href="#" class="news-breaking-read">Read Full Story <i class="fas fa-long-arrow-alt-right"></i></a>
+        <a href="#" class="news-read-link">Read Full Story <i class="fas fa-long-arrow-alt-right"></i></a>
       </div>
-    </div>
-
-    <!-- SECONDARY NEWS GRID -->
-    <div class="news-grid reveal">
-
-      <div class="news-card">
-        <div class="news-card-img">
-          <div class="news-card-img-icon">🏛️</div>
-          <div class="news-card-img-bar"></div>
-        </div>
-        <div class="news-card-body">
-          <div class="news-card-meta">
-            <span class="news-card-cat">Organisation</span>
-            <span class="news-card-date">May 2026</span>
-          </div>
-          <h4>FAPCAN Confirmed as a Registered Community Based Organisation</h4>
-          <p>FAPCAN has officially attained registration as a Community Based Organisation (CBO), a milestone that strengthens our legal standing and opens new doors for partnerships and development funding.</p>
-          <a href="#" class="news-card-link">Read More <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
-        </div>
-      </div>
-
-      <div class="news-card">
-        <div class="news-card-img">
-          <div class="news-card-img-icon">🎓</div>
-          <div class="news-card-img-bar"></div>
-        </div>
-        <div class="news-card-body">
-          <div class="news-card-meta">
-            <span class="news-card-cat">Education</span>
-            <span class="news-card-date">April 2026</span>
-          </div>
-          <h4>New School Term Begins for 80+ FAPCAN Students</h4>
-          <p>A new academic term has started with over eighty children enrolled across various levels, supported by FAPCAN's commitment to ensure no child in our care is left without quality education.</p>
-          <a href="#" class="news-card-link">Read More <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
-        </div>
-      </div>
-
-      <div class="news-card">
-        <div class="news-card-img">
-          <div class="news-card-img-icon">🌾</div>
-          <div class="news-card-img-bar"></div>
-        </div>
-        <div class="news-card-body">
-          <div class="news-card-meta">
-            <span class="news-card-cat">Agriculture</span>
-            <span class="news-card-date">March 2026</span>
-          </div>
-          <h4>Community Farm Harvest Feeds Hundreds This Season</h4>
-          <p>FAPCAN's agricultural programme yielded a bountiful harvest this season, providing food security for over three hundred community members including orphans, elders and persons with disabilities.</p>
-          <a href="#" class="news-card-link">Read More <i class="fas fa-chevron-right" style="font-size:9px"></i></a>
-        </div>
-      </div>
-
     </div>
 
     <!-- NEWS TICKER -->
@@ -1752,14 +1604,12 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="ticker-label"><i class="fas fa-bolt" style="margin-right:6px"></i> Latest</div>
       <div class="ticker-track-outer">
         <div class="ticker-track" id="tickerTrack">
-          <!-- First set -->
           <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected on 8th May 2026</span>
           <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected on 8th May 2026</span>
           <span class="ticker-item"><strong>CBO Status:</strong> FAPCAN is now a registered Community Based Organisation</span>
           <span class="ticker-item"><strong>Education:</strong> 80+ students begin new term under FAPCAN support</span>
           <span class="ticker-item"><strong>Save Souls Films:</strong> New documentary on community transformation in production</span>
           <span class="ticker-item"><strong>Community:</strong> 300+ members strong and growing across Kasese District</span>
-          <!-- Duplicate for loop -->
           <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected on 8th May 2026</span>
           <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected on 8th May 2026</span>
           <span class="ticker-item"><strong>CBO Status:</strong> FAPCAN is now a registered Community Based Organisation</span>
@@ -2115,7 +1965,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.news-card,.winner-card').forEach(el=>{
+document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
