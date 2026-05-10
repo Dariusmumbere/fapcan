@@ -972,13 +972,15 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-action-card:nth-child(1)::before,
 .impact-action-card:nth-child(2)::before,
 .impact-action-card:nth-child(3)::before,
-.impact-action-card:nth-child(4)::before {
+.impact-action-card:nth-child(4)::before,
+.impact-action-card:nth-child(5)::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 5;
 }
 .impact-action-card:nth-child(1)::before { background: linear-gradient(to right, var(--teal), var(--green)); }
 .impact-action-card:nth-child(2)::before { background: linear-gradient(to right, var(--purple), var(--teal)); }
 .impact-action-card:nth-child(3)::before { background: linear-gradient(to right, var(--gold), var(--red)); }
 .impact-action-card:nth-child(4)::before { background: linear-gradient(to right, var(--green), var(--navy)); }
+.impact-action-card:nth-child(5)::before { background: linear-gradient(to right, var(--gold), var(--teal)); }
 
 /* Image mosaic area */
 .impact-card-images {
@@ -1060,6 +1062,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-action-card:nth-child(2) .impact-card-tag { background: rgba(85,60,154,0.1); color: var(--purple); border: 1px solid rgba(85,60,154,0.22); }
 .impact-action-card:nth-child(3) .impact-card-tag { background: rgba(214,158,46,0.1); color: #92610B; border: 1px solid rgba(214,158,46,0.3); }
 .impact-action-card:nth-child(4) .impact-card-tag { background: rgba(39,103,73,0.1); color: var(--green); border: 1px solid rgba(39,103,73,0.25); }
+.impact-action-card:nth-child(5) .impact-card-tag { background: rgba(214,158,46,0.1); color: #92610B; border: 1px solid rgba(214,158,46,0.3); }
 
 .impact-card-body h3 {
   font-family: var(--font-serif); font-weight: 700;
@@ -1089,7 +1092,16 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-action-card:nth-child(2) .impact-pill:hover { border-color: var(--purple); color: var(--purple); }
 .impact-action-card:nth-child(3) .impact-pill:hover { border-color: var(--gold); color: #92610B; }
 .impact-action-card:nth-child(4) .impact-pill:hover { border-color: var(--green); color: var(--green); }
+.impact-action-card:nth-child(5) .impact-pill:hover { border-color: var(--gold); color: #92610B; }
 .impact-pill i { font-size: 9px; }
+
+/* ── ELDER LOVE CARD — full-width spanning card ── */
+.impact-elder-card {
+  grid-column: 1 / -1;
+}
+.impact-elder-card .impact-card-images.dual-img {
+  height: 340px;
+}
 
 /* ── FOUNDER ── */
 .founder {
@@ -1551,9 +1563,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
 /* ── OUR IMPACT RESPONSIVE ── */
 @media (max-width: 1100px) {
   .impact-cards-grid { grid-template-columns: 1fr; }
+  .impact-elder-card { grid-column: 1 / -1; }
   .impact-card-images.single-img { height: 260px; }
   .impact-card-images.dual-img { height: 260px; }
   .impact-card-images.triple-img { height: 260px; }
+  .impact-elder-card .impact-card-images.dual-img { height: 280px; }
 }
 
 @media (max-width: 960px) {
@@ -1567,6 +1581,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .impact-card-images.dual-img { height: 220px; }
   .impact-card-images.triple-img { height: 220px; }
   .impact-card-images.single-img { height: 220px; }
+  .impact-elder-card .impact-card-images.dual-img { height: 220px; }
   .impact-card-body { padding: 22px 20px 26px; }
   .impact-card-pills { gap: 6px; }
 }
@@ -1887,7 +1902,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
 
 <!-- ══════════════════════════════════════════
      OUR IMPACT / SUPPORT & COMMUNITY TRANSFORMATION
-     (Inserted after "Who We Are" section)
 ══════════════════════════════════════════ -->
 <section class="our-impact" id="our-impact">
   <div class="our-impact-inner">
@@ -1979,6 +1993,26 @@ footer { background: var(--dark); padding: 80px 0 0; }
             <span class="impact-pill"><i class="fas fa-female"></i> Single Mothers</span>
             <span class="impact-pill"><i class="fas fa-wheelchair"></i> PWDs Support</span>
             <span class="impact-pill"><i class="fas fa-globe-africa"></i> Community Outreach</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Elder Love — Alfred with Elders (FULL WIDTH) -->
+      <div class="impact-action-card impact-elder-card reveal">
+        <div class="impact-card-images dual-img">
+          <img src="elder1.jpg" alt="Bwambale Alfred showing love and support for elderly twin women at FAPCAN" loading="lazy">
+          <img src="elder2.jpg" alt="Omuzana Alfred Bwambale with a pregnant woman and an elderly man at FAPCAN" loading="lazy">
+        </div>
+        <div class="impact-card-body">
+          <span class="impact-card-tag"><i class="fas fa-heart"></i> &nbsp;A Father's Love</span>
+          <h3>Alfred's Love for the Elderly — A Father to All</h3>
+          <p>These photographs capture the heart of FAPCAN's founder, Alfred Bwambale (Omuzana), in moments of profound love and service. Whether embracing elderly twin women or standing in solidarity with a pregnant mother and an aged man, Alfred embodies FAPCAN's deepest calling — that <strong>no one is forgotten, no one is left behind.</strong> His is a love without condition, offered freely to the old, the young, and the vulnerable alike.</p>
+          <div class="impact-card-pills">
+            <span class="impact-pill"><i class="fas fa-hands-helping"></i> Elders Dignity</span>
+            <span class="impact-pill"><i class="fas fa-baby"></i> Maternal Support</span>
+            <span class="impact-pill"><i class="fas fa-heart"></i> Unconditional Love</span>
+            <span class="impact-pill"><i class="fas fa-home"></i> Family for All</span>
+            <span class="impact-pill"><i class="fas fa-user-tie"></i> Alfred's Legacy</span>
           </div>
         </div>
       </div>
