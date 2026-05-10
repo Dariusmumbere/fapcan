@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>FAPCAN | Our Activities - Faith in Action</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAPCAN | Our Activities • Handcraft, Sports, Livestock</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-/* ----- DESIGN SYSTEM ----- */
+/* ═══════════════════════════════════════════
+   MIF DESIGN SYSTEM — FAPCAN EDITION
+═══════════════════════════════════════════ */
 :root {
   --navy:    #1A365D;
   --navy-dk: #0f1f3d;
@@ -26,285 +28,1127 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans:  'DM Sans', system-ui, sans-serif;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
 body {
   font-family: var(--font-sans);
   background: var(--off-white);
   color: var(--dark);
   overflow-x: hidden;
+  cursor: none;
 }
 
-/* ------ CUSTOM CURSOR (refined) ------ */
-.cursor { position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; mix-blend-mode: difference; }
-.cursor-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--white); transform: translate(-50%, -50%); transition: transform 0.1s; }
-.cursor-ring { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.5); transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; margin-top: -22px; margin-left: -14px; }
-body.hovering .cursor-ring { width: 52px; height: 52px; opacity: 0.6; }
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none; mix-blend-mode: difference;
+}
+.cursor-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--white); transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), opacity 0.3s, transform 0.08s;
+  margin-top: -22px; margin-left: -14px;
+}
+body.hovering .cursor-ring { width: 56px; height: 56px; opacity: 0.5; }
 
-/* top band */
-.colour-band { height: 5px; width: 100%; background: linear-gradient(to right, var(--red) 0%, var(--red) 20%, var(--gold) 20%, var(--gold) 40%, var(--green) 40%, var(--green) 60%, var(--teal) 60%, var(--teal) 80%, var(--purple) 80%, var(--purple) 100%); position: fixed; top: 0; left: 0; z-index: 1001; animation: bandReveal 1s var(--ease-out) both; }
+/* ── COLOUR BAND ── */
+.colour-band {
+  height: 5px; width: 100%;
+  background: linear-gradient(to right,
+    var(--red) 0%,   var(--red) 20%,
+    var(--gold) 20%, var(--gold) 40%,
+    var(--green) 40%,var(--green) 60%,
+    var(--teal) 60%, var(--teal) 80%,
+    var(--purple) 80%,var(--purple) 100%);
+  position: fixed; top: 0; left: 0; z-index: 1001;
+  transform-origin: left;
+  animation: bandReveal 1.2s var(--ease-out) both;
+}
 @keyframes bandReveal { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* navigation */
+/* ── NAV ── */
 nav {
   position: fixed; top: 5px; left: 0; right: 0; z-index: 1000;
-  background: rgba(255,255,255,0.97); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.97);
   border-bottom: 1px solid var(--light-gray);
+  backdrop-filter: blur(12px);
   transition: box-shadow 0.3s;
 }
-nav.scrolled { box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
-.nav-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+.nav-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
 .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo-badge { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--teal)); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-.logo-badge img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.logo-text strong { font-family: var(--font-serif); font-weight: 700; font-size: 20px; color: var(--navy); line-height: 1.1; }
-.logo-text span { font-size: 10.5px; font-weight: 500; color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase; }
+.logo-badge {
+  width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(26,54,93,0.25);
+}
+.logo-badge img { width: 100%; height: 100%; object-fit: cover; }
+.logo-badge-fallback {
+  font-family: var(--font-serif); font-weight: 900; font-size: 15px;
+  color: white; letter-spacing: -0.5px;
+}
+.logo-text { display: flex; flex-direction: column; }
+.logo-text strong {
+  font-family: var(--font-serif); font-weight: 700; font-size: 20px;
+  color: var(--navy); line-height: 1.1;
+}
+.logo-text span {
+  font-size: 10.5px; font-weight: 500; color: var(--teal);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
 .nav-links { display: flex; list-style: none; gap: 2px; }
-.nav-link { padding: 10px 18px; font-size: 14px; font-weight: 500; color: var(--mid); text-decoration: none; border-radius: 4px; transition: color 0.2s; }
+.nav-item { position: relative; }
+.nav-link {
+  display: flex; align-items: center; gap: 6px; padding: 10px 18px;
+  font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
 .nav-link:hover, .nav-link.active { color: var(--navy); background: rgba(26,54,93,0.05); }
-.nav-cta { background: var(--red); color: white; padding: 10px 24px; font-size: 13px; font-weight: 600; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s; }
-.nav-cta:hover { background: #9B2C2C; }
-.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
-.hamburger span { width: 24px; height: 2px; background: var(--navy); transition: 0.2s; }
+.nav-link .arr { font-size: 10px; transition: transform 0.25s; }
+.nav-item:hover .arr { transform: rotate(180deg); }
+.dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0;
+  background: var(--white); min-width: 260px;
+  border: 1px solid var(--light-gray); border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s;
+  z-index: 200; overflow: hidden;
+}
+.nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; font-size: 14px; font-weight: 500; color: var(--mid);
+  text-decoration: none; border-bottom: 1px solid rgba(0,0,0,0.04);
+  transition: background 0.15s, color 0.15s, padding-left 0.2s;
+}
+.dropdown a:last-child { border-bottom: none; }
+.dropdown a:hover { background: var(--off-white); color: var(--navy); padding-left: 26px; }
+.dropdown a i { color: var(--red); width: 18px; text-align: center; font-size: 13px; }
+.nav-cta {
+  background: var(--red); color: white; border: none; cursor: pointer;
+  padding: 10px 24px; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { background: #9B2C2C; transform: translateY(-1px); }
+.hamburger { display: none; cursor: pointer; padding: 6px; background: none; border: none; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); transition: transform 0.3s, opacity 0.3s; }
 
-/* hero */
-.page-hero { padding-top: 75px; min-height: 520px; display: flex; align-items: center; position: relative; overflow: hidden; }
-.page-hero-bg { position: absolute; inset: 0; background-image: url('Agric1.jpg'); background-size: cover; background-position: center 40%; transform: scale(1.05); animation: heroZoom 20s infinite alternate; z-index: 0; }
-@keyframes heroZoom { 0% { transform: scale(1.05); background-position: center 40%; } 100% { transform: scale(1.12); background-position: center 48%; } }
-.page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,20,40,0.85) 0%, rgba(10,20,40,0.5) 70%, rgba(0,0,0,0.2) 100%); z-index: 1; }
-.page-hero-inner { max-width: 1320px; margin: 0 auto; padding: 80px 32px; position: relative; z-index: 4; }
-.breadcrumb { font-size: 12px; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-.page-hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: var(--gold); border: 1px solid rgba(214,158,46,0.5); background: rgba(0,0,0,0.3); padding: 6px 16px; margin-bottom: 24px; border-radius: 40px; }
-.page-hero-inner h1 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(38px, 5.5vw, 70px); color: white; line-height: 1.07; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+/* ══════════════════════════════════════
+   PAGE HERO — with real background image
+══════════════════════════════════════ */
+.page-hero {
+  padding-top: 75px;
+  position: relative; overflow: hidden;
+  min-height: 520px;
+  display: flex; align-items: center;
+}
+
+/* BG image layer */
+.page-hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('Agric1.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  transform: scale(1.08);
+  animation: heroBgZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroBgZoom {
+  from { transform: scale(1.08); background-position: center 40%; }
+  to   { transform: scale(1.14); background-position: center 48%; }
+}
+
+/* multi-layer colour overlay */
+.page-hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, rgba(10,20,40,0.82) 0%, rgba(10,20,40,0.55) 55%, rgba(10,20,40,0.25) 100%),
+    linear-gradient(to top,   rgba(10,20,40,0.60) 0%, transparent 50%);
+}
+
+/* animated grain */
+.page-hero-grain {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  animation: grainAnim 0.4s steps(1) infinite;
+}
+@keyframes grainAnim {
+  0%  { transform: translate(0,0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -2px); }
+  75% { transform: translate(-1px, 2px); }
+}
+
+/* Geometric rings */
+.page-hero-geo {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 3;
+}
+.page-hero-geo-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  animation: geoSpin linear infinite;
+}
+.page-hero-geo-ring:nth-child(1) { width: 600px; height: 600px; top: -200px; right: -100px; animation-duration: 60s; }
+.page-hero-geo-ring:nth-child(2) { width: 400px; height: 400px; top: -80px; right: 0px; animation-duration: 45s; animation-direction: reverse; border-color: rgba(214,158,46,0.1); }
+.page-hero-geo-ring:nth-child(3) { width: 250px; height: 250px; bottom: 40px; left: 35%; animation-duration: 35s; border-color: rgba(39,103,73,0.12); }
+@keyframes geoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* Gold diagonal accent line */
+.page-hero-line {
+  position: absolute; bottom: 0; right: 0; z-index: 3; pointer-events: none;
+  width: 400px; height: 300px; overflow: hidden;
+}
+.page-hero-line::before {
+  content: '';
+  position: absolute; bottom: -60px; right: -40px;
+  width: 2px; height: 320px;
+  background: linear-gradient(to top, transparent, rgba(214,158,46,0.5), transparent);
+  transform: rotate(-35deg);
+  transform-origin: bottom center;
+  animation: lineReveal 1.8s 0.6s var(--ease-out) both;
+}
+.page-hero-line::after {
+  content: '';
+  position: absolute; bottom: -60px; right: 20px;
+  width: 1px; height: 260px;
+  background: linear-gradient(to top, transparent, rgba(214,158,46,0.25), transparent);
+  transform: rotate(-35deg);
+  transform-origin: bottom center;
+  animation: lineReveal 1.8s 0.85s var(--ease-out) both;
+}
+@keyframes lineReveal {
+  from { opacity: 0; height: 0; }
+  to   { opacity: 1; height: 320px; }
+}
+
+.page-hero-inner {
+  max-width: 1320px; margin: 0 auto; padding: 80px 32px;
+  position: relative; z-index: 4;
+}
+.breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 20px;
+  animation: fadeUp 0.8s 0.2s var(--ease-out) both;
+}
+.breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb i { font-size: 9px; }
+.page-hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(214,158,46,0.4);
+  padding: 6px 16px; margin-bottom: 24px;
+  background: rgba(214,158,46,0.08);
+  backdrop-filter: blur(8px);
+  animation: fadeUp 0.8s 0.3s var(--ease-out) both;
+}
+.page-hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+.page-hero-inner h1 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(38px, 5.5vw, 72px); line-height: 1.07;
+  color: white; margin-bottom: 20px;
+  animation: fadeUp 0.9s 0.45s var(--ease-out) both;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
 .page-hero-inner h1 em { font-style: italic; color: var(--gold); }
-.page-hero-inner p { font-size: 17px; color: rgba(255,255,255,0.8); max-width: 600px; line-height: 1.8; }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-.breadcrumb, .page-hero-tag, .page-hero-inner h1, .page-hero-inner p { animation: fadeUp 0.8s var(--ease-out) both; }
-.page-hero-tag { animation-delay: 0.1s; }
-.page-hero-inner h1 { animation-delay: 0.2s; }
-.page-hero-inner p { animation-delay: 0.3s; }
+.page-hero-inner p {
+  font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.72);
+  max-width: 600px; line-height: 1.85;
+  animation: fadeUp 0.9s 0.6s var(--ease-out) both;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
 
-/* sections */
-.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-.section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); }
+/* Hero scroll indicator */
+.hero-scroll {
+  display: flex; align-items: center; gap: 12px; margin-top: 40px;
+  animation: fadeUp 0.8s 0.85s var(--ease-out) both;
+}
+.hero-scroll-line {
+  width: 48px; height: 1px; background: rgba(255,255,255,0.3);
+  position: relative; overflow: hidden;
+}
+.hero-scroll-line::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: var(--gold);
+  animation: scrollLineSweep 2s 1.2s var(--ease-out) infinite;
+}
+@keyframes scrollLineSweep {
+  0%   { left: -100%; }
+  50%  { left: 0%; }
+  100% { left: 100%; }
+}
+.hero-scroll span {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
 
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION COMMON ── */
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before { content: ''; width: 28px; height: 2px; background: var(--red); display: block; }
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
 .reveal.visible { opacity: 1; transform: none; }
-.reveal-left { opacity: 0; transform: translateX(-40px); transition: 0.9s var(--ease-out); }
-.reveal-right { opacity: 0; transform: translateX(40px); transition: 0.9s var(--ease-out); }
-.reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+.reveal-right.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
 
-/* activity overview bar */
-.activities-overview { background: var(--dark); display: grid; grid-template-columns: repeat(7, 1fr); }
-.act-overview-item { padding: 32px 12px; text-align: center; text-decoration: none; border-right: 1px solid rgba(255,255,255,0.08); transition: background 0.2s; }
-.act-overview-item:hover { background: rgba(255,255,255,0.05); }
-.act-overview-icon { font-size: 28px; display: block; margin-bottom: 8px; transition: transform 0.2s; }
-.act-overview-item:hover .act-overview-icon { transform: scale(1.2); }
-.act-overview-label { font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.06em; }
+/* ── ACTIVITIES OVERVIEW STRIP ── */
+.activities-overview {
+  background: var(--dark); padding: 0;
+  display: grid; grid-template-columns: repeat(7, 1fr);
+}
+.act-overview-item {
+  padding: 36px 20px; border-right: 1px solid rgba(255,255,255,0.07);
+  text-align: center; position: relative; overflow: hidden;
+  transition: background 0.3s; cursor: pointer;
+  text-decoration: none; display: block;
+}
+.act-overview-item:last-child { border-right: none; }
+.act-overview-item::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.act-overview-item:nth-child(1)::before { background: var(--teal); }
+.act-overview-item:nth-child(2)::before { background: var(--green); }
+.act-overview-item:nth-child(3)::before { background: var(--purple); }
+.act-overview-item:nth-child(4)::before { background: var(--gold); }
+.act-overview-item:nth-child(5)::before { background: var(--red); }
+.act-overview-item:nth-child(6)::before { background: var(--teal); }
+.act-overview-item:nth-child(7)::before { background: var(--green); }
+.act-overview-item:hover::before { transform: scaleX(1); }
+.act-overview-item:hover { background: rgba(255,255,255,0.04); }
+.act-overview-icon { font-size: 26px; margin-bottom: 10px; display: block; transition: transform 0.3s var(--ease-out); }
+.act-overview-item:hover .act-overview-icon { transform: scale(1.25) translateY(-3px); }
+.act-overview-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.4; }
 
-/* activities main */
-.activities-main { padding: 100px 0; background: var(--white); }
-.activities-main-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
-.activities-main-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 72px; align-items: end; }
-.activities-main-header h2 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(30px, 4vw, 52px); color: var(--navy); line-height: 1.1; }
-.activities-main-header h2 em { color: var(--teal); font-style: italic; }
-.activities-main-header p { border-left: 3px solid var(--gold); padding-left: 24px; font-size: 16px; color: var(--mid); line-height: 1.7; }
+/* ── MAIN ACTIVITIES SECTION ── */
+.activities-main {
+  padding: 100px 0;
+  background: var(--white);
+}
+.activities-main-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+}
+.activities-main-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+  margin-bottom: 72px;
+}
+.activities-main-header h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(30px, 4vw, 52px); color: var(--navy); line-height: 1.1;
+}
+.activities-main-header h2 em { font-style: italic; color: var(--teal); }
+.activities-main-header p {
+  font-size: 16px; color: var(--mid); line-height: 1.8;
+  border-left: 3px solid var(--gold); padding-left: 24px;
+}
 
-/* GRID LAYOUTS */
-.act-featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 3px; }
-.act-card-large, .act-card-small { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; cursor: pointer; transition: transform 0.4s var(--ease-out); }
-.act-card-large { min-height: 400px; padding: 44px 40px; }
-.act-card-small { min-height: 280px; padding: 32px 28px; }
-.act-card-large:hover, .act-card-small:hover { transform: scale(1.003); }
-.act-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.6s var(--ease-out), filter 0.4s; filter: saturate(0.85); z-index: 0; }
-.act-card-large:hover .act-card-bg, .act-card-small:hover .act-card-bg { transform: scale(1.1); filter: saturate(1.05); }
-.act-card-large-overlay, .act-card-small-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%); z-index: 1; transition: opacity 0.3s; }
-.act-card-large:hover .act-card-large-overlay, .act-card-small:hover .act-card-small-overlay { opacity: 0.92; }
-.act-card-large-num, .act-card-small-num { position: absolute; top: 28px; right: 28px; font-family: var(--font-serif); font-size: 72px; font-weight: 900; color: rgba(255,255,255,0.08); z-index: 2; pointer-events: none; transition: 0.3s; }
-.act-card-large-icon, .act-card-small-icon { position: absolute; top: 28px; left: 32px; width: 56px; height: 56px; background: rgba(255,255,255,0.12); backdrop-filter: blur(6px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; z-index: 3; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s; }
-.act-card-large:hover .act-card-large-icon, .act-card-small:hover .act-card-small-icon { transform: scale(1.15) rotate(-6deg); background: rgba(255,255,255,0.25); }
-.act-card-large-tag, .act-card-small-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.65); text-transform: uppercase; margin-bottom: 8px; z-index: 3; position: relative; }
-.act-card-large h3, .act-card-small h3 { font-family: var(--font-serif); font-weight: 700; font-size: 28px; color: white; line-height: 1.2; margin-bottom: 12px; z-index: 3; position: relative; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-.act-card-small h3 { font-size: 22px; }
-.act-card-large p, .act-card-small p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; z-index: 3; position: relative; max-width: 85%; }
-.act-card-large-arrow, .act-card-small-arrow { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-decoration: none; z-index: 3; position: relative; transition: gap 0.3s; }
-.act-card-large:hover .act-card-large-arrow, .act-card-small:hover .act-card-small-arrow { gap: 16px; color: white; }
+/* ══════════════════════════════════════
+   ACTIVITY CARDS — with background images
+   NEW IMAGES INTEGRATED: handcraft, pottery, basket, sports, livestock
+══════════════════════════════════════ */
+.act-featured-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-bottom: 3px;
+}
 
-.act-small-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+/* ─ LARGE CARD ─ */
+.act-card-large {
+  position: relative; overflow: hidden;
+  min-height: 380px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 44px 40px;
+  cursor: pointer;
+  transition: transform 0.5s var(--ease-out);
+}
+.act-card-large:hover { transform: scale(1.005); }
 
-/* impact strip */
-.impact-strip { background: var(--dark); display: grid; grid-template-columns: repeat(4, 1fr); }
-.impact-item { padding: 48px 24px; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); transition: background 0.2s; }
+/* Background image layer */
+.act-card-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.06);
+  transition: transform 0.7s var(--ease-out), filter 0.5s;
+  filter: saturate(0.85);
+}
+.act-card-large:hover .act-card-bg { transform: scale(1.12); filter: saturate(1.1); }
+
+/* Gradient overlay on top of image */
+.act-card-large-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  transition: opacity 0.4s;
+}
+.c-teal  .act-card-large-overlay { background: linear-gradient(to top, rgba(4,38,46,0.9) 0%, rgba(4,38,46,0.55) 50%, rgba(10,74,86,0.3) 100%); }
+.c-green .act-card-large-overlay { background: linear-gradient(to top, rgba(10,35,22,0.92) 0%, rgba(10,35,22,0.55) 50%, rgba(20,67,45,0.25) 100%); }
+.c-purple .act-card-large-overlay { background: linear-gradient(to top, rgba(20,10,60,0.92) 0%, rgba(20,10,60,0.55) 50%, rgba(45,30,107,0.25) 100%); }
+.c-gold   .act-card-large-overlay { background: linear-gradient(to top, rgba(60,35,0,0.92) 0%, rgba(60,35,0,0.55) 50%, rgba(100,65,0,0.25) 100%); }
+.act-card-large:hover .act-card-large-overlay { opacity: 0.85; }
+
+/* Pattern overlay */
+.act-card-large::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.act-card-large-num {
+  position: absolute; top: 32px; right: 36px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 90px;
+  color: rgba(255,255,255,0.07); line-height: 1;
+  z-index: 3; transition: color 0.4s, transform 0.5s var(--ease-out);
+  pointer-events: none;
+}
+.act-card-large:hover .act-card-large-num { color: rgba(255,255,255,0.13); transform: scale(1.05) translateY(-4px); }
+
+.act-card-large-icon {
+  position: absolute; top: 32px; left: 40px;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; z-index: 4;
+  transition: transform 0.5s var(--ease-out), background 0.3s, box-shadow 0.4s;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.act-card-large:hover .act-card-large-icon {
+  transform: scale(1.15) rotate(-10deg);
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35);
+}
+
+.act-card-large-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); margin-bottom: 10px; display: block;
+  position: relative; z-index: 4;
+}
+.act-card-large h3 {
+  font-family: var(--font-serif); font-weight: 700; font-size: 30px;
+  color: white; line-height: 1.15; margin-bottom: 14px;
+  position: relative; z-index: 4;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  transition: transform 0.4s var(--ease-out);
+}
+.act-card-large:hover h3 { transform: translateY(-3px); }
+.act-card-large p {
+  font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.75;
+  max-width: 420px; position: relative; z-index: 4;
+}
+.act-card-large-arrow {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 22px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  position: relative; z-index: 4;
+  transition: gap 0.3s var(--ease-out), color 0.25s;
+  padding-bottom: 3px;
+}
+.act-card-large-arrow::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+  background: rgba(255,255,255,0.7);
+  transition: width 0.4s var(--ease-out);
+}
+.act-card-large:hover .act-card-large-arrow { gap: 18px; color: white; }
+.act-card-large:hover .act-card-large-arrow::after { width: 100%; }
+
+/* ─ SMALL CARD ─ */
+.act-small-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.act-card-small {
+  position: relative; overflow: hidden;
+  min-height: 280px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 32px 28px;
+  cursor: pointer;
+  transition: transform 0.5s var(--ease-out);
+}
+.act-card-small:hover { transform: scale(1.005); }
+
+.act-card-small .act-card-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.06);
+  transition: transform 0.7s var(--ease-out), filter 0.5s;
+  filter: saturate(0.8);
+}
+.act-card-small:hover .act-card-bg { transform: scale(1.13); filter: saturate(1.1); }
+
+.act-card-small-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  transition: opacity 0.4s;
+}
+.c-red   .act-card-small-overlay { background: linear-gradient(to top, rgba(70,5,5,0.92) 0%, rgba(70,5,5,0.55) 50%, rgba(120,10,10,0.25) 100%); }
+.c-navy  .act-card-small-overlay { background: linear-gradient(to top, rgba(5,10,30,0.92) 0%, rgba(5,10,30,0.55) 50%, rgba(15,31,61,0.25) 100%); }
+.c-green2 .act-card-small-overlay { background: linear-gradient(to top, rgba(10,22,12,0.92) 0%, rgba(10,22,12,0.55) 50%, rgba(28,58,36,0.25) 100%); }
+.act-card-small:hover .act-card-small-overlay { opacity: 0.82; }
+
+.act-card-small::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2; opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.act-card-small-num {
+  position: absolute; top: 20px; right: 24px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 68px;
+  color: rgba(255,255,255,0.07); line-height: 1; z-index: 3;
+  pointer-events: none; transition: color 0.4s, transform 0.5s var(--ease-out);
+}
+.act-card-small:hover .act-card-small-num { color: rgba(255,255,255,0.14); transform: scale(1.05) translateY(-3px); }
+
+.act-card-small-icon {
+  position: absolute; top: 24px; left: 28px;
+  width: 50px; height: 50px; border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; z-index: 4;
+  transition: transform 0.5s var(--ease-out), background 0.3s, box-shadow 0.4s;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.act-card-small:hover .act-card-small-icon {
+  transform: scale(1.15) rotate(-10deg);
+  background: rgba(255,255,255,0.22);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.act-card-small-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 8px; display: block;
+  position: relative; z-index: 4;
+}
+.act-card-small h3 {
+  font-family: var(--font-serif); font-weight: 700; font-size: 23px;
+  color: white; line-height: 1.2; margin-bottom: 10px;
+  position: relative; z-index: 4;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  transition: transform 0.4s var(--ease-out);
+}
+.act-card-small:hover h3 { transform: translateY(-3px); }
+.act-card-small p {
+  font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.7;
+  position: relative; z-index: 4;
+}
+.act-card-small-arrow {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); text-decoration: none;
+  position: relative; z-index: 4;
+  transition: gap 0.3s var(--ease-out), color 0.25s;
+  padding-bottom: 3px;
+}
+.act-card-small-arrow::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+  background: rgba(255,255,255,0.6);
+  transition: width 0.4s var(--ease-out);
+}
+.act-card-small:hover .act-card-small-arrow { gap: 16px; color: white; }
+.act-card-small:hover .act-card-small-arrow::after { width: 100%; }
+
+/* ── IMPACT STRIP ── */
+.impact-strip {
+  background: var(--dark); padding: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.impact-item {
+  padding: 52px 32px; border-right: 1px solid rgba(255,255,255,0.07);
+  text-align: center; position: relative; overflow: hidden;
+  transition: background 0.3s;
+}
+.impact-item:last-child { border-right: none; }
+.impact-item::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.impact-item:nth-child(1)::before { background: var(--teal); }
+.impact-item:nth-child(2)::before { background: var(--green); }
+.impact-item:nth-child(3)::before { background: var(--gold); }
+.impact-item:nth-child(4)::before { background: var(--red); }
+.impact-item:hover::before { transform: scaleX(1); }
 .impact-item:hover { background: rgba(255,255,255,0.03); }
-.impact-icon { font-size: 32px; color: rgba(255,255,255,0.2); margin-bottom: 16px; transition: color 0.2s; }
-.impact-item:hover .impact-icon { color: var(--gold); }
-.impact-num { font-family: var(--font-serif); font-weight: 900; font-size: 48px; color: var(--gold); line-height: 1; margin-bottom: 8px; }
-.impact-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+.impact-icon { font-size: 28px; color: rgba(255,255,255,0.2); margin-bottom: 14px; transition: transform 0.4s var(--ease-out), color 0.3s; }
+.impact-item:hover .impact-icon { transform: scale(1.2) translateY(-2px); }
+.impact-item:nth-child(1):hover .impact-icon { color: var(--teal); }
+.impact-item:nth-child(2):hover .impact-icon { color: var(--green); }
+.impact-item:nth-child(3):hover .impact-icon { color: var(--gold); }
+.impact-item:nth-child(4):hover .impact-icon { color: var(--red); }
+.impact-num {
+  font-family: var(--font-serif); font-weight: 900; font-size: 52px;
+  color: white; line-height: 1; margin-bottom: 8px;
+  transition: transform 0.4s var(--ease-out);
+}
+.impact-item:hover .impact-num { transform: scale(1.05); }
+.impact-item:nth-child(1) .impact-num { color: var(--teal); }
+.impact-item:nth-child(2) .impact-num { color: var(--green); }
+.impact-item:nth-child(3) .impact-num { color: var(--gold); }
+.impact-item:nth-child(4) .impact-num { color: var(--red); }
+.impact-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; }
 
-/* photo band */
-.photo-band { display: grid; grid-template-columns: repeat(5, 1fr); height: 280px; gap: 3px; background: #000; }
-.photo-band-item { position: relative; overflow: hidden; cursor: pointer; }
-.photo-band-item-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s, filter 0.3s; filter: brightness(0.8); }
-.photo-band-item:hover .photo-band-item-bg { transform: scale(1.05); filter: brightness(1); }
-.photo-band-item-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px 16px 16px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.9); text-transform: uppercase; transform: translateY(12px); opacity: 0; transition: 0.3s; }
+/* ── WHY ACTIVITIES SECTION ── */
+.why-activities {
+  padding: 100px 0;
+  background: var(--off-white);
+  position: relative; overflow: hidden;
+}
+.why-activities::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url('Agric3.jpg');
+  background-size: cover; background-position: center;
+  background-attachment: fixed; z-index: 0; opacity: 0.06;
+}
+.why-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.why-grid {
+  display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center;
+}
+.why-text h2 {
+  font-family: var(--font-serif); font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 48px); line-height: 1.1; margin-bottom: 24px;
+  color: var(--navy);
+}
+.why-text h2 em { font-style: italic; color: var(--teal); }
+.why-text p { font-size: 16px; line-height: 1.8; color: var(--mid); margin-bottom: 20px; }
+.why-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+.why-pillar {
+  padding: 20px; border-left: 3px solid var(--light-gray);
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+  transition: border-color 0.3s, transform 0.4s var(--ease-out), box-shadow 0.3s;
+}
+.why-pillar:hover { border-color: var(--teal); transform: translateX(5px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.why-pillar h4 { font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.why-pillar p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+.why-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.why-visual-card {
+  background: var(--white); border-radius: 4px; overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+}
+.why-visual-card:hover { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(0,0,0,0.14); }
+.why-visual-card:first-child { grid-column: 1 / -1; }
+.why-visual-band {
+  height: 5px;
+  background: linear-gradient(to right, var(--teal), var(--green));
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.why-visual-card:hover .why-visual-band { transform: scaleX(1.02); }
+.why-visual-card:nth-child(2) .why-visual-band { background: linear-gradient(to right, var(--gold), var(--red)); }
+.why-visual-card:nth-child(3) .why-visual-band { background: linear-gradient(to right, var(--purple), var(--teal)); }
+.why-visual-body { padding: 24px 24px 28px; }
+.why-visual-body .prog-icon { font-size: 30px; margin-bottom: 12px; display: block; transition: transform 0.4s var(--ease-out); }
+.why-visual-card:hover .prog-icon { transform: scale(1.2) rotate(-6deg); }
+.why-visual-body h4 { font-family: var(--font-serif); font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.why-visual-body p { font-size: 13.5px; color: var(--mid); line-height: 1.65; }
+
+/* ── PHOTO BAND / PARALLAX STRIP ── */
+.photo-band {
+  height: 320px;
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 3px;
+}
+.photo-band-item {
+  position: relative; overflow: hidden;
+}
+.photo-band-item-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.1);
+  transition: transform 0.7s var(--ease-out), filter 0.5s;
+  filter: saturate(0.7) brightness(0.85);
+}
+.photo-band-item:hover .photo-band-item-bg { transform: scale(1); filter: saturate(1) brightness(0.95); }
+.photo-band-item-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 28px 20px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.75);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transform: translateY(6px); opacity: 0;
+  transition: transform 0.4s var(--ease-out), opacity 0.4s;
+  z-index: 2;
+}
 .photo-band-item:hover .photo-band-item-label { transform: translateY(0); opacity: 1; }
 
-/* why section */
-.why-activities { padding: 100px 0; background: var(--off-white); position: relative; }
-.why-activities::before { content: ''; position: absolute; inset: 0; background-image: url('Agric3.jpg'); opacity: 0.05; background-size: cover; background-attachment: fixed; pointer-events: none; }
-.why-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
-.why-grid { display: grid; grid-template-columns: 5fr 6fr; gap: 80px; align-items: center; }
-.why-text h2 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(28px, 3.5vw, 48px); color: var(--navy); margin-bottom: 20px; }
-.why-text h2 em { color: var(--teal); font-style: italic; }
-.why-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
-.why-pillar { padding: 20px; background: white; border-left: 4px solid var(--teal); box-shadow: 0 8px 20px rgba(0,0,0,0.02); transition: transform 0.2s; }
-.why-pillar:hover { transform: translateX(6px); }
-.why-pillar h4 { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-.why-pillar p { font-size: 13px; color: var(--mid); }
-.why-visual { display: grid; gap: 20px; }
-.why-visual-card { background: white; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
-.why-visual-card:hover { transform: translateY(-6px); box-shadow: 0 20px 32px rgba(0,0,0,0.1); }
-.why-visual-band { height: 5px; background: linear-gradient(90deg, var(--teal), var(--green)); }
-.why-visual-body { padding: 28px; }
-.prog-icon { font-size: 32px; margin-bottom: 12px; display: block; }
-.why-visual-body h4 { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-
-/* CTABand */
-.cta-band { background: var(--red); padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
-.cta-inner { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-.cta-inner h2 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(32px, 5vw, 52px); color: white; margin-bottom: 20px; }
+/* ── CTA BAND ── */
+.cta-band {
+  background: var(--red); padding: 72px 0;
+  position: relative; overflow: hidden;
+}
+.cta-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    -45deg, transparent 0, transparent 20px,
+    rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px
+  );
+}
+/* Animated shimmer wave */
+.cta-band::after {
+  content: ''; position: absolute; top: -50%; left: -60%; width: 80%; height: 200%;
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.07) 50%, transparent 70%);
+  animation: ctaShimmer 6s linear infinite;
+}
+@keyframes ctaShimmer { from { left: -60%; } to { left: 100%; } }
+.cta-inner { max-width: 900px; margin: 0 auto; padding: 0 32px; text-align: center; position: relative; z-index: 2; }
+.cta-inner h2 {
+  font-family: var(--font-serif); font-weight: 900; color: white;
+  font-size: clamp(28px, 4vw, 52px); line-height: 1.15; margin-bottom: 16px;
+}
 .cta-inner h2 em { font-style: italic; }
-.cta-inner p { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
-.btn-cta-light, .btn-cta-ghost { display: inline-block; padding: 14px 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 8px; transition: 0.2s; text-decoration: none; }
-.btn-cta-light { background: white; color: var(--red); border-radius: 40px; }
-.btn-cta-light:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.2); }
-.btn-cta-ghost { border: 1.5px solid white; color: white; border-radius: 40px; }
-.btn-cta-ghost:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+.cta-inner p { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 580px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-cta-light {
+  background: white; color: var(--red); border: none;
+  padding: 16px 36px; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+  text-decoration: none; display: inline-block;
+  transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.btn-cta-light:hover { background: var(--off-white); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+.btn-cta-ghost {
+  background: transparent; color: white;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  padding: 16px 36px; font-size: 14px; font-weight: 500;
+  cursor: pointer; text-decoration: none; display: inline-block;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+.btn-cta-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); transform: translateY(-3px); }
 
-/* footer */
-footer { background: var(--dark); padding: 70px 0 0; }
+/* ── FOOTER ── */
+footer {
+  background: var(--dark); padding: 80px 0 0;
+}
 .footer-inner { max-width: 1320px; margin: 0 auto; padding: 0 32px; }
-.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.08); }
-.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); margin: 16px 0; line-height: 1.6; }
+.footer-top { display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand .logo-badge { width: 52px; height: 52px; margin-bottom: 16px; }
+.footer-brand strong { font-family: var(--font-serif); font-weight: 700; font-size: 22px; color: white; display: block; margin-bottom: 4px; }
+.footer-brand .tagline { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 18px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
 .footer-socials { display: flex; gap: 12px; }
-.footer-socials a { width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: 0.2s; }
-.footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
-.footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); margin-bottom: 20px; text-transform: uppercase; }
-.footer-col ul { list-style: none; }
-.footer-col ul li { margin-bottom: 10px; }
-.footer-col ul a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+.footer-socials a {
+  width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.25s;
+}
+.footer-socials a:hover { border-color: var(--gold); color: var(--gold); background: rgba(214,158,46,0.1); transform: translateY(-4px); }
+.footer-col h4 {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 20px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none;
+  transition: color 0.2s, padding-left 0.25s;
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-col ul a i { font-size: 11px; color: rgba(255,255,255,0.2); transition: color 0.2s; }
 .footer-col ul a:hover { color: white; padding-left: 4px; }
-.footer-bottom { display: flex; justify-content: space-between; padding: 24px 0; font-size: 12px; color: rgba(255,255,255,0.3); flex-wrap: wrap; }
+.footer-col ul a:hover i { color: var(--gold); }
+.footer-bottom {
+  padding: 24px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+.footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
 
+/* ── MOBILE NAV ── */
 @media (max-width: 1024px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
-  .mobile-menu { position: fixed; top: 75px; left: 0; right: 0; background: white; z-index: 998; transform: translateX(100%); transition: 0.3s; padding: 20px 0; }
+  .mobile-menu {
+    position: fixed; top: 75px; left: 0; right: 0; bottom: 0;
+    background: white; z-index: 999; overflow-y: auto;
+    transform: translateX(100%); transition: transform 0.4s var(--ease-out);
+    padding: 20px 0;
+  }
   .mobile-menu.open { transform: none; }
-  .mob-link { display: block; padding: 14px 32px; font-size: 16px; color: var(--navy); text-decoration: none; border-bottom: 1px solid #eee; }
+  .mob-link {
+    display: block; padding: 16px 32px; font-size: 16px; font-weight: 500;
+    color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--light-gray);
+    transition: background 0.15s;
+  }
+  .mob-link:hover { background: var(--off-white); }
+  .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
+}
+
+@media (max-width: 960px) {
   .activities-overview { grid-template-columns: repeat(4, 1fr); }
   .act-featured-grid { grid-template-columns: 1fr; }
   .act-small-grid { grid-template-columns: 1fr; }
-  .activities-main-header { grid-template-columns: 1fr; gap: 32px; }
+  .activities-main-header { grid-template-columns: 1fr; gap: 24px; }
   .why-grid { grid-template-columns: 1fr; gap: 40px; }
   .impact-strip { grid-template-columns: repeat(2, 1fr); }
-  .photo-band { grid-template-columns: repeat(3, 1fr); }
+  .impact-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
   .footer-top { grid-template-columns: 1fr 1fr; }
+  .photo-band { grid-template-columns: repeat(3, 1fr); height: 260px; }
+  .photo-band-item:nth-child(4), .photo-band-item:nth-child(5) { display: none; }
 }
+
 @media (max-width: 640px) {
-  .activities-overview { grid-template-columns: repeat(2,1fr); }
-  .photo-band { grid-template-columns: repeat(2,1fr); }
-  .impact-strip { grid-template-columns: 1fr; }
+  .activities-overview { grid-template-columns: repeat(2, 1fr); }
+  .why-pillars { grid-template-columns: 1fr; }
+  .why-visual { grid-template-columns: 1fr; }
+  .why-visual-card:first-child { grid-column: auto; }
+  .impact-strip { grid-template-columns: 1fr 1fr; }
+  .nav-inner, .activities-main-inner, .why-inner, .footer-inner, .page-hero-inner { padding: 0 20px; }
+  .page-hero-inner { padding: 60px 20px; }
+  .activities-main { padding: 70px 0; }
+  .why-activities { padding: 70px 0; }
+  .photo-band { grid-template-columns: repeat(2, 1fr); height: 200px; }
+  .photo-band-item:nth-child(5) { display: none; }
 }
 </style>
 </head>
 <body>
-<div class="cursor"><div class="cursor-dot"></div><div class="cursor-ring"></div></div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor">
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+</div>
+
+<!-- COLOUR BAND -->
 <div class="colour-band"></div>
-<nav id="mainNav"><div class="nav-inner"><a href="#" class="logo"><div class="logo-badge"><img src="fapcan.jpg" alt="FAPCAN"></div><div class="logo-text"><strong>FAPCAN</strong><span>Fatima Praying Center</span></div></a><ul class="nav-links"><li><a href="#" class="nav-link">Home</a></li><li><a href="#" class="nav-link">About</a></li><li><a href="#" class="nav-link">Spiritual Life</a></li><li><a href="#" class="nav-link">Save Souls</a></li><li><a href="#" class="nav-link active">Activities</a></li><li><a href="#" class="nav-link">Gallery</a></li><li><a href="#" class="nav-link">Media</a></li></ul><a href="#" class="nav-cta">Support Us</a><button class="hamburger"><span></span><span></span><span></span></button></div></nav>
-<div class="mobile-menu" id="mobileMenu"><a href="#" class="mob-link">Home</a><a href="#" class="mob-link">About</a><a href="#" class="mob-link">Spiritual Life</a><a href="#" class="mob-link">Save Souls</a><a href="#" class="mob-link">Activities</a><a href="#" class="mob-link">Gallery</a><a href="#" class="mob-link">Media</a></div>
 
-<!-- Hero -->
-<section class="page-hero"><div class="page-hero-bg"></div><div class="page-hero-overlay"></div><div class="page-hero-inner"><div class="breadcrumb"><span>Home</span> <i class="fas fa-chevron-right"></i> <span>Activities</span></div><div class="page-hero-tag"><i class="fas fa-hand-sparkles"></i> Empowering Communities</div><h1>Hands That Build<br><em>Hope & Livelihoods</em></h1><p>From fish ponds to football, weaving to livestock — discover the programmes shaping a self-reliant future in Kasese, Uganda.</p></div></section>
+<!-- NAV (unchanged) -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">
+        <img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="logo-badge-fallback" style="display:none">FAP</span>
+      </div>
+      <div class="logo-text">
+        <strong>FAPCAN</strong>
+        <span>Fatima Praying Center</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item">
+        <a href="index.html#about" class="nav-link">About Us <i class="fas fa-chevron-down arr"></i></a>
+        <div class="dropdown">
+          <a href="index.html#mission"><i class="fas fa-cross"></i> Mission &amp; Vision</a>
+          <a href="index.html#history"><i class="fas fa-history"></i> Our History</a>
+          <a href="community.html"><i class="fas fa-users"></i> FAPCAN Community</a>
+          <a href="index.html#location"><i class="fas fa-map-marker-alt"></i> Location</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="prayer.html" class="nav-link">Spiritual Life</a></li>
+      <li class="nav-item"><a href="save.html" class="nav-link">Save Souls</a></li>
+      <li class="nav-item"><a href="activities.html" class="nav-link active">Activities</a></li>
+      <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li class="nav-item"><a href="film.html" class="nav-link">Media</a></li>
+      <li class="nav-item"><a href="index.html#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Support Us</a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-<!-- Quick Nav -->
-<div class="activities-overview"><a href="#fishing" class="act-overview-item"><span class="act-overview-icon">🐟</span><span class="act-overview-label">Fish Ponds</span></a><a href="#handcrafts" class="act-overview-item"><span class="act-overview-icon">🧶</span><span class="act-overview-label">Handcrafts</span></a><a href="#pottery" class="act-overview-item"><span class="act-overview-icon">🏺</span><span class="act-overview-label">Pottery</span></a><a href="#basketry" class="act-overview-item"><span class="act-overview-icon">🧺</span><span class="act-overview-label">Basketry</span></a><a href="#sports" class="act-overview-item"><span class="act-overview-icon">⚽</span><span class="act-overview-label">Sports</span></a><a href="#tailoring" class="act-overview-item"><span class="act-overview-icon">🪡</span><span class="act-overview-label">Tailoring</span></a><a href="#livestock" class="act-overview-item"><span class="act-overview-icon">🐄</span><span class="act-overview-label">Livestock</span></a></div>
-
-<main class="activities-main"><div class="activities-main-inner"><div class="activities-main-header"><div class="reveal-left"><div class="section-label">What We Do</div><h2>Creating Dignity Through<br><em>Practical Work</em></h2></div><div class="reveal-right"><p>Our holistic approach combines agriculture, arts, sports, and animal husbandry to build resilience, preserve heritage, and empower every member of the community.</p></div></div>
-
-<!-- FEATURED GRID (handcrafts, pottery, basketry, tailoring + fishing) -->
-<div class="act-featured-grid">
-  <!-- FISHING (fish pond) with handcraft1.jpg as background, but we make it fishing theme -->
-  <div class="act-card-large" id="fishing"><div class="act-card-bg" style="background-image: url('handcraft1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">01</div><div class="act-card-large-icon">🐟</div><span class="act-card-large-tag">Aquaculture · Nutrition</span><h3>Fish Ponds</h3><p>Sustainable fish farming provides protein and income for families.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
-  
-  <!-- HANDCRAFT general with handcraft.jpg -->
-  <div class="act-card-large" id="handcrafts"><div class="act-card-bg" style="background-image: url('handcraft.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">02</div><div class="act-card-large-icon">🧵</div><span class="act-card-large-tag">Heritage · Artistry</span><h3>Handcraft & Art</h3><p>Traditional crafts preserve culture while generating livelihoods.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
-
-  <!-- POTTERY 1 & 2 (two images combined as main card for pottery) -->
-  <div class="act-card-large" id="pottery"><div class="act-card-bg" style="background-image: url('pottery1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">03</div><div class="act-card-large-icon">🏺</div><span class="act-card-large-tag">Sculpting · Craft</span><h3>Pottery & Ceramics</h3><p>Shaping clay into functional art — skills for self-reliance.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
-
-  <!-- BASKETRY with basket.jpg -->
-  <div class="act-card-large" id="basketry"><div class="act-card-bg" style="background-image: url('basket.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">04</div><div class="act-card-large-icon">🧺</div><span class="act-card-large-tag">Weaving · Enterprise</span><h3>Basketry</h3><p>Intricate weaving techniques passed down through generations.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="index.html#about" class="mob-link">About Us</a>
+  <a href="index.html#mission" class="mob-link sub">↳ Mission &amp; Vision</a>
+  <a href="index.html#history" class="mob-link sub">↳ Our History</a>
+  <a href="community.html" class="mob-link sub">↳ FAPCAN Community</a>
+  <a href="prayer.html" class="mob-link">Spiritual Life</a>
+  <a href="save.html" class="mob-link">Save Souls</a>
+  <a href="activities.html" class="mob-link">Activities</a>
+  <a href="gallery.html" class="mob-link">Gallery</a>
+  <a href="film.html" class="mob-link">Media</a>
+  <a href="index.html#contact" class="mob-link">Contact</a>
 </div>
 
-<!-- SMALL GRID: SPORTS (with sports1-4), TAILORING, LIVESTOCK (with livestock1-4) -->
-<div class="act-small-grid">
-  <!-- SPORTS: using sports1.jpg as primary but will link to gallery of all sports images -->
-  <div class="act-card-small" id="sports"><div class="act-card-bg" style="background-image: url('sports1.jpg');"></div><div class="act-card-small-overlay"></div><div class="act-card-small-num">05</div><div class="act-card-small-icon">⚽</div><span class="act-card-small-tag">Teamwork · Health</span><h3>Football & Netball</h3><p>Youth leagues building discipline, joy and community spirit.</p><span class="act-card-small-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
-  
-  <!-- TAILORING (using existing tailoring imagery but we keep name) -->
-  <div class="act-card-small" id="tailoring"><div class="act-card-bg" style="background-image: url('pottery2.jpg');"></div><div class="act-card-small-overlay"></div><div class="act-card-small-num">06</div><div class="act-card-small-icon">🪡</div><span class="act-card-small-tag">Self-Employment</span><h3>Tailoring</h3><p>Sewing skills empower women and youth to start small businesses.</p><span class="act-card-small-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+<!-- ══ PAGE HERO (unchanged) ══ -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-grain"></div>
+  <div class="page-hero-geo">
+    <div class="page-hero-geo-ring"></div>
+    <div class="page-hero-geo-ring"></div>
+    <div class="page-hero-geo-ring"></div>
+  </div>
+  <div class="page-hero-line"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Activities</span>
+    </div>
+    <div class="page-hero-tag">Community Life · Kasese · Uganda</div>
+    <h1>Our <em>Activities</em><br>&amp; Programmes</h1>
+    <p>From fish ponds to football fields, from tailoring to tapestry — FAPCAN's activities build skills, sustain families, and weave a community together through shared purpose and hands-on work.</p>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span>Explore Below</span>
+    </div>
+  </div>
+</section>
 
-  <!-- LIVESTOCK using livestock1.jpg -->
-  <div class="act-card-small" id="livestock"><div class="act-card-bg" style="background-image: url('livestock1.jpg');"></div><div class="act-card-small-overlay"></div><div class="act-card-small-num">07</div><div class="act-card-small-icon">🐄</div><span class="act-card-small-tag">Nutrition · Income</span><h3>Livestock Rearing</h3><p>Goats, cows and rabbits — sustainable animal husbandry.</p><span class="act-card-small-arrow">Learn More <i class="fas fa-arrow-right"></i></span></div>
+<!-- ACTIVITIES QUICK NAV -->
+<div class="activities-overview">
+  <a class="act-overview-item" href="#fishing"><span class="act-overview-icon">🐟</span><span class="act-overview-label">Fish Ponds</span></a>
+  <a class="act-overview-item" href="#farming"><span class="act-overview-icon">🌽</span><span class="act-overview-label">Family Farming</span></a>
+  <a class="act-overview-item" href="#tailoring"><span class="act-overview-icon">🪡</span><span class="act-overview-label">Tailoring</span></a>
+  <a class="act-overview-item" href="#tapestry"><span class="act-overview-icon">🎨</span><span class="act-overview-label">Tapestry</span></a>
+  <a class="act-overview-item" href="#sports"><span class="act-overview-icon">⚽</span><span class="act-overview-label">Sports</span></a>
+  <a class="act-overview-item" href="#basketry"><span class="act-overview-icon">🧺</span><span class="act-overview-label">Basketry</span></a>
+  <a class="act-overview-item" href="#livestock"><span class="act-overview-icon">🐄</span><span class="act-overview-label">Livestock</span></a>
 </div>
-</div></main>
 
-<!-- Impact numbers -->
-<div class="impact-strip"><div class="impact-item"><div class="impact-icon"><i class="fas fa-fish"></i></div><div class="impact-num" data-target="8">0+</div><div class="impact-label">Active Programmes</div></div><div class="impact-item"><div class="impact-icon"><i class="fas fa-hand-sparkles"></i></div><div class="impact-num" data-target="340">0+</div><div class="impact-label">Households Supported</div></div><div class="impact-item"><div class="impact-icon"><i class="fas fa-calendar-alt"></i></div><div class="impact-num" data-target="14">0+</div><div class="impact-label">Years of Service</div></div><div class="impact-item"><div class="impact-icon"><i class="fas fa-users"></i></div><div class="impact-num" data-target="280">0+</div><div class="impact-label">Youth Engaged</div></div></div>
+<!-- MAIN ACTIVITIES (cards updated with fresh imagery) -->
+<section class="activities-main">
+  <div class="activities-main-inner">
+    <div class="activities-main-header">
+      <div class="reveal-left"><div class="section-label">What We Do</div><h2>Building Lives Through<br><em>Practical Skills</em></h2></div>
+      <div class="reveal-right"><p>Each activity at FAPCAN is more than work — it is a vehicle for dignity, self-reliance, and community cohesion. Our programmes equip families and youth with the tools they need to thrive, sustain themselves, and contribute to one another.</p></div>
+    </div>
 
-<!-- Photo Band with sports images gallery (sports2, sports3, sports4) plus livestock2, livestock3 -->
-<div class="photo-band"><div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('sports2.jpg')"></div><div class="photo-band-item-label">Football Academy</div></div><div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('sports3.jpg')"></div><div class="photo-band-item-label">Netball</div></div><div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('sports4.jpg')"></div><div class="photo-band-item-label">Sports Tournaments</div></div><div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('livestock2.jpg')"></div><div class="photo-band-item-label">Goat Rearing</div></div><div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('livestock3.jpg')"></div><div class="photo-band-item-label">Poultry & Rabbits</div></div></div>
+    <div class="act-featured-grid">
+      <!-- 1. Fishing (existing image Agric4.jpg) -->
+      <div class="act-card-large c-teal reveal reveal-delay-1" id="fishing">
+        <div class="act-card-bg" style="background-image: url('Agric4.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">01</div><div class="act-card-large-icon">🐟</div>
+        <span class="act-card-large-tag">Livelihood · Food Security</span><h3>Fishing (Fish Ponds)</h3>
+        <p>We manage community fish ponds to provide food, income, and hands-on skills in sustainable aquaculture for families and youth.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <!-- 2. Family Farming (Agric1.jpg) -->
+      <div class="act-card-large c-green reveal reveal-delay-2" id="farming">
+        <div class="act-card-bg" style="background-image: url('Agric1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">02</div><div class="act-card-large-icon">🌽</div>
+        <span class="act-card-large-tag">Food Security · Family</span><h3>Family Farming</h3>
+        <p>Whole families work together in our gardens growing maize, beans, groundnuts, cassava, rice, and more — building food security and shared responsibility.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <!-- 3. Tailoring (updated: handcraft.jpg + handcraft1.jpg added to background rotation: using handcraft1.jpg) -->
+      <div class="act-card-large c-purple reveal reveal-delay-3" id="tailoring">
+        <div class="act-card-bg" style="background-image: url('handcraft1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">03</div><div class="act-card-large-icon">🪡</div>
+        <span class="act-card-large-tag">Skills · Self-Employment</span><h3>Tailoring &amp; Handcraft</h3>
+        <p>We train members in sewing, clothing design and fine handcraft — developing practical skills, creativity and opportunities for self-employment.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <!-- 4. Tapestry (pottery1.jpg + pottery2.jpg style) -->
+      <div class="act-card-large c-gold reveal reveal-delay-4" id="tapestry">
+        <div class="act-card-bg" style="background-image: url('pottery1.jpg');"></div><div class="act-card-large-overlay"></div><div class="act-card-large-num">04</div><div class="act-card-large-icon">🎨</div>
+        <span class="act-card-large-tag">Culture · Arts · Income</span><h3>Pottery &amp; Tapestry</h3>
+        <p>Through tapestry, pottery and decorative arts, we preserve culture while teaching artistic skills that can create income and personal expression.</p><span class="act-card-large-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+    </div>
 
-<!-- Why Section with remaining livestock4 & handcraft integration -->
-<section class="why-activities"><div class="why-inner"><div class="why-grid"><div class="why-text reveal-left"><div class="section-label">Our Approach</div><h2>Work as <em>Worship,</em><br>Skills as Service</h2><p>At FAPCAN, every programme is rooted in dignity, sustainability, and inclusion — welcoming PWDs, widows, orphans, and youth to grow together.</p><div class="why-pillars"><div class="why-pillar"><h4>Sustainability</h4><p>All activities generate food and income for long-term resilience.</p></div><div class="why-pillar"><h4>Inclusivity</h4><p>Open to all, regardless of background or ability.</p></div><div class="why-pillar"><h4>Heritage</h4><p>Pottery, basketry, and handcraft preserve cultural identity.</p></div><div class="why-pillar"><h4>Youth Focus</h4><p>Sports and vocational training shape future leaders.</p></div></div></div><div class="why-visual reveal-right"><div class="why-visual-card"><div class="why-visual-band"></div><div class="why-visual-body"><span class="prog-icon">🐐</span><h4>Livestock for Life</h4><p>With cows, goats, and rabbits, families gain nutrition and a pathway out of poverty.</p></div></div><div class="why-visual-card"><div class="why-visual-band"></div><div class="why-visual-body"><span class="prog-icon">🏺</span><h4>Pottery & Expression</h4><p>Beautiful ceramics from local clay — art meets enterprise.</p></div></div></div></div></div></section>
+    <div class="act-small-grid">
+      <!-- 5. Sports (using sports1.jpeg, sports2.jpeg, sports3.jpeg, sports4.jpeg) -->
+      <div class="act-card-small c-red reveal reveal-delay-1" id="sports">
+        <div class="act-card-bg" style="background-image: url('sports1.jpeg');"></div><div class="act-card-small-overlay"></div><div class="act-card-small-num">05</div><div class="act-card-small-icon">⚽</div>
+        <span class="act-card-small-tag">Youth · Health · Teamwork</span><h3>Football &amp; Netball</h3>
+        <p>Our sports programs promote teamwork, discipline, health, and positive youth development within the community.</p><span class="act-card-small-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <!-- 6. Basketry (using basket.jpg) -->
+      <div class="act-card-small c-navy reveal reveal-delay-2" id="basketry">
+        <div class="act-card-bg" style="background-image: url('basket.jpg');"></div><div class="act-card-small-overlay"></div><div class="act-card-small-num">06</div><div class="act-card-small-icon">🧺</div>
+        <span class="act-card-small-tag">Heritage · Enterprise</span><h3>Basketry &amp; Weaving</h3>
+        <p>We teach traditional basket weaving to keep cultural heritage alive and support small-scale business opportunities.</p><span class="act-card-small-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <!-- 7. Livestock (using livestock1.jpg, livestock2.jpg, livestock3.jpg, livestock4.jpg) -->
+      <div class="act-card-small c-green2 reveal reveal-delay-3" id="livestock">
+        <div class="act-card-bg" style="background-image: url('livestock1.jpg');"></div><div class="act-card-small-overlay"></div><div class="act-card-small-num">07</div><div class="act-card-small-icon">🐄</div>
+        <span class="act-card-small-tag">Nutrition · Livelihoods</span><h3>Livestock Rearing</h3>
+        <p>We raise cows, goats, and rabbits to support nutrition, farming skills, and sustainable livelihoods for families.</p><span class="act-card-small-arrow">Learn More <i class="fas fa-arrow-right"></i></span>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Livestock final band: livestock4.jpg -->
-<div style="height: 300px; background-image: url('livestock4.jpg'); background-size: cover; background-position: center; background-attachment: fixed; position: relative; margin: 0;"><div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center;"><h2 style="font-family: var(--font-serif); color: white; font-size: 2rem; text-shadow: 0 2px 12px black;">Raising Hope, One Animal at a Time</h2></div></div>
+<!-- IMPACT STRIP (unchanged) -->
+<div class="impact-strip">
+  <div class="impact-item reveal"><div class="impact-icon"><i class="fas fa-fish"></i></div><div class="impact-num" data-target="7">0</div><div class="impact-label">Active Programmes</div></div>
+  <div class="impact-item reveal reveal-delay-1"><div class="impact-icon"><i class="fas fa-seedling"></i></div><div class="impact-num" data-target="300">0</div><div class="impact-label">Families Supported</div></div>
+  <div class="impact-item reveal reveal-delay-2"><div class="impact-icon"><i class="fas fa-hands-holding"></i></div><div class="impact-num" data-target="12">0</div><div class="impact-label">Years Running</div></div>
+  <div class="impact-item reveal reveal-delay-3"><div class="impact-icon"><i class="fas fa-users"></i></div><div class="impact-num" data-target="250">0</div><div class="impact-label">Youth Engaged</div></div>
+</div>
 
-<section class="cta-band"><div class="cta-inner"><h2>Help Us <em>Expand</em> These Programmes</h2><p>Your donation buys seeds, sewing machines, sports equipment, or livestock — directly transforming lives in Kasese.</p><div><a href="#" class="btn-cta-light">Donate Now</a><a href="#" class="btn-cta-ghost">Become a Volunteer</a></div></div></section>
+<!-- PHOTO BAND (updated with new craft & livestock imagery) -->
+<div class="photo-band reveal">
+  <div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('handcraft.jpg')"></div><div class="photo-band-item-label">Handcraft</div></div>
+  <div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('pottery2.jpg')"></div><div class="photo-band-item-label">Pottery</div></div>
+  <div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('sports2.jpeg')"></div><div class="photo-band-item-label">Sports</div></div>
+  <div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('livestock2.jpg')"></div><div class="photo-band-item-label">Livestock</div></div>
+  <div class="photo-band-item"><div class="photo-band-item-bg" style="background-image:url('sports3.jpeg')"></div><div class="photo-band-item-label">Tournament</div></div>
+</div>
 
-<footer><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><div class="logo-badge"><img src="fapcan.jpg" alt="FAPCAN"></div><strong>FAPCAN</strong><span class="tagline" style="display:block; color:var(--gold); font-size:11px; margin-top:5px;">Fatima Praying Center for All Nations</span><p>Empowering vulnerable communities through faith, skills, and sustainable action in Uganda.</p><div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div><div class="footer-col"><h4>Explore</h4><ul><li><a href="#">Home</a></li><li><a href="#">About Us</a></li><li><a href="#">Spiritual Life</a></li><li><a href="#">Save Souls</a></li><li><a href="#">Gallery</a></li></ul></div><div class="footer-col"><h4>Activities</h4><ul><li><a href="#fishing">Fish Ponds</a></li><li><a href="#handcrafts">Handcrafts</a></li><li><a href="#pottery">Pottery</a></li><li><a href="#basketry">Basketry</a></li><li><a href="#sports">Sports</a></li><li><a href="#tailoring">Tailoring</a></li><li><a href="#livestock">Livestock</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese</li><li><i class="fas fa-phone"></i> +256 123 456 789</li><li><i class="fas fa-envelope"></i> info@fapcan.org</li></ul></div></div><div class="footer-bottom"><p>© 2026 FAPCAN — Faith in Action. All rights reserved.</p><div><a href="#">Privacy</a> | <a href="#">Terms</a></div></div></div></footer>
+<!-- WHY ACTIVITIES (unchanged, but we ensure no legacy broken) -->
+<section class="why-activities">
+  <div class="why-inner"><div class="why-grid"><div class="why-text reveal-left"><div class="section-label">Our Approach</div><h2>Work as <em>Worship,</em><br>Skills as Service</h2><p>At FAPCAN, every activity is grounded in our belief that dignified work transforms lives. We don't just teach skills — we build people who can sustain themselves, their families, and their communities.</p><p>Our programmes are designed to be inclusive, welcoming PWDs, orphans, widows, elders, and youth into the same shared spaces of growth and productivity.</p><div class="why-pillars"><div class="why-pillar"><h4>Sustainability</h4><p>All activities are designed to generate income and food security over the long term.</p></div><div class="why-pillar"><h4>Inclusivity</h4><p>Every programme is open to all members regardless of background or ability.</p></div><div class="why-pillar"><h4>Culture</h4><p>Arts, basketry and tapestry preserve heritage while generating livelihoods.</p></div><div class="why-pillar"><h4>Youth Focus</h4><p>Sports and skills training ensure young people have purpose, health and hope.</p></div></div></div><div class="why-visual reveal-right"><div class="why-visual-card"><div class="why-visual-band"></div><div class="why-visual-body"><span class="prog-icon">🌱</span><h4>Growing Together</h4><p>Family farming and fish ponds bring households together in a shared effort — children, parents and elders working side by side, building bonds as strong as the harvests they reap.</p></div></div><div class="why-visual-card"><div class="why-visual-band"></div><div class="why-visual-body"><span class="prog-icon">✂️</span><h4>Creating Independence</h4><p>Tailoring and basketry empower members — especially women — with skills and income streams that free them from dependency and open doors to enterprise.</p></div></div><div class="why-visual-card"><div class="why-visual-band"></div><div class="why-visual-body"><span class="prog-icon">🏆</span><h4>Raising Champions</h4><p>Football and netball build far more than athletic ability. They teach discipline, cooperation, conflict resolution, and the joy of working toward a shared goal.</p></div></div></div></div></div>
+</section>
+
+<!-- CTA BAND (unchanged) -->
+<section class="cta-band"><div class="cta-inner reveal"><h2>Help Us <em>Grow</em> These Programmes</h2><p>Your support — whether through prayer, volunteering, or a donation — gives more families access to skills, food, and a future. Join the FAPCAN family today.</p><div class="cta-btns"><a href="#" class="btn-cta-light">Donate Now</a><a href="#" class="btn-cta-ghost">Volunteer With Us</a></div></div></section>
+
+<!-- FOOTER (unchanged) -->
+<footer id="contact"><div class="footer-inner"><div class="footer-top"><div class="footer-brand"><div class="logo-badge" style="margin-bottom:16px"><img src="fapcan.jpg" alt="FAPCAN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="logo-badge-fallback" style="display:none">FAP</span></div><strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span><p>A voluntary non-government organisation providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p><div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="index.html#about"><i class="fas fa-chevron-right"></i> About</a></li><li><a href="prayer.html"><i class="fas fa-chevron-right"></i> Spiritual Life</a></li><li><a href="save.html"><i class="fas fa-chevron-right"></i> Save Souls</a></li><li><a href="activities.html"><i class="fas fa-chevron-right"></i> Activities</a></li><li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li><li><a href="film.html"><i class="fas fa-chevron-right"></i> Media</a></li></ul></div><div class="footer-col"><h4>Our Activities</h4><ul><li><a href="#fishing"><i class="fas fa-chevron-right"></i> Fish Ponds</a></li><li><a href="#farming"><i class="fas fa-chevron-right"></i> Family Farming</a></li><li><a href="#tailoring"><i class="fas fa-chevron-right"></i> Tailoring</a></li><li><a href="#tapestry"><i class="fas fa-chevron-right"></i> Tapestry & Pottery</a></li><li><a href="#sports"><i class="fas fa-chevron-right"></i> Football &amp; Netball</a></li><li><a href="#basketry"><i class="fas fa-chevron-right"></i> Basketry</a></li><li><a href="#livestock"><i class="fas fa-chevron-right"></i> Livestock</a></li></ul></div><div class="footer-col"><h4>Contact</h4><ul><li><a href="#"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li><li><a href="#"><i class="fas fa-phone"></i> +256 XXX XXX XXX</a></li><li><a href="#"><i class="fas fa-envelope"></i> info@fapcan.org</a></li><li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 FAPCAN – Fatima Praying Center for All Nations. All Rights Reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div></div></footer>
 
 <script>
-// Cursor & interactive
-const cursorDot = document.querySelector('.cursor-dot'), cursorRing = document.querySelector('.cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; });
-document.querySelectorAll('a, button, .act-card-large, .act-card-small, .act-overview-item').forEach(el=>{ el.addEventListener('mouseenter',()=>document.body.classList.add('hovering')); el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));});
-function animateCursor(){ rx+=(mx-rx)*0.14; ry+=(my-ry)*0.14; cursorDot.style.transform=`translate(${mx}px,${my}px) translate(-50%,-50%)`; cursorRing.style.transform=`translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(animateCursor); } animateCursor();
-if('ontouchstart' in window) document.querySelector('.cursor').style.display='none';
+/* ── CURSOR & INTERACTIVITY (same as original) ── */
+const cursorDot  = document.querySelector('#cursor .cursor-dot');
+const cursorRing = document.querySelector('#cursor .cursor-ring');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+document.querySelectorAll('a,button,.act-card-large,.act-card-small,.act-overview-item,.impact-item,.why-visual-card,.why-pillar,.photo-band-item').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+});
+function animCursor() {
+  rx += (mx - rx) * 0.14;
+  ry += (my - ry) * 0.14;
+  cursorDot.style.transform  = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+if ('ontouchstart' in window) document.querySelector('.cursor').style.display = 'none';
 
-// nav scroll
-window.addEventListener('scroll',()=> document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY>40));
-// hamburger
-const hamburger=document.querySelector('.hamburger'), mobileMenu=document.getElementById('mobileMenu');
-hamburger?.addEventListener('click',()=>{ mobileMenu.classList.toggle('open'); const spans=hamburger.querySelectorAll('span'); if(mobileMenu.classList.contains('open')){ spans[0].style.transform='translateY(7px) rotate(45deg)'; spans[1].style.opacity='0'; spans[2].style.transform='translateY(-7px) rotate(-45deg)';} else { spans.forEach(s=>{ s.style.transform=''; s.style.opacity='';});}});
-document.querySelectorAll('.mob-link').forEach(l=>l.addEventListener('click',()=>{ mobileMenu.classList.remove('open'); hamburger.querySelectorAll('span').forEach(s=>{ s.style.transform=''; s.style.opacity='';});}));
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
-// reveal observer
-const revealObs = new IntersectionObserver(e=>{ e.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); }) }, {threshold:0.15});
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el=>revealObs.observe(el));
+const hamburger  = document.querySelector('.hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger?.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+  const spans = hamburger.querySelectorAll('span');
+  if (mobileMenu.classList.contains('open')) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity   = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else {
+    spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  }
+});
+document.querySelectorAll('.mob-link').forEach(link => link.addEventListener('click', () => {
+  mobileMenu.classList.remove('open');
+  hamburger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+}));
 
-// Count up
-const countItems = document.querySelectorAll('.impact-num');
-const countObserver = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ const el=e.target; const target=parseInt(el.dataset.target); let val=0; const step=Math.ceil(target/70); const timer=setInterval(()=>{ val+=step; if(val>=target){ el.innerText=target+'+'; clearInterval(timer); } else el.innerText=val+'+'; },20); countObserver.unobserve(el); }}) }, {threshold:0.6});
-countItems.forEach(el=>countObserver.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const href = a.getAttribute('href');
+  if (href === '#') return;
+  const target = document.querySelector(href);
+  if (target) {
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + window.scrollY - 90;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}));
 
-// smooth anchor scroll offset
-document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click',function(e){ const hash=this.getAttribute('href'); if(hash==="#") return; const target=document.querySelector(hash); if(target){ e.preventDefault(); const yOffset=-100; const y=target.getBoundingClientRect().top+window.scrollY+yOffset; window.scrollTo({top:y, behavior:'smooth'}); } }); });
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.10 });
+revealEls.forEach(el => revealObs.observe(el));
+
+function countUp(el) {
+  const target   = parseInt(el.dataset.target);
+  const isLarge  = target >= 100;
+  const duration = isLarge ? 2000 : 1400;
+  const step     = target / (duration / 16);
+  let val = 0;
+  const suffix = '+';
+  const timer = setInterval(() => {
+    val += step;
+    if (val >= target) {
+      el.textContent = target + suffix;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(val) + suffix;
+    }
+  }, 16);
+}
+const impactObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.impact-num').forEach(countUp); impactObs.unobserve(e.target); } });
+}, { threshold: 0.35 });
+const impactStrip = document.querySelector('.impact-strip');
+if (impactStrip) impactObs.observe(impactStrip);
+
+const heroBg = document.querySelector('.page-hero-bg');
+window.addEventListener('scroll', () => { if(heroBg) heroBg.style.transform = `scale(1.08) translateY(${window.scrollY * 0.25}px)`; }, { passive: true });
+
+document.querySelectorAll('.photo-band-item-bg').forEach((bg, i) => {
+  window.addEventListener('scroll', () => {
+    const parent = bg.parentElement;
+    const rect   = parent.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    const dir = i % 2 === 0 ? 1 : -1;
+    bg.style.transform = `scale(1.12) translateY(${(progress - 0.5) * 30 * dir}px)`;
+  }, { passive: true });
+});
+
+const overviewItems = document.querySelectorAll('.act-overview-item');
+const overviewObs   = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      overviewItems.forEach((item, i) => { setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'translateY(0)'; }, i * 80); });
+      overviewObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+overviewItems.forEach(item => { item.style.opacity = '0'; item.style.transform = 'translateY(20px)'; item.style.transition = 'opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), background 0.3s'; });
+if (overviewItems.length) overviewObs.observe(overviewItems[0].parentElement);
 </script>
 </body>
 </html>
