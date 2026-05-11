@@ -203,7 +203,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
 
-/* ── REGISTERED CBO BADGE ── */
 .hero-cbo-badge {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
@@ -355,7 +354,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
 /* ═══════════════════════════════════════════════════
-   ── NEWS & UPDATES SECTION — BRIEF STYLE ──
+   ── NEWS & UPDATES SECTION
 ═══════════════════════════════════════════════════ */
 .news-section {
   background: var(--navy-dk);
@@ -383,7 +382,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative; z-index: 2;
 }
 
-/* Section header row */
 .news-header {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
@@ -404,7 +402,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .news-view-all:hover { background: rgba(214,158,46,0.1); border-color: var(--gold); }
 
-/* ── Compact event card ── */
 .news-event-card {
   display: grid;
   grid-template-columns: 340px 1fr;
@@ -470,7 +467,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   margin-bottom: 22px; max-width: 520px;
 }
 
-/* Winner name tags */
 .winners-inline {
   display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 22px;
 }
@@ -483,7 +479,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .winner-tag:hover { border-color: rgba(214,158,46,0.4); }
 .winner-tag-crown { font-size: 18px; }
-.winner-tag-info {}
 .winner-tag-role {
   font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
   color: rgba(255,255,255,0.38); display: block; margin-bottom: 2px;
@@ -502,7 +497,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .news-read-link:hover { gap: 14px; }
 
-/* Ticker */
 .news-ticker {
   margin-top: 36px;
   border-top: 1px solid rgba(255,255,255,0.07);
@@ -797,6 +791,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   height: 240px;
   overflow: hidden;
   position: relative;
+  background: linear-gradient(135deg, var(--navy-dk), var(--navy));
 }
 .craft-card-img img {
   width: 100%; height: 100%;
@@ -805,6 +800,10 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   transition: transform 0.7s var(--ease-out);
 }
 .craft-card:hover .craft-card-img img { transform: scale(1.07); }
+.craft-card-img::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+}
 .craft-card:nth-child(12n+1)  .craft-card-img::after { background: var(--gold); }
 .craft-card:nth-child(12n+2)  .craft-card-img::after { background: var(--teal); }
 .craft-card:nth-child(12n+3)  .craft-card-img::after { background: var(--green); }
@@ -817,10 +816,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .craft-card:nth-child(12n+10) .craft-card-img::after { background: var(--red); }
 .craft-card:nth-child(12n+11) .craft-card-img::after { background: var(--purple); }
 .craft-card:nth-child(12n+0)  .craft-card-img::after { background: var(--navy); }
-.craft-card-img::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-}
 .craft-card-caption {
   padding: 14px 18px 16px;
   background: var(--white);
@@ -922,7 +917,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative; z-index: 2;
 }
 
-/* Header */
 .our-impact-header {
   text-align: center;
   margin-bottom: 60px;
@@ -947,14 +941,12 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   margin: 0 auto; line-height: 1.8;
 }
 
-/* Cards grid */
 .impact-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 28px;
 }
 
-/* Individual impact card */
 .impact-action-card {
   border-radius: 6px;
   overflow: hidden;
@@ -968,7 +960,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   box-shadow: 0 24px 56px rgba(0,0,0,0.14);
 }
 
-/* Top accent bar per card */
 .impact-action-card:nth-child(1)::before,
 .impact-action-card:nth-child(2)::before,
 .impact-action-card:nth-child(3)::before,
@@ -982,14 +973,12 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-action-card:nth-child(4)::before { background: linear-gradient(to right, var(--green), var(--navy)); }
 .impact-action-card:nth-child(5)::before { background: linear-gradient(to right, var(--gold), var(--teal)); }
 
-/* Image mosaic area */
 .impact-card-images {
   position: relative;
   overflow: hidden;
   background: var(--navy-dk);
 }
 
-/* Single image layout */
 .impact-card-images.single-img {
   height: 280px;
 }
@@ -1001,7 +990,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .impact-action-card:hover .impact-card-images img { transform: scale(1.06); }
 
-/* Dual image layout */
 .impact-card-images.dual-img {
   height: 280px;
   display: grid;
@@ -1016,7 +1004,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .impact-action-card:hover .dual-img img { transform: scale(1.06); }
 
-/* Triple image layout */
 .impact-card-images.triple-img {
   height: 280px;
   display: grid;
@@ -1040,7 +1027,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   overflow: hidden;
 }
 
-/* Image overlay gradient */
 .impact-card-images::after {
   content: '';
   position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
@@ -1048,7 +1034,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   pointer-events: none; z-index: 2;
 }
 
-/* Card body */
 .impact-card-body {
   padding: 28px 30px 32px;
 }
@@ -1075,7 +1060,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   margin-bottom: 20px;
 }
 
-/* Keyword pills */
 .impact-card-pills {
   display: flex; flex-wrap: wrap; gap: 8px;
 }
@@ -1087,7 +1071,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   color: var(--mid); border-radius: 2px;
   transition: border-color 0.2s, color 0.2s;
 }
-.impact-action-card:hover .impact-pill { border-color: var(--light-gray); }
 .impact-action-card:nth-child(1) .impact-pill:hover { border-color: var(--teal); color: var(--teal); }
 .impact-action-card:nth-child(2) .impact-pill:hover { border-color: var(--purple); color: var(--purple); }
 .impact-action-card:nth-child(3) .impact-pill:hover { border-color: var(--gold); color: #92610B; }
@@ -1095,7 +1078,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-action-card:nth-child(5) .impact-pill:hover { border-color: var(--gold); color: #92610B; }
 .impact-pill i { font-size: 9px; }
 
-/* ── ELDER LOVE CARD — full-width spanning card ── */
 .impact-elder-card {
   grid-column: 1 / -1;
 }
@@ -1104,7 +1086,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 
 /* ══════════════════════════════════════════════════════════
-   ── PHOTO GALLERY SECTION - UNIFORM CARDS, 3 PER ROW ──
+   ── PHOTO GALLERY — REBUILT, RELIABLE, MODERN ──
 ══════════════════════════════════════════════════════════ */
 .photo-gallery {
   background: var(--dark);
@@ -1113,7 +1095,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   overflow: hidden;
 }
 
-/* Textured top accent */
 .photo-gallery::before {
   content: '';
   position: absolute; top: 0; left: 0; right: 0; height: 5px;
@@ -1122,7 +1103,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
     var(--gold) 60%, var(--red) 80%, var(--navy) 100%);
 }
 
-/* Subtle diagonal noise overlay */
 .photo-gallery::after {
   content: '';
   position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
@@ -1137,10 +1117,9 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative; z-index: 2;
 }
 
-/* Header */
 .gallery-header {
   display: flex; justify-content: space-between; align-items: flex-end;
-  margin-bottom: 64px; flex-wrap: wrap; gap: 20px;
+  margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
 }
 .gallery-header-left .section-label {
   color: var(--gold);
@@ -1170,10 +1149,10 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   transform: translateY(-2px);
 }
 
-/* ── Filter tabs ── */
+/* Filter tabs */
 .gallery-filters {
   display: flex; gap: 8px; flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 .gallery-filter-btn {
   padding: 8px 20px; font-size: 11px; font-weight: 600;
@@ -1189,55 +1168,55 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   color: var(--navy-dk);
 }
 
-/* ── UNIFORM GRID: 3 CARDS PER ROW ── */
-.gallery-uniform-grid {
+/* ── CORE GALLERY GRID: 3 columns, uniform aspect ratio ── */
+.gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-top: 20px;
+  gap: 16px;
 }
 
-/* gallery card styles */
-.gallery-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 8px;
+/* Each card */
+.g-card {
+  position: relative;
+  border-radius: 6px;
   overflow: hidden;
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s;
+  background: #1a2744;
   cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s, border-color 0.3s;
 }
-.gallery-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  border-color: rgba(214,158,46,0.4);
+.g-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45);
+  border-color: rgba(214,158,46,0.45);
 }
-.gallery-card-img {
+
+/* Fixed-ratio image container */
+.g-card-img {
   width: 100%;
   aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #1a1f2e;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 0;
+  overflow: hidden;
 }
-.gallery-card-img img {
+
+/* The actual image */
+.g-card-img img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   display: block;
-  transition: transform 0.5s var(--ease-out);
-  /* Ensure broken images don't collapse the card */
-  min-height: 100%;
-  flex-shrink: 0;
+  transition: transform 0.5s var(--ease-out), opacity 0.3s;
+  opacity: 1;
 }
-/* Broken image fallback — hide the broken icon, show styled placeholder */
-.gallery-card-img img.img-error {
-  opacity: 0;
-  position: absolute;
+.g-card:hover .g-card-img img {
+  transform: scale(1.07);
 }
-.gallery-card-img .img-placeholder {
+
+/* Fallback placeholder shown when image fails */
+.g-card-img .g-placeholder {
   display: none;
   position: absolute;
   inset: 0;
@@ -1245,71 +1224,93 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, #1a2744 0%, #0f1f3d 60%, #1A7A8A22 100%);
-  color: rgba(255,255,255,0.35);
-  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #1a2744 0%, #0f1f3d 100%);
+  color: rgba(255,255,255,0.3);
+  font-size: 12px;
   text-align: center;
-  padding: 20px;
-}
-.gallery-card-img .img-placeholder i {
-  font-size: 28px;
-  color: rgba(214,158,46,0.5);
-  margin-bottom: 4px;
-}
-.gallery-card-img .img-placeholder span {
-  font-size: 11px;
-  font-weight: 500;
+  padding: 16px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  line-height: 1.4;
 }
-.gallery-card-img .img-placeholder-cross {
-  font-size: 18px;
-  color: rgba(214,158,46,0.3);
+.g-card-img .g-placeholder i {
+  font-size: 30px;
+  color: rgba(214,158,46,0.4);
+  display: block;
+  margin-bottom: 8px;
 }
-.gallery-card-img.broken .img-placeholder {
+/* When image fails, show placeholder */
+.g-card-img.no-img .g-placeholder { display: flex; }
+.g-card-img.no-img img { opacity: 0; }
+
+/* Gradient overlay at bottom of image */
+.g-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(10,20,50,0.75) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s;
+}
+.g-card:hover .g-card-img::after { opacity: 0.8; }
+
+/* Caption overlay on top of image gradient */
+.g-card-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 16px;
+  z-index: 3;
   display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.gallery-card:hover .gallery-card-img img {
-  transform: scale(1.05);
-}
-.gallery-card-info {
-  padding: 18px 20px 22px;
-}
-.gallery-card-tag {
+.g-card-cat {
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold);
-  background: rgba(214,158,46,0.15);
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 2px;
-  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s, transform 0.3s;
 }
-.gallery-card-title {
+.g-card:hover .g-card-cat {
+  opacity: 1;
+  transform: translateY(0);
+}
+.g-card-title {
   font-family: var(--font-serif);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  color: white;
-  line-height: 1.4;
-  margin: 0;
-}
-.gallery-card-title span {
-  font-style: italic;
-  color: rgba(255,255,255,0.6);
-}
-.gallery-card:hover .gallery-card-title {
-  color: var(--gold);
-  transition: color 0.2s;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.35;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  /* truncate long titles */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Caption strip below grid */
+/* Top-left accent line per category */
+.g-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 4;
+}
+.g-card[data-cat="community"]::before   { background: var(--teal); }
+.g-card[data-cat="children"]::before    { background: var(--gold); }
+.g-card[data-cat="agriculture"]::before { background: var(--green); }
+.g-card[data-cat="founder"]::before     { background: var(--red); }
+.g-card[data-cat="events"]::before      { background: var(--purple); }
+
+/* Caption strip */
 .gallery-caption-strip {
   display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 1px; margin-top: 60px;
+  gap: 1px; margin-top: 52px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.06);
 }
@@ -1329,7 +1330,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   font-size: 11px; color: rgba(255,255,255,0.38); line-height: 1.5;
 }
 
-/* ── Lightbox ── */
+/* Lightbox */
 .gallery-lightbox {
   position: fixed; inset: 0; z-index: 9998;
   background: rgba(0,0,0,0.96);
@@ -1381,16 +1382,17 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 
 /* Gallery responsive */
 @media (max-width: 1100px) {
-  .gallery-uniform-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-caption-strip { grid-template-columns: repeat(3, 1fr); }
 }
-@media (max-width: 768px) {
-  .gallery-uniform-grid { grid-template-columns: 1fr; gap: 16px; }
+@media (max-width: 640px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .gallery-caption-strip { grid-template-columns: repeat(2, 1fr); }
   .lightbox-prev { left: -40px; }
   .lightbox-next { right: -40px; }
 }
-@media (max-width: 480px) {
+@media (max-width: 420px) {
+  .gallery-grid { grid-template-columns: 1fr; }
   .gallery-caption-strip { grid-template-columns: 1fr; }
   .lightbox-prev, .lightbox-next { display: none; }
 }
@@ -1448,9 +1450,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .fact .val { font-family: var(--font-serif); font-size: 28px; font-weight: 900; color: var(--gold); }
 .fact .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
-/* ══════════════════════════════════════════
-   ── CHILDREN MARQUEE SECTION ──
-══════════════════════════════════════════ */
+/* ── CHILDREN MARQUEE ── */
 .children-marquee {
   background: var(--off-white);
   padding: 80px 0;
@@ -1523,6 +1523,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   position: relative;
   box-shadow: 0 8px 28px rgba(0,0,0,0.12);
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s;
+  background: var(--navy-dk);
 }
 .marquee-card:hover {
   transform: scale(1.03) translateY(-4px);
@@ -1577,9 +1578,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .nurture-pill h4 { font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.3; }
 .nurture-pill p { font-size: 12px; color: var(--mid); line-height: 1.55; }
 
-/* ══════════════════════════════════════════
-   ── DOCUMENTARIES SECTION ──
-══════════════════════════════════════════ */
+/* ── DOCUMENTARIES ── */
 .documentaries {
   background: var(--dark);
   padding: 100px 0;
@@ -1694,11 +1693,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 36px 32px; transition: background 0.3s;
 }
-.activity-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, transparent 60%, rgba(0,0,0,0.04));
-  transition: background 0.3s;
-}
 .activity-card:nth-child(1) { background: #EBF4FF; }
 .activity-card:nth-child(2) { background: #FFF5E6; }
 .activity-card:nth-child(3) { background: #F0FFF4; }
@@ -1735,7 +1729,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .activity-card:hover .act-arrow { gap: 16px; }
 
-/* ── SPIRITUAL LIFE / PROGRAMME STRIP ── */
+/* ── PROGRAMMES ── */
 .programmes {
   background: var(--off-white); padding: 80px 0;
   border-top: 1px solid var(--light-gray);
@@ -1852,32 +1846,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .mob-link.sub { padding-left: 52px; font-size: 14px; color: var(--mid); }
 }
 
-/* ── OUR IMPACT RESPONSIVE ── */
-@media (max-width: 1100px) {
-  .impact-cards-grid { grid-template-columns: 1fr; }
-  .impact-elder-card { grid-column: 1 / -1; }
-  .impact-card-images.single-img { height: 260px; }
-  .impact-card-images.dual-img { height: 260px; }
-  .impact-card-images.triple-img { height: 260px; }
-  .impact-elder-card .impact-card-images.dual-img { height: 280px; }
-}
-
-@media (max-width: 960px) {
-  .impact-cards-grid { grid-template-columns: 1fr; }
-  .our-impact { padding: 80px 0; }
-}
-
-@media (max-width: 640px) {
-  .our-impact-inner { padding: 0 20px; }
-  .impact-cards-grid { gap: 20px; }
-  .impact-card-images.dual-img { height: 220px; }
-  .impact-card-images.triple-img { height: 220px; }
-  .impact-card-images.single-img { height: 220px; }
-  .impact-elder-card .impact-card-images.dual-img { height: 220px; }
-  .impact-card-body { padding: 22px 20px 26px; }
-  .impact-card-pills { gap: 6px; }
-}
-
+/* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .doc-featured-inner { grid-template-columns: 1fr; }
   .doc-featured-info { padding: 28px 28px 32px; }
@@ -1886,6 +1855,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .why-cards { grid-template-columns: 1fr 1fr; }
   .news-event-card { grid-template-columns: 1fr; }
   .news-event-img { height: 280px; }
+  .impact-cards-grid { grid-template-columns: 1fr; }
+  .impact-elder-card { grid-column: 1 / -1; }
 }
 
 @media (max-width: 960px) {
@@ -2084,8 +2055,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </div>
 
-
-<!-- WHY WE EXIST — AIM SECTION -->
+<!-- WHY WE EXIST -->
 <section class="why-exist" id="why-exist">
   <div class="why-bg-word">LEGACY</div>
   <div class="why-inner">
@@ -2128,7 +2098,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- CRAFT & VOCATIONAL SKILLS SCROLL -->
+<!-- CRAFT SCROLL -->
 <section class="craft-scroll" id="craft-skills">
   <div class="craft-scroll-header reveal">
     <div class="section-label">Vocational Skills &amp; Crafts</div>
@@ -2166,7 +2136,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- ABOUT / WHO WE ARE -->
+<!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-inner">
     <div id="mission"></div>
@@ -2195,7 +2165,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- OUR IMPACT / SUPPORT & COMMUNITY TRANSFORMATION -->
+<!-- OUR IMPACT -->
 <section class="our-impact" id="our-impact">
   <div class="our-impact-inner">
     <div class="our-impact-header reveal">
@@ -2204,78 +2174,69 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <p>At FAPCAN, compassion is not just a word — it is a daily practice. From supporting persons with albinism and caring for the mentally ill, to sponsoring children's education and uplifting elders, single mothers, and persons with disabilities, we are committed to transforming lives through faith, restoration, and community empowerment.</p>
     </div>
     <div class="impact-cards-grid">
-      <!-- Card 1: Albinism -->
       <div class="impact-action-card reveal reveal-delay-1">
         <div class="impact-card-images single-img">
-          <img src="albino.jpg" alt="Support for People with Albinism at FAPCAN" loading="lazy">
+          <img src="albino.jpg" alt="Support for People with Albinism" loading="lazy">
         </div>
         <div class="impact-card-body">
           <span class="impact-card-tag"><i class="fas fa-heart"></i> &nbsp;Inclusion &amp; Advocacy</span>
           <h3>Support for People with Albinism</h3>
-          <p>FAPCAN stands as a safe haven for persons with albinism — offering care, dignity, and belonging in a world that too often marginalises them. Through community awareness, advocacy, and daily support, we champion their right to be seen, heard, and fully included in every aspect of community life.</p>
+          <p>FAPCAN stands as a safe haven for persons with albinism — offering care, dignity, and belonging in a world that too often marginalises them. Through community awareness, advocacy, and daily support, we champion their right to be seen, heard, and fully included.</p>
           <div class="impact-card-pills">
             <span class="impact-pill"><i class="fas fa-shield-alt"></i> Care &amp; Protection</span>
             <span class="impact-pill"><i class="fas fa-users"></i> Inclusion</span>
             <span class="impact-pill"><i class="fas fa-bullhorn"></i> Advocacy</span>
-            <span class="impact-pill"><i class="fas fa-hands-helping"></i> Community Support</span>
           </div>
         </div>
       </div>
-      <!-- Card 2: Rehabilitation / Prayer -->
       <div class="impact-action-card reveal reveal-delay-2">
         <div class="impact-card-images dual-img">
-          <img src="mad.jpg" alt="Rehabilitation and Prayer at FAPCAN" loading="lazy">
-          <img src="brendah.jpg" alt="Brenda's Story — Restoration at FAPCAN" loading="lazy">
+          <img src="mad.jpg" alt="Rehabilitation and Prayer" loading="lazy">
+          <img src="brendah.jpg" alt="Brenda's Story" loading="lazy">
         </div>
         <div class="impact-card-body">
           <span class="impact-card-tag"><i class="fas fa-pray"></i> &nbsp;Healing &amp; Restoration</span>
           <h3>Transformation Through Prayer &amp; Rehabilitation</h3>
-          <p>We walk alongside those broken by mental illness, addiction, and life's hardest seasons. Through prayer, counselling, and structured rehabilitation, FAPCAN brings restoration, hope, and a renewed sense of purpose — turning stories of despair into testimonies of resilience and healing.</p>
+          <p>We walk alongside those broken by mental illness, addiction, and life's hardest seasons. Through prayer, counselling, and structured rehabilitation, FAPCAN brings restoration, hope, and a renewed sense of purpose.</p>
           <div class="impact-card-pills">
             <span class="impact-pill"><i class="fas fa-brain"></i> Mental Health</span>
-            <span class="impact-pill"><i class="fas fa-hands-praying"></i> Prayer Ministry</span>
             <span class="impact-pill"><i class="fas fa-redo-alt"></i> Rehabilitation</span>
             <span class="impact-pill"><i class="fas fa-star"></i> Hope &amp; Restoration</span>
           </div>
         </div>
       </div>
-      <!-- Card 3: Education -->
       <div class="impact-action-card reveal reveal-delay-3">
         <div class="impact-card-images single-img">
-          <img src="Child2.jpg" alt="Supporting Education for Vulnerable Children at FAPCAN" loading="lazy">
+          <img src="Child2.jpg" alt="Supporting Education for Vulnerable Children" loading="lazy">
         </div>
         <div class="impact-card-body">
           <span class="impact-card-tag"><i class="fas fa-graduation-cap"></i> &nbsp;Education &amp; Empowerment</span>
           <h3>Supporting Education for Vulnerable Children</h3>
-          <p>Every child deserves a chance to learn. FAPCAN provides school sponsorships, learning materials, and mentorship to vulnerable children who would otherwise be left behind — unlocking doors to knowledge, confidence, and a future full of possibility.</p>
+          <p>Every child deserves a chance to learn. FAPCAN provides school sponsorships, learning materials, and mentorship to vulnerable children — unlocking doors to knowledge, confidence, and a future full of possibility.</p>
           <div class="impact-card-pills">
             <span class="impact-pill"><i class="fas fa-book-open"></i> School Sponsorship</span>
-            <span class="impact-pill"><i class="fas fa-pencil-alt"></i> Learning Support</span>
             <span class="impact-pill"><i class="fas fa-lightbulb"></i> Empowerment</span>
             <span class="impact-pill"><i class="fas fa-child"></i> Child Development</span>
           </div>
         </div>
       </div>
-      <!-- Card 4: Elders, Mothers, PWDs -->
       <div class="impact-action-card reveal reveal-delay-4">
         <div class="impact-card-images triple-img">
-          <div class="img-main"><img src="alfred6.jpg" alt="Elders and Community Outreach at FAPCAN" loading="lazy"></div>
-          <div class="img-side"><img src="co1.jpg" alt="Single Mothers Support at FAPCAN" loading="lazy"></div>
-          <div class="img-side"><img src="alfred4.jpg" alt="Persons with Disabilities Support at FAPCAN" loading="lazy"></div>
+          <div class="img-main"><img src="alfred6.jpg" alt="Elders and Community Outreach" loading="lazy"></div>
+          <div class="img-side"><img src="co1.jpg" alt="Single Mothers Support" loading="lazy"></div>
+          <div class="img-side"><img src="alfred4.jpg" alt="Persons with Disabilities Support" loading="lazy"></div>
         </div>
         <div class="impact-card-body">
           <span class="impact-card-tag"><i class="fas fa-hand-holding-heart"></i> &nbsp;Humanitarian Outreach</span>
           <h3>Supporting Elders, Single Mothers &amp; Persons with Disabilities</h3>
-          <p>Our community outreach reaches those society often forgets — the elderly, single mothers carrying the weight of families alone, and persons with disabilities longing for dignity. FAPCAN provides caregiving, empowerment programs, and a community of belonging.</p>
+          <p>Our community outreach reaches those society often forgets — the elderly, single mothers, and persons with disabilities. FAPCAN provides caregiving, empowerment programs, and a community of belonging.</p>
           <div class="impact-card-pills">
             <span class="impact-pill"><i class="fas fa-user-friends"></i> Elders Care</span>
             <span class="impact-pill"><i class="fas fa-female"></i> Single Mothers</span>
             <span class="impact-pill"><i class="fas fa-wheelchair"></i> PWDs Support</span>
-            <span class="impact-pill"><i class="fas fa-globe-africa"></i> Community Outreach</span>
           </div>
         </div>
       </div>
-      <!-- Card 5: Elder Love — full-width -->
       <div class="impact-action-card impact-elder-card reveal">
         <div class="impact-card-images dual-img">
           <img src="elder1.jpg" alt="Alfred showing love for elderly twin women" loading="lazy">
@@ -2284,13 +2245,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <div class="impact-card-body">
           <span class="impact-card-tag"><i class="fas fa-heart"></i> &nbsp;A Father's Love</span>
           <h3>Alfred's Love for the Elderly — A Father to All</h3>
-          <p>These photographs capture the heart of FAPCAN's founder, Alfred Bwambale (Omuzana), in moments of profound love and service. Whether embracing elderly twin women or standing in solidarity with a pregnant mother and an aged man, Alfred embodies FAPCAN's deepest calling — that <strong>no one is forgotten, no one is left behind.</strong></p>
+          <p>These photographs capture the heart of FAPCAN's founder in moments of profound love and service. Whether embracing elderly twin women or standing in solidarity with a mother and an aged man, Alfred embodies FAPCAN's deepest calling — that <strong>no one is forgotten, no one is left behind.</strong></p>
           <div class="impact-card-pills">
             <span class="impact-pill"><i class="fas fa-hands-helping"></i> Elders Dignity</span>
-            <span class="impact-pill"><i class="fas fa-baby"></i> Maternal Support</span>
             <span class="impact-pill"><i class="fas fa-heart"></i> Unconditional Love</span>
             <span class="impact-pill"><i class="fas fa-home"></i> Family for All</span>
-            <span class="impact-pill"><i class="fas fa-user-tie"></i> Alfred's Legacy</span>
           </div>
         </div>
       </div>
@@ -2299,10 +2258,13 @@ footer { background: var(--dark); padding: 80px 0 0; }
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     PHOTO GALLERY — UNIFORM CARDS, 3 PER ROW (ALL IMAGES EXCEPT UUU.jpg, co2.jpg, Mr and miss.jpg)
+     PHOTO GALLERY — REBUILT: SIMPLE, RELIABLE, MODERN
+     All images except UUU.jpg, co2.jpg, Mr and miss.jpg
+     + new: grand1.jpg, grand2.jpg, members1.jpg, blind1.jpg
 ══════════════════════════════════════════════════════════ -->
 <section class="photo-gallery" id="gallery-section">
   <div class="photo-gallery-inner">
+
     <div class="gallery-header reveal">
       <div class="gallery-header-left">
         <div class="section-label">Community Moments</div>
@@ -2313,16 +2275,19 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <i class="fas fa-images"></i> Full Gallery
       </a>
     </div>
+
     <div class="gallery-filters reveal">
-      <button class="gallery-filter-btn active" data-filter="all">All Moments</button>
+      <button class="gallery-filter-btn active" data-filter="all">All</button>
       <button class="gallery-filter-btn" data-filter="community">Community</button>
       <button class="gallery-filter-btn" data-filter="children">Children</button>
       <button class="gallery-filter-btn" data-filter="agriculture">Agriculture</button>
       <button class="gallery-filter-btn" data-filter="founder">Founder</button>
       <button class="gallery-filter-btn" data-filter="events">Events</button>
     </div>
-    <!-- Uniform Grid: 3 cards per row -->
-    <div class="gallery-uniform-grid reveal" id="galleryUniformGrid"></div>
+
+    <!-- Grid built by JS below -->
+    <div class="gallery-grid reveal" id="galleryGrid"></div>
+
     <div class="gallery-caption-strip reveal">
       <div class="gallery-caption-item"><span class="gallery-caption-item-icon">🙏</span><h5>Faith</h5><p>Prayer as the foundation</p></div>
       <div class="gallery-caption-item"><span class="gallery-caption-item-icon">👨‍👧‍👦</span><h5>Family</h5><p>No one is a stranger</p></div>
@@ -2330,7 +2295,9 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="gallery-caption-item"><span class="gallery-caption-item-icon">📚</span><h5>Education</h5><p>Equipping minds</p></div>
       <div class="gallery-caption-item"><span class="gallery-caption-item-icon">💛</span><h5>Legacy</h5><p>Leaving world better</p></div>
     </div>
+
   </div>
+
   <!-- Lightbox -->
   <div class="gallery-lightbox" id="galleryLightbox">
     <div class="lightbox-img-wrap">
@@ -2389,6 +2356,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="marquee-card"><img src="Child8.jpg" alt="Child"><div class="marquee-card-overlay"><span>Hope in every smile</span></div></div>
       <div class="marquee-card"><img src="Child9.jpg" alt="Child"><div class="marquee-card-overlay"><span>Growing together</span></div></div>
       <div class="marquee-card"><img src="Child10.jpg" alt="Child"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
+      <!-- duplicate for seamless loop -->
       <div class="marquee-card"><img src="Child1.jpg" alt="Child"><div class="marquee-card-overlay"><span>Growing in faith & love</span></div></div>
       <div class="marquee-card"><img src="Child2.jpg" alt="Child"><div class="marquee-card-overlay"><span>Education changes lives</span></div></div>
       <div class="marquee-card"><img src="Child3.jpg" alt="Child"><div class="marquee-card-overlay"><span>Every child matters</span></div></div>
@@ -2410,7 +2378,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- SAVE SOULS / DOCUMENTARIES -->
+<!-- DOCUMENTARIES -->
 <section class="documentaries" id="documentaries">
   <div class="documentaries-inner">
     <div class="documentaries-header reveal">
@@ -2458,7 +2426,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-<!-- NEWS & UPDATES SECTION -->
+<!-- NEWS & UPDATES -->
 <section class="news-section" id="news">
   <div class="news-inner">
     <div class="news-header reveal">
@@ -2536,7 +2504,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card,.impact-action-card,.impact-pill,.gallery-card,.gallery-filter-btn').forEach(el=>{
+document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card,.impact-action-card,.impact-pill,.g-card,.gallery-filter-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
@@ -2544,7 +2512,7 @@ function animCursor(){rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;cursorDot.style.transfor
 animCursor();
 if('ontouchstart' in window) document.querySelector('.cursor').style.display='none';
 
-/* ── NAV SCROLL ── */
+/* ── NAV ── */
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
 
@@ -2581,7 +2549,7 @@ const slides=document.querySelectorAll('.slide');
 const dotsWrap=document.getElementById('sliderDots');
 const currNum=document.getElementById('slideCurrentNum');
 const totalNum=document.getElementById('slideTotalNum');
-let current=0,interval;
+let current=0,sliderInterval;
 totalNum.textContent=slides.length;
 slides.forEach((_,i)=>{
   const d=document.createElement('div');
@@ -2597,16 +2565,16 @@ function goTo(n){
   document.querySelectorAll('#sliderDots .dot')[current].classList.add('active');
   currNum.textContent=current+1;
 }
-function startSlider(){interval=setInterval(()=>goTo(current+1),4500);}
+function startSlider(){sliderInterval=setInterval(()=>goTo(current+1),4500);}
 startSlider();
-document.getElementById('heroSlider')?.addEventListener('mouseenter',()=>clearInterval(interval));
+document.getElementById('heroSlider')?.addEventListener('mouseenter',()=>clearInterval(sliderInterval));
 document.getElementById('heroSlider')?.addEventListener('mouseleave',startSlider);
 
 /* ── REVEAL ON SCROLL ── */
-const revealEls=document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
 const revealObs=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
-},{threshold:0.12});
+},{threshold:0.1});
 revealEls.forEach(el=>revealObs.observe(el));
 
 /* ── COUNT-UP ── */
@@ -2626,214 +2594,221 @@ const impactObs=new IntersectionObserver((entries)=>{
 document.querySelector('.impact-strip')&&impactObs.observe(document.querySelector('.impact-strip'));
 
 /* ── MARQUEE / CRAFT / TICKER PAUSE ── */
-const marqueeTrack = document.getElementById('marqueeTrack');
-if(marqueeTrack){
-  marqueeTrack.addEventListener('mouseenter',()=>marqueeTrack.style.animationPlayState='paused');
-  marqueeTrack.addEventListener('mouseleave',()=>marqueeTrack.style.animationPlayState='running');
-}
-const craftTrack = document.getElementById('craftTrack');
-if(craftTrack){
-  craftTrack.addEventListener('mouseenter',()=>craftTrack.style.animationPlayState='paused');
-  craftTrack.addEventListener('mouseleave',()=>craftTrack.style.animationPlayState='running');
-}
-const tickerTrack = document.getElementById('tickerTrack');
-if(tickerTrack){
-  tickerTrack.addEventListener('mouseenter',()=>tickerTrack.style.animationPlayState='paused');
-  tickerTrack.addEventListener('mouseleave',()=>tickerTrack.style.animationPlayState='running');
-}
+['marqueeTrack','craftTrack','tickerTrack'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener('mouseenter',()=>el.style.animationPlayState='paused');
+  el.addEventListener('mouseleave',()=>el.style.animationPlayState='running');
+});
 
-/* ── WHY WE EXIST DROP LETTER ANIMATION ── */
+/* ── WHY WE EXIST DROP LETTER ── */
 (function(){
-  const section = document.getElementById('why-exist');
-  const headlineEl = document.getElementById('whyHeadline');
-  const legacyEl   = document.getElementById('whyLegacy');
-  const ornamentEl = document.getElementById('whyOrnament');
-  const quoteEl    = document.getElementById('whyQuote');
-  const cardsEl    = document.getElementById('whyCards');
-  const eyebrowEl  = document.getElementById('whyEyebrow');
-  let animated = false;
-  const line1 = 'Leaving Legacy Behind';
-  function buildDropLine(text, baseDelay, isItalic) {
-    const chars = text.split('');
-    const frag = document.createDocumentFragment();
-    const lineDiv = document.createElement('span');
-    lineDiv.style.cssText = 'display:block;';
-    chars.forEach((ch, i) => {
-      const span = document.createElement('span');
+  const section=document.getElementById('why-exist');
+  const headlineEl=document.getElementById('whyHeadline');
+  const legacyEl=document.getElementById('whyLegacy');
+  const ornamentEl=document.getElementById('whyOrnament');
+  const quoteEl=document.getElementById('whyQuote');
+  const cardsEl=document.getElementById('whyCards');
+  const eyebrowEl=document.getElementById('whyEyebrow');
+  let animated=false;
+  const line1='Leaving Legacy Behind';
+  function buildDropLine(text,baseDelay){
+    const frag=document.createDocumentFragment();
+    const lineDiv=document.createElement('span');
+    lineDiv.style.cssText='display:block;';
+    text.split('').forEach((ch,i)=>{
+      const span=document.createElement('span');
       span.classList.add('drop-letter');
-      if(ch === ' ') span.classList.add('space');
-      if(isItalic) span.style.color = 'var(--gold)';
-      span.style.transitionDelay = (baseDelay + i * 55) + 'ms';
-      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      if(ch===' ')span.classList.add('space');
+      span.style.transitionDelay=(baseDelay+i*55)+'ms';
+      span.textContent=ch===' '?'\u00A0':ch;
       lineDiv.appendChild(span);
     });
     frag.appendChild(lineDiv);
     return frag;
   }
-  headlineEl.appendChild(buildDropLine(line1, 0, false));
-  function triggerAnimation() {
-    if(animated) return;
-    animated = true;
+  headlineEl.appendChild(buildDropLine(line1,0));
+  function triggerAnimation(){
+    if(animated)return;
+    animated=true;
     eyebrowEl.classList.add('drop-done');
-    const letters = headlineEl.querySelectorAll('.drop-letter');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        letters.forEach(l => l.classList.add('landed'));
-      });
-    });
-    const totalLetterTime = 55 * line1.length + 200;
-    setTimeout(() => legacyEl.classList.add('drop-done'),   totalLetterTime);
-    setTimeout(() => ornamentEl.classList.add('drop-done'), totalLetterTime + 200);
-    setTimeout(() => quoteEl.classList.add('drop-done'),    totalLetterTime + 400);
-    setTimeout(() => cardsEl.classList.add('drop-done'),    totalLetterTime + 650);
+    const letters=headlineEl.querySelectorAll('.drop-letter');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>letters.forEach(l=>l.classList.add('landed'))));
+    const t=55*line1.length+200;
+    setTimeout(()=>legacyEl.classList.add('drop-done'),t);
+    setTimeout(()=>ornamentEl.classList.add('drop-done'),t+200);
+    setTimeout(()=>quoteEl.classList.add('drop-done'),t+400);
+    setTimeout(()=>cardsEl.classList.add('drop-done'),t+650);
   }
-  const whyObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting) { triggerAnimation(); whyObs.unobserve(section); }
-    });
-  }, { threshold: 0.2 });
-  whyObs.observe(section);
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){triggerAnimation();}});
+  },{threshold:0.2}).observe(section);
 })();
 
-/* ══════════════════════════════════════════════
-   ── GALLERY: UNIFORM CARDS (3 PER ROW), ALL IMAGES EXCEPT UUU.jpg, co2.jpg, Mr and miss.jpg ──
-══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════
+   GALLERY — REBUILT FROM SCRATCH
+   Simple, reliable rendering. Cards with inline img tags.
+   Fallback placeholder shown if image fails to load.
+══════════════════════════════════════════════════════════ */
 (function(){
-  // define all gallery images with metadata (exclude UUU.jpg, co2.jpg, Mr and miss.jpg)
-  const galleryItems = [
-    { src: "albino.jpg", category: "community", label: "Support for People with Albinism — dignity and belonging" },
-    { src: "alfred1.jpg", category: "founder", label: "Alfred Bwambale — a father to all nations" },
-    { src: "alfred2.jpg", category: "founder", label: "A legacy built on love and service" },
-    { src: "alfred3.jpg", category: "community", label: "Together, we are stronger" },
-    { src: "alfred4.jpg", category: "community", label: "Community outreach and prayer" },
-    { src: "alfred6.jpg", category: "community", label: "Supporting elders and community" },
-    { src: "Agric1.jpg", category: "agriculture", label: "Farming for food security" },
-    { src: "Agric2.jpg", category: "agriculture", label: "Agriculture — self-reliance through farming" },
-    { src: "brendah.jpg", category: "community", label: "Brenda's story — restoration and hope" },
-    { src: "c1.jpg", category: "community", label: "The FAPCAN community gathered in faith" },
-    { src: "Child1.jpg", category: "children", label: "Growing in faith and love" },
-    { src: "Child2.jpg", category: "children", label: "Education changes lives — school support" },
-    { src: "Child3.jpg", category: "children", label: "Every child deserves a bright future" },
-    { src: "Child4.jpg", category: "children", label: "Nurtured with compassion" },
-    { src: "Child5.jpg", category: "children", label: "Building bright futures" },
-    { src: "Child6.jpg", category: "children", label: "Loved and protected" },
-    { src: "Child7.jpg", category: "children", label: "Skills for tomorrow" },
-    { src: "Child8.jpg", category: "children", label: "Hope in every smile" },
-    { src: "Child9.jpg", category: "children", label: "Growing together in community" },
-    { src: "Child10.jpg", category: "children", label: "A community of joy and hope" },
-    { src: "Child11.jpg", category: "children", label: "Crafting futures, one stitch at a time" },
-    { src: "Child12.jpg", category: "children", label: "Young hands learning early" },
-    { src: "co1.jpg", category: "community", label: "FAPCAN — a home for all nations" },
-    { src: "elder1.jpg", category: "community", label: "Alfred with elderly twin women — love in action" },
-    { src: "elder2.jpeg", category: "founder", label: "Alfred with a mother and elder — compassion without borders" },
-    { src: "infant1.jpg", category: "children", label: "Infant care and nurture" },
-    { src: "mad.jpg", category: "community", label: "Rehabilitation and prayer — restoration" },
-    { src: "tailor1.jpg", category: "community", label: "Tailoring skills for livelihood" },
-    { src: "tapestry.jpg", category: "community", label: "Community hands, shared purpose" },
-    { src: "tapestry1.jpg", category: "community", label: "Intricate tapestry patterns" },
-    { src: "tapestry2.jpg", category: "community", label: "Colour and craft in every thread" },
-    { src: "weaving.jpg", category: "community", label: "Weaving tradition into livelihood" },
-    { src: "weaving1.jpg", category: "community", label: "Detail in every handmade piece" },
-    { src: "weaving2.jpg", category: "community", label: "From fibre to finished fabric" },
-    { src: "weaving3.jpg", category: "community", label: "Patience woven into every row" },
-    { src: "weaving4.jpg", category: "community", label: "Weaving skills for independence" },
-    { src: "weaving5.jpg", category: "community", label: "Advanced weaving techniques" }
+
+  // ── All gallery images (excluding UUU.jpg, co2.jpg, "Mr and miss.jpg")
+  // ++ Added: grand1.jpg, grand2.jpg, members1.jpg, blind1.jpg
+  const ALL_ITEMS = [
+    { src:'grand1.jpg',    cat:'community',   title:'Grandparents of FAPCAN',            label:'The grandparents — pillars of our community' },
+    { src:'grand2.jpg',    cat:'community',   title:'A Grandmother\'s Love',              label:'Love that spans generations' },
+    { src:'members1.jpg',  cat:'community',   title:'FAPCAN Members Together',            label:'Our members — united in faith and purpose' },
+    { src:'blind1.jpg',    cat:'community',   title:'Supporting the Visually Impaired',   label:'Care and inclusion for the visually impaired' },
+    { src:'albino.jpg',    cat:'community',   title:'Support for People with Albinism',   label:'Dignity and belonging for all' },
+    { src:'alfred1.jpg',   cat:'founder',     title:'Alfred Bwambale',                    label:'Alfred — a father to all nations' },
+    { src:'alfred2.jpg',   cat:'founder',     title:'A Legacy of Service',                label:'A legacy built on love and service' },
+    { src:'alfred3.jpg',   cat:'community',   title:'Together We Are Stronger',           label:'Together, we are stronger' },
+    { src:'alfred4.jpg',   cat:'community',   title:'Community Outreach',                 label:'Community outreach and prayer' },
+    { src:'alfred6.jpg',   cat:'community',   title:'Supporting the Elderly',             label:'Supporting elders and community' },
+    { src:'Agric1.jpg',    cat:'agriculture', title:'Farming for Food Security',          label:'Farming for food security' },
+    { src:'Agric2.jpg',    cat:'agriculture', title:'Agriculture & Self-Reliance',        label:'Self-reliance through farming' },
+    { src:'brendah.jpg',   cat:'community',   title:'Brenda\'s Story',                    label:'Restoration and hope — Brenda\'s story' },
+    { src:'c1.jpg',        cat:'community',   title:'FAPCAN Community Gathered',          label:'The FAPCAN community gathered in faith' },
+    { src:'Child1.jpg',    cat:'children',    title:'Growing in Faith',                   label:'Growing in faith and love' },
+    { src:'Child2.jpg',    cat:'children',    title:'Education Changes Lives',            label:'Education changes lives' },
+    { src:'Child3.jpg',    cat:'children',    title:'Every Child Matters',                label:'Every child deserves a bright future' },
+    { src:'Child4.jpg',    cat:'children',    title:'Nurtured with Compassion',           label:'Nurtured with compassion' },
+    { src:'Child5.jpg',    cat:'children',    title:'Building Bright Futures',            label:'Building bright futures' },
+    { src:'Child6.jpg',    cat:'children',    title:'Loved & Protected',                  label:'Loved and protected' },
+    { src:'Child7.jpg',    cat:'children',    title:'Skills for Tomorrow',                label:'Skills for tomorrow' },
+    { src:'Child8.jpg',    cat:'children',    title:'Hope in Every Smile',                label:'Hope in every smile' },
+    { src:'Child9.jpg',    cat:'children',    title:'Growing Together',                   label:'Growing together in community' },
+    { src:'Child10.jpg',   cat:'children',    title:'A Community of Joy',                 label:'A community of joy and hope' },
+    { src:'Child11.jpg',   cat:'children',    title:'Crafting Futures',                   label:'Crafting futures, one stitch at a time' },
+    { src:'Child12.jpg',   cat:'children',    title:'Young Hands Learning',               label:'Young hands learning early' },
+    { src:'co1.jpg',       cat:'community',   title:'Home for All Nations',               label:'FAPCAN — a home for all nations' },
+    { src:'elder1.jpg',    cat:'community',   title:'Love for the Elderly',               label:'Alfred with elderly twin women' },
+    { src:'elder2.jpeg',   cat:'founder',     title:'Compassion Without Borders',         label:'Alfred with a mother and elder' },
+    { src:'infant1.jpg',   cat:'children',    title:'Infant Care & Nurture',              label:'Infant care and nurture' },
+    { src:'mad.jpg',       cat:'community',   title:'Rehabilitation & Prayer',            label:'Rehabilitation and prayer — restoration' },
+    { src:'tailor1.jpg',   cat:'community',   title:'Tailoring for Livelihood',           label:'Tailoring skills for livelihood' },
+    { src:'tapestry.jpg',  cat:'community',   title:'Shared Purpose in Craft',            label:'Community hands, shared purpose' },
+    { src:'tapestry1.jpg', cat:'community',   title:'Intricate Tapestry',                 label:'Intricate tapestry patterns' },
+    { src:'tapestry2.jpg', cat:'community',   title:'Colour & Craft',                     label:'Colour and craft in every thread' },
+    { src:'weaving.jpg',   cat:'community',   title:'Weaving Tradition',                  label:'Weaving tradition into livelihood' },
+    { src:'weaving1.jpg',  cat:'community',   title:'Detail in Handmade',                 label:'Detail in every handmade piece' },
+    { src:'weaving2.jpg',  cat:'community',   title:'Fibre to Fabric',                    label:'From fibre to finished fabric' },
+    { src:'weaving3.jpg',  cat:'community',   title:'Patience Woven',                     label:'Patience woven into every row' },
+    { src:'weaving4.jpg',  cat:'community',   title:'Weaving Skills',                     label:'Weaving skills for independence' },
+    { src:'weaving5.jpg',  cat:'community',   title:'Advanced Weaving',                   label:'Advanced weaving techniques' },
   ];
 
-  const gridContainer = document.getElementById('galleryUniformGrid');
-  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+  const grid = document.getElementById('galleryGrid');
   const lightbox = document.getElementById('galleryLightbox');
   const lbImg = document.getElementById('lightboxImg');
   const lbCaption = document.getElementById('lightboxCaption');
   const lbClose = document.getElementById('lightboxClose');
   const lbPrev = document.getElementById('lightboxPrev');
   const lbNext = document.getElementById('lightboxNext');
-  let currentCards = [];
-  let currentLbIdx = 0;
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
 
-  function buildCards(items) {
-    gridContainer.innerHTML = '';
-    currentCards = [];
+  let visibleItems = [];
+  let lbIdx = 0;
+
+  // ── Build gallery cards ──
+  function buildGallery(items) {
+    grid.innerHTML = '';
+    visibleItems = items;
+
     items.forEach((item, idx) => {
       const card = document.createElement('div');
-      card.className = 'gallery-card';
-      card.setAttribute('data-category', item.category);
-      card.setAttribute('data-img', item.src);
-      card.setAttribute('data-label', item.label);
-      const shortLabel = item.label.length > 55 ? item.label.slice(0,52)+'...' : item.label;
-      const catLabel = item.category.charAt(0).toUpperCase() + item.category.slice(1);
-      card.innerHTML = `
-        <div class="gallery-card-img">
-          <img src="${item.src}" alt="${item.label}" loading="lazy"
-            onerror="this.classList.add('img-error'); this.parentElement.classList.add('broken');">
-          <div class="img-placeholder">
-            <i class="fas fa-image"></i>
-            <span class="img-placeholder-cross">✦</span>
-            <span>${shortLabel}</span>
-          </div>
-        </div>
-        <div class="gallery-card-info">
-          <span class="gallery-card-tag">${catLabel}</span>
-          <div class="gallery-card-title">${shortLabel}<span></span></div>
-        </div>
+      card.className = 'g-card';
+      card.setAttribute('data-cat', item.cat);
+
+      // image container
+      const imgWrap = document.createElement('div');
+      imgWrap.className = 'g-card-img';
+
+      // actual img tag
+      const img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.label;
+      img.loading = 'lazy';
+      // On error: hide img, show placeholder
+      img.addEventListener('error', function() {
+        imgWrap.classList.add('no-img');
+      });
+
+      // placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'g-placeholder';
+      placeholder.innerHTML = `<i class="fas fa-image"></i><span>${item.title}</span>`;
+
+      imgWrap.appendChild(img);
+      imgWrap.appendChild(placeholder);
+
+      // caption overlay
+      const caption = document.createElement('div');
+      caption.className = 'g-card-caption';
+      caption.innerHTML = `
+        <span class="g-card-cat">${item.cat.charAt(0).toUpperCase()+item.cat.slice(1)}</span>
+        <div class="g-card-title">${item.title}</div>
       `;
+
+      card.appendChild(imgWrap);
+      card.appendChild(caption);
+
+      // click to open lightbox
       card.addEventListener('click', () => openLightbox(idx));
-      gridContainer.appendChild(card);
-      currentCards.push(card);
+
+      grid.appendChild(card);
     });
   }
 
-  function filterGallery(filter) {
-    const itemsToShow = filter === 'all' ? galleryItems : galleryItems.filter(i => i.category === filter);
-    buildCards(itemsToShow);
-    currentLbIdx = 0;
-  }
-
-  function openLightbox(idx) {
-    if(!currentCards.length) return;
-    const card = currentCards[idx];
-    const imgSrc = card.dataset.img;
-    const label = card.dataset.label;
-    lbImg.src = imgSrc;
-    lbImg.alt = label;
-    lbCaption.textContent = label;
-    currentLbIdx = idx;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
-  lbClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
-  lbPrev.addEventListener('click', e => {
-    e.stopPropagation();
-    if(!currentCards.length) return;
-    const prev = (currentLbIdx - 1 + currentCards.length) % currentCards.length;
-    openLightbox(prev);
-  });
-  lbNext.addEventListener('click', e => {
-    e.stopPropagation();
-    if(!currentCards.length) return;
-    const next = (currentLbIdx + 1) % currentCards.length;
-    openLightbox(next);
-  });
-  document.addEventListener('keydown', e => {
-    if(!lightbox.classList.contains('open')) return;
-    if(e.key === 'Escape') closeLightbox();
-    if(e.key === 'ArrowLeft') lbPrev.click();
-    if(e.key === 'ArrowRight') lbNext.click();
-  });
-
+  // ── Filter ──
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      filterGallery(btn.dataset.filter);
+      const f = btn.dataset.filter;
+      buildGallery(f === 'all' ? ALL_ITEMS : ALL_ITEMS.filter(i => i.cat === f));
     });
   });
-  // initial load: all images (excluding excluded ones)
-  filterGallery('all');
-})();
+
+  // ── Lightbox ──
+  function openLightbox(idx) {
+    lbIdx = idx;
+    const item = visibleItems[idx];
+    lbImg.src = item.src;
+    lbImg.alt = item.label;
+    lbCaption.textContent = item.label;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
+
+  lbPrev.addEventListener('click', e => {
+    e.stopPropagation();
+    openLightbox((lbIdx - 1 + visibleItems.length) % visibleItems.length);
+  });
+  lbNext.addEventListener('click', e => {
+    e.stopPropagation();
+    openLightbox((lbIdx + 1) % visibleItems.length);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lbPrev.click();
+    if (e.key === 'ArrowRight') lbNext.click();
+  });
+
+  // ── Initial load ──
+  buildGallery(ALL_ITEMS);
+
+})(); // end gallery IIFE
 </script>
 </body>
 </html>
