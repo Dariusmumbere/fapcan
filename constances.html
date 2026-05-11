@@ -546,7 +546,8 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .legacy-card p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; }
 
 /* ══════════════════════
-   JOURNEY TIMELINE
+   JOURNEY TIMELINE — NEW TWO-COLUMN LAYOUT
+   Left: timeline | Right: sticky image
 ══════════════════════ */
 .journey-section {
   background: var(--white);
@@ -559,7 +560,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   background: linear-gradient(to right, var(--teal) 0%, var(--green) 40%, var(--rose) 70%, var(--gold) 100%);
 }
 .journey-inner {
-  max-width: 900px; margin: 0 auto; padding: 0 32px;
+  max-width: 1320px; margin: 0 auto; padding: 0 32px;
 }
 .journey-header { text-align: center; margin-bottom: 60px; }
 .journey-header .section-label { justify-content: center; color: var(--rose); margin-bottom: 16px; }
@@ -571,56 +572,64 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .journey-header h2 em { font-style: italic; color: var(--rose); }
 
-/* Timeline */
+/* Two-column journey body */
+.journey-body {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── Timeline (left column) ── */
 .timeline {
   position: relative;
   padding-left: 0;
 }
+/* Vertical line runs along the left edge of timeline content */
 .timeline::before {
   content: '';
-  position: absolute; top: 0; bottom: 0;
-  left: 50%; transform: translateX(-50%);
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 18px;
   width: 2px;
   background: linear-gradient(to bottom, var(--rose), var(--gold), var(--teal), var(--green));
 }
+
 .timeline-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
   position: relative;
-  margin-bottom: 48px;
+  padding-left: 56px;
+  margin-bottom: 40px;
 }
 .timeline-item:last-child { margin-bottom: 0; }
-/* Dot */
+
+/* Dot on the left line */
 .timeline-item::before {
   content: '';
   position: absolute;
-  top: 28px; left: 50%;
-  transform: translate(-50%, -50%);
+  top: 24px;
+  left: 10px;
   width: 16px; height: 16px;
   border-radius: 50%;
   background: var(--gold);
-  border: 3px solid white;
+  border: 3px solid var(--white);
   box-shadow: 0 0 0 3px rgba(214,158,46,0.3);
   z-index: 2;
 }
-.timeline-item:nth-child(even)::before { background: var(--rose); box-shadow: 0 0 0 3px rgba(155,36,89,0.3); }
+.timeline-item:nth-child(2)::before { background: var(--rose); box-shadow: 0 0 0 3px rgba(155,36,89,0.3); }
 .timeline-item:nth-child(3)::before { background: var(--teal); box-shadow: 0 0 0 3px rgba(26,122,138,0.3); }
-
-.timeline-left { padding-right: 44px; text-align: right; }
-.timeline-right { padding-left: 44px; text-align: left; }
-.timeline-item:nth-child(even) .timeline-left { grid-column: 2; padding-left: 44px; padding-right: 0; text-align: left; }
-.timeline-item:nth-child(even) .timeline-right { grid-column: 1; grid-row: 1; padding-right: 44px; padding-left: 0; text-align: right; }
+.timeline-item:nth-child(4)::before { background: var(--green); box-shadow: 0 0 0 3px rgba(39,103,73,0.3); }
 
 .tl-year {
-  font-family: var(--font-serif); font-weight: 900; font-size: 32px;
-  color: var(--gold); line-height: 1; display: block; margin-bottom: 8px;
+  font-family: var(--font-serif); font-weight: 900; font-size: 28px;
+  color: var(--gold); line-height: 1; display: block; margin-bottom: 4px;
 }
-.timeline-item:nth-child(even) .tl-year { color: var(--rose); }
+.timeline-item:nth-child(2) .tl-year { color: var(--rose); }
 .timeline-item:nth-child(3) .tl-year { color: var(--teal); }
+.timeline-item:nth-child(4) .tl-year { color: var(--green); }
+
 .tl-phase {
   font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--mid); margin-bottom: 6px; display: block;
+  color: var(--mid); margin-bottom: 8px; display: block;
 }
 .tl-box {
   background: var(--off-white);
@@ -635,6 +644,67 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   color: var(--navy); margin-bottom: 8px; line-height: 1.3;
 }
 .tl-box p { font-size: 13.5px; color: var(--mid); line-height: 1.65; }
+
+/* ── Right image column ── */
+.journey-image-col {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+.journey-image-wrap {
+  position: relative;
+  border-radius: 4px;
+  overflow: visible;
+}
+.journey-image-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px; z-index: 10;
+  background: linear-gradient(to right, var(--rose) 0%, var(--rose) 20%, var(--gold) 20%, var(--gold) 40%, var(--green) 40%, var(--green) 60%, var(--teal) 60%, var(--teal) 80%, var(--purple) 80%, var(--purple) 100%);
+  border-radius: 4px 4px 0 0;
+}
+.journey-image-wrap img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 32px 64px rgba(0,0,0,0.18);
+  transition: transform 6s ease;
+}
+.journey-image-wrap:hover img { transform: scale(1.03); }
+.journey-image-wrap { overflow: hidden; }
+
+/* Decorative label on image */
+.journey-img-badge {
+  position: absolute;
+  bottom: -16px;
+  left: -16px;
+  background: var(--rose);
+  color: white;
+  padding: 12px 20px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(155,36,89,0.4);
+  z-index: 10;
+}
+.journey-img-caption {
+  margin-top: 32px;
+  padding: 20px 22px;
+  background: var(--navy);
+  border: 1px solid rgba(214,158,46,0.25);
+  border-radius: 4px;
+}
+.journey-img-caption p {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; color: rgba(255,255,255,0.7);
+  line-height: 1.6; margin-bottom: 10px;
+}
+.journey-img-caption span {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold);
+}
 
 /* ══════════════════════
    EMPOWERMENT / VALUES
@@ -819,11 +889,15 @@ footer { background: var(--dark); padding: 80px 0 0; }
   .footer-top { grid-template-columns: 1fr 1fr; }
   .impact-strip { grid-template-columns: repeat(2, 1fr); }
   .impact-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
-  .timeline::before { left: 28px; transform: none; }
-  .timeline-item { grid-template-columns: 1fr; padding-left: 60px; }
-  .timeline-item::before { left: 28px; transform: translateX(-50%); }
-  .timeline-left, .timeline-right { padding: 0 !important; text-align: left !important; grid-column: 1 !important; grid-row: auto !important; }
-  .tl-year-block { margin-bottom: 8px; }
+
+  /* Journey responsive: stack to single column */
+  .journey-body { grid-template-columns: 1fr; gap: 48px; }
+  .journey-image-col { position: static; order: -1; }
+  .journey-image-wrap img { aspect-ratio: 4/3; }
+  .journey-img-badge { left: 0; bottom: -12px; }
+
+  /* Timeline stays left-aligned */
+  .timeline::before { left: 18px; }
 }
 @media (max-width: 640px) {
   .profile-hero-inner { padding: 60px 20px 80px; }
@@ -963,7 +1037,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         who dared to believe in her own worth.
       </p>
 
-      
       <div class="profile-cta-row">
         <a href="index.html#our-impact" class="btn-primary-gold">
           <i class="fas fa-heart"></i> Our Impact
@@ -1100,10 +1173,13 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <h2>A Journey of<br><em>Courage &amp; Purpose</em></h2>
     </div>
 
-    <div class="timeline">
+    <!-- NEW: two-column body — timeline left, image right -->
+    <div class="journey-body">
 
-      <div class="timeline-item reveal">
-        <div class="timeline-left">
+      <!-- LEFT: Timeline items -->
+      <div class="timeline reveal-left">
+
+        <div class="timeline-item reveal">
           <div class="tl-box">
             <span class="tl-year">2012+</span>
             <span class="tl-phase">Foundation</span>
@@ -1111,12 +1187,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
             <p>Constance grew up under the care, love, and nurturing of the FAPCAN community — receiving education, spiritual grounding, and the confidence that every girl belongs and matters.</p>
           </div>
         </div>
-        <div class="timeline-right"></div>
-      </div>
 
-      <div class="timeline-item reveal">
-        <div class="timeline-left"></div>
-        <div class="timeline-right">
+        <div class="timeline-item reveal">
           <div class="tl-box">
             <span class="tl-year">2023</span>
             <span class="tl-phase">The Bold Step</span>
@@ -1124,10 +1196,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
             <p>With courage in her heart and the community's prayers behind her, Constance stepped forward and entered the Miss Kasese Municipality competition — representing FAPCAN and every girl who was told her dreams were too big.</p>
           </div>
         </div>
-      </div>
 
-      <div class="timeline-item reveal">
-        <div class="timeline-left">
+        <div class="timeline-item reveal">
           <div class="tl-box">
             <span class="tl-year">May 2023</span>
             <span class="tl-phase">The Crown</span>
@@ -1135,12 +1205,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
             <p>Mbambu Constance emerged as the 1st Runner Up — a stunning achievement that filled the FAPCAN community with joy and proved that their investment in young people bears beautiful fruit.</p>
           </div>
         </div>
-        <div class="timeline-right"></div>
-      </div>
 
-      <div class="timeline-item reveal">
-        <div class="timeline-left"></div>
-        <div class="timeline-right">
+        <div class="timeline-item reveal">
           <div class="tl-box">
             <span class="tl-year">2023–Now</span>
             <span class="tl-phase">Legacy in Motion</span>
@@ -1148,9 +1214,26 @@ footer { background: var(--dark); padding: 80px 0 0; }
             <p>Her victory sparked a movement within FAPCAN — more girls daring to dream, families investing in their daughters, and FAPCAN launching annual beauty and talent events to give every young person a platform to shine.</p>
           </div>
         </div>
+
+      </div><!-- /.timeline -->
+
+      <!-- RIGHT: Sticky image -->
+      <div class="journey-image-col reveal-right">
+        <div class="journey-image-wrap">
+          <img src="crisia2.PNG" alt="Mbambu Constance — Her Journey"
+            onerror="this.style.background='linear-gradient(135deg,#9B2459,#D69E2E)';this.src=''">
+          <div class="journey-img-badge">
+            <i class="fas fa-crown" style="margin-right:6px"></i> Miss Kasese 2023
+          </div>
+        </div>
+        <div class="journey-img-caption">
+          <p>"Her presence on that stage was a message to every girl in our community — you belong here, and your story matters."</p>
+          <span>— FAPCAN Community · Kasese, Uganda</span>
+        </div>
       </div>
 
-    </div>
+    </div><!-- /.journey-body -->
+
   </div>
 </section>
 
