@@ -95,7 +95,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   align-items: center;
 }
 
-/* Background image layer */
 .pageant-hero-bg {
   position: absolute;
   inset: 0;
@@ -108,7 +107,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   object-position: center top;
   display: block;
 }
-/* Dark overlay so text stays readable */
 .pageant-hero-bg::after {
   content: '';
   position: absolute;
@@ -129,7 +127,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .pageant-hero-geo-ring:nth-child(3) { width: 300px; height: 300px; bottom: 80px; left: 40%; animation-duration: 35s; border-color: rgba(39,103,73,0.12); }
 @keyframes geoSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* Noise grain overlay */
 .pageant-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0.04; z-index: 2; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); }
 
 .pageant-hero-inner {
@@ -144,9 +141,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   gap: 60px;
   align-items: center;
 }
-
-/* Left column — text */
-.pageant-hero-left {}
 
 .pageant-hero-breadcrumb {
   display: flex; align-items: center; gap: 10px;
@@ -184,7 +178,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   animation: fadeUp 0.9s 0.5s var(--ease-out) both;
 }
 
-/* Date pills row */
 .pageant-days-strip {
   display: flex; gap: 10px; flex-wrap: wrap;
   margin-bottom: 0;
@@ -207,7 +200,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .day-pill:nth-child(2) .day-pill-num { color: var(--gold); }
 .day-pill:nth-child(3) .day-pill-num { color: var(--red); }
 
-/* Right column — image showcase */
 .pageant-hero-right {
   animation: fadeUp 1.1s 0.5s var(--ease-out) both;
   position: relative;
@@ -266,7 +258,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .hero-img-showcase .hi-thumb:hover .hi-thumb-label { opacity: 1; }
 
-/* Winners strip below hero */
 .hero-winners-strip {
   margin-top: 40px;
   padding-top: 32px;
@@ -316,8 +307,7 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .impact-label { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
 
 /* ════════════════════════════════════════
-   THREE-DAY TIMELINE — REDESIGNED
-   Each day: alternating text / image side
+   THREE-DAY TIMELINE
 ════════════════════════════════════════ */
 .timeline-section {
   background: var(--off-white);
@@ -335,7 +325,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .timeline-header h2 em { font-style: italic; color: var(--teal); }
 .timeline-header p { font-size: 16px; color: var(--mid); max-width: 580px; margin: 0 auto; line-height: 1.75; }
 
-/* ── NEW: Day row layout ── */
 .day-row {
   display: grid;
   grid-template-columns: 1fr 80px 1fr;
@@ -346,7 +335,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 }
 .day-row:last-child { margin-bottom: 0; }
 
-/* Text panel */
 .day-text-panel {
   padding: 48px 48px 48px 0;
   display: flex;
@@ -358,7 +346,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   order: 3;
 }
 
-/* Center spine */
 .day-spine {
   display: flex;
   flex-direction: column;
@@ -393,12 +380,10 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .day-row:nth-child(2) .day-dot { background: var(--gold); }
 .day-row:nth-child(3) .day-dot { background: var(--red); }
 
-/* Connector accent lines */
 .day-row:nth-child(1) .day-spine-line { background: linear-gradient(to bottom, transparent, var(--teal) 30%, var(--gold) 100%); }
 .day-row:nth-child(2) .day-spine-line { background: linear-gradient(to bottom, var(--gold), var(--red)); }
 .day-row:nth-child(3) .day-spine-line { background: linear-gradient(to bottom, var(--red), transparent); }
 
-/* Image panel */
 .day-img-panel {
   position: relative;
   overflow: hidden;
@@ -423,7 +408,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   background: linear-gradient(to bottom, rgba(10,20,45,0) 50%, rgba(10,20,45,0.55) 100%);
   pointer-events: none;
 }
-/* Left-side image: gradient from right */
 .day-row:not(.reverse) .day-img-panel::before {
   content: '';
   position: absolute;
@@ -432,7 +416,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   pointer-events: none;
   z-index: 1;
 }
-/* Right-side image: gradient from left */
 .day-row.reverse .day-img-panel::before {
   content: '';
   position: absolute;
@@ -468,7 +451,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   color: rgba(255,255,255,0.8);
 }
 
-/* Text content styles */
 .tl-day-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
 .day-row:nth-child(1) .tl-day-label { color: var(--teal); }
 .day-row:nth-child(2) .tl-day-label { color: var(--gold); }
@@ -486,7 +468,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .tl-badge.gold { background: rgba(214,158,46,0.1); color: #92610B; border: 1px solid rgba(214,158,46,0.3); }
 .tl-badge.red  { background: rgba(197,48,48,0.08); color: var(--red); border: 1px solid rgba(197,48,48,0.25); }
 
-/* Mobile stacked layout */
 @media (max-width: 900px) {
   .day-row {
     grid-template-columns: 1fr;
@@ -526,7 +507,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .winners-header h2 em { font-style: italic; color: var(--gold); }
 .winners-header p { font-size: 16px; color: rgba(255,255,255,0.5); max-width: 560px; margin: 0 auto; line-height: 1.75; }
 
-/* MISS FAPCAN podium */
 .miss-podium {
   display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 16px;
   margin-bottom: 48px; align-items: end;
@@ -570,7 +550,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .rank-1 .podium-crown { font-size: 40px; }
 .podium-title-text { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
 
-/* MR FAPCAN side by side */
 .mr-row {
   display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; margin-bottom: 48px;
 }
@@ -601,7 +580,6 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .mr-runner-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform 0.5s; }
 .mr-runner-card:hover .mr-runner-img img { transform: scale(1.05); }
 
-/* Special awards */
 .special-awards { margin-top: 24px; }
 .special-awards-title {
   font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
@@ -632,6 +610,408 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 .special-award-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
 .special-award-name { font-family: var(--font-serif); font-weight: 700; font-size: 16px; color: white; margin-bottom: 3px; }
 .special-award-title { font-size: 11px; color: rgba(255,255,255,0.45); }
+
+/* ════════════════════════════════════════
+   MISS FAPCAN PROFILE SECTION — NEW
+════════════════════════════════════════ */
+.profile-section {
+  background: var(--off-white);
+  padding: 110px 0;
+  position: relative;
+  overflow: hidden;
+}
+.profile-section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(to right, var(--gold), var(--gold-lt) 30%, var(--red) 65%, var(--teal));
+}
+/* Subtle diagonal texture */
+.profile-section::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent 0,
+    transparent 48px,
+    rgba(214,158,46,0.025) 48px,
+    rgba(214,158,46,0.025) 49px
+  );
+  z-index: 0;
+}
+
+.profile-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Profile header ── */
+.profile-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.profile-header .section-label { justify-content: center; color: var(--gold); }
+.profile-header .section-label::before { background: var(--gold); }
+.profile-header .section-label::after { content: ''; width: 28px; height: 2px; background: var(--gold); display: block; }
+.profile-header h2 { font-family: var(--font-serif); font-weight: 900; font-size: clamp(30px,4vw,56px); color: var(--navy); line-height: 1.1; margin-bottom: 16px; }
+.profile-header h2 em { font-style: italic; color: var(--gold); }
+.profile-header p { font-size: 16px; color: var(--mid); max-width: 600px; margin: 0 auto; line-height: 1.75; }
+
+/* ── Main profile grid ── */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 56px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+
+/* ── Left: photo column ── */
+.profile-photo-col {}
+
+.profile-photo-frame {
+  position: relative;
+  margin-bottom: 28px;
+}
+.profile-photo-crown-badge {
+  position: absolute;
+  top: -18px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: var(--gold);
+  color: var(--navy-dk);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 7px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(214,158,46,0.35);
+}
+.profile-photo-crown-badge i { font-size: 14px; }
+
+.profile-img-main {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  border: 3px solid var(--gold);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.14), 0 0 0 8px rgba(214,158,46,0.08);
+  margin-top: 14px;
+}
+.profile-img-main img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+  transition: transform 0.7s var(--ease-out);
+}
+.profile-photo-frame:hover .profile-img-main img { transform: scale(1.05); }
+
+/* Gold corner accents */
+.profile-img-main::before {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 36px; height: 36px;
+  border-top: 2px solid var(--gold-lt);
+  border-left: 2px solid var(--gold-lt);
+  z-index: 3;
+  pointer-events: none;
+}
+.profile-img-main::after {
+  content: '';
+  position: absolute;
+  bottom: 10px; right: 10px;
+  width: 36px; height: 36px;
+  border-bottom: 2px solid var(--gold-lt);
+  border-right: 2px solid var(--gold-lt);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Profile quick facts card */
+.profile-facts-card {
+  background: var(--navy);
+  padding: 28px 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.profile-facts-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--red), var(--teal));
+}
+.profile-fact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.profile-fact-row:last-child { border-bottom: none; padding-bottom: 0; }
+.profile-fact-row:first-child { padding-top: 0; }
+.profile-fact-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(214,158,46,0.15);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--gold);
+}
+.profile-fact-info {}
+.profile-fact-label {
+  font-size: 8.5px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 3px;
+}
+.profile-fact-value {
+  font-size: 14px; font-weight: 600; color: white; line-height: 1.35;
+}
+
+/* ── Right: story column ── */
+.profile-story-col {}
+
+.profile-story-intro {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a2e5a 100%);
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.profile-story-intro::before {
+  content: '"';
+  position: absolute;
+  top: -10px; left: 24px;
+  font-family: var(--font-serif);
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(214,158,46,0.12);
+  line-height: 1;
+  pointer-events: none;
+}
+.profile-story-intro p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 1.6vw, 20px);
+  color: rgba(255,255,255,0.9);
+  line-height: 1.7;
+  position: relative;
+  z-index: 2;
+}
+.profile-story-intro p strong { color: var(--gold); font-style: normal; }
+
+.profile-story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.profile-story-body p {
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.82;
+}
+.profile-story-body p strong { color: var(--navy); font-weight: 600; }
+
+/* Highlight pull-quote */
+.profile-quote-highlight {
+  border-left: 4px solid var(--gold);
+  background: rgba(214,158,46,0.06);
+  padding: 20px 24px;
+  margin: 8px 0;
+}
+.profile-quote-highlight p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px !important;
+  color: var(--navy) !important;
+  line-height: 1.65 !important;
+  margin: 0;
+}
+
+/* ── Advocacy section ── */
+.profile-advocacy {
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.profile-advocacy::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
+  background: linear-gradient(to bottom, var(--red), var(--gold), var(--teal));
+}
+.profile-advocacy-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.profile-advocacy-title em { font-style: italic; color: var(--red); }
+.profile-advocacy-sub {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+.profile-advocacy-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.advocacy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--off-white);
+  transition: background 0.2s, transform 0.2s;
+}
+.advocacy-item:hover { background: var(--light-gray); transform: translateX(4px); }
+.advocacy-item-icon {
+  width: 36px; height: 36px;
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.advocacy-item:nth-child(1) .advocacy-item-icon { background: rgba(197,48,48,0.1); }
+.advocacy-item:nth-child(2) .advocacy-item-icon { background: rgba(26,122,138,0.1); }
+.advocacy-item:nth-child(3) .advocacy-item-icon { background: rgba(214,158,46,0.12); }
+.advocacy-item:nth-child(4) .advocacy-item-icon { background: rgba(39,103,73,0.1); }
+.advocacy-item:nth-child(5) .advocacy-item-icon { background: rgba(85,60,154,0.1); }
+.advocacy-item:nth-child(6) .advocacy-item-icon { background: rgba(197,48,48,0.08); }
+.advocacy-item-text h5 {
+  font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+}
+.advocacy-item-text p {
+  font-size: 12px; color: var(--mid); line-height: 1.55; margin: 0;
+}
+
+/* ── Closing message banner ── */
+.profile-closing-banner {
+  background: linear-gradient(135deg, var(--navy-dk) 0%, #162448 50%, var(--navy) 100%);
+  padding: 52px 56px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 40px;
+}
+.profile-closing-banner::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--gold-lt), var(--red), var(--teal));
+}
+/* Decorative large crown watermark */
+.profile-closing-banner::after {
+  content: '👑';
+  position: absolute;
+  right: 48px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 120px;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.profile-closing-banner-inner {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+.profile-closing-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 26px);
+  color: white;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.profile-closing-quote em { color: var(--gold); font-style: normal; }
+.profile-closing-attribution {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+.profile-closing-stat-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.profile-stat-pill {
+  text-align: center;
+  padding: 18px 28px;
+  background: rgba(214,158,46,0.12);
+  border: 1px solid rgba(214,158,46,0.3);
+}
+.profile-stat-num {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.profile-stat-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+/* role models strip */
+.profile-role-models {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.profile-role-models-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.profile-role-models-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.profile-role-models-row {
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.role-model-tag {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 18px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.role-model-tag:hover { background: rgba(255,255,255,0.1); border-color: rgba(214,158,46,0.4); }
+.role-model-tag-icon { font-size: 20px; }
+.role-model-tag-info {}
+.role-model-tag-name { font-family: var(--font-serif); font-weight: 700; font-size: 14px; color: white; }
+.role-model-tag-role { font-size: 10px; color: rgba(255,255,255,0.35); }
+
+@media (max-width: 1024px) {
+  .profile-grid { grid-template-columns: 1fr; }
+  .profile-photo-col { max-width: 380px; margin: 0 auto; }
+  .profile-closing-banner-inner { grid-template-columns: 1fr; gap: 28px; }
+  .profile-closing-stat-col { flex-direction: row; }
+}
+@media (max-width: 600px) {
+  .profile-advocacy-grid { grid-template-columns: 1fr; }
+  .profile-closing-banner { padding: 36px 28px; }
+  .profile-closing-stat-col { flex-wrap: wrap; }
+}
 
 /* ════════════════════════════════════════
    CATEGORIES / COMPETITIONS
@@ -869,7 +1249,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
 }
 @media (max-width: 480px) {
   .nav-inner, .footer-inner { padding: 0 20px; }
-  .pageant-hero-inner, .timeline-inner, .winners-inner, .categories-inner, .story-inner, .hosted-inner, .group-inner { padding: 0 20px; }
+  .pageant-hero-inner, .timeline-inner, .winners-inner, .categories-inner, .story-inner, .hosted-inner, .group-inner, .profile-inner { padding: 0 20px; }
   .hero-winners-strip { grid-template-columns: 1fr; }
   .pageant-days-strip { gap: 10px; }
   .special-grid { grid-template-columns: 1fr; }
@@ -1057,7 +1437,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
 </div>
 
 <!-- ════════════════════════════════════════
-     THREE-DAY TIMELINE — alternating layout
+     THREE-DAY TIMELINE
 ════════════════════════════════════════ -->
 <section class="timeline-section" id="timeline">
   <div class="timeline-inner">
@@ -1071,9 +1451,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <p>From the 7th to the 9th of May 2026, FAPCAN hosted a landmark beauty and talent pageant that brought the entire community together in joy, pride, and purpose.</p>
     </div>
 
-    <!-- DAY 1: Text LEFT · Image RIGHT -->
+    <!-- DAY 1 -->
     <div class="day-row reveal">
-      <!-- Text panel -->
       <div class="day-text-panel">
         <div class="tl-day-label">Day One · Wednesday 7th May</div>
         <div class="tl-date">Mr. FAPCAN</div>
@@ -1085,13 +1464,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
           <i class="fas fa-medal"></i> Runner Up: Muhindo Samuel Asiimwe
         </div>
       </div>
-      <!-- Spine -->
       <div class="day-spine">
         <div class="day-spine-line"></div>
         <div class="day-dot">1</div>
         <div class="day-spine-line"></div>
       </div>
-      <!-- Image panel -->
       <div class="day-img-panel">
         <img src="sm.jpg" alt="Mr FAPCAN Competition — Day One" onerror="this.src='mr.jpg'">
         <div class="day-img-caption">
@@ -1101,9 +1478,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
 
-    <!-- DAY 2: Image LEFT · Text RIGHT -->
+    <!-- DAY 2 -->
     <div class="day-row reverse reveal">
-      <!-- Image panel (order:1 via CSS) -->
       <div class="day-img-panel">
         <img src="20.jpg" alt="Girls & Women Heats — Day Two" onerror="this.src='group1.jpg'">
         <div class="day-img-caption">
@@ -1111,13 +1487,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
           <span class="day-img-caption-text">Girls &amp; Women Heats</span>
         </div>
       </div>
-      <!-- Spine -->
       <div class="day-spine">
         <div class="day-spine-line"></div>
         <div class="day-dot">2</div>
         <div class="day-spine-line"></div>
       </div>
-      <!-- Text panel (order:3 via CSS) -->
       <div class="day-text-panel">
         <div class="tl-day-label">Day Two · Thursday 8th May</div>
         <div class="tl-date">Girls &amp; Women Heats</div>
@@ -1128,9 +1502,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
 
-    <!-- DAY 3: Text LEFT · Image RIGHT -->
+    <!-- DAY 3 -->
     <div class="day-row reveal">
-      <!-- Text panel -->
       <div class="day-text-panel">
         <div class="tl-day-label">Day Three · Friday 9th May 2026</div>
         <div class="tl-date">Grand Finale</div>
@@ -1145,13 +1518,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
           <i class="fas fa-award"></i> 2nd Runner Up: Babirye Zainab
         </div>
       </div>
-      <!-- Spine -->
       <div class="day-spine">
         <div class="day-spine-line"></div>
         <div class="day-dot">3</div>
         <div class="day-spine-line"></div>
       </div>
-      <!-- Image panel -->
       <div class="day-img-panel">
         <img src="Mr and miss.jpg" alt="Grand Finale — Miss & Mr FAPCAN 2026" onerror="this.src='runners.jpg'">
         <div class="day-img-caption">
@@ -1160,7 +1531,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -1183,7 +1553,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
     <div class="miss-podium reveal">
-      <!-- 1st Runner Up -->
       <div class="podium-card rank-2">
         <div class="podium-img">
           <img src="kibuga.jpg" alt="Mbambu Joyline" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -1200,7 +1569,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         </div>
       </div>
 
-      <!-- CENTER — WINNER -->
       <div class="podium-card rank-1">
         <div class="podium-img">
           <img src="miss1.jpg" alt="Mbambu Matherine — Miss FAPCAN 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -1217,7 +1585,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         </div>
       </div>
 
-      <!-- 2nd Runner Up -->
       <div class="podium-card rank-3">
         <div class="podium-img">
           <img src="zainab.jpg" alt="Babirye Zainab" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -1243,7 +1610,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
     <div class="mr-row reveal">
-      <!-- Mr FAPCAN Winner -->
       <div class="mr-main-card">
         <div style="width:5px;background:linear-gradient(to bottom,var(--teal),var(--purple));flex-shrink:0;"></div>
         <div class="mr-main-body">
@@ -1256,7 +1622,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         </div>
       </div>
 
-      <!-- Mr FAPCAN Runner Up — now with sam.jpg -->
       <div class="mr-runner-card">
         <div class="mr-runner-body">
           <div style="font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple);margin-bottom:10px;">1st Runner Up — Mr. FAPCAN</div>
@@ -1309,6 +1674,207 @@ footer { background: var(--dark); padding: 80px 0 0; }
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     MISS FAPCAN 2026 — PROFILE SECTION (NEW)
+════════════════════════════════════════ -->
+<section class="profile-section" id="miss-profile">
+  <div class="profile-inner">
+
+    <div class="profile-header reveal">
+      <div class="section-label">Behind the Crown</div>
+      <h2>The Story of <em>Miss FAPCAN 2026</em></h2>
+      <p>Behind every crown is a story — of hope, struggle, resilience, and purpose. This is the inspiring journey of Mbambu Matherine, the young girl who rose to become the face and voice of FAPCAN 2026.</p>
+    </div>
+
+    <div class="profile-grid">
+
+      <!-- LEFT: Photo & Facts -->
+      <div class="profile-photo-col reveal-left">
+        <div class="profile-photo-frame">
+          <div class="profile-photo-crown-badge">
+            <i class="fas fa-crown"></i> Miss FAPCAN 2026
+          </div>
+          <div class="profile-img-main">
+            <img src="miss1.jpg" alt="Mbambu Matherine — Miss FAPCAN 2026" onerror="this.src='yozefina.jpg'">
+          </div>
+        </div>
+
+        <div class="profile-facts-card">
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-user"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">Full Name</div>
+              <div class="profile-fact-value">Mbambu Matherine</div>
+            </div>
+          </div>
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-birthday-cake"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">Age</div>
+              <div class="profile-fact-value">14 Years Old</div>
+            </div>
+          </div>
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">School</div>
+              <div class="profile-fact-value">St. Mary's High School, Kasese</div>
+            </div>
+          </div>
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-heart"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">Mother</div>
+              <div class="profile-fact-value">Masika Jetress</div>
+            </div>
+          </div>
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-users"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">Raised By</div>
+              <div class="profile-fact-value">Grandmother Bujune Christine &amp; Grandfather Baluku Wilson Serebethe</div>
+            </div>
+          </div>
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-home"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">Community</div>
+              <div class="profile-fact-value">FAPCAN Family, Kasese, Uganda</div>
+            </div>
+          </div>
+          <div class="profile-fact-row">
+            <div class="profile-fact-icon"><i class="fas fa-crown"></i></div>
+            <div class="profile-fact-info">
+              <div class="profile-fact-label">Title Won</div>
+              <div class="profile-fact-value">Miss FAPCAN 2026 — Grand Winner</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Story -->
+      <div class="profile-story-col reveal-right">
+        <div class="profile-story-intro">
+          <p>Behind the crown of Miss FAPCAN 2026 is a touching story of <strong>hope, strength, humility, and purpose</strong>. Mbambu Matherine, a 14-year-old young girl, emerged as the crowned Miss FAPCAN 2026 during the colourful Beauty Pageant organized by the FAPCAN community — and her journey is one that moves hearts.</p>
+        </div>
+
+        <div class="profile-story-body">
+          <p>Matherine is one of the children cared for and supported by <strong>Alfred Bwambale</strong> — famously known as Omuzana — at FAPCAN. She is the fourth last born among her siblings, raised with love, faith, and resilience under the guidance of her grandmother <strong>Bujune Christine</strong> and grandfather <strong>Baluku Wilson Serebethe</strong>.</p>
+
+          <p>She is currently pursuing her studies at <strong>St. Mary's High School, Kasese</strong>, where she continues to dream of becoming a strong and influential woman in society.</p>
+
+          <div class="profile-quote-highlight">
+            <p>"For Matherine, the crown is not only a symbol of beauty — it is a sign of responsibility, courage, and purpose. She describes this achievement as a life-changing milestone that has shaped her confidence and given her hope to pursue bigger dreams."</p>
+          </div>
+
+          <p>She proudly says that her greatest role model is her uncle <strong>Alfred Bwambale</strong> because of his sacrifice and commitment to helping helpless souls regardless of their background, status, or tribe. She also looks up to <strong>Mother Mary</strong> as a symbol of love, purity, humility, and strength.</p>
+
+          <p>In her emotional message after winning the crown, Matherine thanked the entire FAPCAN community and especially Alfred Bwambale for organizing such an empowering event for young girls and boys. According to her, the pageant has not only discovered talents — it has opened doors of <strong>confidence, leadership, and hope</strong> for many young people.</p>
+        </div>
+
+        <!-- Role Models -->
+        <div class="profile-role-models" style="margin-top:28px;padding-top:24px;border-top:1px solid var(--light-gray);">
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;display:flex;align-items:center;gap:12px;">
+            Role Models
+            <span style="flex:1;height:1px;background:var(--light-gray);display:block;"></span>
+          </div>
+          <div class="profile-role-models-row">
+            <div class="role-model-tag">
+              <div class="role-model-tag-icon">🌟</div>
+              <div class="role-model-tag-info">
+                <div class="role-model-tag-name">Alfred Bwambale</div>
+                <div class="role-model-tag-role" style="color:var(--mid);">Uncle &amp; FAPCAN Founder</div>
+              </div>
+            </div>
+            <div class="role-model-tag">
+              <div class="role-model-tag-icon">🕊️</div>
+              <div class="role-model-tag-info">
+                <div class="role-model-tag-name">Mother Mary</div>
+                <div class="role-model-tag-role" style="color:var(--mid);">Love, Purity &amp; Strength</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADVOCACY SECTION -->
+    <div class="profile-advocacy reveal">
+      <div class="profile-advocacy-title">Matherine's <em>Voice &amp; Message</em></div>
+      <div class="profile-advocacy-sub">Her Call to Action — Speaking for the Voiceless</div>
+      <p style="font-size:15px;color:var(--mid);line-height:1.78;margin-bottom:24px;">As a young girl who has personally experienced pain from a separated family caused by violence, Matherine used her voice to speak for thousands of voiceless girls facing similar struggles in society. Her message went beyond celebration — it was a call for change, protection, and opportunity.</p>
+      <div class="profile-advocacy-grid">
+        <div class="advocacy-item">
+          <div class="advocacy-item-icon">📚</div>
+          <div class="advocacy-item-text">
+            <h5>Girl Child Education</h5>
+            <p>Called upon the government, well-wishers, leaders, and organizations to support girl child education at FAPCAN and across Uganda.</p>
+          </div>
+        </div>
+        <div class="advocacy-item">
+          <div class="advocacy-item-icon">🛡️</div>
+          <div class="advocacy-item-text">
+            <h5>Protection from Violence</h5>
+            <p>Strongly spoke against domestic violence and broken homes, and appealed for protection of teenage girls vulnerable to abuse, exploitation, and neglect.</p>
+          </div>
+        </div>
+        <div class="advocacy-item">
+          <div class="advocacy-item-icon">💧</div>
+          <div class="advocacy-item-text">
+            <h5>Girls' Hygiene &amp; Basic Needs</h5>
+            <p>Appealed for support towards sanitary pads, education materials, counseling, food, and healthcare for girls who lack basic necessities.</p>
+          </div>
+        </div>
+        <div class="advocacy-item">
+          <div class="advocacy-item-icon">💼</div>
+          <div class="advocacy-item-text">
+            <h5>Skills &amp; Empowerment</h5>
+            <p>Emphasized skills development programs to help groom young girls with purpose, confidence, and independence — in leadership, art, fashion, and entrepreneurship.</p>
+          </div>
+        </div>
+        <div class="advocacy-item">
+          <div class="advocacy-item-icon">⚖️</div>
+          <div class="advocacy-item-text">
+            <h5>Justice for Silenced Girls</h5>
+            <p>Advocated for justice and rights for girls who undergo rape and abuse but remain silenced. Encouraged girls to speak up and seek help instead of suffering alone.</p>
+          </div>
+        </div>
+        <div class="advocacy-item">
+          <div class="advocacy-item-icon">🌱</div>
+          <div class="advocacy-item-text">
+            <h5>Jobs &amp; Dignity</h5>
+            <p>Encouraged job creation and empowerment for young girls so they can live with dignity. Discouraged abortion and advised girls to value their lives and womanhood.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLOSING BANNER -->
+    <div class="profile-closing-banner reveal">
+      <div class="profile-closing-banner-inner">
+        <div>
+          <div class="profile-closing-quote">
+            "To all young girls — our future is bright if we remain <em>focused, disciplined, prayerful, educated, and united</em>. We are the mothers of tomorrow, and FAPCAN will be proud of us."
+          </div>
+          <div class="profile-closing-attribution">— Mbambu Matherine, Miss FAPCAN 2026 · Kasese, Uganda</div>
+          <p style="font-size:14px;color:rgba(255,255,255,0.45);line-height:1.72;margin-top:20px;max-width:680px;">Today, the story of Mbambu Matherine is not only inspiring the FAPCAN community — it is sending a powerful message to the entire nation of Uganda that every girl, regardless of her background, deserves a chance to dream, to be heard, and to shine.</p>
+        </div>
+        <div class="profile-closing-stat-col">
+          <div class="profile-stat-pill">
+            <div class="profile-stat-num">14</div>
+            <div class="profile-stat-label">Years Old</div>
+          </div>
+          <div class="profile-stat-pill">
+            <div class="profile-stat-num">👑</div>
+            <div class="profile-stat-label">Miss FAPCAN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1576,6 +2142,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="footer-col"><h4>This Event</h4><ul>
         <li><a href="#timeline"><i class="fas fa-chevron-right"></i> 3-Day Programme</a></li>
         <li><a href="#winners"><i class="fas fa-chevron-right"></i> Winners &amp; Awards</a></li>
+        <li><a href="#miss-profile"><i class="fas fa-chevron-right"></i> Miss FAPCAN Profile</a></li>
         <li><a href="#categories"><i class="fas fa-chevron-right"></i> Competition Rounds</a></li>
         <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Photo Gallery</a></li>
         <li><a href="#story"><i class="fas fa-chevron-right"></i> The Story</a></li>
@@ -1609,7 +2176,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.podium-card,.cat-card,.special-card,.day-pill,.gallery-item,.story-pillar,.hws-card,.hi-thumb,.hi-main,.group-photo-main,.group-photo-thumb,.day-img-panel').forEach(el=>{
+document.querySelectorAll('a,button,.podium-card,.cat-card,.special-card,.day-pill,.gallery-item,.story-pillar,.hws-card,.hi-thumb,.hi-main,.group-photo-main,.group-photo-thumb,.day-img-panel,.advocacy-item,.role-model-tag,.profile-photo-frame').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
