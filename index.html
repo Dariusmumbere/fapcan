@@ -1103,9 +1103,8 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   height: 340px;
 }
 
-
 /* ══════════════════════════════════════════════════════════
-   ── PHOTO GALLERY SECTION (NEW) ──
+   ── PHOTO GALLERY SECTION - UNIFORM CARDS, 3 PER ROW ──
 ══════════════════════════════════════════════════════════ */
 .photo-gallery {
   background: var(--dark);
@@ -1190,88 +1189,80 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
   color: var(--navy-dk);
 }
 
-/* ── Masonry-style bento grid ── */
-.gallery-bento {
+/* ── UNIFORM GRID: 3 CARDS PER ROW ── */
+.gallery-uniform-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(3, 220px);
-  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 20px;
 }
 
-/* Cell sizing */
-.g-cell { position: relative; overflow: hidden; border-radius: 3px; cursor: pointer; }
-
-/* Row 1 */
-.g-cell:nth-child(1) { grid-column: 1 / 5; grid-row: 1 / 3; }   /* tall left */
-.g-cell:nth-child(2) { grid-column: 5 / 8; grid-row: 1 / 2; }
-.g-cell:nth-child(3) { grid-column: 8 / 10; grid-row: 1 / 2; }
-.g-cell:nth-child(4) { grid-column: 10 / 13; grid-row: 1 / 3; }  /* tall right */
-/* Row 2 */
-.g-cell:nth-child(5) { grid-column: 5 / 7; grid-row: 2 / 3; }
-.g-cell:nth-child(6) { grid-column: 7 / 10; grid-row: 2 / 3; }
-/* Row 3 */
-.g-cell:nth-child(7)  { grid-column: 1 / 4;  grid-row: 3 / 4; }
-.g-cell:nth-child(8)  { grid-column: 4 / 7;  grid-row: 3 / 4; }
-.g-cell:nth-child(9)  { grid-column: 7 / 10; grid-row: 3 / 4; }
-.g-cell:nth-child(10) { grid-column: 10 / 13; grid-row: 3 / 4; }
-
-/* Images */
-.g-cell img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
+/* gallery card styles */
+.gallery-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-color 0.3s;
+  cursor: pointer;
+}
+.gallery-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  border-color: rgba(214,158,46,0.4);
+}
+.gallery-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1f2e;
+}
+.gallery-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  transition: transform 0.7s var(--ease-out), filter 0.4s;
-  filter: brightness(0.88) saturate(0.9);
+  transition: transform 0.5s var(--ease-out);
 }
-.g-cell:hover img {
-  transform: scale(1.08);
-  filter: brightness(1) saturate(1.05);
+.gallery-card:hover .gallery-card-img img {
+  transform: scale(1.05);
+}
+.gallery-card-info {
+  padding: 18px 20px 22px;
+}
+.gallery-card-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(214,158,46,0.15);
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+.gallery-card-title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.4;
+  margin: 0;
+}
+.gallery-card-title span {
+  font-style: italic;
+  color: rgba(255,255,255,0.6);
+}
+.gallery-card:hover .gallery-card-title {
+  color: var(--gold);
+  transition: color 0.2s;
 }
 
-/* Overlay on hover */
-.g-cell-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(15,31,61,0.85) 0%, transparent 55%);
-  opacity: 0; transition: opacity 0.4s var(--ease-out);
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 20px;
-}
-.g-cell:hover .g-cell-overlay { opacity: 1; }
-.g-cell-overlay-label {
-  font-family: var(--font-serif); font-style: italic;
-  font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.4;
-  transform: translateY(8px);
-  transition: transform 0.4s var(--ease-out);
-}
-.g-cell:hover .g-cell-overlay-label { transform: translateY(0); }
-.g-cell-overlay-tag {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 6px; display: block;
-}
-
-/* Accent colour bar per cell */
-.g-cell::before {
-  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 3px; z-index: 5;
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 0.4s var(--ease-out);
-}
-.g-cell:nth-child(1)::before  { background: var(--gold); }
-.g-cell:nth-child(2)::before  { background: var(--teal); }
-.g-cell:nth-child(3)::before  { background: var(--red); }
-.g-cell:nth-child(4)::before  { background: var(--green); }
-.g-cell:nth-child(5)::before  { background: var(--purple); }
-.g-cell:nth-child(6)::before  { background: var(--gold); }
-.g-cell:nth-child(7)::before  { background: var(--red); }
-.g-cell:nth-child(8)::before  { background: var(--teal); }
-.g-cell:nth-child(9)::before  { background: var(--green); }
-.g-cell:nth-child(10)::before { background: var(--purple); }
-.g-cell:hover::before { transform: scaleX(1); }
-
-/* ── Featured caption strip ── */
+/* Caption strip below grid */
 .gallery-caption-strip {
   display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 1px; margin-top: 8px;
+  gap: 1px; margin-top: 60px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.06);
 }
@@ -1343,43 +1334,19 @@ nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
 
 /* Gallery responsive */
 @media (max-width: 1100px) {
-  .gallery-bento {
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(5, 180px);
-  }
-  .g-cell:nth-child(1)  { grid-column: 1 / 4; grid-row: 1 / 3; }
-  .g-cell:nth-child(2)  { grid-column: 4 / 7; grid-row: 1 / 2; }
-  .g-cell:nth-child(3)  { grid-column: 4 / 7; grid-row: 2 / 3; }
-  .g-cell:nth-child(4)  { grid-column: 1 / 3; grid-row: 3 / 4; }
-  .g-cell:nth-child(5)  { grid-column: 3 / 5; grid-row: 3 / 4; }
-  .g-cell:nth-child(6)  { grid-column: 5 / 7; grid-row: 3 / 4; }
-  .g-cell:nth-child(7)  { grid-column: 1 / 3; grid-row: 4 / 5; }
-  .g-cell:nth-child(8)  { grid-column: 3 / 5; grid-row: 4 / 5; }
-  .g-cell:nth-child(9)  { grid-column: 5 / 7; grid-row: 4 / 5; }
-  .g-cell:nth-child(10) { grid-column: 1 / 4; grid-row: 5 / 6; }
+  .gallery-uniform-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .gallery-caption-strip { grid-template-columns: repeat(3, 1fr); }
 }
-
 @media (max-width: 768px) {
-  .gallery-bento {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-  }
-  .g-cell { grid-column: auto !important; grid-row: auto !important; height: 200px; }
-  .g-cell:nth-child(1) { grid-column: 1 / 3 !important; height: 260px; }
+  .gallery-uniform-grid { grid-template-columns: 1fr; gap: 16px; }
   .gallery-caption-strip { grid-template-columns: repeat(2, 1fr); }
   .lightbox-prev { left: -40px; }
   .lightbox-next { right: -40px; }
 }
-
 @media (max-width: 480px) {
-  .gallery-bento { grid-template-columns: 1fr; }
-  .g-cell { grid-column: auto !important; height: 200px; }
-  .g-cell:nth-child(1) { grid-column: auto !important; }
-  .gallery-caption-strip { grid-template-columns: 1fr 1fr; }
+  .gallery-caption-strip { grid-template-columns: 1fr; }
   .lightbox-prev, .lightbox-next { display: none; }
 }
-
 
 /* ── FOUNDER ── */
 .founder {
@@ -2123,31 +2090,31 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
   <div class="craft-scroll-outer">
     <div class="craft-track" id="craftTrack">
-      <div class="craft-card"><div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Mastering the art of tailoring</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div><div class="craft-card-caption"><span>Intricate tapestry patterns</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div><div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div><div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Community hands, shared purpose</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div><div class="craft-card-caption"><span>Advanced weaving techniques</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div><div class="craft-card-caption"><span>Young hands learning early</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div><div class="craft-card-caption"><span>Patience woven into every row</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div><div class="craft-card-caption"><span>From fibre to finished fabric</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Skills that open doors</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div><div class="craft-card-caption"><span>Detail in every handmade piece</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div><div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div></div>
-      <!-- Duplicate for seamless loop -->
-      <div class="craft-card"><div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Mastering the art of tailoring</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry work" loading="lazy"></div><div class="craft-card-caption"><span>Intricate tapestry patterns</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div><div class="craft-card-caption"><span>Colour &amp; craft in every thread</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving skills" loading="lazy"></div><div class="craft-card-caption"><span>Weaving tradition into livelihood</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="tapestry.jpg" alt="Community tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Community hands, shared purpose</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving5.jpg" alt="Advanced weaving" loading="lazy"></div><div class="craft-card-caption"><span>Advanced weaving techniques</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="child12.jpg" alt="Young learner in crafts" loading="lazy"></div><div class="craft-card-caption"><span>Young hands learning early</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div><div class="craft-card-caption"><span>Patience woven into every row</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div><div class="craft-card-caption"><span>From fibre to finished fabric</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving.jpg" alt="Weaving at FAPCAN" loading="lazy"></div><div class="craft-card-caption"><span>Skills that open doors</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="weaving1.jpg" alt="Weaving craft detail" loading="lazy"></div><div class="craft-card-caption"><span>Detail in every handmade piece</span></div></div>
-      <div class="craft-card"><div class="craft-card-img"><img src="child11.jpg" alt="Child learning craft" loading="lazy"></div><div class="craft-card-caption"><span>Crafting futures, one stitch at a time</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring" loading="lazy"></div><div class="craft-card-caption"><span>Mastering tailoring</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Intricate tapestry</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div><div class="craft-card-caption"><span>Colour & craft</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving" loading="lazy"></div><div class="craft-card-caption"><span>Weaving livelihood</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry.jpg" alt="Tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Shared purpose</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving5.jpg" alt="Weaving" loading="lazy"></div><div class="craft-card-caption"><span>Advanced techniques</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child12.jpg" alt="Young learner" loading="lazy"></div><div class="craft-card-caption"><span>Young hands learning</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div><div class="craft-card-caption"><span>Patience woven</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div><div class="craft-card-caption"><span>Fibre to fabric</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving.jpg" alt="Weaving" loading="lazy"></div><div class="craft-card-caption"><span>Skills that open doors</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving1.jpg" alt="Craft detail" loading="lazy"></div><div class="craft-card-caption"><span>Detail in handmade</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child11.jpg" alt="Child learning" loading="lazy"></div><div class="craft-card-caption"><span>Crafting futures</span></div></div>
+      <!-- duplicate for seamless loop -->
+      <div class="craft-card"><div class="craft-card-img"><img src="tailor1.jpg" alt="Tailoring" loading="lazy"></div><div class="craft-card-caption"><span>Mastering tailoring</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry1.jpg" alt="Tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Intricate tapestry</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry2.jpg" alt="Tapestry craft" loading="lazy"></div><div class="craft-card-caption"><span>Colour & craft</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving4.jpg" alt="Weaving" loading="lazy"></div><div class="craft-card-caption"><span>Weaving livelihood</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="tapestry.jpg" alt="Tapestry" loading="lazy"></div><div class="craft-card-caption"><span>Shared purpose</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving5.jpg" alt="Weaving" loading="lazy"></div><div class="craft-card-caption"><span>Advanced techniques</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child12.jpg" alt="Young learner" loading="lazy"></div><div class="craft-card-caption"><span>Young hands learning</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving3.jpg" alt="Loom weaving" loading="lazy"></div><div class="craft-card-caption"><span>Patience woven</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving2.jpg" alt="Weaving process" loading="lazy"></div><div class="craft-card-caption"><span>Fibre to fabric</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving.jpg" alt="Weaving" loading="lazy"></div><div class="craft-card-caption"><span>Skills that open doors</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="weaving1.jpg" alt="Craft detail" loading="lazy"></div><div class="craft-card-caption"><span>Detail in handmade</span></div></div>
+      <div class="craft-card"><div class="craft-card-img"><img src="child11.jpg" alt="Child learning" loading="lazy"></div><div class="craft-card-caption"><span>Crafting futures</span></div></div>
     </div>
   </div>
 </section>
@@ -2264,8 +2231,8 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <!-- Card 5: Elder Love — full-width -->
       <div class="impact-action-card impact-elder-card reveal">
         <div class="impact-card-images dual-img">
-          <img src="elder1.jpg" alt="Bwambale Alfred showing love and support for elderly twin women at FAPCAN" loading="lazy">
-          <img src="elder2.jpeg" alt="Omuzana Alfred Bwambale with a pregnant woman and an elderly man at FAPCAN" loading="lazy">
+          <img src="elder1.jpg" alt="Alfred showing love for elderly twin women" loading="lazy">
+          <img src="elder2.jpeg" alt="Alfred with pregnant woman and elderly man" loading="lazy">
         </div>
         <div class="impact-card-body">
           <span class="impact-card-tag"><i class="fas fa-heart"></i> &nbsp;A Father's Love</span>
@@ -2284,14 +2251,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
 </section>
 
-
 <!-- ══════════════════════════════════════════════════════════
-     PHOTO GALLERY — COMMUNITY MOMENTS (NEW SECTION)
+     PHOTO GALLERY — UNIFORM CARDS, 3 PER ROW (ALL IMAGES EXCEPT UUU.jpg, co2.jpg, Mr and miss.jpg)
 ══════════════════════════════════════════════════════════ -->
 <section class="photo-gallery" id="gallery-section">
   <div class="photo-gallery-inner">
-
-    <!-- Header -->
     <div class="gallery-header reveal">
       <div class="gallery-header-left">
         <div class="section-label">Community Moments</div>
@@ -2302,8 +2266,6 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <i class="fas fa-images"></i> Full Gallery
       </a>
     </div>
-
-    <!-- Filter Tabs -->
     <div class="gallery-filters reveal">
       <button class="gallery-filter-btn active" data-filter="all">All Moments</button>
       <button class="gallery-filter-btn" data-filter="community">Community</button>
@@ -2312,117 +2274,16 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <button class="gallery-filter-btn" data-filter="founder">Founder</button>
       <button class="gallery-filter-btn" data-filter="events">Events</button>
     </div>
-
-    <!-- Bento Grid -->
-    <div class="gallery-bento reveal" id="galleryBento">
-
-      <div class="g-cell" data-category="founder" data-img="alfred1.jpg" data-label="Alfred Bwambale — A father to all nations">
-        <img src="alfred1.jpg" alt="Alfred Bwambale FAPCAN Founder" loading="lazy">
-        
-      </div>
-
-      <div class="g-cell" data-category="community" data-img="c1.jpg" data-label="The FAPCAN community gathered in faith">
-        <img src="c1.jpg" alt="FAPCAN Community" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Community</span>
-          <span class="g-cell-overlay-label">The FAPCAN community gathered in faith</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="community" data-img="alfred3.jpg" data-label="Together, we are stronger">
-        <img src="alfred3.jpg" alt="FAPCAN Together" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Community</span>
-          <span class="g-cell-overlay-label">Together, we are stronger</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="events" data-img="elder2.jpg" data-label="Miss & Mr FAPCAN 2026 Celebration">
-        <img src="elder2.jpg" alt="FAPCAN 2026" loading="lazy">
-        
-      </div>
-
-      <div class="g-cell" data-category="children" data-img="Child1.jpg" data-label="Growing in faith and love">
-        <img src="Child1.jpg" alt="FAPCAN Child" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Our Children</span>
-          <span class="g-cell-overlay-label">Growing in faith and love</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="children" data-img="Child3.jpg" data-label="Every child deserves a bright future">
-        <img src="Child3.jpg" alt="FAPCAN Child" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Our Children</span>
-          <span class="g-cell-overlay-label">Every child deserves a bright future</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="agriculture" data-img="Agric2.jpg" data-label="Farming for food security and self-reliance">
-        <img src="Agric2.jpg" alt="FAPCAN Agriculture" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Agriculture</span>
-          <span class="g-cell-overlay-label">Farming for food security &amp; self-reliance</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="founder" data-img="alfred1.jpg" data-label="Alfred serving the community with heart">
-        <img src="alfred1.jpg" alt="Alfred FAPCAN" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Founder</span>
-          <span class="g-cell-overlay-label">Alfred serving the community with heart</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="founder" data-img="alfred2.jpg" data-label="A legacy built on love and service">
-        <img src="alfred2.jpg" alt="Alfred FAPCAN" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Founder</span>
-          <span class="g-cell-overlay-label">A legacy built on love and service</span>
-        </div>
-      </div>
-
-      <div class="g-cell" data-category="community" data-img="co1.jpg" data-label="FAPCAN — a home for all nations">
-        <img src="co1.jpg" alt="FAPCAN Home for All" loading="lazy">
-        <div class="g-cell-overlay">
-          <span class="g-cell-overlay-tag">Community</span>
-          <span class="g-cell-overlay-label">FAPCAN — a home for all nations</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Caption strip below grid -->
+    <!-- Uniform Grid: 3 cards per row -->
+    <div class="gallery-uniform-grid reveal" id="galleryUniformGrid"></div>
     <div class="gallery-caption-strip reveal">
-      <div class="gallery-caption-item">
-        <span class="gallery-caption-item-icon">🙏</span>
-        <h5>Faith</h5>
-        <p>Prayer as the foundation of every life we touch</p>
-      </div>
-      <div class="gallery-caption-item">
-        <span class="gallery-caption-item-icon">👨‍👧‍👦</span>
-        <h5>Family</h5>
-        <p>A community where no one is a stranger</p>
-      </div>
-      <div class="gallery-caption-item">
-        <span class="gallery-caption-item-icon">🌾</span>
-        <h5>Provision</h5>
-        <p>Agriculture, craft, and skills for daily sustenance</p>
-      </div>
-      <div class="gallery-caption-item">
-        <span class="gallery-caption-item-icon">📚</span>
-        <h5>Education</h5>
-        <p>Equipping minds to build the future</p>
-      </div>
-      <div class="gallery-caption-item">
-        <span class="gallery-caption-item-icon">💛</span>
-        <h5>Legacy</h5>
-        <p>Leaving the world better than we found it</p>
-      </div>
+      <div class="gallery-caption-item"><span class="gallery-caption-item-icon">🙏</span><h5>Faith</h5><p>Prayer as the foundation</p></div>
+      <div class="gallery-caption-item"><span class="gallery-caption-item-icon">👨‍👧‍👦</span><h5>Family</h5><p>No one is a stranger</p></div>
+      <div class="gallery-caption-item"><span class="gallery-caption-item-icon">🌾</span><h5>Provision</h5><p>Skills for daily sustenance</p></div>
+      <div class="gallery-caption-item"><span class="gallery-caption-item-icon">📚</span><h5>Education</h5><p>Equipping minds</p></div>
+      <div class="gallery-caption-item"><span class="gallery-caption-item-icon">💛</span><h5>Legacy</h5><p>Leaving world better</p></div>
     </div>
-
   </div>
-
   <!-- Lightbox -->
   <div class="gallery-lightbox" id="galleryLightbox">
     <div class="lightbox-img-wrap">
@@ -2433,9 +2294,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="lightbox-caption"><span id="lightboxCaption"></span></div>
     </div>
   </div>
-
 </section>
-
 
 <!-- FOUNDER -->
 <section class="founder" id="founder">
@@ -2473,54 +2332,34 @@ footer { background: var(--dark); padding: 80px 0 0; }
   </div>
   <div class="marquee-outer">
     <div class="marquee-track" id="marqueeTrack">
-      <div class="marquee-card"><img src="Child1.jpg" alt="FAPCAN Child 1" loading="lazy"><div class="marquee-card-overlay"><span>Growing in faith &amp; love</span></div></div>
-      <div class="marquee-card"><img src="Child2.jpg" alt="FAPCAN Child 2" loading="lazy"><div class="marquee-card-overlay"><span>Education changes lives</span></div></div>
-      <div class="marquee-card"><img src="Child3.jpg" alt="FAPCAN Child 3" loading="lazy"><div class="marquee-card-overlay"><span>Every child matters</span></div></div>
-      <div class="marquee-card"><img src="Child4.jpg" alt="FAPCAN Child 4" loading="lazy"><div class="marquee-card-overlay"><span>Nurtured with compassion</span></div></div>
-      <div class="marquee-card"><img src="Child5.jpg" alt="FAPCAN Child 5" loading="lazy"><div class="marquee-card-overlay"><span>Building bright futures</span></div></div>
-      <div class="marquee-card"><img src="Child6.jpg" alt="FAPCAN Child 6" loading="lazy"><div class="marquee-card-overlay"><span>Loved &amp; protected</span></div></div>
-      <div class="marquee-card"><img src="Child7.jpg" alt="FAPCAN Child 7" loading="lazy"><div class="marquee-card-overlay"><span>Skills for tomorrow</span></div></div>
-      <div class="marquee-card"><img src="Child8.jpg" alt="FAPCAN Child 8" loading="lazy"><div class="marquee-card-overlay"><span>Hope in every smile</span></div></div>
-      <div class="marquee-card"><img src="Child9.jpg" alt="FAPCAN Child 9" loading="lazy"><div class="marquee-card-overlay"><span>Growing together</span></div></div>
-      <div class="marquee-card"><img src="Child10.jpg" alt="FAPCAN Child 10" loading="lazy"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
-      <div class="marquee-card"><img src="Child1.jpg" alt="FAPCAN Child 1" loading="lazy"><div class="marquee-card-overlay"><span>Growing in faith &amp; love</span></div></div>
-      <div class="marquee-card"><img src="Child2.jpg" alt="FAPCAN Child 2" loading="lazy"><div class="marquee-card-overlay"><span>Education changes lives</span></div></div>
-      <div class="marquee-card"><img src="Child3.jpg" alt="FAPCAN Child 3" loading="lazy"><div class="marquee-card-overlay"><span>Every child matters</span></div></div>
-      <div class="marquee-card"><img src="Child4.jpg" alt="FAPCAN Child 4" loading="lazy"><div class="marquee-card-overlay"><span>Nurtured with compassion</span></div></div>
-      <div class="marquee-card"><img src="Child5.jpg" alt="FAPCAN Child 5" loading="lazy"><div class="marquee-card-overlay"><span>Building bright futures</span></div></div>
-      <div class="marquee-card"><img src="Child6.jpg" alt="FAPCAN Child 6" loading="lazy"><div class="marquee-card-overlay"><span>Loved &amp; protected</span></div></div>
-      <div class="marquee-card"><img src="Child7.jpg" alt="FAPCAN Child 7" loading="lazy"><div class="marquee-card-overlay"><span>Skills for tomorrow</span></div></div>
-      <div class="marquee-card"><img src="Child8.jpg" alt="FAPCAN Child 8" loading="lazy"><div class="marquee-card-overlay"><span>Hope in every smile</span></div></div>
-      <div class="marquee-card"><img src="Child9.jpg" alt="FAPCAN Child 9" loading="lazy"><div class="marquee-card-overlay"><span>Growing together</span></div></div>
-      <div class="marquee-card"><img src="Child10.jpg" alt="FAPCAN Child 10" loading="lazy"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
+      <div class="marquee-card"><img src="Child1.jpg" alt="Child"><div class="marquee-card-overlay"><span>Growing in faith & love</span></div></div>
+      <div class="marquee-card"><img src="Child2.jpg" alt="Child"><div class="marquee-card-overlay"><span>Education changes lives</span></div></div>
+      <div class="marquee-card"><img src="Child3.jpg" alt="Child"><div class="marquee-card-overlay"><span>Every child matters</span></div></div>
+      <div class="marquee-card"><img src="Child4.jpg" alt="Child"><div class="marquee-card-overlay"><span>Nurtured with compassion</span></div></div>
+      <div class="marquee-card"><img src="Child5.jpg" alt="Child"><div class="marquee-card-overlay"><span>Building bright futures</span></div></div>
+      <div class="marquee-card"><img src="Child6.jpg" alt="Child"><div class="marquee-card-overlay"><span>Loved & protected</span></div></div>
+      <div class="marquee-card"><img src="Child7.jpg" alt="Child"><div class="marquee-card-overlay"><span>Skills for tomorrow</span></div></div>
+      <div class="marquee-card"><img src="Child8.jpg" alt="Child"><div class="marquee-card-overlay"><span>Hope in every smile</span></div></div>
+      <div class="marquee-card"><img src="Child9.jpg" alt="Child"><div class="marquee-card-overlay"><span>Growing together</span></div></div>
+      <div class="marquee-card"><img src="Child10.jpg" alt="Child"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
+      <div class="marquee-card"><img src="Child1.jpg" alt="Child"><div class="marquee-card-overlay"><span>Growing in faith & love</span></div></div>
+      <div class="marquee-card"><img src="Child2.jpg" alt="Child"><div class="marquee-card-overlay"><span>Education changes lives</span></div></div>
+      <div class="marquee-card"><img src="Child3.jpg" alt="Child"><div class="marquee-card-overlay"><span>Every child matters</span></div></div>
+      <div class="marquee-card"><img src="Child4.jpg" alt="Child"><div class="marquee-card-overlay"><span>Nurtured with compassion</span></div></div>
+      <div class="marquee-card"><img src="Child5.jpg" alt="Child"><div class="marquee-card-overlay"><span>Building bright futures</span></div></div>
+      <div class="marquee-card"><img src="Child6.jpg" alt="Child"><div class="marquee-card-overlay"><span>Loved & protected</span></div></div>
+      <div class="marquee-card"><img src="Child7.jpg" alt="Child"><div class="marquee-card-overlay"><span>Skills for tomorrow</span></div></div>
+      <div class="marquee-card"><img src="Child8.jpg" alt="Child"><div class="marquee-card-overlay"><span>Hope in every smile</span></div></div>
+      <div class="marquee-card"><img src="Child9.jpg" alt="Child"><div class="marquee-card-overlay"><span>Growing together</span></div></div>
+      <div class="marquee-card"><img src="Child10.jpg" alt="Child"><div class="marquee-card-overlay"><span>A community of joy</span></div></div>
     </div>
   </div>
   <div class="nurture-pillars reveal">
-    <div class="nurture-pill">
-      <div class="nurture-pill-icon">📚</div>
-      <h4>Education</h4>
-      <p>Quality schooling and literacy for every child in our care.</p>
-    </div>
-    <div class="nurture-pill">
-      <div class="nurture-pill-icon">🙏</div>
-      <h4>Religion &amp; Values</h4>
-      <p>Faith formation and moral grounding through prayer and scripture.</p>
-    </div>
-    <div class="nurture-pill">
-      <div class="nurture-pill-icon">🛠️</div>
-      <h4>Vocational Skills</h4>
-      <p>Practical trade skills that open doors to independence and livelihood.</p>
-    </div>
-    <div class="nurture-pill">
-      <div class="nurture-pill-icon">🍽️</div>
-      <h4>Nutrition &amp; Health</h4>
-      <p>Daily meals, medical care, and wellness support for growing bodies.</p>
-    </div>
-    <div class="nurture-pill">
-      <div class="nurture-pill-icon">❤️</div>
-      <h4>Love &amp; Community</h4>
-      <p>A family environment where every child is seen, heard, and valued.</p>
-    </div>
+    <div class="nurture-pill"><div class="nurture-pill-icon">📚</div><h4>Education</h4><p>Quality schooling for every child.</p></div>
+    <div class="nurture-pill"><div class="nurture-pill-icon">🙏</div><h4>Religion &amp; Values</h4><p>Faith formation and moral grounding.</p></div>
+    <div class="nurture-pill"><div class="nurture-pill-icon">🛠️</div><h4>Vocational Skills</h4><p>Practical trade skills for independence.</p></div>
+    <div class="nurture-pill"><div class="nurture-pill-icon">🍽️</div><h4>Nutrition &amp; Health</h4><p>Daily meals and medical care.</p></div>
+    <div class="nurture-pill"><div class="nurture-pill-icon">❤️</div><h4>Love &amp; Community</h4><p>A family where every child is valued.</p></div>
   </div>
 </section>
 
@@ -2547,42 +2386,10 @@ footer { background: var(--dark); padding: 80px 0 0; }
       </div>
     </div>
     <div class="doc-grid">
-      <div class="doc-card">
-        <div class="doc-card-video">
-          <iframe src="https://www.youtube.com/embed/bcU8vnCyW6g" title="Doc 2" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="doc-card-info">
-          <span class="doc-card-num">Doc 02</span>
-          <h4>Voices of the Forgotten</h4>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="doc-card-video">
-          <iframe src="https://www.youtube.com/embed/mU5VH8_cUug" title="Doc 3" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="doc-card-info">
-          <span class="doc-card-num">Doc 03</span>
-          <h4>Faith in Action</h4>
-        </div>
-      </div>
-      <div class="doc-card featured-card">
-        <div class="doc-card-video">
-          <iframe src="https://www.youtube.com/embed/2-EOrWGOmBQ" title="Brenda's Story" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="doc-card-info">
-          <span class="doc-card-num">★ Brenda's Story</span>
-          <h4>Brenda — A Story of Resilience</h4>
-        </div>
-      </div>
-      <div class="doc-card">
-        <div class="doc-card-video">
-          <iframe src="https://www.youtube.com/embed/oZxjPxLiamo" title="Doc 5" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <div class="doc-card-info">
-          <span class="doc-card-num">Doc 05</span>
-          <h4>Roots &amp; Wings</h4>
-        </div>
-      </div>
+      <div class="doc-card"><div class="doc-card-video"><iframe src="https://www.youtube.com/embed/bcU8vnCyW6g" title="Doc 2" allowfullscreen loading="lazy"></iframe></div><div class="doc-card-info"><span class="doc-card-num">Doc 02</span><h4>Voices of the Forgotten</h4></div></div>
+      <div class="doc-card"><div class="doc-card-video"><iframe src="https://www.youtube.com/embed/mU5VH8_cUug" title="Doc 3" allowfullscreen loading="lazy"></iframe></div><div class="doc-card-info"><span class="doc-card-num">Doc 03</span><h4>Faith in Action</h4></div></div>
+      <div class="doc-card featured-card"><div class="doc-card-video"><iframe src="https://www.youtube.com/embed/2-EOrWGOmBQ" title="Brenda's Story" allowfullscreen loading="lazy"></iframe></div><div class="doc-card-info"><span class="doc-card-num">★ Brenda's Story</span><h4>Brenda — A Story of Resilience</h4></div></div>
+      <div class="doc-card"><div class="doc-card-video"><iframe src="https://www.youtube.com/embed/oZxjPxLiamo" title="Doc 5" allowfullscreen loading="lazy"></iframe></div><div class="doc-card-info"><span class="doc-card-num">Doc 05</span><h4>Roots &amp; Wings</h4></div></div>
     </div>
   </div>
 </section>
@@ -2595,11 +2402,11 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <h2>Our Spiritual Life &amp; Services</h2>
     </div>
     <div class="programmes-grid">
-      <div class="prog-card"><div class="prog-icon">🕊️</div><h4>Daily Prayer</h4><p>Morning and evening prayers unite our community in faith and reflection.</p></div>
-      <div class="prog-card"><div class="prog-icon">🙏</div><h4>Healing Sessions</h4><p>Special prayer sessions for physical, emotional, and spiritual healing.</p></div>
-      <div class="prog-card"><div class="prog-icon">📖</div><h4>Bible Study</h4><p>Weekly scripture reading and discussion to deepen understanding of faith.</p></div>
-      <div class="prog-card"><div class="prog-icon">🎵</div><h4>Worship Music</h4><p>Choir and music ministry that lifts spirits and glorifies God.</p></div>
-      <div class="prog-card"><div class="prog-icon">⛪</div><h4>Sunday Mass</h4><p>Weekly celebration of the Eucharist open to all denominations.</p></div>
+      <div class="prog-card"><div class="prog-icon">🕊️</div><h4>Daily Prayer</h4><p>Morning and evening prayers unite our community.</p></div>
+      <div class="prog-card"><div class="prog-icon">🙏</div><h4>Healing Sessions</h4><p>Special prayer sessions for healing.</p></div>
+      <div class="prog-card"><div class="prog-icon">📖</div><h4>Bible Study</h4><p>Weekly scripture reading and discussion.</p></div>
+      <div class="prog-card"><div class="prog-icon">🎵</div><h4>Worship Music</h4><p>Choir and music ministry that glorifies God.</p></div>
+      <div class="prog-card"><div class="prog-icon">⛪</div><h4>Sunday Mass</h4><p>Weekly celebration of the Eucharist.</p></div>
     </div>
   </div>
 </section>
@@ -2612,7 +2419,7 @@ footer { background: var(--dark); padding: 80px 0 0; }
         <div class="section-label">Latest News &amp; Updates</div>
         <h2>What's Happening at <em>FAPCAN</em></h2>
       </div>
-      <a href="#" class="news-view-all">All Updates <i class="fas fa-arrow-right" style="font-size:10px"></i></a>
+      <a href="#" class="news-view-all">All Updates <i class="fas fa-arrow-right"></i></a>
     </div>
     <div class="news-event-card reveal">
       <div class="news-event-img">
@@ -2622,45 +2429,29 @@ footer { background: var(--dark); padding: 80px 0 0; }
       <div class="news-event-body">
         <div class="news-event-meta">
           <span class="badge-breaking">Breaking News</span>
-          <span class="badge-date"><i class="fas fa-calendar-alt" style="margin-right:5px;font-size:10px"></i> 8th May, 2026</span>
+          <span class="badge-date"><i class="fas fa-calendar-alt"></i> 8th May, 2026</span>
         </div>
         <h3>FAPCAN Crowns <em>Miss &amp; Mr FAPCAN 2026</em></h3>
         <p>In a joyful ceremony held at the FAPCAN centre in Kidodo, Kasese, the community elected their ambassadors of faith, dignity, and service after a spirited prayerful voting process.</p>
         <div class="winners-inline">
-          <div class="winner-tag miss">
-            <span class="winner-tag-crown">👑</span>
-            <div class="winner-tag-info">
-              <span class="winner-tag-role">Miss FAPCAN 2026</span>
-              <span class="winner-tag-name">Mbambu Matherene</span>
-            </div>
-          </div>
-          <div class="winner-tag mr">
-            <span class="winner-tag-crown">🎖️</span>
-            <div class="winner-tag-info">
-              <span class="winner-tag-role">Mr FAPCAN 2026</span>
-              <span class="winner-tag-name">Bwambale Moses</span>
-            </div>
-          </div>
+          <div class="winner-tag miss"><span class="winner-tag-crown">👑</span><div class="winner-tag-info"><span class="winner-tag-role">Miss FAPCAN 2026</span><span class="winner-tag-name">Mbambu Matherene</span></div></div>
+          <div class="winner-tag mr"><span class="winner-tag-crown">🎖️</span><div class="winner-tag-info"><span class="winner-tag-role">Mr FAPCAN 2026</span><span class="winner-tag-name">Bwambale Moses</span></div></div>
         </div>
         <a href="event.html" class="news-read-link">Read Full Story <i class="fas fa-long-arrow-alt-right"></i></a>
       </div>
     </div>
     <div class="news-ticker reveal">
-      <div class="ticker-label"><i class="fas fa-bolt" style="margin-right:6px"></i> Latest</div>
+      <div class="ticker-label"><i class="fas fa-bolt"></i> Latest</div>
       <div class="ticker-track-outer">
         <div class="ticker-track" id="tickerTrack">
-          <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected on 8th May 2026</span>
-          <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected on 8th May 2026</span>
-          <span class="ticker-item"><strong>CBO Status:</strong> FAPCAN is now a registered Community Based Organisation</span>
-          <span class="ticker-item"><strong>Education:</strong> 80+ students begin new term under FAPCAN support</span>
-          <span class="ticker-item"><strong>Save Souls Films:</strong> New documentary on community transformation in production</span>
-          <span class="ticker-item"><strong>Community:</strong> 300+ members strong and growing across Kasese District</span>
-          <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected on 8th May 2026</span>
-          <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected on 8th May 2026</span>
-          <span class="ticker-item"><strong>CBO Status:</strong> FAPCAN is now a registered Community Based Organisation</span>
-          <span class="ticker-item"><strong>Education:</strong> 80+ students begin new term under FAPCAN support</span>
-          <span class="ticker-item"><strong>Save Souls Films:</strong> New documentary on community transformation in production</span>
-          <span class="ticker-item"><strong>Community:</strong> 300+ members strong and growing across Kasese District</span>
+          <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene elected</span>
+          <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses elected</span>
+          <span class="ticker-item"><strong>CBO Status:</strong> Registered Community Based Organisation</span>
+          <span class="ticker-item"><strong>Education:</strong> 80+ students new term</span>
+          <span class="ticker-item"><strong>Save Souls Films:</strong> New documentary in production</span>
+          <span class="ticker-item"><strong>Community:</strong> 300+ members in Kasese</span>
+          <span class="ticker-item"><strong>Miss FAPCAN 2026:</strong> Mbambu Matherene</span>
+          <span class="ticker-item"><strong>Mr FAPCAN 2026:</strong> Bwambale Moses</span>
         </div>
       </div>
     </div>
@@ -2683,46 +2474,12 @@ footer { background: var(--dark); padding: 80px 0 0; }
 <footer id="contact">
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo-badge" style="margin-bottom:16px"><img src="fapcan.jpg" alt="FAPCAN"><span class="logo-badge-fallback" style="display:none">FAP</span></div>
-        <strong>FAPCAN</strong>
-        <span class="tagline">Fatima Praying Center for All Nations</span>
-        <p>A registered Community Based Organisation (CBO) providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p>
-        <div class="footer-socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-      <div class="footer-col"><h4>Quick Links</h4><ul>
-        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
-        <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
-        <li><a href="prayer.html"><i class="fas fa-chevron-right"></i> Spiritual Life</a></li>
-        <li><a href="save.html"><i class="fas fa-chevron-right"></i> Save Souls</a></li>
-        <li><a href="#news"><i class="fas fa-chevron-right"></i> News &amp; Updates</a></li>
-        <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
-        <li><a href="film.html"><i class="fas fa-chevron-right"></i> Media</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Our Work</h4><ul>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Orphans Support</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> PWDs Programs</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Widows &amp; Women</a></li>
-        <li><a href="#"><i class="fas fa-chevron-right"></i> Elders Care</a></li>
-        <li><a href="film.html"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li>
-      </ul></div>
-      <div class="footer-col"><h4>Contact</h4><ul>
-        <li><a href="#location"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li>
-        <li><a href="#"><i class="fas fa-phone"></i> +256758027180</a></li>
-        <li><a href="#"><i class="fas fa-envelope"></i> bwambalealfred89@gmail.com</a></li>
-        <li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li>
-      </ul></div>
+      <div class="footer-brand"><div class="logo-badge" style="margin-bottom:16px"><img src="fapcan.jpg" alt="FAPCAN"><span class="logo-badge-fallback" style="display:none">FAP</span></div><strong>FAPCAN</strong><span class="tagline">Fatima Praying Center for All Nations</span><p>A registered Community Based Organisation (CBO) providing homage for PWDs, Orphans, Widows, Widowers and Elders through faith, education and community.</p><div class="footer-socials"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div></div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li><li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li><li><a href="prayer.html"><i class="fas fa-chevron-right"></i> Spiritual Life</a></li><li><a href="save.html"><i class="fas fa-chevron-right"></i> Save Souls</a></li><li><a href="#news"><i class="fas fa-chevron-right"></i> News</a></li><li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li><li><a href="film.html"><i class="fas fa-chevron-right"></i> Media</a></li></ul></div>
+      <div class="footer-col"><h4>Our Work</h4><ul><li><a href="#"><i class="fas fa-chevron-right"></i> Orphans Support</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> PWDs Programs</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Widows &amp; Women</a></li><li><a href="#"><i class="fas fa-chevron-right"></i> Elders Care</a></li><li><a href="film.html"><i class="fas fa-chevron-right"></i> Save Souls Films</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#location"><i class="fas fa-map-marker-alt"></i> Kidodo Cell, Kasese, Uganda</a></li><li><a href="#"><i class="fas fa-phone"></i> +256758027180</a></li><li><a href="#"><i class="fas fa-envelope"></i> bwambalealfred89@gmail.com</a></li><li><a href="#"><i class="fas fa-clock"></i> Open Daily: 6:00 AM – 9:00 PM</a></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 FAPCAN – Fatima Praying Center for All Nations. Registered CBO. All Rights Reserved.</p>
-      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
-    </div>
+    <div class="footer-bottom"><p>© 2026 FAPCAN – Fatima Praying Center for All Nations. Registered CBO. All Rights Reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div>
   </div>
 </footer>
 
@@ -2732,7 +2489,7 @@ const cursorDot = document.querySelector('#cursor .cursor-dot');
 const cursorRing = document.querySelector('#cursor .cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card,.impact-action-card,.impact-pill,.g-cell,.gallery-filter-btn').forEach(el=>{
+document.querySelectorAll('a,button,.activity-card,.prog-card,.impact-item,.dot,.doc-card,.marquee-card,.nurture-pill,.why-card,.craft-card,.winner-tag,.news-event-card,.impact-action-card,.impact-pill,.gallery-card,.gallery-filter-btn').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
 });
@@ -2821,21 +2578,17 @@ const impactObs=new IntersectionObserver((entries)=>{
 },{threshold:0.4});
 document.querySelector('.impact-strip')&&impactObs.observe(document.querySelector('.impact-strip'));
 
-/* ── MARQUEE PAUSE ── */
+/* ── MARQUEE / CRAFT / TICKER PAUSE ── */
 const marqueeTrack = document.getElementById('marqueeTrack');
 if(marqueeTrack){
   marqueeTrack.addEventListener('mouseenter',()=>marqueeTrack.style.animationPlayState='paused');
   marqueeTrack.addEventListener('mouseleave',()=>marqueeTrack.style.animationPlayState='running');
 }
-
-/* ── CRAFT TRACK PAUSE ── */
 const craftTrack = document.getElementById('craftTrack');
 if(craftTrack){
   craftTrack.addEventListener('mouseenter',()=>craftTrack.style.animationPlayState='paused');
   craftTrack.addEventListener('mouseleave',()=>craftTrack.style.animationPlayState='running');
 }
-
-/* ── TICKER PAUSE ── */
 const tickerTrack = document.getElementById('tickerTrack');
 if(tickerTrack){
   tickerTrack.addEventListener('mouseenter',()=>tickerTrack.style.animationPlayState='paused');
@@ -2896,10 +2649,51 @@ if(tickerTrack){
 })();
 
 /* ══════════════════════════════════════════════
-   ── GALLERY LOGIC ──
+   ── GALLERY: UNIFORM CARDS (3 PER ROW), ALL IMAGES EXCEPT UUU.jpg, co2.jpg, Mr and miss.jpg ──
 ══════════════════════════════════════════════ */
 (function(){
-  const cells = document.querySelectorAll('.g-cell');
+  // define all gallery images with metadata (exclude UUU.jpg, co2.jpg, Mr and miss.jpg)
+  const galleryItems = [
+    { src: "albino.jpg", category: "community", label: "Support for People with Albinism — dignity and belonging" },
+    { src: "alfred1.jpg", category: "founder", label: "Alfred Bwambale — a father to all nations" },
+    { src: "alfred2.jpg", category: "founder", label: "A legacy built on love and service" },
+    { src: "alfred3.jpg", category: "community", label: "Together, we are stronger" },
+    { src: "alfred4.jpg", category: "community", label: "Community outreach and prayer" },
+    { src: "alfred6.jpg", category: "community", label: "Supporting elders and community" },
+    { src: "Agric1.jpg", category: "agriculture", label: "Farming for food security" },
+    { src: "Agric2.jpg", category: "agriculture", label: "Agriculture — self-reliance through farming" },
+    { src: "brendah.jpg", category: "community", label: "Brenda's story — restoration and hope" },
+    { src: "c1.jpg", category: "community", label: "The FAPCAN community gathered in faith" },
+    { src: "Child1.jpg", category: "children", label: "Growing in faith and love" },
+    { src: "Child2.jpg", category: "children", label: "Education changes lives — school support" },
+    { src: "Child3.jpg", category: "children", label: "Every child deserves a bright future" },
+    { src: "Child4.jpg", category: "children", label: "Nurtured with compassion" },
+    { src: "Child5.jpg", category: "children", label: "Building bright futures" },
+    { src: "Child6.jpg", category: "children", label: "Loved and protected" },
+    { src: "Child7.jpg", category: "children", label: "Skills for tomorrow" },
+    { src: "Child8.jpg", category: "children", label: "Hope in every smile" },
+    { src: "Child9.jpg", category: "children", label: "Growing together in community" },
+    { src: "Child10.jpg", category: "children", label: "A community of joy and hope" },
+    { src: "Child11.jpg", category: "children", label: "Crafting futures, one stitch at a time" },
+    { src: "Child12.jpg", category: "children", label: "Young hands learning early" },
+    { src: "co1.jpg", category: "community", label: "FAPCAN — a home for all nations" },
+    { src: "elder1.jpg", category: "community", label: "Alfred with elderly twin women — love in action" },
+    { src: "elder2.jpeg", category: "founder", label: "Alfred with a mother and elder — compassion without borders" },
+    { src: "infant1.jpg", category: "children", label: "Infant care and nurture" },
+    { src: "mad.jpg", category: "community", label: "Rehabilitation and prayer — restoration" },
+    { src: "tailor1.jpg", category: "community", label: "Tailoring skills for livelihood" },
+    { src: "tapestry.jpg", category: "community", label: "Community hands, shared purpose" },
+    { src: "tapestry1.jpg", category: "community", label: "Intricate tapestry patterns" },
+    { src: "tapestry2.jpg", category: "community", label: "Colour and craft in every thread" },
+    { src: "weaving.jpg", category: "community", label: "Weaving tradition into livelihood" },
+    { src: "weaving1.jpg", category: "community", label: "Detail in every handmade piece" },
+    { src: "weaving2.jpg", category: "community", label: "From fibre to finished fabric" },
+    { src: "weaving3.jpg", category: "community", label: "Patience woven into every row" },
+    { src: "weaving4.jpg", category: "community", label: "Weaving skills for independence" },
+    { src: "weaving5.jpg", category: "community", label: "Advanced weaving techniques" }
+  ];
+
+  const gridContainer = document.getElementById('galleryUniformGrid');
   const filterBtns = document.querySelectorAll('.gallery-filter-btn');
   const lightbox = document.getElementById('galleryLightbox');
   const lbImg = document.getElementById('lightboxImg');
@@ -2907,69 +2701,62 @@ if(tickerTrack){
   const lbClose = document.getElementById('lightboxClose');
   const lbPrev = document.getElementById('lightboxPrev');
   const lbNext = document.getElementById('lightboxNext');
-
-  let visibleCells = Array.from(cells);
+  let currentCards = [];
   let currentLbIdx = 0;
 
-  /* ── Filter ── */
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      cells.forEach(cell => {
-        const cat = cell.dataset.category;
-        const show = filter === 'all' || cat === filter;
-        cell.style.opacity = show ? '1' : '0.2';
-        cell.style.pointerEvents = show ? 'auto' : 'none';
-        cell.style.transition = 'opacity 0.4s ease';
-      });
-      visibleCells = filter === 'all'
-        ? Array.from(cells)
-        : Array.from(cells).filter(c => c.dataset.category === filter);
+  function buildCards(items) {
+    gridContainer.innerHTML = '';
+    currentCards = [];
+    items.forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'gallery-card';
+      card.setAttribute('data-category', item.category);
+      card.setAttribute('data-img', item.src);
+      card.setAttribute('data-label', item.label);
+      card.innerHTML = `
+        <div class="gallery-card-img"><img src="${item.src}" alt="${item.label}" loading="lazy" onerror="this.src='https://placehold.co/400x300?text=Image+Not+Found'"></div>
+        <div class="gallery-card-info"><span class="gallery-card-tag">${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</span><div class="gallery-card-title">${item.label.length > 55 ? item.label.slice(0,52)+'...' : item.label}<span></span></div></div>
+      `;
+      card.addEventListener('click', () => openLightbox(idx));
+      gridContainer.appendChild(card);
+      currentCards.push(card);
     });
-  });
+  }
 
-  /* ── Lightbox open ── */
-  cells.forEach((cell, idx) => {
-    cell.addEventListener('click', () => {
-      currentLbIdx = visibleCells.indexOf(cell);
-      if(currentLbIdx === -1) currentLbIdx = 0;
-      openLightbox(currentLbIdx);
-    });
-  });
+  function filterGallery(filter) {
+    const itemsToShow = filter === 'all' ? galleryItems : galleryItems.filter(i => i.category === filter);
+    buildCards(itemsToShow);
+    currentLbIdx = 0;
+  }
 
   function openLightbox(idx) {
-    const cell = visibleCells[idx];
-    if(!cell) return;
-    lbImg.src = cell.dataset.img;
-    lbImg.alt = cell.dataset.label;
-    lbCaption.textContent = cell.dataset.label;
+    if(!currentCards.length) return;
+    const card = currentCards[idx];
+    const imgSrc = card.dataset.img;
+    const label = card.dataset.label;
+    lbImg.src = imgSrc;
+    lbImg.alt = label;
+    lbCaption.textContent = label;
     currentLbIdx = idx;
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeLightbox() {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
+  function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
   lbClose.addEventListener('click', closeLightbox);
   lightbox.addEventListener('click', e => { if(e.target === lightbox) closeLightbox(); });
-
   lbPrev.addEventListener('click', e => {
     e.stopPropagation();
-    const prev = (currentLbIdx - 1 + visibleCells.length) % visibleCells.length;
+    if(!currentCards.length) return;
+    const prev = (currentLbIdx - 1 + currentCards.length) % currentCards.length;
     openLightbox(prev);
   });
   lbNext.addEventListener('click', e => {
     e.stopPropagation();
-    const next = (currentLbIdx + 1) % visibleCells.length;
+    if(!currentCards.length) return;
+    const next = (currentLbIdx + 1) % currentCards.length;
     openLightbox(next);
   });
-
-  /* Keyboard nav */
   document.addEventListener('keydown', e => {
     if(!lightbox.classList.contains('open')) return;
     if(e.key === 'Escape') closeLightbox();
@@ -2977,31 +2764,15 @@ if(tickerTrack){
     if(e.key === 'ArrowRight') lbNext.click();
   });
 
-  /* ── Staggered reveal for g-cells ── */
-  const cellObs = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        const allCells = document.querySelectorAll('.g-cell');
-        allCells.forEach((cell, i) => {
-          setTimeout(() => {
-            cell.style.opacity = '1';
-            cell.style.transform = 'translateY(0)';
-          }, i * 80);
-        });
-        cellObs.disconnect();
-      }
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterGallery(btn.dataset.filter);
     });
-  }, { threshold: 0.1 });
-
-  /* Initial state for stagger */
-  cells.forEach(cell => {
-    cell.style.opacity = '0';
-    cell.style.transform = 'translateY(20px)';
-    cell.style.transition = 'opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out)';
   });
-  const bentoEl = document.getElementById('galleryBento');
-  if(bentoEl) cellObs.observe(bentoEl);
-
+  // initial load: all images (excluding excluded ones)
+  filterGallery('all');
 })();
 </script>
 </body>
